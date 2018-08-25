@@ -38,6 +38,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        hari = (TextView) findViewById(R.id.hari);
+        detik = (TextView) findViewById(R.id.detik);
+        menit = (TextView) findViewById(R.id.menit);
+        jam = (TextView) findViewById(R.id.jam);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
+        db = new SQLiteHandler(getApplicationContext());
+
+        session = new SessionManager(getApplicationContext());
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+
+        countDown();
+    }
+
+    private void countDown(){
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -61,30 +83,17 @@ public class MainActivity extends AppCompatActivity {
         long diffHours = diff / (60 * 60 * 1000) % 24;
         long diffDays = diff / (24 * 60 * 60 * 1000);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        hari = (TextView) findViewById(R.id.hari);
-        detik = (TextView) findViewById(R.id.detik);
-        menit = (TextView) findViewById(R.id.menit);
-        jam = (TextView) findViewById(R.id.jam);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-
         hari.setText("" + diffDays);
         jam.setText("" + diffHours);
         menit.setText("" + diffMinutes);
         detik.setText("" + diffSeconds);
 
-        db = new SQLiteHandler(getApplicationContext());
+        Log.d("TAG", "" + diffDays);
+        Log.d("TAG", "" + diffHours);
+        Log.d("TAG", "" + diffMinutes);
+        Log.d("TAG", "" + diffSeconds);
 
-        session = new SessionManager(getApplicationContext());
-
-        if (!session.isLoggedIn()) {
-            logoutUser();
-        }
-
-        new CountDownTimer(diffSeconds * 1000, 1000){
+        new CountDownTimer(diffSeconds, 1000){
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);
@@ -93,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 detik.setText("0");
-                Toast.makeText(getApplicationContext(), "Selesai", Toast.LENGTH_SHORT).show();
             }
         }.start();
+
     }
 
     @Override

@@ -60,6 +60,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
     }
 
     private void loginQR(String username) {
+
     }
 
     @Override
