@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.QR_Login"></activity>
+        <activity android:name=".activity.QR_Login" />
+        <activity android:name=".activity.Dashboard_SuperAdmin"></activity>
     </application>
 
 </manifest>

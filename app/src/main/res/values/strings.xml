@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TrenCenter</string>
+
+    <string name="title_home">Beranda</string>
+    <string name="title_message">Pesan</string>
+    <string name="title_account">Akun</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
