@@ -3,12 +3,19 @@ package com.meivaldi.trencenter.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +34,8 @@ public class HomeFragment extends Fragment implements MessageFragment.OnFragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView hari, detik, menit, jam;
 
     private OnFragmentInteractionListener mListener;
 

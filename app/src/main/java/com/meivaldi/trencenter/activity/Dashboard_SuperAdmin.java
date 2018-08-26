@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,10 +31,9 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener,
         MessageFragment.OnFragmentInteractionListener  {
 
-    private ActionBar toolbar;
     private SessionManager session;
     private SQLiteHandler db;
-    private TextView hari, detik, menit, jam;
+    private Toolbar toolbar;
 
 
     @Override
@@ -52,6 +52,10 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         if (!session.isLoggedIn()) {
             logoutUser();
         }
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
     }
 
@@ -81,54 +85,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         Intent intent = new Intent(Dashboard_SuperAdmin.this, LoginActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    private void countDown(){
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
-        String dateStart = format.format(c);
-        String dateEnd = "04/17/2019 06:00:00";
-
-        Date d1 = null;
-        Date d2 = null;
-
-        try {
-            d1 = format.parse(dateStart);
-            d2 = format.parse(dateEnd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        long diff = d2.getTime() - d1.getTime();
-
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-
-        hari.setText("" + diffDays);
-        jam.setText("" + diffHours);
-        menit.setText("" + diffMinutes);
-        detik.setText("" + diffSeconds);
-
-        Log.d("TAG", "" + diffDays);
-        Log.d("TAG", "" + diffHours);
-        Log.d("TAG", "" + diffMinutes);
-        Log.d("TAG", "" + diffSeconds);
-
-        new CountDownTimer(diffSeconds * 1000, 1000){
-            @Override
-            public void onTick(long l) {
-                detik.setText("" + l / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                detik.setText("0");
-            }
-        }.start();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

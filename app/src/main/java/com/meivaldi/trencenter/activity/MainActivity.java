@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SQLiteHandler db;
     private SessionManager session;
-    private TextView hari, detik, menit, jam;
+    private TextView hari, jam, menit, detik;
 
     private static final int day = 15;
     private static final int hour = 6;
@@ -39,11 +39,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         hari = (TextView) findViewById(R.id.hari);
-        detik = (TextView) findViewById(R.id.detik);
-        menit = (TextView) findViewById(R.id.menit);
         jam = (TextView) findViewById(R.id.jam);
+        menit = (TextView) findViewById(R.id.menit);
+        detik = (TextView) findViewById(R.id.detik);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -93,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TAG", "" + diffMinutes);
         Log.d("TAG", "" + diffSeconds);
 
-        new CountDownTimer(diffSeconds * 1000, 1000){
+        long time = 24 * 60 * 60 * 1000;
+
+        new CountDownTimer(time, 1000){
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);
