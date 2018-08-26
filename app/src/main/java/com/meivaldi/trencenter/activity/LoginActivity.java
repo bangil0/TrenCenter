@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {

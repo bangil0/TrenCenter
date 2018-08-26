@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 
@@ -25,7 +27,7 @@ import java.util.Date;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements MessageFragment.OnFragmentInteractionListener {
+public class HomeFragment extends Fragment implements MessageFragment.OnFragmentInteractionListener, View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,6 +40,7 @@ public class HomeFragment extends Fragment implements MessageFragment.OnFragment
     private TextView hari, detik, menit, jam;
 
     private OnFragmentInteractionListener mListener;
+    private RelativeLayout one, two, three, four, five, six, seven;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,7 +77,82 @@ public class HomeFragment extends Fragment implements MessageFragment.OnFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        one = (RelativeLayout) rootView.findViewById(R.id.layout_one);
+        two = (RelativeLayout) rootView.findViewById(R.id.layout_two);
+        three = (RelativeLayout) rootView.findViewById(R.id.layout_three);
+        four = (RelativeLayout) rootView.findViewById(R.id.layout_four);
+        five = (RelativeLayout) rootView.findViewById(R.id.layout_five);
+        six = (RelativeLayout) rootView.findViewById(R.id.layout_six);
+        seven = (RelativeLayout) rootView.findViewById(R.id.layout_seven);
+
+        hari = (TextView) rootView.findViewById(R.id.hari);
+        jam = (TextView) rootView.findViewById(R.id.jam);
+        menit = (TextView) rootView.findViewById(R.id.menit);
+        detik = (TextView) rootView.findViewById(R.id.detik);
+
+        one.setOnClickListener(this);
+        two.setOnClickListener(this);
+        three.setOnClickListener(this);
+        four.setOnClickListener(this);
+        five.setOnClickListener(this);
+        six.setOnClickListener(this);
+        seven.setOnClickListener(this);
+
+        countDown();
+
+        return rootView;
+    }
+
+    private void countDown(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+        String dateStart = format.format(c);
+        String dateEnd = "04/17/2019 06:00:00";
+
+        Date d1 = null;
+        Date d2 = null;
+
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateEnd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        long diff = d2.getTime() - d1.getTime();
+
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        hari.setText("" + diffDays);
+        jam.setText("" + diffHours);
+        menit.setText("" + diffMinutes);
+        detik.setText("" + diffSeconds);
+
+        Log.d("TAG", "" + diffDays);
+        Log.d("TAG", "" + diffHours);
+        Log.d("TAG", "" + diffMinutes);
+        Log.d("TAG", "" + diffSeconds);
+
+        long time = 24 * 60 * 60 * 1000;
+
+        new CountDownTimer(diffSeconds * 1000, 1000){
+            @Override
+            public void onTick(long l) {
+                detik.setText("" + l / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                countDown();
+            }
+        }.start();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,6 +182,40 @@ public class HomeFragment extends Fragment implements MessageFragment.OnFragment
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.layout_one:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_two:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_three:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_four:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_five:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_six:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_seven:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+        }
     }
 
     /**

@@ -6,19 +6,20 @@ package com.meivaldi.trencenter.model;
 
 public class Message {
 
-    private int title, description, image;
+    private int description, image;
+    private String title;
 
-    public Message(int title, int description, int image) {
+    public Message(String title, int description, int image) {
         this.title = title;
         this.description = description;
         this.image = image;
     }
 
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(int title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

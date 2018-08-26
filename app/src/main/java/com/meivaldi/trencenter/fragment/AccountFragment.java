@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 
@@ -18,7 +20,7 @@ import com.meivaldi.trencenter.R;
  * Use the {@link AccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
+public class AccountFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +31,7 @@ public class AccountFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private RelativeLayout userPhoto, userName, userPassword;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -65,7 +68,17 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+
+        userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
+        userName = (RelativeLayout) rootView.findViewById(R.id.username_settings);
+        userPassword = (RelativeLayout) rootView.findViewById(R.id.password_settings);
+
+        userPhoto.setOnClickListener(this);
+        userName.setOnClickListener(this);
+        userPassword.setOnClickListener(this);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +103,24 @@ public class AccountFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.foto:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.username_settings:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.password_settings:
+                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+        }
     }
 
     /**
