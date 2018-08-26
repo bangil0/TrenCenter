@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TAG", "" + diffMinutes);
         Log.d("TAG", "" + diffSeconds);
 
-        new CountDownTimer(diffSeconds, 1000){
+        new CountDownTimer(diffSeconds * 1000, 1000){
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);

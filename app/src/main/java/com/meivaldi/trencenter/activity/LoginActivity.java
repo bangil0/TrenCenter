@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         if (session.isLoggedIn()) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, Dashboard_SuperAdmin.class);
             startActivity(intent);
             finish();
         }
@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         db.addUser(name, username, uid, created_at);
 
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                Dashboard_SuperAdmin.class);
                         startActivity(intent);
                         finish();
                     } else {
