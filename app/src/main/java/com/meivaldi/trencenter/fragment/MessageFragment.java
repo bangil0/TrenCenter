@@ -28,8 +28,6 @@ public class MessageFragment extends Fragment {
     private String mParam2;
 
     private FragmentTabHost tabHost;
-    private ListView listView;
-    private MessageAdapter mAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,20 +67,6 @@ public class MessageFragment extends Fragment {
         arg2.putInt("Arg for Frag2", 2);
         tabHost.addTab(tabHost.newTabSpec("Tab2").setIndicator("Keluar"),
                 OutboxFragment.class, arg2);
-
-        listView = (ListView) container.findViewById(R.id.inbox_list);
-        ArrayList<Message> messagesList = new ArrayList<>();
-
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-        messagesList.add(new Message(R.string.title, R.string.description, R.drawable.team));
-
-        mAdapter = new MessageAdapter(getContext(), messagesList);
-        listView.setAdapter(mAdapter);
 
         return tabHost;
     }
