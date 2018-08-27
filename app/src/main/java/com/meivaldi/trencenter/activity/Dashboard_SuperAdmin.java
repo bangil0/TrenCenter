@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.fragment.AccountFragment;
@@ -26,6 +27,7 @@ import com.meivaldi.trencenter.helper.SessionManager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Dashboard_SuperAdmin extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener,
@@ -48,6 +50,11 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        String tipe = user.get("name");
+        Toast.makeText(getApplicationContext(), tipe, Toast.LENGTH_SHORT).show();
 
         if (!session.isLoggedIn()) {
             logoutUser();

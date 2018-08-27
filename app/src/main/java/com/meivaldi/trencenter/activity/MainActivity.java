@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
     private TextView hari, jam, menit, detik;
-
-    private static final int day = 15;
-    private static final int hour = 6;
-    private static final int minute = 0;
-    private static final int second = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
 
         session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        String tipe = user.get("name");
+        Toast.makeText(getApplicationContext(), tipe, Toast.LENGTH_SHORT).show();
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
 
         if (!session.isLoggedIn()) {
             logoutUser();
@@ -87,14 +92,7 @@ public class MainActivity extends AppCompatActivity {
         menit.setText("" + diffMinutes);
         detik.setText("" + diffSeconds);
 
-        Log.d("TAG", "" + diffDays);
-        Log.d("TAG", "" + diffHours);
-        Log.d("TAG", "" + diffMinutes);
-        Log.d("TAG", "" + diffSeconds);
-
-        long time = 24 * 60 * 60 * 1000;
-
-        new CountDownTimer(time, 1000){
+        new CountDownTimer(diffSeconds, 1000){
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                detik.setText("0");
+                countDown();
             }
         }.start();
 

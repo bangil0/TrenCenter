@@ -28,7 +28,9 @@
         </activity>
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.QR_Login" />
-        <activity android:name=".activity.Dashboard_SuperAdmin"></activity>
+        <activity android:name=".activity.Dashboard_SuperAdmin" />
+        <activity android:name=".activity.ChangeUsername" />
+        <activity android:name=".activity.ChangePassword"></activity>
     </application>
 
 </manifest>

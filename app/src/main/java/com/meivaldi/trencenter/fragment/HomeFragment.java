@@ -134,13 +134,6 @@ public class HomeFragment extends Fragment implements MessageFragment.OnFragment
         menit.setText("" + diffMinutes);
         detik.setText("" + diffSeconds);
 
-        Log.d("TAG", "" + diffDays);
-        Log.d("TAG", "" + diffHours);
-        Log.d("TAG", "" + diffMinutes);
-        Log.d("TAG", "" + diffSeconds);
-
-        long time = 24 * 60 * 60 * 1000;
-
         new CountDownTimer(diffSeconds * 1000, 1000){
             @Override
             public void onTick(long l) {

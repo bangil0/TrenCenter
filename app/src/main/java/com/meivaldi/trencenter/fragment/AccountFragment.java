@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.ChangePassword;
+import com.meivaldi.trencenter.activity.ChangeUsername;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -113,12 +116,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.username_settings:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(getContext(), ChangeUsername.class));
                 return;
             case R.id.password_settings:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(getContext(), ChangePassword.class));
                 return;
         }
     }

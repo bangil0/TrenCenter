@@ -96,6 +96,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String username = user.getString("username");
+                        String tipe = user.getString("tipe");
                         String created_at = user
                                 .getString("created_at");
 

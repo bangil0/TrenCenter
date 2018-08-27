@@ -122,14 +122,22 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String username = user.getString("username");
+                        String tipe = user.getString("tipe");
                         String created_at = user
                                 .getString("created_at");
 
                         db.addUser(name, username, uid, created_at);
 
-                        Intent intent = new Intent(LoginActivity.this,
-                                Dashboard_SuperAdmin.class);
-                        startActivity(intent);
+                        if(tipe.equals("super_admin")){
+                            Intent intent = new Intent(LoginActivity.this,
+                                    Dashboard_SuperAdmin.class);
+                            startActivity(intent);
+                        } else if(tipe.equals("admin_pnbp")){
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intent);
+                        }
+
                         finish();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
@@ -175,5 +183,11 @@ public class LoginActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }
