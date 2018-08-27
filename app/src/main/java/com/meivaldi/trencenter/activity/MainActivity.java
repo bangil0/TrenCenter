@@ -1,13 +1,21 @@
 package com.meivaldi.trencenter.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,17 +36,34 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
     private TextView hari, jam, menit, detik;
+    private int[] layouts;
+    private TextView[] dots;
+    private ViewPager viewPager;
+    private LinearLayout dotsLayout;
+    private MyViewPagerAdapter myViewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         hari = (TextView) findViewById(R.id.hari);
         jam = (TextView) findViewById(R.id.jam);
         menit = (TextView) findViewById(R.id.menit);
         detik = (TextView) findViewById(R.id.detik);
+
+        layouts = new int[]{
+                R.layout.iklan1,
+                R.layout.iklan2,
+                R.layout.iklan3
+        };
+
+        myViewPagerAdapter = new MyViewPagerAdapter();
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -49,18 +74,55 @@ public class MainActivity extends AppCompatActivity {
 
         HashMap<String, String> user = db.getUserDetails();
 
-        String tipe = user.get("name");
-        Toast.makeText(getApplicationContext(), tipe, Toast.LENGTH_SHORT).show();
+        String tipe = user.get("type");
 
         if (!session.isLoggedIn()) {
             logoutUser();
         }
 
-        if (!session.isLoggedIn()) {
-            logoutUser();
+        if(tipe.equals("super_admin")){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
 
         countDown();
+    }
+
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDots(position);
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[layouts.length];
+
+        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(colorsInactive[currentPage]);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
     private void countDown(){
@@ -138,5 +200,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    public class MyViewPagerAdapter extends PagerAdapter {
+        private LayoutInflater layoutInflater;
+
+        public MyViewPagerAdapter() {
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = layoutInflater.inflate(layouts[position], container, false);
+            container.addView(view);
+
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return layouts.length;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
     }
 }
