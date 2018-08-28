@@ -6,9 +6,10 @@ package com.meivaldi.trencenter.model;
 
 public class Program {
 
-    private String title, date, location, image;
+    private String title, date, location;
+    int image;
 
-    public Program(String title, String date, String location, String image) {
+    public Program(String title, String date, String location, int image) {
         this.title = title;
         this.date = date;
         this.location = location;
@@ -39,11 +40,11 @@ public class Program {
         this.location = location;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 }

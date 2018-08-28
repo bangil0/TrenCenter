@@ -45,13 +45,7 @@ public class ProgramAdapter extends ArrayAdapter<Program> {
         Program currentProgram = programList.get(position);
 
         ImageView image = (ImageView) listItem.findViewById(R.id.logo);
-        try {
-            URL url = new URL(currentProgram.getImage());
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            image.setImageBitmap(bitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        image.setImageResource(currentProgram.getImage());
 
         TextView title = (TextView) listItem.findViewById(R.id.title);
         title.setText(currentProgram.getTitle());

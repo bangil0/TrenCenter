@@ -19,6 +19,7 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.model.Program;
 
 import org.json.JSONArray;
@@ -43,13 +44,12 @@ public class ProgramKerja extends AppCompatActivity {
     private Toolbar toolbar;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
+    private static final String url = "http://103.28.53.181/~millenn1/android/getProgram.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_kerja);
-
-        getProgram();
 
         listView = (ListView) findViewById(R.id.program_list);
         programList = new ArrayList<>();
@@ -66,6 +66,8 @@ public class ProgramKerja extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
+
+        new GetPrograms().execute();
 
         adapter = new ProgramAdapter(getApplicationContext(), programList);
         listView.setAdapter(adapter);
@@ -87,61 +89,66 @@ public class ProgramKerja extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
-    private void getProgram() {
-        String tag_string_req = "req_program";
-
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.GET_PROGRAM, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-
-                    if (!error) {
-                        JSONArray jsonArray = jObj.getJSONArray("programs");
-
-                        for(int i=0; i<jsonArray.length(); i++){
-                            JSONArray program = jsonArray.getJSONArray(i);
-
-                            String nama = program.getString(1);
-                            String tanggalMulai = program.getString(2);
-                            String lokasi = program.getString(4);
-                            String image = program.getString(7);
-
-                            programList.add(new Program(nama, tanggalMulai, lokasi, image));
-                        }
-
-                    } else {
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-
     @Override
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    private class GetPrograms extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr = sh.makeServiceCall(url);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    JSONArray programs = jsonObj.getJSONArray("programs");
+
+                    for (int i = 0; i < programs.length(); i++) {
+                        JSONArray program = programs.getJSONArray(i);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String lokasi = program.getString(4);
+
+                        programList.add(new Program(nama, tanggalMulai, lokasi, R.drawable.team));
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
     }
 }
