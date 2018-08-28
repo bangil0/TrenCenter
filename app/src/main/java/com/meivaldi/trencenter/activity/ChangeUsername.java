@@ -35,6 +35,7 @@ public class ChangeUsername extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), Dashboard_SuperAdmin.class));
+                finish();
             }
         });
 

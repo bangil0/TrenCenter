@@ -30,7 +30,9 @@
         <activity android:name=".activity.QR_Login" />
         <activity android:name=".activity.Dashboard_SuperAdmin" />
         <activity android:name=".activity.ChangeUsername" />
-        <activity android:name=".activity.ChangePassword"></activity>
+        <activity android:name=".activity.ChangePassword" />
+        <activity android:name=".activity.ProgramKerja" />
+        <activity android:name=".activity.DetailProgram"></activity>
     </application>
 
 </manifest>

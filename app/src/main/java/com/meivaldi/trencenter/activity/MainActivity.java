@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private LinearLayout dotsLayout;
     private MyViewPagerAdapter myViewPagerAdapter;
+    private RelativeLayout programKerja;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         jam = (TextView) findViewById(R.id.jam);
         menit = (TextView) findViewById(R.id.menit);
         detik = (TextView) findViewById(R.id.detik);
+        programKerja = (RelativeLayout) findViewById(R.id.programKerja);
 
         layouts = new int[]{
                 R.layout.iklan1,
@@ -64,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        programKerja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+                finish();
+            }
+        });
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
