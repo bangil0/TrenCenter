@@ -52,8 +52,6 @@ public class ProgramKerja extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.program_list);
         programList = new ArrayList<>();
 
-        getProgram();
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +77,14 @@ public class ProgramKerja extends AppCompatActivity {
                 finish();
             }
         });
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getProgram();
+            }
+        });
+        thread.start();
     }
 
     private void getProgram() {
@@ -133,4 +139,9 @@ public class ProgramKerja extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

@@ -1,14 +1,31 @@
 package com.meivaldi.trencenter.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.model.Program;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,71 +38,109 @@ public class DetailProgram extends AppCompatActivity {
 
     private static final String TAG = DetailProgram.class.getSimpleName();
 
+    private TextView title, description;
+    private ImageView image;
+    private Toolbar toolbar;
+    private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_program);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getProgram();
+            }
+        });
+
+        thread.start();
+
+        title = (TextView) findViewById(R.id.titleProgram);
+        description = (TextView) findViewById(R.id.descriptionProgram);
+        image = (ImageView) findViewById(R.id.image);
+        button = (Button) findViewById(R.id.join);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+            }
+        });
     }
 
-    private class DownloadTask extends AsyncTask<String, Void, String> {
+    private void getProgram() {
+        String tag_string_req = "req_program";
 
-        @Override
-        protected String doInBackground(String... urls) {
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.GET_PROGRAM, new Response.Listener<String>() {
 
-            String result = "";
-            URL url;
-            HttpURLConnection httpURLConnection = null;
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
 
-            try {
-                url = new URL(urls[0]);
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream in = httpURLConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(in);
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
 
-                int data = reader.read();
+                    if (!error) {
+                        JSONArray jsonArray = jObj.getJSONArray("programs");
 
-                while(data != -1){
-                    char current = (char) data;
-                    result += current;
-                    data = reader.read();
+                        int index = getIntent().getIntExtra("INDEX", 0);
+                        JSONArray program = jsonArray.getJSONArray(index);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String tanggalSelesai = program.getString(3);
+                        String lokasi = program.getString(4);
+                        String deskripsi = program.getString(5);
+                        String penanggungJawab = program.getString(6);
+                        String gambar = program.getString(7);
+
+                        title.setText(nama);
+                        description.setText(deskripsi);
+
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                return result;
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        }, new Response.ErrorListener() {
 
-            return null;
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            try {
-                JSONArray jsonArray = new JSONArray(s);
-
-                for(int i=0; i<jsonArray.length(); i++){
-                    JSONArray program = jsonArray.getJSONArray(i);
-
-                    Log.i("Rido Meivaldi", program.getString(0));
-                    Log.i("Rido Meivaldi", program.getString(1));
-                    Log.i("Rido Meivaldi", program.getString(2));
-                    Log.i("Rido Meivaldi", program.getString(3));
-                    Log.i("Rido Meivaldi", program.getString(4));
-                    Log.i("Rido Meivaldi", program.getString(5));
-                    Log.i("Rido Meivaldi", program.getString(6));
-                    Log.i("Rido Meivaldi", program.getString(7));
-                    Log.i("Rido Meivaldi", program.getString(8));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
-        }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }
