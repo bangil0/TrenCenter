@@ -36,14 +36,7 @@ public class DetailProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_program);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getProgram();
-            }
-        });
-
-        thread.start();
+        getProgram();
 
         title = (TextView) findViewById(R.id.titleProgram);
         description = (TextView) findViewById(R.id.descriptionProgram);

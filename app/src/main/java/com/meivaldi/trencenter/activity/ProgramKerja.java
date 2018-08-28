@@ -49,6 +49,8 @@ public class ProgramKerja extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_kerja);
 
+        getProgram();
+
         listView = (ListView) findViewById(R.id.program_list);
         programList = new ArrayList<>();
 
@@ -77,14 +79,6 @@ public class ProgramKerja extends AppCompatActivity {
                 finish();
             }
         });
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getProgram();
-            }
-        });
-        thread.start();
     }
 
     @Override
