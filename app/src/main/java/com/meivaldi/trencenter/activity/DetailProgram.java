@@ -1,9 +1,6 @@
 package com.meivaldi.trencenter.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,19 +18,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
-import com.meivaldi.trencenter.model.Program;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 public class DetailProgram extends AppCompatActivity {
 
     private static final String TAG = DetailProgram.class.getSimpleName();
@@ -65,7 +53,7 @@ public class DetailProgram extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getApplicationContext(), "Berhasil bergabung", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -136,6 +124,12 @@ public class DetailProgram extends AppCompatActivity {
         });
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
     }
 
     @Override

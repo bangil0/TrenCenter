@@ -87,6 +87,12 @@ public class ProgramKerja extends AppCompatActivity {
         thread.start();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
+
     private void getProgram() {
         String tag_string_req = "req_program";
 
