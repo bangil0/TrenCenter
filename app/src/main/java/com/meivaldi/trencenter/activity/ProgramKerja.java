@@ -67,8 +67,6 @@ public class ProgramKerja extends AppCompatActivity {
             }
         });
 
-        new GetPrograms().execute();
-
         adapter = new ProgramAdapter(getApplicationContext(), programList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +79,8 @@ public class ProgramKerja extends AppCompatActivity {
                 finish();
             }
         });
+
+        new GetPrograms().execute();
     }
 
     @Override
