@@ -30,8 +30,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Dashboard_SuperAdmin extends AppCompatActivity implements
-        HomeFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener,
-        MessageFragment.OnFragmentInteractionListener  {
+        HomeFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener {
 
     private SessionManager session;
     private SQLiteHandler db;
