@@ -3,6 +3,7 @@ package com.meivaldi.trencenter.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.adapter.MessageAdapter;
@@ -33,6 +35,8 @@ public class MessageFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    private FloatingActionButton button;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,17 +66,24 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+        button = rootView.findViewById(R.id.create_message);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         return rootView;
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFragment(new InboxFragment(), "Masuk");
         adapter.addFragment(new OutboxFragment(), "Keluar");
         viewPager.setAdapter(adapter);

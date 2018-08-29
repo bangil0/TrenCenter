@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,12 +21,15 @@ public class InboxFragment extends Fragment {
 
     private ListView listView;
     private MessageAdapter mAdapter;
-    FloatingActionButton button;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
-        button = (FloatingActionButton) rootView.findViewById(R.id.inbox_send);
 
         listView = (ListView) rootView.findViewById(R.id.inbox_list);
         ArrayList<Message> messagesList = new ArrayList<>();
@@ -40,13 +44,6 @@ public class InboxFragment extends Fragment {
 
         mAdapter = new MessageAdapter(getContext(), messagesList);
         listView.setAdapter(mAdapter);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return rootView;
     }
