@@ -134,11 +134,11 @@ public class ProfileRelawan extends Fragment implements View.OnClickListener {
 
                 return;
             case R.id.username_settings:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ChangeUsername.class));
 
                 return;
             case R.id.password_settings:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ChangePassword.class));
 
                 return;
         }
