@@ -3,8 +3,12 @@ package com.meivaldi.trencenter.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +31,8 @@ public class MessageFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FragmentTabHost tabHost;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,19 +61,50 @@ public class MessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        tabHost = new FragmentTabHost(getActivity());
-        tabHost.setup(getActivity(), getChildFragmentManager(), R.layout.fragment_message);
+        View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+        viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        Bundle arg1 = new Bundle();
-        arg1.putInt("Arg for Frag1", 1);
-        tabHost.addTab(tabHost.newTabSpec("Tab1").setIndicator("Masuk"), InboxFragment.class, arg1);
+        tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-        Bundle arg2 = new Bundle();
-        arg2.putInt("Arg for Frag2", 2);
-        tabHost.addTab(tabHost.newTabSpec("Tab2").setIndicator("Keluar"),
-                OutboxFragment.class, arg2);
+        return rootView;
+    }
 
-        return tabHost;
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter.addFragment(new InboxFragment(), "Masuk");
+        adapter.addFragment(new OutboxFragment(), "Keluar");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     public void onButtonPressed(Uri uri) {
