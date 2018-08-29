@@ -74,7 +74,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
         mScannerView.resumeCameraPreview(this);
     }
 
-    private void loginQR(final String username) {
+    private void loginQR(final String nik) {
         String tag_string_req = "req_login";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -137,7 +137,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", username);
+                params.put("NIK", nik);
 
                 return params;
             }

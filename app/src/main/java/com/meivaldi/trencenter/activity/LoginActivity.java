@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this,
                                     Dashboard_SuperAdmin.class);
                             startActivity(intent);
-                        } else if(tipe.equals("admin_pnbp")){
+                        } else if(tipe.equals("Relawan")){
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
                             startActivity(intent);
