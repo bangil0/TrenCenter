@@ -60,10 +60,24 @@ public class LoginActivity extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
 
+        HashMap<String, String> user = db.getUserDetails();
+
+        String tipe = user.get("type");
+
         if (session.isLoggedIn()) {
-            Intent intent = new Intent(LoginActivity.this, Dashboard_SuperAdmin.class);
-            startActivity(intent);
-            finish();
+            if(tipe.equals("super_admin")){
+                Intent intent = new Intent(LoginActivity.this,
+                        Dashboard_SuperAdmin.class);
+                startActivity(intent);
+            } else if(tipe.equals("Relawan")){
+                Intent intent = new Intent(LoginActivity.this,
+                        MainActivity.class);
+                startActivity(intent);
+            } else if(tipe.equals("tim_pemenangan")){
+                Intent intent = new Intent(LoginActivity.this,
+                        MainActivity.class);
+                startActivity(intent);
+            }
         }
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {

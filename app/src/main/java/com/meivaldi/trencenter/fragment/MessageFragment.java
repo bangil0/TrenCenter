@@ -52,8 +52,8 @@ public class MessageFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new OneFragment(), "Satu");
-        adapter.addFragment(new TwoFragment(), "Dua");
+        adapter.addFragment(new InboxFragment(), "Masuk");
+        adapter.addFragment(new OutboxFragment(), "Keluar");
         viewPager.setAdapter(adapter);
     }
 
