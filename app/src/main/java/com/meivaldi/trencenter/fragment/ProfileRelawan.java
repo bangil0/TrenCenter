@@ -9,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ChangePassword;
 import com.meivaldi.trencenter.activity.ChangeUsername;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +39,9 @@ public class ProfileRelawan extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private RelativeLayout userPhoto, userName, userPassword;
+    private TextView name, status;
+
+    private SQLiteHandler db;
 
     public ProfileRelawan() {
         // Required empty public constructor
@@ -70,7 +77,19 @@ public class ProfileRelawan extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile_relawan, container, false);
+
+        db = new SQLiteHandler(getContext());
+        HashMap<String, String> user = db.getUserDetails();
+
+        String nama = user.get("name");
+        String type = user.get("type");
+
+        name = (TextView) rootView.findViewById(R.id.nama);
+        status = (TextView) rootView.findViewById(R.id.status);
+
+        name.setText(nama);
+        status.setText(type);
 
         userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
         userName = (RelativeLayout) rootView.findViewById(R.id.username_settings);

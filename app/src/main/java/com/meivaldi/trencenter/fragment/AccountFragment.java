@@ -2,6 +2,7 @@ package com.meivaldi.trencenter.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ChangePassword;
 import com.meivaldi.trencenter.activity.ChangeUsername;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +40,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
     private RelativeLayout userPhoto, userName, userPassword;
+
+    private SQLiteHandler db;
+    private TextView name, status;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -76,6 +84,18 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
         userName = (RelativeLayout) rootView.findViewById(R.id.username_settings);
         userPassword = (RelativeLayout) rootView.findViewById(R.id.password_settings);
+
+        name = (TextView) rootView.findViewById(R.id.nama);
+        status = (TextView) rootView.findViewById(R.id.status);
+
+        db = new SQLiteHandler(getContext());
+        HashMap<String, String> user = db.getUserDetails();
+
+        String nama = user.get("name");
+        String tipe = user.get("type");
+
+        name.setText(nama);
+        status.setText(tipe);
 
         userPhoto.setOnClickListener(this);
         userName.setOnClickListener(this);

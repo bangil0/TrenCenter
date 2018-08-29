@@ -9,14 +9,36 @@
         android:id="@+id/profile_picture"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/fog">
+        android:background="@drawable/background_akun">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:id="@+id/fotoProfil"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/team"/>
+
+        <TextView
+            android:id="@+id/nama"
+            android:layout_below="@id/fotoProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nama User"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nama"
+            android:layout_centerInParent="true"
+            android:text="Status"
+            android:textColor="@android:color/white"/>
 
     </RelativeLayout>
 
