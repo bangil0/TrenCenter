@@ -85,4 +85,5 @@ public class MessageFragment extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
+
 }
