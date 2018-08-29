@@ -67,19 +67,6 @@ public class ProgramKerja extends AppCompatActivity {
             }
         });
 
-        adapter = new ProgramAdapter(getApplicationContext(), programList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), DetailProgram.class);
-                intent.putExtra("INDEX", i);
-                startActivity(intent);
-
-                finish();
-            }
-        });
-
         new GetPrograms().execute();
     }
 
@@ -150,5 +137,20 @@ public class ProgramKerja extends AppCompatActivity {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            adapter = new ProgramAdapter(getApplicationContext(), programList);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(getApplicationContext(), DetailProgram.class);
+                    intent.putExtra("INDEX", i);
+                    startActivity(intent);
+
+                    finish();
+                }
+            });
+        }
     }
 }

@@ -2,15 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_home_relawan"
         android:icon="@drawable/baseline_home_black_24dp"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/blank" />
+        android:id="@+id/blank"
+        android:title="" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_profile_relawan"
         android:icon="@drawable/baseline_person_black_24dp"
         android:title="@string/title_account" />
 

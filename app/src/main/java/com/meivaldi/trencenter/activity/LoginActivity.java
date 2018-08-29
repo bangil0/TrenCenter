@@ -126,8 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                         String created_at = user
                                 .getString("created_at");
 
-                        db.addUser(name, username, uid, tipe, created_at);
-
                         if(tipe.equals("super_admin")){
                             Intent intent = new Intent(LoginActivity.this,
                                     Dashboard_SuperAdmin.class);
@@ -137,6 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                                     MainActivity.class);
                             startActivity(intent);
                         }
+
+                        db.addUser(name, username, uid, tipe, created_at);
 
                         finish();
                     } else {
