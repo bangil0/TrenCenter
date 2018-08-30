@@ -35,6 +35,8 @@ public class ChangeUsername extends AppCompatActivity{
     private EditText usernameLama, usernameBaru;
     private Button change;
 
+    private SQLiteHandler db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,11 @@ public class ChangeUsername extends AppCompatActivity{
             public void onClick(View view) {
                 String lama = usernameLama.getText().toString();
                 String baru = usernameBaru.getText().toString();
+
+                if(lama.isEmpty() || baru.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Field tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 update(lama, baru);
             }

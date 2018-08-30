@@ -19,14 +19,6 @@ import com.meivaldi.trencenter.helper.SQLiteHandler;
 
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileRelawan.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileRelawan#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileRelawan extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
