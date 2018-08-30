@@ -2,8 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.meivaldi.trencenter">
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
         android:name=".app.AppController"
@@ -12,7 +20,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +34,8 @@
         <activity android:name=".activity.ChangeUsername" />
         <activity android:name=".activity.ChangePassword" />
         <activity android:name=".activity.ProgramKerja" />
-        <activity android:name=".activity.DetailProgram"></activity>
+        <activity android:name=".activity.DetailProgram" />
+        <activity android:name=".activity.InputRelawan"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.InputRelawan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -85,7 +87,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         four = (RelativeLayout) rootView.findViewById(R.id.layout_four);
         five = (RelativeLayout) rootView.findViewById(R.id.layout_five);
         six = (RelativeLayout) rootView.findViewById(R.id.layout_six);
-        seven = (RelativeLayout) rootView.findViewById(R.id.layout_seven);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -98,7 +99,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         four.setOnClickListener(this);
         five.setOnClickListener(this);
         six.setOnClickListener(this);
-        seven.setOnClickListener(this);
 
         countDown();
 
@@ -178,7 +178,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.layout_three:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), InputRelawan.class));
 
                 return;
             case R.id.layout_four:
@@ -193,23 +193,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
 
                 return;
-            case R.id.layout_seven:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
-
-                return;
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
