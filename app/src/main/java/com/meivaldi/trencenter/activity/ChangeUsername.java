@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -66,7 +67,7 @@ public class ChangeUsername extends AppCompatActivity{
                     startActivity(intent);
                 } else if(tipe.equals("tim_pemenangan")){
                     Intent intent = new Intent(ChangeUsername.this,
-                            MainActivity.class);
+                            Tim_Pemenangan.class);
                     startActivity(intent);
                 }
                 finish();

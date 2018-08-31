@@ -7,19 +7,25 @@
     android:layout_height="match_parent"
     tools:context="com.meivaldi.trencenter.activity.relawan.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:src="@drawable/icon_logo_white"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
 
-    </android.support.v7.widget.Toolbar>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_logo_white"/>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -34,7 +40,7 @@
         app:menu="@menu/navigation_relawan" />
 
     <FrameLayout
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/app_bar"
         android:layout_above="@id/navigation"
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
