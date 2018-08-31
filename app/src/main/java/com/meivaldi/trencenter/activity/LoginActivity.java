@@ -150,6 +150,10 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
                             startActivity(intent);
+                        } else if(tipe.equals("tim_pemenangan")){
+                            Intent intent = new Intent(LoginActivity.this,
+                                    Tim_Pemenangan.class);
+                            startActivity(intent);
                         }
 
                         db.addUser(name, username, uid, tipe, created_at);
