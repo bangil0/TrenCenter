@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,10 @@ public class Tim_Pemenangan extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
