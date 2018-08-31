@@ -100,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Email atau Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 }
+
+                startActivity(new Intent(getApplicationContext(), Dashboard_SuperAdmin.class));
             }
         });
 
