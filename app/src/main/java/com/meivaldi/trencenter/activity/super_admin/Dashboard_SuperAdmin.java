@@ -44,16 +44,8 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
 
-        HashMap<String, String> user = db.getUserDetails();
-        String tipe = user.get("type");
-
         if (!session.isLoggedIn()) {
             logoutUser();
-        }
-
-        if(tipe.equals("admin_pnbp")){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

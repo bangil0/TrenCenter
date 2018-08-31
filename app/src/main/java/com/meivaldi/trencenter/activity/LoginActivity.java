@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         String tipe = user.get("type");
 
         if (session.isLoggedIn()) {
-            if(tipe.equals("super_admin")){
+            if(tipe.equals("relawan")){
                 Intent intent = new Intent(LoginActivity.this,
                         Dashboard_SuperAdmin.class);
                 startActivity(intent);
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if(tipe.equals("tim_pemenangan")){
                 Intent intent = new Intent(LoginActivity.this,
-                        MainActivity.class);
+                        Tim_Pemenangan.class);
                 startActivity(intent);
             }
         }

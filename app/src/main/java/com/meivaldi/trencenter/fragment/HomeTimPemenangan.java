@@ -1,45 +1,30 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.ProgramKerja;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentHomeRelawan.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentHomeRelawan#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentHomeRelawan extends Fragment {
-
+public class HomeTimPemenangan extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -48,16 +33,23 @@ public class FragmentHomeRelawan extends Fragment {
     private TextView hari, detik, menit, jam;
     private ViewPager viewPager;
     private int[] layouts;
-    private RelativeLayout programKerja;
     private MyViewPagerAdapter myViewPagerAdapter;
 
-    public FragmentHomeRelawan() {
+    public HomeTimPemenangan() {
+        // Required empty public constructor
     }
 
-
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment HomeTimPemenangan.
+     */
     // TODO: Rename and change types and number of parameters
-    public static FragmentHomeRelawan newInstance(String param1, String param2) {
-        FragmentHomeRelawan fragment = new FragmentHomeRelawan();
+    public static HomeTimPemenangan newInstance(String param1, String param2) {
+        HomeTimPemenangan fragment = new HomeTimPemenangan();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,28 +69,19 @@ public class FragmentHomeRelawan extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView =  inflater.inflate(R.layout.fragment_home_tim_pemenangan, container, false);
 
-        View rootView = inflater.inflate(R.layout.fragment_fragment_home_relawan, container, false);
-
-        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
-        programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
+        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
         layouts = new int[]{
                 R.layout.iklan1,
                 R.layout.iklan2,
                 R.layout.iklan3
         };
-
-        programKerja.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ProgramKerja.class));
-            }
-        });
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -108,6 +91,40 @@ public class FragmentHomeRelawan extends Fragment {
 
         return rootView;
     }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
     private void countDown(){
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -137,7 +154,7 @@ public class FragmentHomeRelawan extends Fragment {
         menit.setText("" + diffMinutes);
         detik.setText("" + diffSeconds);
 
-        new CountDownTimer(diffSeconds, 1000){
+        new CountDownTimer(diffSeconds * 1000, 1000){
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);
@@ -149,44 +166,6 @@ public class FragmentHomeRelawan extends Fragment {
             }
         }.start();
 
-    }
-
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     public class MyViewPagerAdapter extends PagerAdapter {
@@ -222,4 +201,22 @@ public class FragmentHomeRelawan extends Fragment {
             container.removeView(view);
         }
     }
+
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
 }
