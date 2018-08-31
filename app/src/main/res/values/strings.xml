@@ -10,4 +10,6 @@
     <string name="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</string>
     <string name="card_title">Lorem ipsum dolor sit amet, consectetur ...</string>
     <string name="title">Title</string>
+    <string name="close">Tutup</string>
+    <string name="open">Buka</string>
 </resources>

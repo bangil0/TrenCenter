@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/baseline_person_white_24dp"
+            android:title="Profile Calon" />
+        <item
+            android:id="@+id/nav_target"
+            android:icon="@drawable/targets"
+            android:title="Visi dan Misi" />
+        <item
+            android:id="@+id/nav_platform"
+            android:icon="@drawable/tasks"
+            android:title="Platform" />
+
+        <item
+            android:id="@+id/nav_progja"
+            android:icon="@drawable/icon"
+            android:title="Program Kerja" />
+
+        <item
+            android:id="@+id/nav_penghargaan"
+            android:icon="@drawable/medals"
+            android:title="Penghargaan" />
+
+</menu>
