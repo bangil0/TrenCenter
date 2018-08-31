@@ -5,7 +5,7 @@
     android:id="@+id/activity_dashboard_super_admin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.Dashboard_SuperAdmin">
+    tools:context="com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

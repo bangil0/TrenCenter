@@ -1,4 +1,4 @@
-package com.meivaldi.trencenter.activity;
+package com.meivaldi.trencenter.activity.pendukung;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 
 public class InputPendukung extends AppCompatActivity {
 

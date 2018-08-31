@@ -11,14 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.adapter.ProgramAdapter;
-import com.meivaldi.trencenter.app.AppConfig;
-import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.model.Program;
 
@@ -26,15 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProgramKerja extends AppCompatActivity {
 

@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.InputPendukung;
-import com.meivaldi.trencenter.activity.InputRelawan;
+import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
+import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
