@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.InputPendukung;
 import com.meivaldi.trencenter.activity.InputRelawan;
 
 import java.text.SimpleDateFormat;
@@ -182,7 +183,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.layout_four:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), InputPendukung.class));
 
                 return;
             case R.id.layout_five:

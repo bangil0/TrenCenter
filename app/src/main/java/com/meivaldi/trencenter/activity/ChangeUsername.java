@@ -37,6 +37,8 @@ public class ChangeUsername extends AppCompatActivity{
 
     private SQLiteHandler db;
 
+    private String tipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +54,26 @@ public class ChangeUsername extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        tipe = user.get("type");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Dashboard_SuperAdmin.class));
+                if(tipe.equals("relawan")){
+                    Intent intent = new Intent(ChangeUsername.this,
+                            Dashboard_SuperAdmin.class);
+                    startActivity(intent);
+                } else if(tipe.equals("Relawan")){
+                    Intent intent = new Intent(ChangeUsername.this,
+                            MainActivity.class);
+                    startActivity(intent);
+                } else if(tipe.equals("tim_pemenangan")){
+                    Intent intent = new Intent(ChangeUsername.this,
+                            MainActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
         });

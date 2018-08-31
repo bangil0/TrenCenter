@@ -35,7 +35,8 @@
         <activity android:name=".activity.ChangePassword" />
         <activity android:name=".activity.ProgramKerja" />
         <activity android:name=".activity.DetailProgram" />
-        <activity android:name=".activity.InputRelawan"></activity>
+        <activity android:name=".activity.InputRelawan" />
+        <activity android:name=".activity.InputPendukung"></activity>
     </application>
 
 </manifest>
