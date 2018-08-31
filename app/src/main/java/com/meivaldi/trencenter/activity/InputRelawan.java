@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,13 +50,17 @@ public class InputRelawan extends AppCompatActivity {
     private Button input, upload;
     private Toolbar toolbar;
     private Calendar calendar;
+    private ImageView profilePicture;
 
+    Dialog dialog;
     final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_relawan);
+
+        profilePicture = (ImageView) findViewById(R.id.profilePicture);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -159,7 +166,7 @@ public class InputRelawan extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(context);
+                dialog = new Dialog(context);
                 dialog.setContentView(R.layout.custom_dialog);
                 dialog.setCancelable(true);
 
@@ -195,12 +202,15 @@ public class InputRelawan extends AppCompatActivity {
 
         switch (requestCode){
             case 0:
-                Toast.makeText(getApplicationContext(), "Foto", Toast.LENGTH_SHORT).show();
+                Uri cameraCapture = data.getData();
+                profilePicture.setImageURI(cameraCapture);
+                dialog.dismiss();
 
                 return;
-
             case 1:
-                Toast.makeText(getApplicationContext(), "Galeri", Toast.LENGTH_SHORT).show();
+                Uri selectedImage = data.getData();
+                profilePicture.setImageURI(selectedImage);
+                dialog.dismiss();
 
                 return;
         }
@@ -242,7 +252,7 @@ public class InputRelawan extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
             }
         }) {
 
