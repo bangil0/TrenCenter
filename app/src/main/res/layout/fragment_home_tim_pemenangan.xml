@@ -569,6 +569,18 @@
 
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/layout_six"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="@drawable/layout_border"
+                        android:layout_weight="50"
+                        android:layout_marginRight="5dp">
+
+
+
+                    </RelativeLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
