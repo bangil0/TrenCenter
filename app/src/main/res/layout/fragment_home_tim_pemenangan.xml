@@ -111,16 +111,9 @@
 
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:layout_below="@id/countDown"
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"/>
-
     <ScrollView
         android:id="@+id/cardView"
-        android:layout_below="@id/view_pager"
+        android:layout_below="@id/countDown"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:layout_width="match_parent"
@@ -131,6 +124,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="10dp">
+
+            <android.support.v4.view.ViewPager
+                android:layout_below="@id/countDown"
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"/>
 
             <RelativeLayout
                 android:id="@+id/berita"
