@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -15,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,10 +29,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
@@ -42,11 +47,16 @@ import com.meivaldi.trencenter.helper.CircleTransform;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
+
+import static android.R.attr.bitmap;
+import static com.meivaldi.trencenter.app.AppConfig.URL_UPLOAD_IMAGE;
 
 public class InputRelawan extends AppCompatActivity {
 
@@ -58,6 +68,7 @@ public class InputRelawan extends AppCompatActivity {
     private Calendar calendar;
     private ImageView profilePicture;
     private RelativeLayout container;
+    private Bitmap image;
 
     Dialog dialog;
     final Context context = this;
@@ -164,11 +175,13 @@ public class InputRelawan extends AppCompatActivity {
                 String gender = jenisKelamin.getSelectedItem().toString();
                 String marriage = status.getSelectedItem().toString();
 
-                checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees);
+                //checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                        //region, kec, kel, erwe, erte, tepees);
 
-                addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees, gender, marriage);
+                //addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                        //region, kec, kel, erwe, erte, tepees, gender, marriage);
+
+                uploadFoto();
             }
         });
 
@@ -185,13 +198,9 @@ public class InputRelawan extends AppCompatActivity {
                 camera.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA},
-                                    0);
-                        } else {
-                            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(cameraIntent, 200);
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, 0);
                         }
                     }
                 });
@@ -211,54 +220,88 @@ public class InputRelawan extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 0) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                Intent cameraIntent = new
-                        Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, 200);
-            } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+    private void uploadFoto() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPLOAD_IMAGE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            boolean responseCode = Boolean.parseBoolean(jsonObject.getString("error"));
+                            String response = jsonObject.getString("msg");
+                            if (responseCode) {
+                                Toast.makeText(InputRelawan.this, response, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(InputRelawan.this, "Error: " + response, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception ex) {
+                            Toast.makeText(InputRelawan.this, "Failed to upload.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(volleyError.getMessage());
+                            int responseCode = Integer.parseInt(jsonObject.getString("responseCode"));
+                            String response = jsonObject.getString("response");
+                            if (responseCode == 1) {
+                                Toast.makeText(InputRelawan.this, response, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(InputRelawan.this, "Error: " + response, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception ex) {
+                            Toast.makeText(InputRelawan.this, "Failed to upload.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String profilImage = toBase64(image);
+
+                Map<String,String> params = new Hashtable<>();
+                params.put("base64", profilImage);
+
+                return params;
             }
-        }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(InputRelawan.this);
+
+        requestQueue.add(stringRequest);
+    }
+
+    public String toBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
-            case 0:
-                Uri uri = data.getData();
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            profilePicture.setImageBitmap(imageBitmap);
 
-                Glide.with(this).load(uri)
-                        .crossFade()
-                        .thumbnail(0.5f)
-                        .bitmapTransform(new CircleTransform(this))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(profilePicture);
-                container.setBackground(null);
+            container.setBackground(null);
 
-                dialog.dismiss();
+            dialog.dismiss();
+        } else if(requestCode == 1 && resultCode == RESULT_OK){
+            Uri selectedImage = data.getData();
 
-                return;
-            case 1:
-                Uri selectedImage = data.getData();
+            Glide.with(this).load(selectedImage)
+                    .crossFade()
+                    .thumbnail(0.5f)
+                    .bitmapTransform(new CircleTransform(this))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(profilePicture);
+            container.setBackground(null);
 
-                Glide.with(this).load(selectedImage)
-                        .crossFade()
-                        .thumbnail(0.5f)
-                        .bitmapTransform(new CircleTransform(this))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(profilePicture);
-                container.setBackground(null);
-
-                dialog.dismiss();
-
-                return;
+            dialog.dismiss();
         }
     }
 
