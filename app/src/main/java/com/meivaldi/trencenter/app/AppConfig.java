@@ -15,4 +15,7 @@ public class AppConfig {
     public static String URL_ADD_RELAWAN = "http://103.28.53.181/~millenn1/android/add_relawan.php";
     public static String URL_ADD_PENDUKUNG = "http://103.28.53.181/~millenn1/android/add_pendukung.php";
     public static String URL_UPLOAD_IMAGE = "http://103.28.53.181/~millenn1/android/upload_foto.php";
+    public static String URL_GET_KABUPATEN = "http://103.28.53.181/~millenn1/android/get_kabupaten.php?id=12";
+    public static String URL_GET_KECAMATAN = "http://103.28.53.181/~millenn1/android/get_kecamatan.php";
+    public static String URL_GET_KELURAHAN = "http://103.28.53.181/~millenn1/android/get_kelurahan.php";
 }

@@ -49,6 +49,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+
 public class InputPendukung extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -66,6 +70,7 @@ public class InputPendukung extends AppCompatActivity {
     final Context context = this;
 
     private HashMap<String, String> user;
+    MyService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +130,13 @@ public class InputPendukung extends AppCompatActivity {
                 }
             }
         });
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor).build();
+
+        service = new Retrofit.Builder().baseUrl("103.28.53.181/~millenn1/dashboard/save/foto/").client(client).build().create(MyService.class);
 
         String[] JenisKelamin = { "Pria", "Wanita" };
         String[] Status = { "Belum Menikah", "Menikah"};

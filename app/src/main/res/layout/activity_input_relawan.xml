@@ -185,44 +185,29 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="#ccc" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/kabupaten"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/white"
-                android:hint="Kabupaten"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp"
-                android:singleLine="true"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textColorHint="#ccc" />
+                android:background="@android:drawable/btn_dropdown" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/kecamatan"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/white"
-                android:hint="Kecamatan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp"
-                android:singleLine="true"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textColorHint="#ccc" />
+                android:background="@android:drawable/btn_dropdown" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/kelurahan"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/white"
-                android:hint="Kelurahan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp"
-                android:singleLine="true"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textColorHint="#ccc" />
+                android:background="@android:drawable/btn_dropdown" />
 
             <EditText
                 android:id="@+id/rt"

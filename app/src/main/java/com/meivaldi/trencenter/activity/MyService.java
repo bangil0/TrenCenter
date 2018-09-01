@@ -1,4 +1,4 @@
-package com.meivaldi.trencenter.service;
+package com.meivaldi.trencenter.activity;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -12,7 +12,7 @@ import retrofit2.http.Part;
  * Created by root on 01/09/18.
  */
 
-interface Service {
+interface MyService {
     @Multipart
     @POST("/")
     Call<ResponseBody> postImage(@Part MultipartBody.Part image, @Part("name")RequestBody name);
