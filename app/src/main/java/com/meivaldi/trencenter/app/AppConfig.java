@@ -13,5 +13,6 @@ public class AppConfig {
     public static String URL_UPDATE = "http://103.28.53.181/~millenn1/android/update.php";
     public static String URL_UPDATE_PASSWORD = "http://103.28.53.181/~millenn1/android/updatePassword.php";
     public static String URL_ADD_RELAWAN = "http://103.28.53.181/~millenn1/android/add_relawan.php";
+    public static String URL_ADD_PENDUKUNG = "http://103.28.53.181/~millenn1/android/add_pendukung.php";
     public static String URL_UPLOAD_IMAGE = "http://103.28.53.181/~millenn1/android/upload_foto.php";
 }

@@ -13,8 +13,8 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -41,7 +41,12 @@
         <activity android:name=".activity.DetailProgram" />
         <activity android:name=".activity.relawan.InputRelawan" />
         <activity android:name=".activity.pendukung.InputPendukung" />
-        <activity android:name=".activity.tim_pemenangan.Tim_Pemenangan"></activity>
+        <activity android:name=".activity.tim_pemenangan.Tim_Pemenangan" />
+
+        <service
+            android:name=".service.Service"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

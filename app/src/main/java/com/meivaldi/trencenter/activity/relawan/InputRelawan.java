@@ -39,10 +39,13 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.CircleTransform;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,6 +72,10 @@ public class InputRelawan extends AppCompatActivity {
     private ImageView profilePicture;
     private RelativeLayout container;
     private Bitmap image;
+
+    private SQLiteHandler db;
+    private String tipe;
+    private  HashMap<String, String> user;
 
     Dialog dialog;
     final Context context = this;
@@ -112,11 +119,26 @@ public class InputRelawan extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        db = new SQLiteHandler(getApplicationContext());
+        user = db.getUserDetails();
+        tipe = user.get("type");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Dashboard_SuperAdmin.class));
-                finish();
+                if(tipe.equals("relawan")){
+                    Intent intent = new Intent(InputRelawan.this,
+                            Dashboard_SuperAdmin.class);
+                    startActivity(intent);
+                } else if(tipe.equals("Relawan")){
+                    Intent intent = new Intent(InputRelawan.this,
+                            MainActivity.class);
+                    startActivity(intent);
+                } else if(tipe.equals("tim_pemenangan")){
+                    Intent intent = new Intent(InputRelawan.this,
+                            Tim_Pemenangan.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -174,14 +196,15 @@ public class InputRelawan extends AppCompatActivity {
                 String tepees = tps.getText().toString();
                 String gender = jenisKelamin.getSelectedItem().toString();
                 String marriage = status.getSelectedItem().toString();
+                String maker = user.get("name");
 
-                //checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        //region, kec, kel, erwe, erte, tepees);
+                checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                        region, kec, kel, erwe, erte, tepees);
 
-                //addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        //region, kec, kel, erwe, erte, tepees, gender, marriage);
+                addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker);
 
-                uploadFoto();
+                //uploadFoto();
             }
         });
 
@@ -308,7 +331,7 @@ public class InputRelawan extends AppCompatActivity {
     private void addRelawan(final String kk, final String nik, final String name, final String birthPlace, final String birthDate,
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
-                            final String gender, final String marriage) {
+                            final String gender, final String marriage, final String maker) {
         String tag_string_req = "req_add_relawan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -366,7 +389,7 @@ public class InputRelawan extends AppCompatActivity {
                 params.put("rt", erte);
                 params.put("rw", erwe);
                 params.put("tps", tepees);
-                params.put("dibuat_oleh", "admin");
+                params.put("dibuat_oleh", maker);
 
                 return params;
             }

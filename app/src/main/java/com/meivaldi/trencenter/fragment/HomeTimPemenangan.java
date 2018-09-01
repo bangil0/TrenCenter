@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,15 +11,19 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
+import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HomeTimPemenangan extends Fragment {
+public class HomeTimPemenangan extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,20 +39,12 @@ public class HomeTimPemenangan extends Fragment {
     private ViewPager viewPager;
     private int[] layouts;
     private MyViewPagerAdapter myViewPagerAdapter;
+    private RelativeLayout one, two, three, four, five;
 
     public HomeTimPemenangan() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeTimPemenangan.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeTimPemenangan newInstance(String param1, String param2) {
         HomeTimPemenangan fragment = new HomeTimPemenangan();
         Bundle args = new Bundle();
@@ -76,6 +73,18 @@ public class HomeTimPemenangan extends Fragment {
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+
+        one = (RelativeLayout) rootView.findViewById(R.id.layout_one);
+        two = (RelativeLayout) rootView.findViewById(R.id.layout_two);
+        three = (RelativeLayout) rootView.findViewById(R.id.layout_three);
+        four = (RelativeLayout) rootView.findViewById(R.id.layout_four);
+        five = (RelativeLayout) rootView.findViewById(R.id.layout_five);
+
+        one.setOnClickListener(this);
+        two.setOnClickListener(this);
+        three.setOnClickListener(this);
+        four.setOnClickListener(this);
+        five.setOnClickListener(this);
 
         layouts = new int[]{
                 R.layout.iklan1,
@@ -108,6 +117,34 @@ public class HomeTimPemenangan extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        switch (id){
+            case R.id.layout_one:
+                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_two:
+                startActivity(new Intent(getContext(), InputRelawan.class));
+
+                return;
+            case R.id.layout_three:
+                startActivity(new Intent(getContext(), InputPendukung.class));
+
+                return;
+            case R.id.layout_four:
+                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+            case R.id.layout_five:
+                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+
+                return;
+        }
     }
 
     /**
