@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -40,17 +41,25 @@ import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.CircleTransform;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 
 public class InputPendukung extends AppCompatActivity {
@@ -58,9 +67,9 @@ public class InputPendukung extends AppCompatActivity {
     private Toolbar toolbar;
     private SQLiteHandler db;
     private String tipe;
-    private Spinner status, jenisKelamin;
+    private Spinner status, jenisKelamin, kabupaten, kecamatan, kelurahan;
     private EditText KK, NIK, nama, tempat_lahir, tanggal_lahir, umur, suku, hp,
-            alamat, kabupaten, kecamatan, kelurahan, rt, rw, tps;
+            alamat, rt, rw, tps;
     private Button input, upload;
     private Calendar calendar;
     private ImageView profilePicture;
@@ -86,6 +95,9 @@ public class InputPendukung extends AppCompatActivity {
 
         status = (Spinner) findViewById(R.id.status);
         jenisKelamin = (Spinner) findViewById(R.id.jenisKelamin);
+        kabupaten = (Spinner) findViewById(R.id.kabupaten);
+        kecamatan = (Spinner) findViewById(R.id.kecamatan);
+        kelurahan = (Spinner) findViewById(R.id.kelurahan);
 
         KK = (EditText) findViewById(R.id.kk);
         NIK = (EditText) findViewById(R.id.nik);
@@ -96,9 +108,6 @@ public class InputPendukung extends AppCompatActivity {
         suku = (EditText) findViewById(R.id.suku);
         hp = (EditText) findViewById(R.id.nomorHPRelawan);
         alamat = (EditText) findViewById(R.id.alamatRelawan);
-        kabupaten = (EditText) findViewById(R.id.kabupaten);
-        kecamatan = (EditText) findViewById(R.id.kecamatan);
-        kelurahan = (EditText) findViewById(R.id.kelurahan);
         rt = (EditText) findViewById(R.id.rt);
         rw = (EditText) findViewById(R.id.rw);
         tps = (EditText) findViewById(R.id.tps);
@@ -136,7 +145,7 @@ public class InputPendukung extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor).build();
 
-        service = new Retrofit.Builder().baseUrl("103.28.53.181/~millenn1/dashboard/save/foto/").client(client).build().create(MyService.class);
+        service = new Retrofit.Builder().baseUrl("http://103.28.53.181/~millenn1/dashboard/save/foto/").client(client).build().create(MyService.class);
 
         String[] JenisKelamin = { "Pria", "Wanita" };
         String[] Status = { "Belum Menikah", "Menikah"};
@@ -172,6 +181,36 @@ public class InputPendukung extends AppCompatActivity {
             }
         });
 
+        getKabupaten();
+
+        kabupaten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String kabs = adapterView.getSelectedItem().toString();
+                getKecamatan(kabs);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        kecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String kec = adapterView.getSelectedItem().toString();
+                getKelurahan(kec);
+                kelurahan.setEnabled(true);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,9 +223,9 @@ public class InputPendukung extends AppCompatActivity {
                 String tribe = suku.getText().toString();
                 String phone = hp.getText().toString();
                 String address = alamat.getText().toString();
-                String region = kabupaten.getText().toString();
-                String kec = kecamatan.getText().toString();
-                String kel = kelurahan.getText().toString();
+                String region = kabupaten.getSelectedItem().toString();
+                String kec = kecamatan.getSelectedItem().toString();
+                String kel = kelurahan.getSelectedItem().toString();
                 String erwe = rw.getText().toString();
                 String erte = rt.getText().toString();
                 String tepees = tps.getText().toString();
@@ -199,6 +238,8 @@ public class InputPendukung extends AppCompatActivity {
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees, gender, marriage, maker);
+                
+                uploadFoto();
             }
         });
 
@@ -236,6 +277,150 @@ public class InputPendukung extends AppCompatActivity {
         });
     }
 
+    private void uploadFoto() {
+    }
+
+    private void getKelurahan(final String kec) {
+        String tag_string_req = "req_get_kabupaten";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_KELURAHAN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Ambil Data", "Berhasil mengambil data");
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray kelurahanArray = jsonObject.getJSONArray("kelurahan");
+
+                    String[] test = new String[kelurahanArray.length()];
+
+                    for(int i=0; i<kelurahanArray.length(); i++){
+                        test[i] = kelurahanArray.getJSONArray(i).getString(2);
+                        Log.d("Kelurahan", test[i]);
+                    }
+
+                    ArrayAdapter<String> kelurahanAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_dropdown_item, test);
+
+                    kelurahan.setAdapter(kelurahanAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("kec", kec);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void getKecamatan(final String kabs) {
+        String tag_string_req = "req_get_kabupaten";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_KECAMATAN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Ambil Data", "Berhasil mengambil data");
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray kecamatanArray = jsonObject.getJSONArray("kecamatan");
+
+                    String[] test = new String[kecamatanArray.length()];
+
+                    for(int i=0; i<kecamatanArray.length(); i++){
+                        test[i] = kecamatanArray.getJSONArray(i).getString(2);
+                        Log.d("Kecamatan", test[i]);
+                    }
+
+                    ArrayAdapter<String> kecamatanAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_dropdown_item, test);
+
+                    kecamatan.setAdapter(kecamatanAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("kab", kabs);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void getKabupaten() {
+        String tag_string_req = "req_get_kabupaten";
+
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_GET_KABUPATEN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Ambil Data", "Berhasil mengambil data");
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray kabupatenArray = jsonObject.getJSONArray("kabupaten");
+
+                    String[] test = new String[kabupatenArray.length()];
+
+                    for(int i=0; i<kabupatenArray.length(); i++){
+                        test[i] = kabupatenArray.getJSONArray(i).getString(2);
+                    }
+
+                    ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_spinner_dropdown_item, test);
+
+                    kabupaten.setAdapter(kabupatenAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -259,6 +444,39 @@ public class InputPendukung extends AppCompatActivity {
                     .into(profilePicture);
             container.setBackground(null);
 
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            android.database.Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            if (cursor == null)
+                return;
+
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            File file = new File(filePath);
+
+            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqFile);
+            RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload_test");
+
+            Log.d("THIS", data.getData().getPath());
+
+            retrofit2.Call<okhttp3.ResponseBody> req = service.postImage(body, name);
+            req.enqueue(new Callback<ResponseBody>() {
+
+                @Override
+                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
             dialog.dismiss();
         }
     }
@@ -267,7 +485,7 @@ public class InputPendukung extends AppCompatActivity {
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
                             final String gender, final String marriage, final String maker) {
-        String tag_string_req = "req_add_relawan";
+        String tag_string_req = "req_add_pendukung";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_ADD_PENDUKUNG, new Response.Listener<String>() {
@@ -402,27 +620,6 @@ public class InputPendukung extends AppCompatActivity {
             alamat.setHint("Alamat tidak boleh kosong!");
         } else {
             alamat.setCompoundDrawables(null, null, success, null);
-        }
-
-        if(region.isEmpty()){
-            kabupaten.setCompoundDrawables(null, null, error, null);
-            kabupaten.setHint("Kabupaten tidak boleh kosong!");
-        } else {
-            kabupaten.setCompoundDrawables(null, null, success, null);
-        }
-
-        if(kec.isEmpty()){
-            kecamatan.setCompoundDrawables(null, null, error, null);
-            kecamatan.setHint("Kecamatan tidak boleh kosong!");
-        } else {
-            kecamatan.setCompoundDrawables(null, null, success, null);
-        }
-
-        if(kel.isEmpty()){
-            kelurahan.setCompoundDrawables(null, null, error, null);
-            kelurahan.setHint("Kelurahan tidak boleh kosong!");
-        } else {
-            kelurahan.setCompoundDrawables(null, null, success, null);
         }
 
         if(erte.isEmpty()){

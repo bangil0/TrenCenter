@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -29,10 +32,22 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     private SQLiteHandler db;
     private SessionManager session;
 
+    private FloatingActionButton button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        button = (FloatingActionButton) findViewById(R.id.input_pendukung);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), InputPendukung.class));
+                finish();
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

@@ -49,6 +49,7 @@
 
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/input_pendukung"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"

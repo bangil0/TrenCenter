@@ -1,18 +1,13 @@
 package com.meivaldi.trencenter.activity.relawan;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -40,7 +35,6 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -54,15 +48,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static android.R.attr.bitmap;
 import static com.meivaldi.trencenter.app.AppConfig.URL_UPLOAD_IMAGE;
 
 public class InputRelawan extends AppCompatActivity {
@@ -83,10 +74,6 @@ public class InputRelawan extends AppCompatActivity {
 
     Dialog dialog;
     final Context context = this;
-
-    private String[] kabupaten;
-    private String[] kecamatan;
-    private String[] kelurahan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
