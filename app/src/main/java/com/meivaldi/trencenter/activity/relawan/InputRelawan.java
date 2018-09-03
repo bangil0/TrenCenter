@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -25,13 +26,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
@@ -50,11 +48,8 @@ import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
-
-import static com.meivaldi.trencenter.app.AppConfig.URL_UPLOAD_IMAGE;
 
 public class InputRelawan extends AppCompatActivity {
 
@@ -66,7 +61,7 @@ public class InputRelawan extends AppCompatActivity {
     private Calendar calendar;
     private ImageView profilePicture;
     private RelativeLayout container;
-    private Bitmap image;
+    private Bitmap imageBitmap;
 
     private SQLiteHandler db;
     private String tipe;
@@ -207,6 +202,9 @@ public class InputRelawan extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                String foto = toBase64(bitmap);
+
                 String kk = KK.getText().toString();
                 String nik = NIK.getText().toString();
                 String name = nama.getText().toString();
@@ -230,9 +228,8 @@ public class InputRelawan extends AppCompatActivity {
                         region, kec, kel, erwe, erte, tepees);
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker);
+                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto);
 
-                //uploadFoto();
             }
         });
 
@@ -412,57 +409,6 @@ public class InputRelawan extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void uploadFoto() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPLOAD_IMAGE,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(s);
-                            boolean responseCode = Boolean.parseBoolean(jsonObject.getString("error"));
-                            String response = jsonObject.getString("msg");
-                            if (responseCode) {
-                                Toast.makeText(InputRelawan.this, response, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(InputRelawan.this, "Error: " + response, Toast.LENGTH_LONG).show();
-                            }
-                        } catch (Exception ex) {
-                            Toast.makeText(InputRelawan.this, "Failed to upload.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(volleyError.getMessage());
-                            int responseCode = Integer.parseInt(jsonObject.getString("responseCode"));
-                            String response = jsonObject.getString("response");
-                            if (responseCode == 1) {
-                                Toast.makeText(InputRelawan.this, response, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(InputRelawan.this, "Error: " + response, Toast.LENGTH_LONG).show();
-                            }
-                        } catch (Exception ex) {
-                            Toast.makeText(InputRelawan.this, "Failed to upload.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                String profilImage = toBase64(image);
-
-                Map<String,String> params = new Hashtable<>();
-                params.put("base64", profilImage);
-
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(InputRelawan.this);
-
-        requestQueue.add(stringRequest);
-    }
-
     public String toBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -476,7 +422,7 @@ public class InputRelawan extends AppCompatActivity {
 
         if (requestCode == 0 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
             profilePicture.setImageBitmap(imageBitmap);
 
             container.setBackground(null);
@@ -500,7 +446,7 @@ public class InputRelawan extends AppCompatActivity {
     private void addRelawan(final String kk, final String nik, final String name, final String birthPlace, final String birthDate,
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
-                            final String gender, final String marriage, final String maker) {
+                            final String gender, final String marriage, final String maker, final String foto) {
         String tag_string_req = "req_add_relawan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -540,7 +486,7 @@ public class InputRelawan extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("foto", "image.jpg");
+                params.put("foto", foto);
                 params.put("kk", kk);
                 params.put("nik", nik);
                 params.put("nama", name);

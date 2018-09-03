@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,6 +47,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -214,6 +217,8 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                String foto = toBase64(bitmap);
                 String kk = KK.getText().toString();
                 String nik = NIK.getText().toString();
                 String name = nama.getText().toString();
@@ -237,9 +242,7 @@ public class InputPendukung extends AppCompatActivity {
                         region, kec, kel, erwe, erte, tepees);
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker);
-                
-                uploadFoto();
+                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto);
             }
         });
 
@@ -275,6 +278,13 @@ public class InputPendukung extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    public String toBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
     private void uploadFoto() {
@@ -484,7 +494,7 @@ public class InputPendukung extends AppCompatActivity {
     private void addRelawan(final String kk, final String nik, final String name, final String birthPlace, final String birthDate,
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
-                            final String gender, final String marriage, final String maker) {
+                            final String gender, final String marriage, final String maker, final String foto) {
         String tag_string_req = "req_add_pendukung";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -524,7 +534,7 @@ public class InputPendukung extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("foto", "image.jpg");
+                params.put("foto", foto);
                 params.put("kk", kk);
                 params.put("nik", nik);
                 params.put("nama", name);
