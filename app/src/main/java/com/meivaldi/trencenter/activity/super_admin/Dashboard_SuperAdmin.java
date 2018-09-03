@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.fragment.HomeFragment;
 import com.meivaldi.trencenter.fragment.MessageFragment;
@@ -29,7 +30,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
     private SessionManager session;
     private SQLiteHandler db;
     private Toolbar toolbar;
-
+    private String tipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+        tipe = user.get("type");
 
         if (!session.isLoggedIn()) {
             logoutUser();

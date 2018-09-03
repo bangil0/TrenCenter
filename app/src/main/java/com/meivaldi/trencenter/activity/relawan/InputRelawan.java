@@ -229,7 +229,6 @@ public class InputRelawan extends AppCompatActivity {
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto);
-
             }
         });
 

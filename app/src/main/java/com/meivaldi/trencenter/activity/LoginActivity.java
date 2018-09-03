@@ -63,10 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         HashMap<String, String> user = db.getUserDetails();
-
         String tipe = user.get("type");
 
-        if (session.isLoggedIn()) {
+        if(session.isLoggedIn()){
             if(tipe.equals("super_admin")){
                 Intent intent = new Intent(LoginActivity.this,
                         Dashboard_SuperAdmin.class);
@@ -142,15 +141,15 @@ public class LoginActivity extends AppCompatActivity {
                         String created_at = user
                                 .getString("created_at");
 
-                        if(tipe.equals("relawan")){
+                        if(tipe.equals("super_admin")){
                             Intent intent = new Intent(LoginActivity.this,
                                     Dashboard_SuperAdmin.class);
                             startActivity(intent);
-                        } else if(tipe.equals("Relawan")){
+                        } else if(tipe.equals("relawan")){
                             Intent intent = new Intent(LoginActivity.this,
                                     MainActivity.class);
                             startActivity(intent);
-                        } else if(tipe.equals("tim_pemenangan")){
+                        } else if(tipe.equals("pendukung")){
                             Intent intent = new Intent(LoginActivity.this,
                                     Tim_Pemenangan.class);
                             startActivity(intent);

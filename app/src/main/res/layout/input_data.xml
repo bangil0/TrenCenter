@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_width="300dp"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relawan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/relawanImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/relawan"/>
+
+            <TextView
+                android:id="@+id/relawanLabel"
+                android:layout_below="@id/relawanImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Relawan"
+                android:textColor="@android:color/black"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/dotted"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/atau"
+            android:layout_below="@id/relawan"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ATAU"
+            android:textSize="30dp"
+            android:layout_marginBottom="50dp"/>
+
+        <RelativeLayout
+            android:id="@+id/pendukung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/atau"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/pendukungImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/pendukung"/>
+
+            <TextView
+                android:id="@+id/relawanLabel"
+                android:layout_below="@id/pendukungImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Pendukung"
+                android:textColor="@android:color/black"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/dotted"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

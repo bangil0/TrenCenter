@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -142,13 +143,6 @@ public class InputPendukung extends AppCompatActivity {
                 }
             }
         });
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor).build();
-
-        service = new Retrofit.Builder().baseUrl("http://103.28.53.181/~millenn1/dashboard/save/foto/").client(client).build().create(MyService.class);
 
         String[] JenisKelamin = { "Pria", "Wanita" };
         String[] Status = { "Belum Menikah", "Menikah"};
@@ -450,39 +444,6 @@ public class InputPendukung extends AppCompatActivity {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(profilePicture);
             container.setBackground(null);
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            android.database.Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-            if (cursor == null)
-                return;
-
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String filePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            File file = new File(filePath);
-
-            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqFile);
-            RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload_test");
-
-            Log.d("THIS", data.getData().getPath());
-
-            retrofit2.Call<okhttp3.ResponseBody> req = service.postImage(body, name);
-            req.enqueue(new Callback<ResponseBody>() {
-
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    t.printStackTrace();
-                }
-            });
 
             dialog.dismiss();
         }

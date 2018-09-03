@@ -47,15 +47,4 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/input_pendukung"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        app:elevation="8dp"
-        android:layout_marginBottom="30dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/baseline_create_white_18"/>
-
 </RelativeLayout>

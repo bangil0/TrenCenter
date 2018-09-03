@@ -1,10 +1,13 @@
 package com.meivaldi.trencenter.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,7 +42,10 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
     private ViewPager viewPager;
     private int[] layouts;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private RelativeLayout one, two, three, four, five;
+
+    private FloatingActionButton create;
+
+    Dialog dialog;
 
     public HomeTimPemenangan() {
 
@@ -74,18 +80,6 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
         detik = (TextView) rootView.findViewById(R.id.detik);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
-        one = (RelativeLayout) rootView.findViewById(R.id.layout_one);
-        two = (RelativeLayout) rootView.findViewById(R.id.layout_two);
-        three = (RelativeLayout) rootView.findViewById(R.id.layout_three);
-        four = (RelativeLayout) rootView.findViewById(R.id.layout_four);
-        five = (RelativeLayout) rootView.findViewById(R.id.layout_five);
-
-        one.setOnClickListener(this);
-        two.setOnClickListener(this);
-        three.setOnClickListener(this);
-        four.setOnClickListener(this);
-        five.setOnClickListener(this);
-
         layouts = new int[]{
                 R.layout.iklan1,
                 R.layout.iklan2,
@@ -95,6 +89,38 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        create = (FloatingActionButton) rootView.findViewById(R.id.createUser);
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.input_data);
+                dialog.setCancelable(true);
+
+                RelativeLayout inputRelawan = (RelativeLayout) dialog.findViewById(R.id.relawan);
+                RelativeLayout inputPendukung = (RelativeLayout) dialog.findViewById(R.id.pendukung);
+
+                inputRelawan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getContext(), InputRelawan.class));
+                        getActivity().finish();
+                    }
+                });
+
+                inputPendukung.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getContext(), InputPendukung.class));
+                        getActivity().finish();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
 
         countDown();
 
