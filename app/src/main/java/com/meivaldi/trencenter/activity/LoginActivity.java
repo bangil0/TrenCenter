@@ -67,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         String tipe = user.get("type");
 
         if (session.isLoggedIn()) {
-            if(tipe.equals("relawan")){
+            if(tipe.equals("super_admin")){
                 Intent intent = new Intent(LoginActivity.this,
                         Dashboard_SuperAdmin.class);
                 startActivity(intent);
-            } else if(tipe.equals("Relawan")){
+            } else if(tipe.equals("relawan")){
                 Intent intent = new Intent(LoginActivity.this,
                         MainActivity.class);
                 startActivity(intent);

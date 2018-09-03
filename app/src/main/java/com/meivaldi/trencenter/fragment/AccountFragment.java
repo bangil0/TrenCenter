@@ -93,6 +93,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         String nama = user.get("name");
         String tipe = user.get("type");
+        String foto = user.get("foto");
+
+        Toast.makeText(getContext(), foto, Toast.LENGTH_SHORT).show();
 
         name.setText(nama);
         status.setText(tipe);
