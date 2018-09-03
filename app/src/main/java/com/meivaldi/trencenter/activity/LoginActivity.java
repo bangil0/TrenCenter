@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this,
                         MainActivity.class);
                 startActivity(intent);
-            } else if(tipe.equals("tim_pemenangan")){
+            } else if(tipe.equals("pendukung")){
                 Intent intent = new Intent(LoginActivity.this,
                         Tim_Pemenangan.class);
                 startActivity(intent);

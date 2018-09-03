@@ -119,15 +119,15 @@ public class InputRelawan extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(tipe.equals("relawan")){
+                if(tipe.equals("super_admin")){
                     Intent intent = new Intent(InputRelawan.this,
                             Dashboard_SuperAdmin.class);
                     startActivity(intent);
-                } else if(tipe.equals("Relawan")){
+                } else if(tipe.equals("relawan")){
                     Intent intent = new Intent(InputRelawan.this,
                             MainActivity.class);
                     startActivity(intent);
-                } else if(tipe.equals("tim_pemenangan")){
+                } else if(tipe.equals("pendukung")){
                     Intent intent = new Intent(InputRelawan.this,
                             Tim_Pemenangan.class);
                     startActivity(intent);
