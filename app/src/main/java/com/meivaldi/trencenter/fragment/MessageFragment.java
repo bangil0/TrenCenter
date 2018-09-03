@@ -1,15 +1,19 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
 
@@ -35,11 +39,14 @@ public class MessageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_message, container, false);
         button = rootView.findViewById(R.id.create_message);
 
+        final ActionBar actionBar = getActivity().getActionBar();
+
+        ViewPagerAdapter myAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        viewPager.setAdapter(myAdapter);
 
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +56,7 @@ public class MessageFragment extends Fragment {
 
         return rootView;
     }
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
