@@ -11,7 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.helper.CircleTransform;
 import com.meivaldi.trencenter.model.Message;
 import com.meivaldi.trencenter.model.Program;
 
@@ -25,6 +28,8 @@ import java.util.List;
  */
 
 public class ProgramAdapter extends ArrayAdapter<Program> {
+
+    private String base = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/";
 
     private Context context;
     private List<Program> programList = new ArrayList<>();
@@ -44,9 +49,6 @@ public class ProgramAdapter extends ArrayAdapter<Program> {
 
         Program currentProgram = programList.get(position);
 
-        ImageView image = (ImageView) listItem.findViewById(R.id.logo);
-        image.setImageResource(currentProgram.getImage());
-
         TextView title = (TextView) listItem.findViewById(R.id.title);
         title.setText(currentProgram.getTitle());
 
@@ -55,6 +57,16 @@ public class ProgramAdapter extends ArrayAdapter<Program> {
 
         TextView dateStart = (TextView) listItem.findViewById(R.id.tanggalMulai);
         dateStart.setText(currentProgram.getDate());
+
+        ImageView imageView = (ImageView) listItem.findViewById(R.id.logo);
+        String url = base + "/" + currentProgram.getImage();
+
+        Glide.with(getContext()).load(url)
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(getContext()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView);
 
         return listItem;
     }

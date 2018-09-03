@@ -91,8 +91,9 @@ public class ProgramKerja extends AppCompatActivity {
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String lokasi = program.getString(4);
+                        String foto = program.getString(7);
 
-                        programList.add(new Program(nama, tanggalMulai, lokasi, R.drawable.team));
+                        programList.add(new Program(nama, tanggalMulai, lokasi, foto));
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
