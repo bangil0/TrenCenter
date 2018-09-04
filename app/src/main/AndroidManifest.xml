@@ -67,7 +67,8 @@
             android:name=".activity.tim_pemenangan.Tim_Pemenangan"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.tim_pemenangan.ProgramKerja_TimPemenangan" />
-        <activity android:name=".activity.tim_pemenangan.DetailProgram_TimPemenangan"></activity>
+        <activity android:name=".activity.tim_pemenangan.DetailProgram_TimPemenangan" />
+        <activity android:name=".activity.pendukung.Pendukung"></activity>
     </application>
 
 </manifest>
