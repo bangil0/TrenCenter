@@ -81,7 +81,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_progja:
-                        Toast.makeText(Tim_Pemenangan.this, "Program Kerja",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
 
                         return true;
                     case R.id.nav_penghargaan:
