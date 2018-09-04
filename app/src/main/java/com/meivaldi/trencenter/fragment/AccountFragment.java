@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
     private SQLiteHandler db;
     private TextView name, status;
+    private ImageView fotoProfil;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -78,7 +80,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
         userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
@@ -87,12 +88,14 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         name = (TextView) rootView.findViewById(R.id.nama);
         status = (TextView) rootView.findViewById(R.id.status);
+        fotoProfil = (ImageView) rootView.findViewById(R.id.fotoProfil);
 
         db = new SQLiteHandler(getContext());
         HashMap<String, String> user = db.getUserDetails();
 
         String nama = user.get("name");
         String tipe = user.get("type");
+        String foto = user.get("foto");
 
         name.setText(nama);
         status.setText(tipe);
