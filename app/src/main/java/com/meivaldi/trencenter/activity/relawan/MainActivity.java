@@ -17,6 +17,8 @@ import android.view.View;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
+import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -56,11 +58,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
 
         if (!session.isLoggedIn()) {
             logoutUser();
-        }
-
-        if(tipe.equals("super_admin")){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
         }
 
     }

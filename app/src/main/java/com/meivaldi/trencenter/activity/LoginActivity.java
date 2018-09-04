@@ -67,15 +67,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if(session.isLoggedIn()){
             if(tipe.equals("super_admin")){
-                Intent intent = new Intent(LoginActivity.this,
+                Intent intent = new Intent(getApplicationContext(),
                         Dashboard_SuperAdmin.class);
                 startActivity(intent);
             } else if(tipe.equals("relawan")){
-                Intent intent = new Intent(LoginActivity.this,
+                Intent intent = new Intent(getApplicationContext(),
                         MainActivity.class);
                 startActivity(intent);
             } else if(tipe.equals("pendukung")){
-                Intent intent = new Intent(LoginActivity.this,
+                Intent intent = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(intent);
+            } else if(tipe.equals("tim_pemenangan")) {
+                Intent intent = new Intent(getApplicationContext(),
                         Tim_Pemenangan.class);
                 startActivity(intent);
             }
@@ -149,6 +153,10 @@ public class LoginActivity extends AppCompatActivity {
                                     MainActivity.class);
                             startActivity(intent);
                         } else if(tipe.equals("pendukung")){
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intent);
+                        } else if(tipe.equals("tim_pemenangan")) {
                             Intent intent = new Intent(LoginActivity.this,
                                     Tim_Pemenangan.class);
                             startActivity(intent);

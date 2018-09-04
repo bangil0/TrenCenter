@@ -85,7 +85,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
-        userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
         userName = (RelativeLayout) rootView.findViewById(R.id.username_settings);
         userPassword = (RelativeLayout) rootView.findViewById(R.id.password_settings);
 
@@ -110,7 +109,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(fotoProfil);
 
-        userPhoto.setOnClickListener(this);
         userName.setOnClickListener(this);
         userPassword.setOnClickListener(this);
 
@@ -138,7 +136,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.foto:
+            case R.id.fotoProfil:
                 Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
 
                 return;
