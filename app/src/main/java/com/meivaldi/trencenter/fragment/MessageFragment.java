@@ -1,5 +1,6 @@
 package com.meivaldi.trencenter.fragment;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.helper.TabAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class MessageFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private TabAdapter adapter;
 
     private FloatingActionButton button;
 
@@ -39,20 +42,15 @@ public class MessageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_message, container, false);
         button = rootView.findViewById(R.id.create_message);
 
-        final ActionBar actionBar = getActivity().getActionBar();
-
-        ViewPagerAdapter myAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        viewPager.setAdapter(myAdapter);
+        tabLayout = (TabLayout) rootView.findViewById(R.id.tabLayout);
 
-        tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
+        adapter = new TabAdapter(getActivity().getSupportFragmentManager());
+        adapter.addFragment(new InboxFragment(), "Masuk");
+        adapter.addFragment(new OutboxFragment(), "Keluar");
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
 
         return rootView;
     }
