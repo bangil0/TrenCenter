@@ -14,9 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ChangePassword;
 import com.meivaldi.trencenter.activity.ChangeUsername;
+import com.meivaldi.trencenter.helper.CircleTransform;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 
 import java.util.HashMap;
@@ -99,6 +102,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         name.setText(nama);
         status.setText(tipe);
+
+        Glide.with(getContext()).load(foto)
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(getContext()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(fotoProfil);
 
         userPhoto.setOnClickListener(this);
         userName.setOnClickListener(this);
