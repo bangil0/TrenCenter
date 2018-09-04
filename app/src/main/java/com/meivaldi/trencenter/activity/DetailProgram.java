@@ -15,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -90,7 +92,13 @@ public class DetailProgram extends AppCompatActivity {
                         String lokasi = program.getString(4);
                         String deskripsi = program.getString(5);
                         String penanggungJawab = program.getString(6);
-                        String gambar = program.getString(7);
+                        String gambar = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/" + program.getString(7);
+
+                        Glide.with(getApplicationContext()).load(gambar)
+                                .crossFade()
+                                .thumbnail(0.5f)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(image);
 
                         title.setText(nama);
                         description.setText(deskripsi);
