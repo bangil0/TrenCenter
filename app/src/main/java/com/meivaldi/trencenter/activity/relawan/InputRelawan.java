@@ -55,7 +55,7 @@ public class InputRelawan extends AppCompatActivity {
 
     private Spinner status, jenisKelamin, kabupatenSP, kecamatanSP, kelurahanSP;
     private EditText KK, NIK, nama, tempat_lahir, tanggal_lahir, umur, suku, hp,
-        alamat, rt, rw, tps;
+        alamat, rt, rw, tps, username, facebook, instagram;
     private Button input, upload;
     private Toolbar toolbar;
     private Calendar calendar;
@@ -105,6 +105,10 @@ public class InputRelawan extends AppCompatActivity {
         rt = (EditText) findViewById(R.id.rt);
         rw = (EditText) findViewById(R.id.rw);
         tps = (EditText) findViewById(R.id.tps);
+        username = (EditText) findViewById(R.id.username);
+        facebook = (EditText) findViewById(R.id.facebook);
+        instagram = (EditText) findViewById(R.id.instagram);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -223,12 +227,16 @@ public class InputRelawan extends AppCompatActivity {
                 String gender = jenisKelamin.getSelectedItem().toString();
                 String marriage = status.getSelectedItem().toString();
                 String maker = user.get("name");
+                String userName = username.getText().toString();
+                String fbAkun = facebook.getText().toString();
+                String igAkun = instagram.getText().toString();
 
                 checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees);
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto);
+                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto, userName,
+                        fbAkun, igAkun);
             }
         });
 
@@ -445,7 +453,8 @@ public class InputRelawan extends AppCompatActivity {
     private void addRelawan(final String kk, final String nik, final String name, final String birthPlace, final String birthDate,
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
-                            final String gender, final String marriage, final String maker, final String foto) {
+                            final String gender, final String marriage, final String maker, final String foto, final String userName,
+                            final String fbAkun, final String igAkun) {
         String tag_string_req = "req_add_relawan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -504,6 +513,9 @@ public class InputRelawan extends AppCompatActivity {
                 params.put("rw", erwe);
                 params.put("tps", tepees);
                 params.put("dibuat_oleh", maker);
+                params.put("username", userName);
+                params.put("facebook", fbAkun);
+                params.put("instagram", igAkun);
 
                 return params;
             }
