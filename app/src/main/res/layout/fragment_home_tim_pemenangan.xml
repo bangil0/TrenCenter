@@ -197,7 +197,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
-                                android:id="@+id/image_berita"
+                                android:id="@+id/image_berita1"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:background="#ccc"
@@ -206,12 +206,13 @@
 
                             <LinearLayout
                                 android:layout_marginLeft="5dp"
-                                android:layout_below="@id/image_berita"
+                                android:layout_below="@id/image_berita1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/judulBerita1"
                                     android:text="@string/card_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -219,6 +220,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tanggalBerita1"
                                     android:textSize="10dp"
                                     android:layout_marginTop="5dp"
                                     android:text="31 Agustus 2018"
@@ -244,7 +246,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
-                                android:id="@+id/image_berita"
+                                android:id="@+id/image_berita2"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:background="#ccc"
@@ -253,12 +255,13 @@
 
                             <LinearLayout
                                 android:layout_marginLeft="5dp"
-                                android:layout_below="@id/image_berita"
+                                android:layout_below="@id/image_berita2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/judulBerita2"
                                     android:text="@string/card_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -266,6 +269,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tanggalBerita2"
                                     android:textSize="10dp"
                                     android:layout_marginTop="5dp"
                                     android:text="31 Agustus 2018"
@@ -302,7 +306,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
-                                android:id="@+id/image_berita"
+                                android:id="@+id/image_berita3"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:background="#ccc"
@@ -311,12 +315,13 @@
 
                             <LinearLayout
                                 android:layout_marginLeft="5dp"
-                                android:layout_below="@id/image_berita"
+                                android:layout_below="@id/image_berita3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/judulBerita3"
                                     android:text="@string/card_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -324,6 +329,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tanggalBerita3"
                                     android:textSize="10dp"
                                     android:layout_marginTop="5dp"
                                     android:text="31 Agustus 2018"
@@ -349,7 +355,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
-                                android:id="@+id/image_berita"
+                                android:id="@+id/image_berita4"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:background="#ccc"
@@ -358,12 +364,13 @@
 
                             <LinearLayout
                                 android:layout_marginLeft="5dp"
-                                android:layout_below="@id/image_berita"
+                                android:layout_below="@id/image_berita4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/judulBerita4"
                                     android:text="@string/card_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -371,6 +378,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tanggalBerita4"
                                     android:textSize="10dp"
                                     android:layout_marginTop="5dp"
                                     android:text="31 Agustus 2018"
