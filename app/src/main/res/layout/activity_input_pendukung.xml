@@ -248,6 +248,47 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="#ccc" />
 
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/white"
+                android:hint="Username"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="#ccc" />
+
+            <EditText
+                android:id="@+id/facebook"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/white"
+                android:hint="Akun Facebook"
+                android:drawableRight="@drawable/facebook"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="#ccc" />
+
+            <EditText
+                android:id="@+id/instagram"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/white"
+                android:hint="Akun Instagram"
+                android:drawableRight="@drawable/instagram"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="#ccc" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
