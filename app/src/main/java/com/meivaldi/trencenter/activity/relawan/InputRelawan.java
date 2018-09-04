@@ -114,7 +114,7 @@ public class InputRelawan extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Tambah Relawan");
 
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();

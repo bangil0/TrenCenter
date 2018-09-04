@@ -122,7 +122,7 @@ public class InputPendukung extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Tambah Pendukung");
 
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
