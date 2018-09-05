@@ -3,7 +3,10 @@ package com.meivaldi.trencenter.fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
@@ -11,24 +14,41 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailProgram;
+import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
+import com.meivaldi.trencenter.adapter.CardAdapter;
+import com.meivaldi.trencenter.adapter.ProgramAdapter;
+import com.meivaldi.trencenter.helper.HttpHandler;
+import com.meivaldi.trencenter.model.Card;
+import com.meivaldi.trencenter.model.Program;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-public class HomeTimPemenangan extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class HomeTimPemenangan extends Fragment  {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -44,6 +64,13 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
     private MyViewPagerAdapter myViewPagerAdapter;
 
     private FloatingActionButton create;
+
+    private RecyclerView recyclerView;
+    private CardAdapter adapter;
+    private List<Card> cardList;
+
+    private static final String TAG = HomeTimPemenangan.class.getSimpleName();
+    private static final String url = "http://103.28.53.181/~millenn1/android/getCard.php";
 
     Dialog dialog;
 
@@ -67,6 +94,8 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        new GetCards().execute();
     }
 
     @Override
@@ -85,6 +114,17 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
                 R.layout.iklan2,
                 R.layout.iklan3
         };
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        cardList = new ArrayList<>();
+        adapter = new CardAdapter(getContext(), cardList);
+
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -134,6 +174,46 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
         }
     }
 
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view);
+            int column = position % spanCount;
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount;
+                outRect.right = (column + 1) * spacing / spanCount;
+
+                if (position < spanCount) {
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing;
+            } else {
+                outRect.left = column * spacing / spanCount;
+                outRect.right = spacing - (column + 1) * spacing / spanCount;
+                if (position >= spanCount) {
+                    outRect.top = spacing;
+                }
+            }
+        }
+    }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -143,34 +223,6 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-
-        switch (id){
-            case R.id.layout_one:
-                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-
-                return;
-            case R.id.layout_two:
-                startActivity(new Intent(getContext(), InputRelawan.class));
-
-                return;
-            case R.id.layout_three:
-                startActivity(new Intent(getContext(), InputPendukung.class));
-
-                return;
-            case R.id.layout_four:
-                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-
-                return;
-            case R.id.layout_five:
-                Toast.makeText(getContext(), "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-
-                return;
-        }
     }
 
     /**
@@ -282,4 +334,62 @@ public class HomeTimPemenangan extends Fragment implements View.OnClickListener 
 
         }
     };
+
+    private class GetCards extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr = sh.makeServiceCall(url);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    JSONArray programs = jsonObj.getJSONArray("cards");
+
+                    for (int i = 0; i < programs.length(); i++) {
+                        JSONArray program = programs.getJSONArray(i);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String foto = program.getString(7);
+
+                        cardList.add(new Card(nama, tanggalMulai, foto));
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+    }
 }

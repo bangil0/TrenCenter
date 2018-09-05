@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="statusBar">#102954</color>
     <color name="error">#ff0000</color>
+    <color name="album_title">#4c4c4c</color>
 
     <color name="tab_background_selected">#153773</color>
     <color name="tab_background_unselected">#1B458D</color>

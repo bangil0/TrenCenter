@@ -50,6 +50,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -78,12 +79,17 @@ public class InputPendukung extends AppCompatActivity {
     private Calendar calendar;
     private ImageView profilePicture;
     private RelativeLayout container;
+    private Uri selectedImage;
+
+    private static final int FROM_CAMERA = 100;
+    private static final int FROM_GALLERY = 200;
+
+    private int imageStatus;
 
     Dialog dialog;
     final Context context = this;
 
     private HashMap<String, String> user;
-    MyService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +224,18 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                Bitmap bitmap = null;
+
+                if(imageStatus == FROM_GALLERY){
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else if(imageStatus == FROM_CAMERA){
+                    bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                }
+
                 String foto = toBase64(bitmap);
                 String kk = KK.getText().toString();
                 String nik = NIK.getText().toString();
@@ -438,6 +455,7 @@ public class InputPendukung extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0 && resultCode == RESULT_OK) {
+            imageStatus = FROM_CAMERA;
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             profilePicture.setImageBitmap(imageBitmap);
@@ -446,7 +464,8 @@ public class InputPendukung extends AppCompatActivity {
 
             dialog.dismiss();
         } else if(requestCode == 1 && resultCode == RESULT_OK){
-            Uri selectedImage = data.getData();
+            imageStatus = FROM_GALLERY;
+            selectedImage = data.getData();
 
             Glide.with(this).load(selectedImage)
                     .crossFade()
