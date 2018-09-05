@@ -113,8 +113,6 @@ public class HomeTimPemenangan extends Fragment  {
         };
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        cardList = new ArrayList<>();
-        adapter = new CardAdapter(getContext(), cardList);
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -334,6 +332,13 @@ public class HomeTimPemenangan extends Fragment  {
     };
 
     private class GetCards extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            cardList = new ArrayList<>();
+            adapter = new CardAdapter(getContext(), cardList);
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
