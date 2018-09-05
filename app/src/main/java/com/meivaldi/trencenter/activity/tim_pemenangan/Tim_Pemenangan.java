@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.fragment.HomeFragment;
@@ -69,7 +70,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.nav_profile:
-                        Toast.makeText(Tim_Pemenangan.this, "Profile",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), DataCaleg.class));
 
                         return true;
                     case R.id.nav_target:

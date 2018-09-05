@@ -150,6 +150,7 @@
                 android:layout_marginTop="10dp">
 
                 <RelativeLayout
+                    android:id="@+id/profil_caleg"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/layout_border"

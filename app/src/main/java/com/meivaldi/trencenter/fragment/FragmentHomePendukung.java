@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ProgramKerja;
+import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class FragmentHomePendukung extends Fragment {
     private TextView hari, detik, menit, jam;
     private ViewPager viewPager;
     private int[] layouts;
-    private RelativeLayout programKerja;
+    private RelativeLayout programKerja, profilCaleg;
     private MyViewPagerAdapter myViewPagerAdapter;
 
     // TODO: Rename and change types of parameters
@@ -73,6 +74,7 @@ public class FragmentHomePendukung extends Fragment {
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
         programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
+        profilCaleg = (RelativeLayout) rootView.findViewById(R.id.profileCaleg);
 
         layouts = new int[]{
                 R.layout.iklan1,
@@ -84,6 +86,13 @@ public class FragmentHomePendukung extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ProgramKerja.class));
+            }
+        });
+
+        profilCaleg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), DataCaleg.class));
             }
         });
 

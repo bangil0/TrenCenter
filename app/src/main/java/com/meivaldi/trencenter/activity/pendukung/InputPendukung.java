@@ -224,7 +224,7 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = null;
+                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
 
                 if(imageStatus == FROM_GALLERY){
                     try {
