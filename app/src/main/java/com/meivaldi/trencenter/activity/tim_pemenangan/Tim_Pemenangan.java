@@ -172,5 +172,9 @@ public class Tim_Pemenangan extends AppCompatActivity {
         transaction.commit();
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

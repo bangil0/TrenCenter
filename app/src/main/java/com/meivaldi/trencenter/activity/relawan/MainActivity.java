@@ -52,10 +52,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
 
         session = new SessionManager(getApplicationContext());
 
-        HashMap<String, String> user = db.getUserDetails();
-
-        String tipe = user.get("type");
-
         if (!session.isLoggedIn()) {
             logoutUser();
         }

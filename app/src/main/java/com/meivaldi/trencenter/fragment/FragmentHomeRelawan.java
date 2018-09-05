@@ -215,11 +215,11 @@ public class FragmentHomeRelawan extends Fragment {
             return view == obj;
         }
 
-
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             View view = (View) object;
             container.removeView(view);
         }
     }
+
 }
