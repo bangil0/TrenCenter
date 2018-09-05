@@ -5,18 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -78,7 +72,7 @@ public class FragmentHomeRelawan extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_fragment_home_relawan, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home_relawan, container, false);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         hari = (TextView) rootView.findViewById(R.id.hari);

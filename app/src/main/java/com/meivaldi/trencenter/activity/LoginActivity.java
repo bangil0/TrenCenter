@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if(tipe.equals("pendukung")){
                 Intent intent = new Intent(getApplicationContext(),
-                        MainActivity.class);
+                        Pendukung.class);
                 startActivity(intent);
             } else if(tipe.equals("tim_pemenangan")) {
                 Intent intent = new Intent(getApplicationContext(),
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else if(tipe.equals("pendukung")){
                             Intent intent = new Intent(LoginActivity.this,
-                                    MainActivity.class);
+                                    Pendukung.class);
                             startActivity(intent);
                         } else if(tipe.equals("tim_pemenangan")) {
                             Intent intent = new Intent(LoginActivity.this,

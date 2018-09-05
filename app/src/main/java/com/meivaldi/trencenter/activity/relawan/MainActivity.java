@@ -34,10 +34,22 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     private SQLiteHandler db;
     private SessionManager session;
 
+    private FloatingActionButton createPendukung;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createPendukung = (FloatingActionButton) findViewById(R.id.createPendukung);
+        createPendukung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), InputPendukung.class));
+
+                finish();
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

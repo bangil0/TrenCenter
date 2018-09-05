@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.meivaldi.trencenter.fragment.FragmentHomeRelawan">
 
     <LinearLayout
@@ -110,16 +111,9 @@
 
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:layout_below="@id/countDown"
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"/>
-
     <ScrollView
         android:id="@+id/cardView"
-        android:layout_below="@id/view_pager"
+        android:layout_below="@id/countDown"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:layout_width="match_parent"
@@ -130,6 +124,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="10dp">
+
+            <android.support.v4.view.ViewPager
+                android:layout_below="@id/countDown"
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -186,7 +187,7 @@
                         android:layout_weight="50"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/bank"
+                        android:src="@drawable/target"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginStart="20dp"/>
@@ -194,7 +195,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dana Calon"
+                        android:text="Visi dan Misi"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentRight="true"
@@ -212,33 +213,6 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/layout_border"
-                    android:layout_weight="50"
-                    android:layout_marginRight="5dp">
-
-                    <ImageView
-                        android:layout_weight="50"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/target"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginStart="20dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Visi dan Misi"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="10dp"/>
-
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/programKerja"
@@ -261,6 +235,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Program Kerja"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginEnd="10dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/layout_border"
+                    android:layout_weight="50"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_weight="50"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/promise"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="20dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Platform"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentRight="true"
@@ -291,34 +292,6 @@
                         android:layout_weight="50"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/promise"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginStart="20dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Janji - Janji"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="10dp"/>
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/layout_border"
-                    android:layout_weight="50"
-                    android:layout_marginRight="5dp">
-
-                    <ImageView
-                        android:layout_weight="50"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
                         android:src="@drawable/medal"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
@@ -332,6 +305,15 @@
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_weight="50"
+                    android:layout_marginRight="5dp">
 
                 </RelativeLayout>
 
