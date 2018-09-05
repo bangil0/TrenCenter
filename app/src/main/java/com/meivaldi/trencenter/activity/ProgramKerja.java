@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
+import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.helper.HttpHandler;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.model.Program;
 
 import org.json.JSONArray;
@@ -22,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProgramKerja extends AppCompatActivity {
 
@@ -29,6 +33,9 @@ public class ProgramKerja extends AppCompatActivity {
     private ArrayList<Program> programList;
     private ProgramAdapter adapter;
     private Toolbar toolbar;
+    private SQLiteHandler db;
+
+    String tipe;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
     private static final String url = "http://103.28.53.181/~millenn1/android/getProgram.php";
@@ -44,13 +51,33 @@ public class ProgramKerja extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        tipe = user.get("type");
+
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                if(tipe.equals("super_admin")){
+                    Intent intent = new Intent(getApplicationContext(),
+                            Dashboard_SuperAdmin.class);
+                    startActivity(intent);
+                } else if(tipe.equals("relawan")){
+                    Intent intent = new Intent(getApplicationContext(),
+                            MainActivity.class);
+                    startActivity(intent);
+                } else if(tipe.equals("pendukung")){
+                    Intent intent = new Intent(getApplicationContext(),
+                            MainActivity.class);
+                    startActivity(intent);
+                } else if(tipe.equals("tim_pemenangan")) {
+                    Intent intent = new Intent(getApplicationContext(),
+                            Tim_Pemenangan.class);
+                    startActivity(intent);
+                }
             }
         });
 
