@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -22,21 +21,18 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 import com.meivaldi.trencenter.adapter.CardAdapter;
-import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.model.Card;
-import com.meivaldi.trencenter.model.Program;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,7 +54,7 @@ public class HomeTimPemenangan extends Fragment  {
 
     private OnFragmentInteractionListener mListener;
 
-    private TextView hari, detik, menit, jam;
+    private TextView hari, detik, menit, jam, selanjutnya;
     private ViewPager viewPager;
     private int[] layouts;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -107,6 +103,7 @@ public class HomeTimPemenangan extends Fragment  {
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
+        selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
         layouts = new int[]{
@@ -122,6 +119,14 @@ public class HomeTimPemenangan extends Fragment  {
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        selanjutnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ProgramKerja_TimPemenangan.class));
+                getActivity().finish();
+            }
+        });
 
         create = (FloatingActionButton) rootView.findViewById(R.id.createUser);
 
@@ -394,5 +399,10 @@ public class HomeTimPemenangan extends Fragment  {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }
