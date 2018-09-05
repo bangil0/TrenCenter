@@ -23,23 +23,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentHomeRelawan.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentHomeRelawan#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentHomeRelawan extends Fragment {
-
+public class FragmentHomePendukung extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     private TextView hari, detik, menit, jam;
     private ViewPager viewPager;
@@ -47,15 +35,17 @@ public class FragmentHomeRelawan extends Fragment {
     private RelativeLayout programKerja;
     private MyViewPagerAdapter myViewPagerAdapter;
 
-    private FloatingActionButton createPendukung;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
-    public FragmentHomeRelawan() {
+    private OnFragmentInteractionListener mListener;
+
+    public FragmentHomePendukung() {
     }
 
-
-    // TODO: Rename and change types and number of parameters
-    public static FragmentHomeRelawan newInstance(String param1, String param2) {
-        FragmentHomeRelawan fragment = new FragmentHomeRelawan();
+    public static FragmentHomePendukung newInstance(String param1, String param2) {
+        FragmentHomePendukung fragment = new FragmentHomePendukung();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,8 +65,7 @@ public class FragmentHomeRelawan extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_home_relawan, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home_pendukung, container, false);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         hari = (TextView) rootView.findViewById(R.id.hari);
@@ -95,14 +84,6 @@ public class FragmentHomeRelawan extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ProgramKerja.class));
-            }
-        });
-
-        createPendukung = (FloatingActionButton) rootView.findViewById(R.id.createPendukung);
-        createPendukung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), InputPendukung.class));
             }
         });
 
@@ -158,13 +139,6 @@ public class FragmentHomeRelawan extends Fragment {
 
     }
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -183,6 +157,16 @@ public class FragmentHomeRelawan extends Fragment {
         }
     };
 
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public void onDetach() {
@@ -191,7 +175,6 @@ public class FragmentHomeRelawan extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -227,5 +210,4 @@ public class FragmentHomeRelawan extends Fragment {
             container.removeView(view);
         }
     }
-
 }

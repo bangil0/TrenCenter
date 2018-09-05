@@ -37,7 +37,7 @@
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@color/bnv_tab_item_foreground"
         app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:menu="@menu/navigation_relawan" />
+        app:menu="@menu/navigation" />
 
     <FrameLayout
         android:layout_below="@id/app_bar"
@@ -46,15 +46,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/createPendukung"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="38dp"
-        android:src="@drawable/baseline_create_24"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:elevation="8dp"/>
 
 </RelativeLayout>

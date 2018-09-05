@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
+import com.meivaldi.trencenter.fragment.FragmentHomePendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -35,7 +36,7 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new FragmentHomeRelawan());
+        loadFragment(new FragmentHomePendukung());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,7 +59,7 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home_relawan:
-                    fragment = new FragmentHomeRelawan();
+                    fragment = new FragmentHomePendukung();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_profile_relawan:

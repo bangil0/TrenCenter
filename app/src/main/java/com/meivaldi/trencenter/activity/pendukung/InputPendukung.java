@@ -147,7 +147,7 @@ public class InputPendukung extends AppCompatActivity {
                     startActivity(intent);
                 } else if(tipe.equals("pendukung")){
                     Intent intent = new Intent(getApplicationContext(),
-                            MainActivity.class);
+                            Pendukung.class);
                     startActivity(intent);
                 } else if(tipe.equals("tim_pemenangan")) {
                     Intent intent = new Intent(getApplicationContext(),

@@ -20,6 +20,7 @@ import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
+import com.meivaldi.trencenter.fragment.MessageFragment;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.helper.SessionManager;
@@ -34,22 +35,10 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     private SQLiteHandler db;
     private SessionManager session;
 
-    private FloatingActionButton createPendukung;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        createPendukung = (FloatingActionButton) findViewById(R.id.createPendukung);
-        createPendukung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), InputPendukung.class));
-
-                finish();
-            }
-        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -77,11 +66,15 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_home_relawan:
+                case R.id.navigation_home:
                     fragment = new FragmentHomeRelawan();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_profile_relawan:
+                case R.id.navigation_message:
+                    fragment = new MessageFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_profile:
                     fragment = new ProfileRelawan();
                     loadFragment(fragment);
                     return true;
