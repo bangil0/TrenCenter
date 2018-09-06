@@ -359,6 +359,10 @@ public class HomeTimPemenangan extends Fragment  {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            if(isAdded()){
+                getResources().getString(R.string.app_name);
+            }
+
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));

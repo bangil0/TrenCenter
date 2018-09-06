@@ -37,7 +37,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     private TextView title, description;
     private ImageView image;
     private Toolbar toolbar;
-
+    private boolean from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +55,16 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        from = getIntent().getBooleanExtra("MAIN", false);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                if(from) {
+                    startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                }
             }
         });
     }

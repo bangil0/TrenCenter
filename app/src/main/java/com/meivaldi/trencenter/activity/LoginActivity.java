@@ -144,12 +144,14 @@ public class LoginActivity extends AppCompatActivity {
                         String created_at = user
                                 .getString("created_at");
 
-                        String foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
+                        String foto;
 
-                        if(tipe == "pendukung"){
+                        if(tipe.equals("pendukung")){
                             foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/" + user.getString("foto");
-                        } else if(tipe == "tim_pemenangan"){
+                        } else if(tipe.equals("tim_pemenangan")){
                             foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                        } else {
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
                         }
 
                         if(tipe.equals("super_admin")){

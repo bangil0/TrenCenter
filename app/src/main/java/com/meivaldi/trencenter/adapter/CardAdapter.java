@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailProgram;
+import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
 import com.meivaldi.trencenter.model.Card;
 
 import java.lang.reflect.Array;
@@ -63,9 +64,23 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             date = (TextView) itemView.findViewById(R.id.date);
             cardImage = (ImageView) itemView.findViewById(R.id.thumbnail);
 
+            cardImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    intent.putExtra("INDEX", getAdapterPosition());
+                    intent.putExtra("MAIN", true);
+                    context.startActivity(intent);
+                }
+            });
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    intent.putExtra("INDEX", getAdapterPosition());
+                    intent.putExtra("MAIN", true);
+                    context.startActivity(intent);
                 }
             });
         }
