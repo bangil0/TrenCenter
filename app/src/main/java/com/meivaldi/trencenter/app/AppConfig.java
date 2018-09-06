@@ -23,4 +23,5 @@ public class AppConfig {
     public static String URL_ADD_PEMENANG = "http://103.28.53.181/~millenn1/android/add_pemenangan.php";
     public static String URL_SEND_MESSAGE = "http://103.28.53.181/~millenn1/android/kirim_pesan.php";
     public static String URL_GET_INBOX = "http://103.28.53.181/~millenn1/android/get_inbox.php";
+    public static String URL_GET_OUTBOX = "http://103.28.53.181/~millenn1/android/get_outbox.php";
 }
