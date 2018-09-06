@@ -1,4 +1,4 @@
-package com.meivaldi.trencenter.activity.pendukung;
+package com.meivaldi.trencenter.activity.tim_pemenangan;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -34,11 +33,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.LoginActivity;
-import com.meivaldi.trencenter.activity.relawan.InputRelawan;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
-import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.CircleTransform;
@@ -49,7 +46,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,17 +53,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-
-public class InputPendukung extends AppCompatActivity {
+public class InputTimPemenangan extends AppCompatActivity {
 
     private Toolbar toolbar;
     private SQLiteHandler db;
@@ -128,7 +114,7 @@ public class InputPendukung extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Tambah Pendukung");
+        getSupportActionBar().setTitle("Tambah Tim Pemenangan");
 
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
@@ -171,7 +157,7 @@ public class InputPendukung extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
 
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(InputPendukung.this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(InputTimPemenangan.this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -224,7 +210,7 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = null;
+                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
 
                 if(imageStatus == FROM_GALLERY){
                     try {
@@ -233,8 +219,6 @@ public class InputPendukung extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else if(imageStatus == FROM_CAMERA){
-                    bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
-                } else if(bitmap == null){
                     bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
                 }
 

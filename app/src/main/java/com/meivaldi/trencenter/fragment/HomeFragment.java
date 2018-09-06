@@ -18,6 +18,7 @@ import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.InputTimPemenangan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private TextView hari, detik, menit, jam;
 
     private OnFragmentInteractionListener mListener;
-    private RelativeLayout one, two, three, four, five, six, seven;
+    private RelativeLayout one, two, three, four, five, six;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -176,7 +177,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.layout_two:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), InputTimPemenangan.class));
 
                 return;
             case R.id.layout_three:

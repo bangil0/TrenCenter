@@ -140,10 +140,17 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String username = user.getString("username");
-                        String foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
                         String tipe = user.getString("tipe");
                         String created_at = user
                                 .getString("created_at");
+
+                        String foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
+
+                        if(tipe == "pendukung"){
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/" + user.getString("foto");
+                        } else if(tipe == "tim_pemenangan"){
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                        }
 
                         if(tipe.equals("super_admin")){
                             Intent intent = new Intent(LoginActivity.this,

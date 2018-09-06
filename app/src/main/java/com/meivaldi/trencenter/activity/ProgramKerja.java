@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
@@ -71,7 +72,7 @@ public class ProgramKerja extends AppCompatActivity {
                     startActivity(intent);
                 } else if(tipe.equals("pendukung")){
                     Intent intent = new Intent(getApplicationContext(),
-                            MainActivity.class);
+                            Pendukung.class);
                     startActivity(intent);
                 } else if(tipe.equals("tim_pemenangan")) {
                     Intent intent = new Intent(getApplicationContext(),
