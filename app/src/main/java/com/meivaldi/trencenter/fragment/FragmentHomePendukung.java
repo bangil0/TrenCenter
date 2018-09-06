@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,10 +20,16 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
+import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
+import com.meivaldi.trencenter.helper.FragmentSlider;
+import com.meivaldi.trencenter.helper.SliderIndicator;
+import com.meivaldi.trencenter.helper.SliderView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class FragmentHomePendukung extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -31,10 +38,13 @@ public class FragmentHomePendukung extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private TextView hari, detik, menit, jam;
-    private ViewPager viewPager;
-    private int[] layouts;
     private RelativeLayout programKerja, profilCaleg;
-    private MyViewPagerAdapter myViewPagerAdapter;
+
+    private SliderPagerAdapter mAdapter;
+    private SliderIndicator mIndicator;
+
+    private SliderView sliderView;
+    private LinearLayout mLinearLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,7 +78,6 @@ public class FragmentHomePendukung extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_pendukung, container, false);
 
-        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
@@ -76,11 +85,10 @@ public class FragmentHomePendukung extends Fragment {
         programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
         profilCaleg = (RelativeLayout) rootView.findViewById(R.id.profileCaleg);
 
-        layouts = new int[]{
-                R.layout.iklan1,
-                R.layout.iklan2,
-                R.layout.iklan3
-        };
+        sliderView = (SliderView) rootView.findViewById(R.id.sliderView);
+        mLinearLayout = (LinearLayout) rootView.findViewById(R.id.pagesContainer);
+
+        setupSlider();
 
         programKerja.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,13 +104,25 @@ public class FragmentHomePendukung extends Fragment {
             }
         });
 
-        myViewPagerAdapter = new MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         countDown();
 
         return rootView;
+    }
+
+    private void setupSlider() {
+        sliderView.setDurationScroll(800);
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/lXlCTkYRcJBReiE1ghXWPM3cdae.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/9u72dJxrEcwgJynDbPhIfWOayRM.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/biN2sqExViEh8IYSJrXlNKjpjxx.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/o9OKe3M06QMLOzTl3l6GStYtnE9.jpg"));
+
+        mAdapter = new SliderPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
+        sliderView.setAdapter(mAdapter);
+        mIndicator = new SliderIndicator(getContext(), mLinearLayout, sliderView, R.drawable.indicator_circle);
+        mIndicator.setPageCount(fragments.size());
+        mIndicator.show();
     }
 
     private void countDown(){
@@ -148,24 +168,6 @@ public class FragmentHomePendukung extends Fragment {
 
     }
 
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
-
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -187,36 +189,4 @@ public class FragmentHomePendukung extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public class MyViewPagerAdapter extends PagerAdapter {
-        private LayoutInflater layoutInflater;
-
-        public MyViewPagerAdapter() {
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View view = layoutInflater.inflate(layouts[position], container, false);
-            container.addView(view);
-
-            return view;
-        }
-
-        @Override
-        public int getCount() {
-            return layouts.length;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object obj) {
-            return view == obj;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = (View) object;
-            container.removeView(view);
-        }
-    }
 }

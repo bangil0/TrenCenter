@@ -21,6 +21,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,11 @@ import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 import com.meivaldi.trencenter.adapter.CardAdapter;
+import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
+import com.meivaldi.trencenter.helper.FragmentSlider;
 import com.meivaldi.trencenter.helper.HttpHandler;
+import com.meivaldi.trencenter.helper.SliderIndicator;
+import com.meivaldi.trencenter.helper.SliderView;
 import com.meivaldi.trencenter.model.Card;
 
 import org.json.JSONArray;
@@ -55,10 +60,6 @@ public class HomeTimPemenangan extends Fragment  {
     private OnFragmentInteractionListener mListener;
 
     private TextView hari, detik, menit, jam, selanjutnya;
-    private ViewPager viewPager;
-    private int[] layouts;
-    private MyViewPagerAdapter myViewPagerAdapter;
-
     private FloatingActionButton create;
 
     private RecyclerView recyclerView;
@@ -69,6 +70,12 @@ public class HomeTimPemenangan extends Fragment  {
     private static final String url = "http://103.28.53.181/~millenn1/android/getCard.php";
 
     Dialog dialog;
+
+    private SliderPagerAdapter mAdapter;
+    private SliderIndicator mIndicator;
+
+    private SliderView sliderView;
+    private LinearLayout mLinearLayout;
 
     public HomeTimPemenangan() {
 
@@ -104,19 +111,10 @@ public class HomeTimPemenangan extends Fragment  {
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
-        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
-
-        layouts = new int[]{
-                R.layout.iklan1,
-                R.layout.iklan2,
-                R.layout.iklan3
-        };
-
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-
-        myViewPagerAdapter = new MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+        sliderView = (SliderView) rootView.findViewById(R.id.sliderView);
+        mLinearLayout = (LinearLayout) rootView.findViewById(R.id.pagesContainer);
+        setupSlider();
 
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +159,21 @@ public class HomeTimPemenangan extends Fragment  {
         countDown();
 
         return rootView;
+    }
+
+    private void setupSlider() {
+        sliderView.setDurationScroll(800);
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/lXlCTkYRcJBReiE1ghXWPM3cdae.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/9u72dJxrEcwgJynDbPhIfWOayRM.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/biN2sqExViEh8IYSJrXlNKjpjxx.jpg"));
+        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/o9OKe3M06QMLOzTl3l6GStYtnE9.jpg"));
+
+        mAdapter = new SliderPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
+        sliderView.setAdapter(mAdapter);
+        mIndicator = new SliderIndicator(getContext(), mLinearLayout, sliderView, R.drawable.indicator_circle);
+        mIndicator.setPageCount(fragments.size());
+        mIndicator.show();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -278,58 +291,6 @@ public class HomeTimPemenangan extends Fragment  {
         }.start();
 
     }
-
-    public class MyViewPagerAdapter extends PagerAdapter {
-        private LayoutInflater layoutInflater;
-
-        public MyViewPagerAdapter() {
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View view = layoutInflater.inflate(layouts[position], container, false);
-            container.addView(view);
-
-            return view;
-        }
-
-        @Override
-        public int getCount() {
-            return layouts.length;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object obj) {
-            return view == obj;
-        }
-
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = (View) object;
-            container.removeView(view);
-        }
-    }
-
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
 
     private class GetCards extends AsyncTask<Void, Void, Void> {
 
