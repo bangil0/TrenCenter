@@ -74,7 +74,7 @@ public class InputPendukung extends AppCompatActivity {
     private String tipe;
     private Spinner status, jenisKelamin, kabupaten, kecamatan, kelurahan;
     private EditText KK, NIK, nama, tempat_lahir, tanggal_lahir, umur, suku, hp,
-            alamat, rt, rw, tps, username, facebook, instagram;
+            alamat, rt, rw, tps, username, facebook, instagram, agama;
     private Button input, upload;
     private Calendar calendar;
     private ImageView profilePicture;
@@ -116,6 +116,7 @@ public class InputPendukung extends AppCompatActivity {
         tanggal_lahir = (EditText) findViewById(R.id.tanggalLahirRelawan);
         umur = (EditText) findViewById(R.id.umurRelawan);
         suku = (EditText) findViewById(R.id.suku);
+        agama = (EditText) findViewById(R.id.agama);
         hp = (EditText) findViewById(R.id.nomorHPRelawan);
         alamat = (EditText) findViewById(R.id.alamatRelawan);
         rt = (EditText) findViewById(R.id.rt);
@@ -224,7 +225,7 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = null;
+                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
 
                 if(imageStatus == FROM_GALLERY){
                     try {
@@ -234,11 +235,10 @@ public class InputPendukung extends AppCompatActivity {
                     }
                 } else if(imageStatus == FROM_CAMERA){
                     bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
-                } else if(bitmap == null){
-                    bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
                 }
 
                 String foto = toBase64(bitmap);
+
                 String kk = KK.getText().toString();
                 String nik = NIK.getText().toString();
                 String name = nama.getText().toString();
@@ -246,6 +246,7 @@ public class InputPendukung extends AppCompatActivity {
                 String birthDate = tanggal_lahir.getText().toString();
                 String age = umur.getText().toString();
                 String tribe = suku.getText().toString();
+                String Agama = agama.getText().toString();
                 String phone = hp.getText().toString();
                 String address = alamat.getText().toString();
                 String region = kabupaten.getSelectedItem().toString();
@@ -256,7 +257,8 @@ public class InputPendukung extends AppCompatActivity {
                 String tepees = tps.getText().toString();
                 String gender = jenisKelamin.getSelectedItem().toString();
                 String marriage = status.getSelectedItem().toString();
-                String maker = user.get("name");
+                String maker = user.get("type");
+                String referensi = user.get("name");
                 String userName = username.getText().toString();
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
@@ -266,7 +268,7 @@ public class InputPendukung extends AppCompatActivity {
 
                 addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto, userName,
-                        fbAkun, igAkun);
+                        fbAkun, igAkun, referensi, Agama);
             }
         });
 
@@ -485,7 +487,7 @@ public class InputPendukung extends AppCompatActivity {
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
                             final String gender, final String marriage, final String maker, final String foto, final String userName,
-                            final String fbAkun, final String igAkun) {
+                            final String fbAkun, final String igAkun, final String referensi, final String agama) {
         String tag_string_req = "req_add_pendukung";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -547,6 +549,8 @@ public class InputPendukung extends AppCompatActivity {
                 params.put("username", userName);
                 params.put("facebook", fbAkun);
                 params.put("instagram", igAkun);
+                params.put("referensi", referensi);
+                params.put("agama", agama);
 
                 return params;
             }

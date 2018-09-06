@@ -156,6 +156,19 @@
                 android:textColorHint="#ccc" />
 
             <EditText
+                android:id="@+id/agama"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/white"
+                android:hint="Agama"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/black"
+                android:textColorHint="#ccc" />
+
+            <EditText
                 android:id="@+id/nomorHPRelawan"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

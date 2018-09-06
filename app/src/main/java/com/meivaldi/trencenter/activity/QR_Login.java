@@ -69,9 +69,9 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
         Log.v("TAG", result.getText());
         Log.v("TAG", result.getBarcodeFormat().toString());
 
-        String username = result.getText();
+        String nik = result.getText();
         
-        loginQR(username);
+        loginQR(nik);
 
         mScannerView.resumeCameraPreview(this);
     }
