@@ -9,11 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.helper.CircleTransform;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.model.Message;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +27,8 @@ import java.util.List;
  */
 
 public class MessageAdapter extends ArrayAdapter<Message> {
+
+    private SQLiteHandler db;
 
     private Context context;
     private List<Message> messageList = new ArrayList<>();
@@ -38,16 +46,25 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         if(listItem == null)
             listItem = LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
 
+        db = new SQLiteHandler(getContext());
+        HashMap<String, String> user = db.getUserDetails();
+        String tipe = user.get("type");
+
         Message currentMessage = messageList.get(position);
 
         ImageView image = (ImageView)listItem.findViewById(R.id.image);
-        image.setImageResource(currentMessage.getImage());
+        Glide.with(getContext()).load(currentMessage.getImage())
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(getContext()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(image);
 
         TextView title = (TextView) listItem.findViewById(R.id.title);
         title.setText(currentMessage.getTitle());
 
         TextView release = (TextView) listItem.findViewById(R.id.description);
-        release.setText(currentMessage.getDescription());
+        release.setText(currentMessage.getDate());
 
         return listItem;
     }

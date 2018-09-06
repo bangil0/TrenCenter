@@ -6,12 +6,11 @@ package com.meivaldi.trencenter.model;
 
 public class Message {
 
-    private int description, image;
-    private String title;
+    private String title, date, image;
 
-    public Message(String title, int description, int image) {
+    public Message(String title, String date, String image) {
         this.title = title;
-        this.description = description;
+        this.date = date;
         this.image = image;
     }
 
@@ -23,19 +22,19 @@ public class Message {
         this.title = title;
     }
 
-    public int getDescription() {
-        return description;
-    }
-
-    public void setDescription(int description) {
-        this.description = description;
-    }
-
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

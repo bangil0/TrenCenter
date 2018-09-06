@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.KirimPesan;
 import com.meivaldi.trencenter.helper.TabAdapter;
 
 import java.util.ArrayList;
@@ -51,6 +53,13 @@ public class MessageFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), KirimPesan.class));
+            }
+        });
 
         return rootView;
     }
