@@ -62,9 +62,9 @@ public class InboxFragment extends Fragment {
         } else if(tipe.equals("pendukung")){
             url = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/";
         } else if(tipe.equals("super_admin")){
-            url = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/";
-        } else if(tipe.equals("tim_pemenangan")){
             url = "http://103.28.53.181/~millenn1/dashboard/save/foto/";
+        } else if(tipe.equals("tim_pemenangan")){
+            url = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/";
         }
 
         loadMessage(penerima, tipe);
@@ -88,7 +88,7 @@ public class InboxFragment extends Fragment {
 
                     if(!error){
                         JSONArray jsonArray = jsonObject.getJSONArray("inbox");
-                        String foto = url + "/" + jsonObject.getString("foto");
+                        String foto = url + jsonObject.getString("foto");
 
                         for(int i = 0; i<jsonArray.length(); i++){
                             JSONArray array = jsonArray.getJSONArray(i);
