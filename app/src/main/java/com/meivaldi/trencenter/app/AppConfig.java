@@ -20,4 +20,5 @@ public class AppConfig {
     public static String URL_GET_KELURAHAN = "http://103.28.53.181/~millenn1/android/get_kelurahan.php";
     public static String URL_SAVE_PHOTOS = "http://103.28.53.181/~millenn1/dashboard/save/foto/";
     public static String URL_GET_CALEG = "http://103.28.53.181/~millenn1/android/getCaleg.php";
+    public static String URL_ADD_PEMENANG = "http://103.28.53.181/~millenn1/android/add_pemenangan.php";
 }
