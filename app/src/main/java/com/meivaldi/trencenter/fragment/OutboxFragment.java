@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPesan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.DetailOutbox;
 import com.meivaldi.trencenter.adapter.MessageAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -74,7 +75,7 @@ public class OutboxFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), DetailPesan.class);
+                Intent intent = new Intent(getContext(), DetailOutbox.class);
                 intent.putExtra("INDEX", i);
                 startActivity(intent);
             }

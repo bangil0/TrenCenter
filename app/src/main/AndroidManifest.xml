@@ -73,6 +73,7 @@
         <activity android:name=".activity.tim_pemenangan.InputTimPemenangan" />
         <activity android:name=".activity.KirimPesan" />
         <activity android:name=".activity.DetailPesan"></activity>
+        <activity android:name=".activity.tim_pemenangan.DetailOutbox"></activity>
     </application>
 
 </manifest>
