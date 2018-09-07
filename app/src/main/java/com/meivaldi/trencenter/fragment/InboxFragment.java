@@ -1,5 +1,6 @@
 package com.meivaldi.trencenter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailPesan;
+import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.adapter.MessageAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -54,7 +58,7 @@ public class InboxFragment extends Fragment {
 
         db = new SQLiteHandler(getContext());
         HashMap<String, String> user = db.getUserDetails();
-        String penerima = user.get("name");
+        String penerima = user.get("username");
         String tipe = user.get("type");
 
         if(tipe.equals("relawan")){
@@ -68,6 +72,15 @@ public class InboxFragment extends Fragment {
         }
 
         loadMessage(penerima, tipe);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), DetailPesan.class);
+                intent.putExtra("INDEX", i);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
