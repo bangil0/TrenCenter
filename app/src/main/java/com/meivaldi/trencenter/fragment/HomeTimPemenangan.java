@@ -190,9 +190,10 @@ public class HomeTimPemenangan extends Fragment  {
                     SliderUtils sliderUtils = new SliderUtils();
 
                     try {
-                        JSONObject jsonObject = response.getJSONObject(i);
+                        JSONArray jsonArray = response.getJSONArray(i);
+                        String image = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/" + jsonArray.getString(7);
 
-                        sliderUtils.setSliderImageUrl(jsonObject.getString("image_url"));
+                        sliderUtils.setSliderImageUrl(image);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
