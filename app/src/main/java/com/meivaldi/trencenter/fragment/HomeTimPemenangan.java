@@ -192,6 +192,7 @@ public class HomeTimPemenangan extends Fragment  {
                     try {
                         JSONArray jsonArray = response.getJSONArray(i);
                         String image = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/" + jsonArray.getString(7);
+                        Toast.makeText(getContext(), image, Toast.LENGTH_SHORT).show();
 
                         sliderUtils.setSliderImageUrl(image);
                     } catch (JSONException e) {
