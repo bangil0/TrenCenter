@@ -347,8 +347,6 @@ public class InputPendukung extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -397,8 +395,6 @@ public class InputPendukung extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -446,8 +442,6 @@ public class InputPendukung extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Tambah Relawan", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Berhasil menambah data", Toast.LENGTH_LONG).show();
             }
         });
 

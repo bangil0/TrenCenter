@@ -542,6 +542,7 @@ public class InputRelawan extends AppCompatActivity {
                 params.put("facebook", fbAkun);
                 params.put("instagram", igAkun);
                 params.put("referensi", makerName);
+                params.put("username", userName);
 
                 return params;
             }

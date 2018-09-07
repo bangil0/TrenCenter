@@ -57,7 +57,7 @@ public class KirimPesan extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
         tipe = user.get("type");
-        pengirim = user.get("name");
+        pengirim = user.get("username");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
