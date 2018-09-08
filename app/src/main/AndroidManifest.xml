@@ -72,8 +72,9 @@
         <activity android:name=".activity.caleg.DataCaleg" />
         <activity android:name=".activity.tim_pemenangan.InputTimPemenangan" />
         <activity android:name=".activity.KirimPesan" />
-        <activity android:name=".activity.DetailPesan"></activity>
-        <activity android:name=".activity.tim_pemenangan.DetailOutbox"></activity>
+        <activity android:name=".activity.DetailPesan" />
+        <activity android:name=".activity.tim_pemenangan.DetailOutbox" />
+        <activity android:name=".activity.DetailBerita"></activity>
     </application>
 
 </manifest>

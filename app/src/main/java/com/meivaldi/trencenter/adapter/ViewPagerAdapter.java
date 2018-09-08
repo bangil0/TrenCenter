@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailBerita;
 import com.meivaldi.trencenter.helper.CustomVolleyRequest;
 import com.meivaldi.trencenter.helper.SliderUtils;
 
@@ -46,7 +49,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.berita_item, null);
@@ -55,6 +58,34 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         SliderUtils utils = sliderImg.get(position);
         headLine.setText(headlineList.get(position));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailBerita.class);
+                if(position == 0){
+                    intent.putExtra("INDEX", position);
+                    context.startActivity(intent);
+
+                    return;
+                } else if(position == 1){
+                    intent.putExtra("INDEX", position);
+                    context.startActivity(intent);
+
+                    return;
+                } else if(position == 2){
+                    intent.putExtra("INDEX", position);
+                    context.startActivity(intent);
+
+                    return;
+                } else if(position == 3){
+                    intent.putExtra("INDEX", position);
+                    context.startActivity(intent);
+
+                    return;
+                }
+            }
+        });
 
         //image.setImageResource(images[position]);
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
