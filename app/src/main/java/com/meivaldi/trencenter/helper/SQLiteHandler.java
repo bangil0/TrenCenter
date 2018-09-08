@@ -49,10 +49,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addUser(String name, String username, String foto, String type, String created_at) {
+    public void addUser(String uid, String name, String username, String foto, String type, String created_at) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, uid);
         values.put(KEY_NAME, name);
         values.put(KEY_USERNAME, username);
         values.put(KEY_PHOTO, foto);
@@ -74,6 +75,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
+            user.put("id", cursor.getString(0));
             user.put("name", cursor.getString(1));
             user.put("username", cursor.getString(2));
             user.put("foto", cursor.getString(3));

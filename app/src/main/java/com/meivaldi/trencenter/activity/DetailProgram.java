@@ -20,10 +20,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class DetailProgram extends AppCompatActivity {
 
     private static final String TAG = DetailProgram.class.getSimpleName();
@@ -32,6 +37,11 @@ public class DetailProgram extends AppCompatActivity {
     private ImageView image;
     private Toolbar toolbar;
     private Button button;
+
+    private SQLiteHandler db;
+    private HashMap<String, String> user;
+
+    private String uid, idProgram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +58,8 @@ public class DetailProgram extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Berhasil bergabung", Toast.LENGTH_SHORT).show();
+                idProgram = getIntent().getStringExtra("id");
+                joinProgram(idProgram);
             }
         });
 
@@ -64,6 +75,61 @@ public class DetailProgram extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
             }
         });
+    }
+
+    private void joinProgram(String program){
+        db = new SQLiteHandler(getApplicationContext());
+        user = db.getUserDetails();
+
+        uid = user.get("id");
+
+        String tag_string_req = "req_join_program";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_JOIN_PROGRAM, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    String msg = jObj.getString("error_msg");
+
+                    if (!error) {
+                        Toast.makeText(getApplicationContext(),
+                                msg, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                msg, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_user", uid);
+                params.put("id_program", idProgram);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void getProgram() {
@@ -86,6 +152,7 @@ public class DetailProgram extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
+                        String uid = program.getString(0);
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String tanggalSelesai = program.getString(3);

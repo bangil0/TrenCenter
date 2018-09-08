@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
+                    String uid = jObj.getString("uid");
 
                     if (!error) {
                         session.setLogin(true);
@@ -172,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
 
-                        db.addUser(name, username, foto, tipe, created_at);
+                        db.addUser(uid, name, username, foto, tipe, created_at);
 
                         finish();
                     } else {

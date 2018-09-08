@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProgramKerja extends AppCompatActivity {
 
@@ -36,7 +37,9 @@ public class ProgramKerja extends AppCompatActivity {
     private Toolbar toolbar;
     private SQLiteHandler db;
 
-    String tipe;
+    private List<String> idProgram;
+
+    String tipe, uid;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
     private static final String url = "http://103.28.53.181/~millenn1/android/getProgram.php";
@@ -48,6 +51,7 @@ public class ProgramKerja extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.program_list);
         programList = new ArrayList<>();
+        idProgram = new ArrayList<>();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,6 +136,7 @@ public class ProgramKerja extends AppCompatActivity {
                     for (int i = 0; i < programs.length(); i++) {
                         JSONArray program = programs.getJSONArray(i);
 
+                        idProgram.add(program.getString(0));
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String lokasi = program.getString(4);
@@ -178,6 +183,7 @@ public class ProgramKerja extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(getApplicationContext(), DetailProgram.class);
                     intent.putExtra("INDEX", i);
+                    intent.putExtra("id", idProgram.get(i));
                     startActivity(intent);
 
                     finish();

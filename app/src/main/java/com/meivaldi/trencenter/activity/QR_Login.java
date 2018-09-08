@@ -104,7 +104,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                         String created_at = user
                                 .getString("created_at");
 
-                        db.addUser(name, username, uid, tipe, created_at);
+                        db.addUser(uid, name, username, uid, tipe, created_at);
 
                         if(tipe.equals("super_admin")){
                             Intent intent = new Intent(QR_Login.this,
