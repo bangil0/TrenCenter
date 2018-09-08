@@ -89,7 +89,7 @@ public class HomeTimPemenangan extends Fragment  {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    String request_url = "http://103.28.53.181/~millenn1/android/get_berita.php";
+    String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
     public HomeTimPemenangan() {
 
@@ -187,23 +187,25 @@ public class HomeTimPemenangan extends Fragment  {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-               for (int i=0; i<response.length(); i++){
+                String url = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/";
+                List<String> headlineList = new ArrayList<>();
 
+                for (int i=0; i<response.length(); i++){
                     SliderUtils sliderUtils = new SliderUtils();
+                   try {
+                       JSONArray array = response.getJSONArray(i);
+                       String image = url + array.getString(0);
+                       headlineList.add(array.getString(1));
 
-                    try {
-                        String image = response.getString(i);
-                        Log.d("IMAGE", image);
-
-                        sliderUtils.setSliderImageUrl(image);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                       sliderUtils.setSliderImageUrl(image);
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
 
                     sliderImg.add(sliderUtils);
                 }
 
-                adapter = new ViewPagerAdapter(sliderImg, getContext());
+                adapter = new ViewPagerAdapter(sliderImg, headlineList, getContext());
                 viewPager.setAdapter(adapter);
 
             }

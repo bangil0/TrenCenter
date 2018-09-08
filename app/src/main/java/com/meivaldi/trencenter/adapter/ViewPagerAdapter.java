@@ -25,12 +25,14 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private List<SliderUtils> sliderImg;
+    private List<String> headlineList;
     private ImageLoader imageLoader;
     //private Integer[] images = {R.drawable.bank, R.drawable.attach, R.drawable.check_mark, R.drawable.delivery_truck};
 
-    public ViewPagerAdapter(List<SliderUtils> sliderImg, Context context){
+    public ViewPagerAdapter(List<SliderUtils> sliderImg, List<String> headlineList, Context context){
         this.context = context;
         this.sliderImg = sliderImg;
+        this.headlineList = headlineList;
     }
 
     @Override
@@ -52,6 +54,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         TextView headLine = (TextView) view.findViewById(R.id.headline);
 
         SliderUtils utils = sliderImg.get(position);
+        headLine.setText(headlineList.get(position));
 
         //image.setImageResource(images[position]);
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
