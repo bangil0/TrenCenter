@@ -15,8 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.Result;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -108,9 +110,21 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                             Intent intent = new Intent(QR_Login.this,
                                     Dashboard_SuperAdmin.class);
                             startActivity(intent);
-                        } else if(tipe.equals("admin_pnbp")){
+                        } else if(tipe.equals("relawan")){
                             Intent intent = new Intent(QR_Login.this,
                                     MainActivity.class);
+                            startActivity(intent);
+                        } else if(tipe.equals("pendukung")){
+                            Intent intent = new Intent(QR_Login.this,
+                                    Pendukung.class);
+                            startActivity(intent);
+                        } else if(tipe.equals("tim_pemenangan")) {
+                            Intent intent = new Intent(QR_Login.this,
+                                    Tim_Pemenangan.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(QR_Login.this,
+                                    Pendukung.class);
                             startActivity(intent);
                         }
 
@@ -139,7 +153,7 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("NIK", nik);
+                params.put("nik", nik);
 
                 return params;
             }
