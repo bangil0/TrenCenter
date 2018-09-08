@@ -16,20 +16,32 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
+import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.helper.FragmentSlider;
 import com.meivaldi.trencenter.helper.SliderIndicator;
+import com.meivaldi.trencenter.helper.SliderUtils;
 import com.meivaldi.trencenter.helper.SliderView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FragmentHomePendukung extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -40,11 +52,13 @@ public class FragmentHomePendukung extends Fragment {
     private TextView hari, detik, menit, jam;
     private RelativeLayout programKerja, profilCaleg;
 
-    private SliderPagerAdapter mAdapter;
-    private SliderIndicator mIndicator;
+    private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
 
-    private SliderView sliderView;
-    private LinearLayout mLinearLayout;
+    private RequestQueue rq;
+    private List<SliderUtils> sliderImg;
+
+    String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,10 +99,15 @@ public class FragmentHomePendukung extends Fragment {
         programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
         profilCaleg = (RelativeLayout) rootView.findViewById(R.id.profileCaleg);
 
-        sliderView = (SliderView) rootView.findViewById(R.id.sliderView);
-        mLinearLayout = (LinearLayout) rootView.findViewById(R.id.pagesContainer);
+        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
-        setupSlider();
+        rq = Volley.newRequestQueue(getContext());
+        sliderImg = new ArrayList<>();
+
+        sendRequest();
+
+        Timer timer = new Timer();
+        timer.schedule(new MyTimerTask(), 2000, 4000);
 
         programKerja.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,19 +129,66 @@ public class FragmentHomePendukung extends Fragment {
         return rootView;
     }
 
-    private void setupSlider() {
-        sliderView.setDurationScroll(800);
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/lXlCTkYRcJBReiE1ghXWPM3cdae.jpg"));
-        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w600_and_h900_bestv2/9u72dJxrEcwgJynDbPhIfWOayRM.jpg"));
-        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/biN2sqExViEh8IYSJrXlNKjpjxx.jpg"));
-        fragments.add(FragmentSlider.newInstance("https://image.tmdb.org/t/p/w250_and_h141_bestv2/o9OKe3M06QMLOzTl3l6GStYtnE9.jpg"));
+    public class MyTimerTask extends TimerTask {
 
-        mAdapter = new SliderPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
-        sliderView.setAdapter(mAdapter);
-        mIndicator = new SliderIndicator(getContext(), mLinearLayout, sliderView, R.drawable.indicator_circle);
-        mIndicator.setPageCount(fragments.size());
-        mIndicator.show();
+        @Override
+        public void run() {
+
+            if(getActivity() == null)
+                return;
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(viewPager.getCurrentItem() == 0){
+                        viewPager.setCurrentItem(1);
+                    } else if(viewPager.getCurrentItem() == 1){
+                        viewPager.setCurrentItem(2);
+                    } else if(viewPager.getCurrentItem() == 2){
+                        viewPager.setCurrentItem(3);
+                    } else {
+                        viewPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
+    }
+
+    public void sendRequest(){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                String url = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/";
+                List<String> headlineList = new ArrayList<>();
+
+                for (int i=0; i<response.length(); i++){
+                    SliderUtils sliderUtils = new SliderUtils();
+                    try {
+                        JSONArray array = response.getJSONArray(i);
+                        String image = url + array.getString(0);
+                        headlineList.add(array.getString(1));
+
+                        sliderUtils.setSliderImageUrl(image);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    sliderImg.add(sliderUtils);
+                }
+
+                adapter = new ViewPagerAdapter(sliderImg, headlineList, getContext());
+                viewPager.setAdapter(adapter);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        rq.add(jsonArrayRequest);
     }
 
     private void countDown(){

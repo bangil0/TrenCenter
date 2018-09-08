@@ -124,39 +124,10 @@
             android:orientation="vertical"
             android:layout_marginBottom="10dp">
 
-            <RelativeLayout
-                android:id="@+id/layout_top"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.meivaldi.trencenter.helper.SliderView
-                        android:id="@+id/sliderView"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp" />
-
-                </FrameLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_indicator"/>
-
-                <LinearLayout
-                    android:id="@+id/pagesContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal"/>
-
-            </RelativeLayout>
-
+                android:layout_height="150dp" />
 
             <TextView
                 android:layout_width="match_parent"
