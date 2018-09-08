@@ -185,14 +185,13 @@ public class HomeTimPemenangan extends Fragment  {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i=0; i<response.length(); i++){
+               for (int i=0; i<response.length(); i++){
 
                     SliderUtils sliderUtils = new SliderUtils();
 
                     try {
-                        JSONArray jsonArray = response.getJSONArray(i);
-                        String image = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/" + jsonArray.getString(7);
-                        Toast.makeText(getContext(), image, Toast.LENGTH_SHORT).show();
+                        String image = response.getString(i);
+                        Log.d("IMAGE", image);
 
                         sliderUtils.setSliderImageUrl(image);
                     } catch (JSONException e) {
@@ -204,7 +203,6 @@ public class HomeTimPemenangan extends Fragment  {
 
                 adapter = new ViewPagerAdapter(sliderImg, getContext());
                 viewPager.setAdapter(adapter);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -226,6 +224,10 @@ public class HomeTimPemenangan extends Fragment  {
 
         @Override
         public void run() {
+
+            if(getActivity() == null)
+                return;
+
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
