@@ -103,6 +103,8 @@ public class InboxFragment extends Fragment {
                         JSONArray jsonArray = jsonObject.getJSONArray("inbox");
                         String foto = url + jsonObject.getString("foto");
 
+                        Log.d("FOTO", url);
+
                         for(int i = 0; i<jsonArray.length(); i++){
                             JSONArray array = jsonArray.getJSONArray(i);
                             String pengirim = array.getString(1);

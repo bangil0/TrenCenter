@@ -105,13 +105,18 @@ public class KirimPesan extends AppCompatActivity {
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("error_msg");
+                    String pesan = jsonObject.getString("error_msg");
                     boolean error = jsonObject.getBoolean("error");
 
                     if(!error){
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), pesan, Toast.LENGTH_SHORT).show();
+
+                        username.setText("");
+                        message.setText("");
+
+                        finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), pesan, Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -141,5 +146,12 @@ public class KirimPesan extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        finish();
     }
 }
