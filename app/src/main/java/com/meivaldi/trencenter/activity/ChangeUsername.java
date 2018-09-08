@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
@@ -133,5 +134,27 @@ public class ChangeUsername extends AppCompatActivity{
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(tipe.equals("super_admin")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Dashboard_SuperAdmin.class);
+            startActivity(intent);
+        } else if(tipe.equals("relawan")){
+            Intent intent = new Intent(getApplicationContext(),
+                    MainActivity.class);
+            startActivity(intent);
+        } else if(tipe.equals("pendukung")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Pendukung.class);
+            startActivity(intent);
+        } else if(tipe.equals("tim_pemenangan")) {
+            Intent intent = new Intent(getApplicationContext(),
+                    Tim_Pemenangan.class);
+            startActivity(intent);
+        }
     }
 }

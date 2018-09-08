@@ -174,4 +174,26 @@ public class DataCaleg extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(tipe.equals("super_admin")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Dashboard_SuperAdmin.class);
+            startActivity(intent);
+        } else if(tipe.equals("relawan")){
+            Intent intent = new Intent(getApplicationContext(),
+                    MainActivity.class);
+            startActivity(intent);
+        } else if(tipe.equals("pendukung")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Pendukung.class);
+            startActivity(intent);
+        } else if(tipe.equals("tim_pemenangan")) {
+            Intent intent = new Intent(getApplicationContext(),
+                    Tim_Pemenangan.class);
+            startActivity(intent);
+        }
+    }
+
 }
