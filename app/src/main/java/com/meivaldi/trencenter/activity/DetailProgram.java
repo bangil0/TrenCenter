@@ -1,6 +1,7 @@
 package com.meivaldi.trencenter.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +67,7 @@ public class DetailProgram extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 idProgram = getIntent().getStringExtra("id");
-                joinProgram(idProgram);
+                joinProgram();
             }
         });
 
@@ -75,9 +83,10 @@ public class DetailProgram extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
             }
         });
+
     }
 
-    private void joinProgram(String program){
+    private void joinProgram(){
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
 
@@ -100,6 +109,9 @@ public class DetailProgram extends AppCompatActivity {
                     if (!error) {
                         Toast.makeText(getApplicationContext(),
                                 msg, Toast.LENGTH_SHORT).show();
+
+                        button.setEnabled(false);
+                        button.setText("Menunggu Verifikasi");
                     } else {
                         Toast.makeText(getApplicationContext(),
                                 msg, Toast.LENGTH_SHORT).show();
