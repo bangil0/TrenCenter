@@ -22,6 +22,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.ProgramKerja;
+import com.meivaldi.trencenter.activity.ScanQR;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.CircleTransform;
@@ -37,7 +38,8 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     private TextView title, description;
     private ImageView image;
     private Toolbar toolbar;
-    private boolean from;
+    private Button scan;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         title = (TextView) findViewById(R.id.titleProgram);
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
+        scan = (Button) findViewById(R.id.scanPeserta);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,16 +58,19 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        from = getIntent().getBooleanExtra("MAIN", false);
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ScanQR.class);
+                intent.putExtra("ID", id);
+                startActivity(intent);
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(from) {
-                    startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
-                }
+                startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
             }
         });
     }
@@ -89,6 +95,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
+                        id = program.getString(0);
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String tanggalSelesai = program.getString(3);
@@ -153,6 +160,8 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_scan){
+            startActivity(new Intent(getApplicationContext(), ScanQR.class));
+
             return true;
         }
 

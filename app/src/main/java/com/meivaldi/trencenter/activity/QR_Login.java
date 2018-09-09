@@ -64,6 +64,8 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
     protected void onPause() {
         super.onPause();
         mScannerView.stopCamera();
+
+        finish();
     }
 
     @Override
@@ -104,7 +106,15 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                         String created_at = user
                                 .getString("created_at");
 
-                        db.addUser(uid, name, username, uid, tipe, created_at);
+                        String foto;
+
+                        if(tipe.equals("pendukung")){
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/" + user.getString("foto");
+                        } else if(tipe.equals("tim_pemenangan")){
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                        } else {
+                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
+                        }
 
                         if(tipe.equals("super_admin")){
                             Intent intent = new Intent(QR_Login.this,
@@ -122,11 +132,9 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                             Intent intent = new Intent(QR_Login.this,
                                     Tim_Pemenangan.class);
                             startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(QR_Login.this,
-                                    Pendukung.class);
-                            startActivity(intent);
                         }
+
+                        db.addUser(uid, name, username, foto, tipe, created_at);
 
                         finish();
                     } else {
@@ -180,4 +188,5 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
 
         }
     }
+
 }

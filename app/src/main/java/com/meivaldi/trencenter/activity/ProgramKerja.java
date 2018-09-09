@@ -39,7 +39,7 @@ public class ProgramKerja extends AppCompatActivity {
 
     private List<String> idProgram;
 
-    String tipe, uid;
+    String tipe;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
     private static final String url = "http://103.28.53.181/~millenn1/android/getProgram.php";

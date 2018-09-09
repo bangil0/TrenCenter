@@ -56,6 +56,9 @@ public class DetailProgram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_program);
 
+        db = new SQLiteHandler(getApplicationContext());
+        user = db.getUserDetails();
+
         getProgram();
 
         title = (TextView) findViewById(R.id.titleProgram);
@@ -83,13 +86,68 @@ public class DetailProgram extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
             }
         });
+    }
 
+    private void check(){
+        uid = user.get("id");
+
+        String tag_string_req = "req_check_program";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_CHECK_VERIFIED, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                /*try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    boolean verified = jObj.getBoolean("status");
+
+                    if (!error) {
+                        if(verified){
+                            button.setBackgroundColor(R.color.button_disable);
+                            button.setEnabled(false);
+                            button.setText("Menunggu Verifikasi");
+                        } else {
+                            button.setBackgroundColor(R.color.button_disable);
+                            button.setEnabled(false);
+                            button.setText("Terverifikasi");
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }*/
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_user", uid);
+                params.put("id_program", idProgram);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void joinProgram(){
-        db = new SQLiteHandler(getApplicationContext());
-        user = db.getUserDetails();
-
         uid = user.get("id");
 
         String tag_string_req = "req_join_program";
