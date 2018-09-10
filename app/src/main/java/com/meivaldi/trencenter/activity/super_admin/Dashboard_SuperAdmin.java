@@ -114,7 +114,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

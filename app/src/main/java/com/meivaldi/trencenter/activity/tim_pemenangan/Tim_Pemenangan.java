@@ -9,7 +9,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,6 +41,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
     private SQLiteHandler db;
     private Toolbar toolbar;
 
+    private  BottomNavigationView navigation;
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -102,7 +105,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
             logoutUser();
         }
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new HomeTimPemenangan());
@@ -112,6 +115,10 @@ public class Tim_Pemenangan extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private Fragment getCurrentFragment(){
+        return this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
     }
 
     @Override
@@ -169,7 +176,6 @@ public class Tim_Pemenangan extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -177,5 +183,23 @@ public class Tim_Pemenangan extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawers();
+            return;
+        }
+
+        MenuItem homeItem = navigation.getMenu().getItem(0);
+
+        if (navigation.getSelectedItemId() != homeItem.getItemId()) {
+            navigation.setSelectedItemId(homeItem.getItemId());
+            Toast.makeText(getApplicationContext(), "" + homeItem.getItemId(), Toast.LENGTH_SHORT).show();
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }
