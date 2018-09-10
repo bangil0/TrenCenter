@@ -144,12 +144,6 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.scan_menu, menu);
         return true;
