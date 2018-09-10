@@ -112,7 +112,6 @@ public class HomeTimPemenangan extends Fragment  {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        new GetCards().execute();
     }
 
     @Override
@@ -128,6 +127,8 @@ public class HomeTimPemenangan extends Fragment  {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+
+        new GetCards().execute();
 
         rq = Volley.newRequestQueue(getContext());
         sliderImg = new ArrayList<>();
@@ -425,6 +426,7 @@ public class HomeTimPemenangan extends Fragment  {
             recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(cardAdapter);
+
         }
     }
 
