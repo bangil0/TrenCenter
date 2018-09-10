@@ -93,9 +93,9 @@ public class InboxFragment extends Fragment {
 
                         for(int i = 0; i<jsonArray.length(); i++){
                             JSONArray array = jsonArray.getJSONArray(i);
-                            String pengirim = array.getString(1);
-                            String tanggal = array.getString(5);
-                            String foto = array.getString(3);
+                            String pengirim = array.getString(3);
+                            String tanggal = array.getString(8);
+                            String foto = array.getString(5);
 
                             Log.d("FOTO", foto);
 

@@ -92,9 +92,9 @@ public class OutboxFragment extends Fragment {
 
                         for(int i = 0; i<jsonArray.length(); i++){
                             JSONArray array = jsonArray.getJSONArray(i);
-                            String penerima = array.getString(2);
-                            String tanggal = array.getString(5);
-                            String foto = array.getString(4);
+                            String penerima = array.getString(4);
+                            String tanggal = array.getString(8);
+                            String foto = array.getString(6);
 
                             Log.d("FOTO", foto);
 
