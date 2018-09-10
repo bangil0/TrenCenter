@@ -645,11 +645,4 @@ public class InputRelawan extends AppCompatActivity {
 
         return;
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        finish();
-    }
 }

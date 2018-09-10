@@ -105,6 +105,7 @@ public class ChangeUsername extends AppCompatActivity{
             public void onResponse(String response) {
                 Log.d("UPDATE", "Login Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Berhasil di Update!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }, new Response.ErrorListener() {
 
