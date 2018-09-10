@@ -30,14 +30,14 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
     private SessionManager session;
     private SQLiteHandler db;
     private Toolbar toolbar;
-    private String tipe;
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_super_admin);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new HomeFragment());
@@ -46,7 +46,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         session = new SessionManager(getApplicationContext());
 
         HashMap<String, String> user = db.getUserDetails();
-        tipe = user.get("type");
 
         if (!session.isLoggedIn()) {
             logoutUser();

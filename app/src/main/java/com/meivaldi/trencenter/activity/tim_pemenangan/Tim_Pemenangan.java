@@ -117,10 +117,6 @@ public class Tim_Pemenangan extends AppCompatActivity {
         return true;
     }
 
-    private Fragment getCurrentFragment(){
-        return this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -196,7 +192,6 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
         if (navigation.getSelectedItemId() != homeItem.getItemId()) {
             navigation.setSelectedItemId(homeItem.getItemId());
-            Toast.makeText(getApplicationContext(), "" + homeItem.getItemId(), Toast.LENGTH_SHORT).show();
         } else {
             super.onBackPressed();
         }

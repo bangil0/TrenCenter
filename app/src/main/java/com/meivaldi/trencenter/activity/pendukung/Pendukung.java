@@ -27,13 +27,14 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
 
     private SQLiteHandler db;
     private SessionManager session;
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pendukung);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new FragmentHomePendukung());
@@ -115,5 +116,16 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        MenuItem homeItem = navigation.getMenu().getItem(0);
+
+        if (navigation.getSelectedItemId() != homeItem.getItemId()) {
+            navigation.setSelectedItemId(homeItem.getItemId());
+        } else {
+            super.onBackPressed();
+        }
     }
 }

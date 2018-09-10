@@ -13,17 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
+import com.meivaldi.trencenter.fragment.FragmentHomePendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.MessageFragment;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.helper.SessionManager;
+import com.meivaldi.trencenter.model.Message;
 
 import java.util.HashMap;
 
@@ -34,13 +37,14 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
 
     private SQLiteHandler db;
     private SessionManager session;
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new FragmentHomeRelawan());
@@ -59,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
 
     }
 
+    private Fragment getCurrentFragment(){
+        return this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -69,14 +77,17 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
                 case R.id.navigation_home:
                     fragment = new FragmentHomeRelawan();
                     loadFragment(fragment);
+
                     return true;
                 case R.id.navigation_message:
                     fragment = new MessageFragment();
                     loadFragment(fragment);
+
                     return true;
                 case R.id.navigation_profile:
                     fragment = new ProfileRelawan();
                     loadFragment(fragment);
+
                     return true;
             }
 
@@ -128,5 +139,16 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        MenuItem homeItem = navigation.getMenu().getItem(0);
+
+        if (navigation.getSelectedItemId() != homeItem.getItemId()) {
+            navigation.setSelectedItemId(homeItem.getItemId());
+        } else {
+            super.onBackPressed();
+        }
     }
 }
