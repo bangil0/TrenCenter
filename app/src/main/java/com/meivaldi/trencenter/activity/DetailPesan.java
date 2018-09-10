@@ -107,7 +107,7 @@ public class DetailPesan extends AppCompatActivity {
                         JSONArray inbox = jsonArray.getJSONArray(index);
 
                         String sender = inbox.getString(1);
-                        String message = inbox.getString(3);
+                        String message = inbox.getString(5);
 
                         pengirim.setText("Dari: " + sender);
                         isiPesan.setText("Pesan:\n" + message);

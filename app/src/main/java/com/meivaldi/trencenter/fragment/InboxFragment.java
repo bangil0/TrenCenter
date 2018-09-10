@@ -42,7 +42,6 @@ public class InboxFragment extends Fragment {
     private ArrayList<Message> messagesList;
 
     private SQLiteHandler db;
-    private String url;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,16 +59,6 @@ public class InboxFragment extends Fragment {
         HashMap<String, String> user = db.getUserDetails();
         String penerima = user.get("username");
         String tipe = user.get("type");
-
-        if(tipe.equals("relawan")){
-            url = "http://103.28.53.181/~millenn1/dashboard/save/foto/";
-        } else if(tipe.equals("pendukung")){
-            url = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/";
-        } else if(tipe.equals("super_admin")){
-            url = "http://103.28.53.181/~millenn1/dashboard/save/foto/";
-        } else if(tipe.equals("tim_pemenangan")){
-            url = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/";
-        }
 
         loadMessage(penerima, tipe);
 
@@ -101,14 +90,14 @@ public class InboxFragment extends Fragment {
 
                     if(!error){
                         JSONArray jsonArray = jsonObject.getJSONArray("inbox");
-                        String foto = url + jsonObject.getString("foto");
-
-                        Log.d("FOTO", foto);
 
                         for(int i = 0; i<jsonArray.length(); i++){
                             JSONArray array = jsonArray.getJSONArray(i);
                             String pengirim = array.getString(1);
-                            String tanggal = array.getString(4);
+                            String tanggal = array.getString(5);
+                            String foto = array.getString(3);
+
+                            Log.d("FOTO", foto);
 
                             messagesList.add(new Message(pengirim, tanggal, foto));
                         }

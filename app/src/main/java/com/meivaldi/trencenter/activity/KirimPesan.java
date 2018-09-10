@@ -147,11 +147,4 @@ public class KirimPesan extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        finish();
-    }
 }
