@@ -64,8 +64,6 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
     protected void onPause() {
         super.onPause();
         mScannerView.stopCamera();
-
-        finish();
     }
 
     @Override

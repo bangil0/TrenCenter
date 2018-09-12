@@ -55,8 +55,6 @@ public class ScanLogistik extends AppCompatActivity implements ZXingScannerView.
     protected void onPause() {
         super.onPause();
         mScannerView.stopCamera();
-
-        finish();
     }
 
     @Override
@@ -65,7 +63,7 @@ public class ScanLogistik extends AppCompatActivity implements ZXingScannerView.
         Log.v("TAG", result.getBarcodeFormat().toString());
 
         String nik = result.getText();
-        nama = getIntent().getStringExtra("Nama");
+        nama = getIntent().getStringExtra("NAMA");
 
         updateLogistik(nik, nama);
 
@@ -82,7 +80,9 @@ public class ScanLogistik extends AppCompatActivity implements ZXingScannerView.
             public void onResponse(String response) {
                 Log.d("Update Logistik", "Update Response: " + response.toString());
 
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
+
+                finish();
             }
         }, new Response.ErrorListener() {
 
