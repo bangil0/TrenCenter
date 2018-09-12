@@ -26,6 +26,9 @@ import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.Penghargaan;
+import com.meivaldi.trencenter.activity.Platform;
+import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.fragment.AccountFragment;
@@ -77,11 +80,11 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_target:
-                        Toast.makeText(Tim_Pemenangan.this, "Target",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), VisiMisi.class));
 
                         return true;
                     case R.id.nav_platform:
-                        Toast.makeText(Tim_Pemenangan.this, "Platform",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), Platform.class));
 
                         return true;
                     case R.id.nav_progja:
@@ -89,7 +92,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_penghargaan:
-                        Toast.makeText(Tim_Pemenangan.this, "Penghargaan",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), Penghargaan.class));
 
                         return true;
                     default:

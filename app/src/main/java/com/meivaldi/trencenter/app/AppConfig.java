@@ -29,5 +29,9 @@ public class AppConfig {
     public static String URL_CHECK_VERIFIED = "http://103.28.53.181/~millenn1/android/get_status.php";
     public static String URL_VERIFIED = "http://103.28.53.181/~millenn1/android/verified.php";
     public static String URL_GET_LOGISTIC = "http://103.28.53.181/~millenn1/android/get_logistik.php";
-    public static String URL_UPDATE_LOGISTIC = "";
+    public static String URL_UPDATE_LOGISTIC = "http://103.28.53.181/~millenn1/android/update_logistik.php";
+    public static String URL_GET_DATA_CALEG = "http://103.28.53.181/~millenn1/android/get_caleg.php";
+    public static String URL_GET_VISI_MISI = "http://103.28.53.181/~millenn1/android/get_visi_misi.php";
+    public static String URL_GET_PLATFORM = "http://103.28.53.181/~millenn1/android/get_platform.php";
+    public static String URL_GET_PENGHARGAAN = "http://103.28.53.181/~millenn1/android/get_penghargaan.php";
 }

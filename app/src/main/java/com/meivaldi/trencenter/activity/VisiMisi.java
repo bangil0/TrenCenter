@@ -1,4 +1,4 @@
-package com.meivaldi.trencenter.activity.caleg;
+package com.meivaldi.trencenter.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,24 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.CalegAdapter;
-import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.model.Caleg;
-import com.meivaldi.trencenter.model.Logistik;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,13 +29,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-public class DataCaleg extends AppCompatActivity {
+public class VisiMisi extends AppCompatActivity {
 
     private HashMap<String, String> user;
     private Toolbar toolbar;
     private SQLiteHandler db;
-    private String tipe;
+    private String tipe, id;
 
     private ArrayList<Caleg> calegList;
     private CalegAdapter adapter;
@@ -56,7 +50,7 @@ public class DataCaleg extends AppCompatActivity {
         calegList = new ArrayList<>();
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Data Caleg");
+        getSupportActionBar().setTitle("Visi Misi Caleg");
         getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -131,6 +125,7 @@ public class DataCaleg extends AppCompatActivity {
                     for (int i = 0; i < calegs.length(); i++) {
                         JSONArray program = calegs.getJSONArray(i);
 
+                        id = program.getString(0);
                         String nama = program.getString(4);
                         String foto = program.getString(1);
 
@@ -173,8 +168,8 @@ public class DataCaleg extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DetailCaleg.class);
-                    intent.putExtra("INDEX", i);
+                    Intent intent = new Intent(getApplicationContext(), DetailVisiMisi.class);
+                    intent.putExtra("id_caleg", id);
                     startActivity(intent);
                 }
             });
@@ -182,3 +177,4 @@ public class DataCaleg extends AppCompatActivity {
     }
 
 }
+

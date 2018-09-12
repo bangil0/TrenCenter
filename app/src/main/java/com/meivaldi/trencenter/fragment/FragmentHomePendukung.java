@@ -60,7 +60,6 @@ public class FragmentHomePendukung extends Fragment {
 
     String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 

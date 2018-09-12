@@ -1,18 +1,15 @@
 package com.meivaldi.trencenter.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,15 +19,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Penghargaan;
+import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
+import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
-import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
-import com.meivaldi.trencenter.helper.FragmentSlider;
-import com.meivaldi.trencenter.helper.SliderIndicator;
 import com.meivaldi.trencenter.helper.SliderUtils;
-import com.meivaldi.trencenter.helper.SliderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,14 +39,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentHomeRelawan.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentHomeRelawan#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentHomeRelawan extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -62,7 +50,7 @@ public class FragmentHomeRelawan extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private TextView hari, detik, menit, jam;
-    private RelativeLayout programKerja, profilCaleg;
+    private RelativeLayout programKerja, profilCaleg, platform, penghargaan, visiMisi;
 
     private FloatingActionButton createPendukung;
 
@@ -77,8 +65,6 @@ public class FragmentHomeRelawan extends Fragment {
     public FragmentHomeRelawan() {
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static FragmentHomeRelawan newInstance(String param1, String param2) {
         FragmentHomeRelawan fragment = new FragmentHomeRelawan();
         Bundle args = new Bundle();
@@ -107,8 +93,12 @@ public class FragmentHomeRelawan extends Fragment {
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
+
         programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
         profilCaleg = (RelativeLayout) rootView.findViewById(R.id.profil_caleg);
+        platform = (RelativeLayout) rootView.findViewById(R.id.platform);
+        penghargaan = (RelativeLayout) rootView.findViewById(R.id.penghargaan);
+        visiMisi = (RelativeLayout) rootView.findViewById(R.id.visi_misi);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
@@ -131,6 +121,27 @@ public class FragmentHomeRelawan extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), DataCaleg.class));
+            }
+        });
+
+        penghargaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Penghargaan.class));
+            }
+        });
+
+        platform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Platform.class));
+            }
+        });
+
+        visiMisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), VisiMisi.class));
             }
         });
 

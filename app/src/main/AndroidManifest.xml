@@ -78,7 +78,14 @@
         <activity android:name=".activity.ScanQR" />
         <activity android:name=".activity.LogistikActivity" />
         <activity android:name=".activity.DetailLogistik" />
-        <activity android:name=".activity.ScanLogistik"></activity>
+        <activity android:name=".activity.ScanLogistik" />
+        <activity android:name=".activity.caleg.DetailCaleg" />
+        <activity android:name=".activity.VisiMisi" />
+        <activity android:name=".activity.Platform" />
+        <activity android:name=".activity.Penghargaan" />
+        <activity android:name=".activity.DetailVisiMisi"></activity>
+        <activity android:name=".activity.DetailPlatform"></activity>
+        <activity android:name=".activity.DetailPenghargaan"></activity>
     </application>
 
 </manifest>

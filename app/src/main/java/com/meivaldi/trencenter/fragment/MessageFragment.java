@@ -64,14 +64,6 @@ public class MessageFragment extends Fragment {
         return rootView;
     }
 
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new InboxFragment(), "Masuk");
-        adapter.addFragment(new OutboxFragment(), "Keluar");
-        viewPager.setAdapter(adapter);
-    }
-
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
