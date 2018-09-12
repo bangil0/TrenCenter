@@ -175,6 +175,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/visi_misi"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/layout_border"
@@ -241,6 +242,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/platform"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/layout_border"
@@ -280,6 +282,7 @@
                 android:layout_marginTop="10dp">
 
                 <RelativeLayout
+                    android:id="@+id/penghargaan"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:background="@drawable/layout_border"
