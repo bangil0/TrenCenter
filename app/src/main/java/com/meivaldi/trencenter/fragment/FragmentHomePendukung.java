@@ -22,7 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Penghargaan;
+import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
+import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
@@ -50,7 +53,7 @@ public class FragmentHomePendukung extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private TextView hari, detik, menit, jam;
-    private RelativeLayout programKerja, profilCaleg;
+    private RelativeLayout programKerja, profilCaleg, platform, penghargaan, visiMisi;
 
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -95,8 +98,33 @@ public class FragmentHomePendukung extends Fragment {
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
+
         programKerja = (RelativeLayout) rootView.findViewById(R.id.programKerja);
         profilCaleg = (RelativeLayout) rootView.findViewById(R.id.profileCaleg);
+        platform = (RelativeLayout) rootView.findViewById(R.id.platform);
+        penghargaan = (RelativeLayout) rootView.findViewById(R.id.penghargaan);
+        visiMisi = (RelativeLayout) rootView.findViewById(R.id.visi_misi);
+
+        penghargaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Penghargaan.class));
+            }
+        });
+
+        platform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Platform.class));
+            }
+        });
+
+        visiMisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), VisiMisi.class));
+            }
+        });
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
