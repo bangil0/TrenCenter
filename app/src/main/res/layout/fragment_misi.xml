@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.fragment.VisiFragment">
+    tools:context="com.meivaldi.trencenter.fragment.MisiFragment">
 
     <ListView
-        android:id="@+id/visi_list"
+        android:id="@+id/misi_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

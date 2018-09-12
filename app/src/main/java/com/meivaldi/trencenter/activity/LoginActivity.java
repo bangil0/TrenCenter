@@ -227,4 +227,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(!session.isLoggedIn()){
+            Toast.makeText(getApplicationContext(), "Login dahulu", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

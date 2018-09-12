@@ -27,24 +27,25 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VisiFragment extends Fragment {
+public class MisiFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String[] visi;
-
-    private OnFragmentInteractionListener mListener;
+    private String misi[];
 
     private ListView listView;
 
-    public VisiFragment() {
+    private OnFragmentInteractionListener mListener;
+
+    public MisiFragment() {
 
     }
 
-    public static VisiFragment newInstance(String param1, String param2) {
-        VisiFragment fragment = new VisiFragment();
+    public static MisiFragment newInstance(String param1, String param2) {
+        MisiFragment fragment = new MisiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,12 +65,13 @@ public class VisiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView =  inflater.inflate(R.layout.fragment_visi, container, false);
 
         listView = (ListView) rootView.findViewById(R.id.visi_list);
         String id = getActivity().getIntent().getStringExtra("id_caleg");
 
-        getVisi(id);
+        getMisi(id);
         return rootView;
     }
 
@@ -82,6 +84,7 @@ public class VisiFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
     }
 
     @Override
@@ -91,11 +94,10 @@ public class VisiFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    private void getVisi(final String id){
+    private void getMisi(final String id){
         String tag_string_req = "req_visi";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -112,13 +114,13 @@ public class VisiFragment extends Fragment {
                     if (!error) {
                         JSONArray data = jObj.getJSONArray("data");
 
-                        visi = new String[data.length()];
+                        misi = new String[data.length()];
 
                         for(int i=0; i<data.length(); i++){
-                            visi[i] = data.getJSONArray(i).getString(0);
+                            misi[i] = data.getJSONArray(i).getString(1);
                         }
 
-                        ArrayAdapter adapter = new ArrayAdapter(getContext(), R.layout.my_text, visi);
+                        ArrayAdapter adapter = new ArrayAdapter(getContext(), R.layout.my_text, misi);
                         listView.setAdapter(adapter);
 
                     } else {

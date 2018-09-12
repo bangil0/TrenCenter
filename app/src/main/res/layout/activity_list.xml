@@ -21,23 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayout"
+    <ListView
+        android:id="@+id/caleg_list"
         android:layout_below="@id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?actionBarSize"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabSelectedTextColor="@android:color/white"
-        app:tabIndicatorHeight="4dp"
-        app:tabBackground="@drawable/tab_color_selector"
-        app:tabMode="fixed" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_below="@id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"  />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

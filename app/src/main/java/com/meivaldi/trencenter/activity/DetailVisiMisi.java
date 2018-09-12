@@ -2,6 +2,8 @@ package com.meivaldi.trencenter.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,8 +28,13 @@ import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.CalegAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.fragment.InboxFragment;
+import com.meivaldi.trencenter.fragment.MisiFragment;
+import com.meivaldi.trencenter.fragment.OutboxFragment;
+import com.meivaldi.trencenter.fragment.VisiFragment;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.helper.TabAdapter;
 import com.meivaldi.trencenter.model.Caleg;
 
 import org.json.JSONArray;
@@ -45,8 +52,9 @@ public class DetailVisiMisi extends AppCompatActivity {
     private String[] visi, misi;
     private ListView listView;
 
-    private SQLiteHandler db;
-    private String tipe;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private TabAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +62,11 @@ public class DetailVisiMisi extends AppCompatActivity {
         setContentView(R.layout.activity_detail_visi_misi);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        listView = (ListView) findViewById(R.id.visi_misi_list);
-
-        String id = getIntent().getStringExtra("id_caleg");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Visi Misi Caleg");
         getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        db = new SQLiteHandler(getApplicationContext());
-        HashMap<String, String> user = db.getUserDetails();
-        tipe = user.get("type");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,70 +77,16 @@ public class DetailVisiMisi extends AppCompatActivity {
             }
         });
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
-        getVisiMisi(id);
-    }
+        adapter = new TabAdapter(getSupportFragmentManager());
+        adapter.addFragment(new VisiFragment(), "Visi");
+        adapter.addFragment(new MisiFragment(), "Misi");
 
-    private void getVisiMisi(final String id){
-        String tag_string_req = "req_visi_misi";
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_GET_VISI_MISI, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d("Inbox", "Login Response: " + response.toString());
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-
-                    if (!error) {
-                        JSONArray data = jObj.getJSONArray("data");
-
-                        visi = new String[data.length()];
-                        misi = new String[data.length()];
-
-                        for(int i=0; i<data.length(); i++){
-                            visi[i] = data.getJSONArray(i).getString(0);
-                            misi[i] = data.getJSONArray(i).getString(1);
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, visi);
-                        listView.setAdapter(adapter);
-
-                    } else {
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Inbox", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
-            }
-        }){
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id_caleg", id);
-
-                return params;
-            }
-
-        };
-
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override

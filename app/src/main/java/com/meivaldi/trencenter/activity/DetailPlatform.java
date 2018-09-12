@@ -38,10 +38,10 @@ public class DetailPlatform extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_visi_misi);
+        setContentView(R.layout.activity_list);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        listView = (ListView) findViewById(R.id.visi_misi_list);
+        listView = (ListView) findViewById(R.id.caleg_list);
 
         String id = getIntent().getStringExtra("id_caleg");
 
