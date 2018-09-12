@@ -74,8 +74,11 @@
         <activity android:name=".activity.KirimPesan" />
         <activity android:name=".activity.DetailPesan" />
         <activity android:name=".activity.tim_pemenangan.DetailOutbox" />
-        <activity android:name=".activity.DetailBerita"></activity>
-        <activity android:name=".activity.ScanQR"></activity>
+        <activity android:name=".activity.DetailBerita" />
+        <activity android:name=".activity.ScanQR" />
+        <activity android:name=".activity.LogistikActivity" />
+        <activity android:name=".activity.DetailLogistik" />
+        <activity android:name=".activity.ScanLogistik"></activity>
     </application>
 
 </manifest>

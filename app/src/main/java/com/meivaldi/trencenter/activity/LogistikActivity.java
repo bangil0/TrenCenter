@@ -16,10 +16,12 @@ import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
+import com.meivaldi.trencenter.adapter.LogistikAdapter;
 import com.meivaldi.trencenter.adapter.ProgramAdapter;
+import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
-import com.meivaldi.trencenter.model.Program;
+import com.meivaldi.trencenter.model.Logistik;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,42 +29,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class ProgramKerja extends AppCompatActivity {
+public class LogistikActivity extends AppCompatActivity {
 
     private ListView listView;
-    private ArrayList<Program> programList;
-    private ProgramAdapter adapter;
+    private LogistikAdapter adapter;
+    private ArrayList<Logistik> logistikList;
 
     private Toolbar toolbar;
     private SQLiteHandler db;
 
-    private List<String> idProgram;
-
     private String tipe;
-
-    private static final String TAG = ProgramKerja.class.getSimpleName();
-    private static final String url = "http://103.28.53.181/~millenn1/android/getProgram.php";
+    private static final String TAG = LogistikActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_program_kerja);
-
-        listView = (ListView) findViewById(R.id.program_list);
-        programList = new ArrayList<>();
-        idProgram = new ArrayList<>();
+        setContentView(R.layout.activity_logistik);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        listView = (ListView) findViewById(R.id.logistik_list);
+        logistikList = new ArrayList<>();
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = new SQLiteHandler(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
         tipe = user.get("type");
-
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,44 +82,16 @@ public class ProgramKerja extends AppCompatActivity {
             }
         });
 
-        new GetPrograms().execute();
+        new GetLogistic().execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(tipe.equals("super_admin")){
-            Intent intent = new Intent(getApplicationContext(),
-                    Dashboard_SuperAdmin.class);
-            startActivity(intent);
-        } else if(tipe.equals("relawan")){
-            Intent intent = new Intent(getApplicationContext(),
-                    MainActivity.class);
-            startActivity(intent);
-        } else if(tipe.equals("pendukung")){
-            Intent intent = new Intent(getApplicationContext(),
-                    Pendukung.class);
-            startActivity(intent);
-        } else if(tipe.equals("tim_pemenangan")) {
-            Intent intent = new Intent(getApplicationContext(),
-                    Tim_Pemenangan.class);
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
-
-    private class GetPrograms extends AsyncTask<Void, Void, Void>{
+    private class GetLogistic extends AsyncTask<Void, Void, Void>{
 
         @Override
         protected Void doInBackground(Void... voids) {
             HttpHandler sh = new HttpHandler();
 
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LOGISTIC);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -132,18 +99,17 @@ public class ProgramKerja extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
-                    JSONArray programs = jsonObj.getJSONArray("programs");
+                    JSONArray programs = jsonObj.getJSONArray("logistik");
 
                     for (int i = 0; i < programs.length(); i++) {
                         JSONArray program = programs.getJSONArray(i);
 
-                        idProgram.add(program.getString(0));
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String lokasi = program.getString(4);
                         String foto = program.getString(7);
 
-                        programList.add(new Program(nama, tanggalMulai, lokasi, foto));
+                        logistikList.add(new Logistik(nama, tanggalMulai, lokasi, foto));
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -177,14 +143,13 @@ public class ProgramKerja extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            adapter = new ProgramAdapter(getApplicationContext(), programList);
+            adapter = new LogistikAdapter(getApplicationContext(), logistikList);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DetailProgram.class);
+                    Intent intent = new Intent(getApplicationContext(), DetailLogistik.class);
                     intent.putExtra("INDEX", i);
-                    intent.putExtra("id", idProgram.get(i));
                     startActivity(intent);
 
                     finish();

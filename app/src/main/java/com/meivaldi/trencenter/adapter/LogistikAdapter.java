@@ -1,8 +1,6 @@
 package com.meivaldi.trencenter.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,29 +13,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.helper.CircleTransform;
-import com.meivaldi.trencenter.model.Message;
+import com.meivaldi.trencenter.model.Logistik;
 import com.meivaldi.trencenter.model.Program;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by root on 28/08/18.
+ * Created by root on 11/09/18.
  */
 
-public class ProgramAdapter extends ArrayAdapter<Program> {
-
-    private String base = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/";
+public class LogistikAdapter extends ArrayAdapter<Logistik>{
 
     private Context context;
-    private List<Program> programList = new ArrayList<>();
+    private List<Logistik> logistikList = new ArrayList<>();
 
-    public ProgramAdapter(Context context, ArrayList<Program> list) {
-        super(context, 0, list);
+    public LogistikAdapter(Context context, List<Logistik> logistikList) {
+        super(context, 0, logistikList);
         this.context = context;
-        this.programList = list;
+        this.logistikList = logistikList;
     }
 
     @NonNull
@@ -45,21 +39,21 @@ public class ProgramAdapter extends ArrayAdapter<Program> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItem = convertView;
         if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.program_kerja_item,parent,false);
+            listItem = LayoutInflater.from(context).inflate(R.layout.logistic_list,parent,false);
 
-        Program currentProgram = programList.get(position);
+        Logistik currentLogistik = logistikList.get(position);
 
         TextView title = (TextView) listItem.findViewById(R.id.title);
-        title.setText(currentProgram.getTitle());
+        title.setText(currentLogistik.getTitle());
 
         TextView location = (TextView) listItem.findViewById(R.id.location);
-        location.setText("Lokasi: " + currentProgram.getLocation());
+        location.setText("Lokasi: " + currentLogistik.getLokasi());
 
         TextView dateStart = (TextView) listItem.findViewById(R.id.tanggalMulai);
-        dateStart.setText(currentProgram.getDate());
+        dateStart.setText(currentLogistik.getDate());
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.logo);
-        String url = base + "/" + currentProgram.getImage();
+        String url = currentLogistik.getImage();
 
         Glide.with(getContext()).load(url)
                 .crossFade()

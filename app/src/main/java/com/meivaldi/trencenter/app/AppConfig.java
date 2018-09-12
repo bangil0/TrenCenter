@@ -28,4 +28,6 @@ public class AppConfig {
     public static String URL_JOIN_PROGRAM = "http://103.28.53.181/~millenn1/android/join_program.php";
     public static String URL_CHECK_VERIFIED = "http://103.28.53.181/~millenn1/android/get_status.php";
     public static String URL_VERIFIED = "http://103.28.53.181/~millenn1/android/verified.php";
+    public static String URL_GET_LOGISTIC = "http://103.28.53.181/~millenn1/android/get_logistik.php";
+    public static String URL_UPDATE_LOGISTIC = "";
 }
