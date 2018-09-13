@@ -110,7 +110,6 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 
     @Override

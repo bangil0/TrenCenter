@@ -181,7 +181,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+
     }
 
     @Override

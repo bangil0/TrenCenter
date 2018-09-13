@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 
 

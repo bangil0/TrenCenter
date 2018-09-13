@@ -53,9 +53,7 @@ public class DetailPlatform extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),
-                        Platform.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -132,7 +130,7 @@ public class DetailPlatform extends AppCompatActivity{
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(getApplicationContext(), Platform.class));
+        finish();
     }
 }
 

@@ -145,7 +145,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
                 getFragmentManager().beginTransaction()
                         .add(R.id.frame_container, new AccountFragment())
-                        .addToBackStack(AccountFragment.class.getSimpleName())
+                        .addToBackStack(ChangeUsername.class.getSimpleName())
                         .commit();
                 return;
             case R.id.password_settings:

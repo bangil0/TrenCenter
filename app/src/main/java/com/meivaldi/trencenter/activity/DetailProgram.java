@@ -84,8 +84,7 @@ public class DetailProgram extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
-
+                finish();
             }
         });
     }
@@ -210,12 +209,11 @@ public class DetailProgram extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+        finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 }

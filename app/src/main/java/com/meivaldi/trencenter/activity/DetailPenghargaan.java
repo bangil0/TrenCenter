@@ -52,9 +52,7 @@ public class DetailPenghargaan extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),
-                        Penghargaan.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -132,6 +130,6 @@ public class DetailPenghargaan extends AppCompatActivity{
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(getApplicationContext(), Penghargaan.class));
+        finish();
     }
 }

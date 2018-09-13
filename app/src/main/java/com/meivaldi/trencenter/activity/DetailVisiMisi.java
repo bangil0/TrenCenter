@@ -74,9 +74,7 @@ public class DetailVisiMisi extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(),
-                            VisiMisi.class);
-                    startActivity(intent);
+                    finish();
             }
         });
 
@@ -101,6 +99,6 @@ public class DetailVisiMisi extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), VisiMisi.class));
+        finish();
     }
 }

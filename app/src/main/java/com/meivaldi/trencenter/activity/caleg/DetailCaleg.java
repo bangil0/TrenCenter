@@ -76,23 +76,7 @@ public class DetailCaleg extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(tipe.equals("super_admin")){
-                    Intent intent = new Intent(getApplicationContext(),
-                            Dashboard_SuperAdmin.class);
-                    startActivity(intent);
-                } else if(tipe.equals("relawan")){
-                    Intent intent = new Intent(getApplicationContext(),
-                            MainActivity.class);
-                    startActivity(intent);
-                } else if(tipe.equals("pendukung")){
-                    Intent intent = new Intent(getApplicationContext(),
-                            Pendukung.class);
-                    startActivity(intent);
-                } else if(tipe.equals("tim_pemenangan")) {
-                    Intent intent = new Intent(getApplicationContext(),
-                            Tim_Pemenangan.class);
-                    startActivity(intent);
-                }
+                finish();
             }
         });
 
@@ -167,7 +151,7 @@ public class DetailCaleg extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(getApplicationContext(), DataCaleg.class));
+        finish();
     }
 
     @Override

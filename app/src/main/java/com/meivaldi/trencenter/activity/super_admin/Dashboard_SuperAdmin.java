@@ -127,6 +127,18 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
     protected void onPause() {
         super.onPause();
 
-        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        MenuItem homeItem = navigation.getMenu().getItem(0);
+
+        if (navigation.getSelectedItemId() != homeItem.getItemId()) {
+            navigation.setSelectedItemId(homeItem.getItemId());
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }
