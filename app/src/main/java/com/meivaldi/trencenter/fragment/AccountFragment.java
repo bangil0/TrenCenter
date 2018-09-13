@@ -143,10 +143,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             case R.id.username_settings:
                 startActivity(new Intent(getContext(), ChangeUsername.class));
 
-                Toast.makeText(getContext(), "Pindah", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
                         .add(R.id.frame_container, new AccountFragment())
-                        .addToBackStack(ChangeUsername.class.getSimpleName())
+                        .addToBackStack(AccountFragment.class.getSimpleName())
                         .commit();
                 return;
             case R.id.password_settings:
