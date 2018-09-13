@@ -25,6 +25,7 @@ import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.ScanQR;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.helper.CircleTransform;
 
 import org.json.JSONArray;
@@ -40,6 +41,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     private Toolbar toolbar;
     private Button scan;
     private String id;
+    private boolean nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        nav = getIntent().getBooleanExtra("MAIN", false);
 
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,7 +74,11 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                if(nav){
+                    startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                }
             }
         });
     }
@@ -140,7 +148,11 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+        if(nav){
+            startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+        } else {
+            startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+        }
     }
 
     @Override
@@ -160,5 +172,12 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        finish();
     }
 }
