@@ -157,4 +157,11 @@ public class LogistikActivity extends AppCompatActivity {
             });
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        finish();
+    }
 }

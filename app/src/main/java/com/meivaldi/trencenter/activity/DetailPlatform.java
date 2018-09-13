@@ -127,5 +127,12 @@ public class DetailPlatform extends AppCompatActivity{
         super.onPause();
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(getApplicationContext(), Platform.class));
+    }
 }
 

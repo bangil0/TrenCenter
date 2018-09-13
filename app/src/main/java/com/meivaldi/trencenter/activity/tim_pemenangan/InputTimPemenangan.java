@@ -638,4 +638,10 @@ public class InputTimPemenangan extends AppCompatActivity {
 
         return;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

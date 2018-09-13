@@ -647,4 +647,10 @@ public class InputPendukung extends AppCompatActivity {
 
         return;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

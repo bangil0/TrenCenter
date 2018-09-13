@@ -127,4 +127,11 @@ public class DetailPenghargaan extends AppCompatActivity{
         super.onPause();
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(getApplicationContext(), Penghargaan.class));
+    }
 }

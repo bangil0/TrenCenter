@@ -49,8 +49,8 @@ import java.util.Map;
 public class DetailVisiMisi extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private String[] visi, misi;
-    private ListView listView;
+    private SQLiteHandler db;
+    private String tipe;
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -62,6 +62,9 @@ public class DetailVisiMisi extends AppCompatActivity {
         setContentView(R.layout.activity_detail_visi_misi);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        tipe = user.get("type");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Visi Misi Caleg");
@@ -93,5 +96,11 @@ public class DetailVisiMisi extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), VisiMisi.class));
     }
 }
