@@ -33,6 +33,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -650,5 +651,27 @@ public class InputRelawan extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(tipe.equals("super_admin")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Dashboard_SuperAdmin.class);
+            startActivity(intent);
+        } else if(tipe.equals("relawan")){
+            Intent intent = new Intent(getApplicationContext(),
+                    MainActivity.class);
+            startActivity(intent);
+        } else if(tipe.equals("pendukung")){
+            Intent intent = new Intent(getApplicationContext(),
+                    Pendukung.class);
+            startActivity(intent);
+        } else if(tipe.equals("tim_pemenangan")) {
+            Intent intent = new Intent(getApplicationContext(),
+                    Tim_Pemenangan.class);
+            startActivity(intent);
+        }
     }
 }

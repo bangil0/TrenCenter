@@ -83,6 +83,7 @@ public class ScanLogistik extends AppCompatActivity implements ZXingScannerView.
                 Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
 
                 finish();
+                startActivity(new Intent(getApplicationContext(), DetailLogistik.class));
             }
         }, new Response.ErrorListener() {
 
