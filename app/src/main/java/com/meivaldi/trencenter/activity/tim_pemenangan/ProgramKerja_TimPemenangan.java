@@ -58,7 +58,7 @@ public class ProgramKerja_TimPemenangan extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+                finish();
             }
         });
 
@@ -68,13 +68,12 @@ public class ProgramKerja_TimPemenangan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+        finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 
     private class GetPrograms extends AsyncTask<Void, Void, Void> {
@@ -145,8 +144,6 @@ public class ProgramKerja_TimPemenangan extends AppCompatActivity {
                     intent.putExtra("INDEX", i);
                     intent.putExtra("id", idProgram.get(i));
                     startActivity(intent);
-
-                    finish();
                 }
             });
         }

@@ -124,6 +124,15 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 

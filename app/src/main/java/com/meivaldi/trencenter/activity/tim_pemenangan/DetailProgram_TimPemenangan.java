@@ -153,6 +153,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         } else {
             startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
         }
+        finish();
     }
 
     @Override

@@ -145,7 +145,7 @@ public class DetailLogistik extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(getApplicationContext(), LogistikActivity.class));
+        finish();
     }
 
     @Override
