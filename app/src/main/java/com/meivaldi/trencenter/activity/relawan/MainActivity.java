@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
         db.deleteUsers();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        ActivityCompat.finishAffinity(MainActivity.this);
         startActivity(intent);
         finish();
     }

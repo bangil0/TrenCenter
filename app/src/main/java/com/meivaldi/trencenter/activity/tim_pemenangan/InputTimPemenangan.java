@@ -141,6 +141,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                             Tim_Pemenangan.class);
                     startActivity(intent);
                 }
+                finish();
             }
         });
 
@@ -659,11 +660,11 @@ public class InputTimPemenangan extends AppCompatActivity {
                     Tim_Pemenangan.class);
             startActivity(intent);
         }
+        this.finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 }

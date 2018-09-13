@@ -21,6 +21,7 @@ import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 
 import java.util.HashMap;
@@ -140,22 +141,26 @@ public class ChangeUsername extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(tipe.equals("super_admin")){
+        /*if(tipe.equals("super_admin")){
             Intent intent = new Intent(getApplicationContext(),
                     Dashboard_SuperAdmin.class);
+            intent.putExtra("Navigation", "Profile");
             startActivity(intent);
         } else if(tipe.equals("relawan")){
             Intent intent = new Intent(getApplicationContext(),
                     MainActivity.class);
+            intent.putExtra("Navigation", "Profile");
             startActivity(intent);
         } else if(tipe.equals("pendukung")){
             Intent intent = new Intent(getApplicationContext(),
                     Pendukung.class);
+            intent.putExtra("Navigation", "Profile");
             startActivity(intent);
         } else if(tipe.equals("tim_pemenangan")) {
             Intent intent = new Intent(getApplicationContext(),
                     Tim_Pemenangan.class);
+            intent.putExtra("Navigation", "Profile");
             startActivity(intent);
-        }
+        }*/
     }
 }

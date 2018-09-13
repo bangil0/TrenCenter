@@ -69,8 +69,6 @@ public class ScanQR extends AppCompatActivity implements ZXingScannerView.Result
     protected void onPause() {
         super.onPause();
         mScannerView.stopCamera();
-
-        finish();
     }
 
     @Override

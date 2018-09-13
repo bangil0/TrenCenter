@@ -148,6 +148,7 @@ public class InputRelawan extends AppCompatActivity {
                             Tim_Pemenangan.class);
                     startActivity(intent);
                 }
+                finish();
             }
         });
 
@@ -650,7 +651,6 @@ public class InputRelawan extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 
     @Override
@@ -673,5 +673,6 @@ public class InputRelawan extends AppCompatActivity {
                     Tim_Pemenangan.class);
             startActivity(intent);
         }
+        this.finish();
     }
 }

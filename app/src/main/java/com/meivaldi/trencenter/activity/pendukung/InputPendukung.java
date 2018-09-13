@@ -155,6 +155,7 @@ public class InputPendukung extends AppCompatActivity {
                             Tim_Pemenangan.class);
                     startActivity(intent);
                 }
+                finish();
             }
         });
 
@@ -668,11 +669,11 @@ public class InputPendukung extends AppCompatActivity {
                     Tim_Pemenangan.class);
             startActivity(intent);
         }
+        this.finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 }
