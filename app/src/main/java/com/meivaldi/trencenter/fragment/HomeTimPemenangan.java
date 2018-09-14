@@ -39,6 +39,7 @@ import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.CardAdapter;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
@@ -142,7 +143,6 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ProgramKerja_TimPemenangan.class));
-                getActivity().finish();
             }
         });
 
@@ -287,7 +287,7 @@ public class HomeTimPemenangan extends Fragment  {
     }
 
     private int dpToPx(int dp) {
-        Resources r = /*HomeTimPemenangan.this.getResources();*/ getActivity().getResources();
+        Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
