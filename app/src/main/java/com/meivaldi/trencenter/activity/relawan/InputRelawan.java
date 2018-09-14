@@ -48,8 +48,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -74,8 +76,14 @@ public class InputRelawan extends AppCompatActivity {
 
     private int imageStatus;
 
-    Dialog dialog;
-    final Context context = this;
+    private Dialog dialog;
+    private final Context context = this;
+
+    private List<String> kabupatenList, kecamatanList, kelurahanList;
+
+    private String kabInit = " -- KABUPATEN -- ";
+    private String kecInit = " -- KECAMATAN -- ";
+    private String kelInit = " -- KELURAHAN -- ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +104,14 @@ public class InputRelawan extends AppCompatActivity {
         kabupatenSP = (Spinner) findViewById(R.id.kabupaten);
         kecamatanSP = (Spinner) findViewById(R.id.kecamatan);
         kelurahanSP = (Spinner) findViewById(R.id.kelurahan);
+
+        kabupatenList = new ArrayList<>();
+        kecamatanList = new ArrayList<>();
+        kelurahanList = new ArrayList<>();
+
+        kabupatenList.add(kabInit);
+        kecamatanList.add(kecInit);
+        kelurahanList.add(kelInit);
 
         kecamatanSP.setClickable(false);
         kelurahanSP.setClickable(false);
@@ -334,15 +350,12 @@ public class InputRelawan extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray kelurahanArray = jsonObject.getJSONArray("kelurahan");
 
-                    String[] test = new String[kelurahanArray.length()];
-
                     for(int i=0; i<kelurahanArray.length(); i++){
-                        test[i] = kelurahanArray.getJSONArray(i).getString(2);
-                        Log.d("Kelurahan", test[i]);
+                        kelurahanList.add(kelurahanArray.getJSONArray(i).getString(2));
                     }
 
                     ArrayAdapter<String> kelurahanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, test);
+                            android.R.layout.simple_spinner_dropdown_item, kelurahanList);
 
                     kelurahanSP.setAdapter(kelurahanAdapter);
 
@@ -384,15 +397,12 @@ public class InputRelawan extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray kecamatanArray = jsonObject.getJSONArray("kecamatan");
 
-                    String[] test = new String[kecamatanArray.length()];
-
                     for(int i=0; i<kecamatanArray.length(); i++){
-                        test[i] = kecamatanArray.getJSONArray(i).getString(2);
-                        Log.d("Kecamatan", test[i]);
+                        kecamatanList.add(kecamatanArray.getJSONArray(i).getString(2));
                     }
 
                     ArrayAdapter<String> kecamatanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, test);
+                            android.R.layout.simple_spinner_dropdown_item, kecamatanList);
 
                     kecamatanSP.setAdapter(kecamatanAdapter);
 
@@ -434,14 +444,12 @@ public class InputRelawan extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray kabupatenArray = jsonObject.getJSONArray("kabupaten");
 
-                    String[] test = new String[kabupatenArray.length()];
-
                     for(int i=0; i<kabupatenArray.length(); i++){
-                        test[i] = kabupatenArray.getJSONArray(i).getString(2);
+                        kabupatenList.add(kabupatenArray.getJSONArray(i).getString(2));
                     }
 
                     ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, test);
+                            android.R.layout.simple_spinner_dropdown_item, kabupatenList);
 
                     kabupatenSP.setAdapter(kabupatenAdapter);
 
@@ -686,6 +694,24 @@ public class InputRelawan extends AppCompatActivity {
             return false;
         } else {
             tps.setCompoundDrawables(null, null, success, null);
+        }
+
+        if(kabupatenSP.getSelectedItem().toString().equals(kabInit)){
+            Toast.makeText(getApplicationContext(), "Pilih Kabupaten!", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        if(kecamatanSP.getSelectedItem().toString().equals(kecInit)){
+            Toast.makeText(getApplicationContext(), "Pilih Kecamatan!", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        if(kelurahanSP.getSelectedItem().toString().equals(kelInit)){
+            Toast.makeText(getApplicationContext(), "Pilih Kelurahan!", Toast.LENGTH_SHORT).show();
+
+            return false;
         }
 
         return true;
