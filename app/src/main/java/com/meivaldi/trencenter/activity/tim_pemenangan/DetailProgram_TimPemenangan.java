@@ -75,7 +75,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(nav){
-                    startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+                    finish();
                 } else {
                     startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
                 }
@@ -149,11 +149,10 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if(nav){
-            startActivity(new Intent(getApplicationContext(), Tim_Pemenangan.class));
+            finish();
         } else {
             startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
         }
-        finish();
     }
 
     @Override

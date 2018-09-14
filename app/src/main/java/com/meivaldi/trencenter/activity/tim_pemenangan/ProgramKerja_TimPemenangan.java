@@ -144,6 +144,8 @@ public class ProgramKerja_TimPemenangan extends AppCompatActivity {
                     intent.putExtra("INDEX", i);
                     intent.putExtra("id", idProgram.get(i));
                     startActivity(intent);
+
+                    finish();
                 }
             });
         }
