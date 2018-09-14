@@ -265,6 +265,20 @@ public class InputRelawan extends AppCompatActivity {
 
                 TextView camera = (TextView) dialog.findViewById(R.id.camera);
                 TextView gallery = (TextView) dialog.findViewById(R.id.gallery);
+                ImageView galleryImg = (ImageView) dialog.findViewById(R.id.galleryLogo);
+                ImageView cameraImg = (ImageView) dialog.findViewById(R.id.cameraLogo);
+
+                cameraImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, 0);
+                        }
+
+                        dialog.dismiss();
+                    }
+                });
 
                 camera.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -273,6 +287,18 @@ public class InputRelawan extends AppCompatActivity {
                         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                             startActivityForResult(takePictureIntent, 0);
                         }
+
+                        dialog.dismiss();
+                    }
+                });
+
+                galleryImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto, 1);
+
                         dialog.dismiss();
                     }
                 });
@@ -283,6 +309,7 @@ public class InputRelawan extends AppCompatActivity {
                         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pickPhoto, 1);
+
                         dialog.dismiss();
                     }
                 });
