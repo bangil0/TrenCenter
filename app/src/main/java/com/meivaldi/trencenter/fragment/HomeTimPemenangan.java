@@ -162,7 +162,7 @@ public class HomeTimPemenangan extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getContext(), InputRelawan.class));
-                        getActivity().finish();
+                        dialog.dismiss();
                     }
                 });
 
@@ -170,7 +170,7 @@ public class HomeTimPemenangan extends Fragment  {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getContext(), InputPendukung.class));
-                        getActivity().finish();
+                        dialog.dismiss();
                     }
                 });
 

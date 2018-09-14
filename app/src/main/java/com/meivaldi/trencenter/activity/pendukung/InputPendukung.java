@@ -1,15 +1,19 @@
 package com.meivaldi.trencenter.activity.pendukung;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +39,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.QR_Login;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
@@ -209,7 +214,7 @@ public class InputPendukung extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                Bitmap bitmap = null;
 
                 if(imageStatus == FROM_GALLERY){
                     try {
@@ -218,6 +223,8 @@ public class InputPendukung extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else if(imageStatus == FROM_CAMERA){
+                    bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
+                } else {
                     bitmap = ((BitmapDrawable) profilePicture.getDrawable()).getBitmap();
                 }
 
@@ -247,12 +254,16 @@ public class InputPendukung extends AppCompatActivity {
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
 
-                checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                boolean status = checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees);
 
-                addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto, userName,
-                        fbAkun, igAkun, referensi, Agama);
+                if(status){
+                    addRelawan(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
+                            region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto, userName,
+                            fbAkun, igAkun, referensi, Agama);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Jangan ada yang kosong", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -273,6 +284,8 @@ public class InputPendukung extends AppCompatActivity {
                         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                             startActivityForResult(takePictureIntent, 0);
                         }
+
+                        dialog.dismiss();
                     }
                 });
 
@@ -538,7 +551,7 @@ public class InputPendukung extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void checkEmptiness(String kk, String nik, String name, String birthPlace, String birthDate, String age, String tribe, String phone, String address, String region, String kec, String kel, String erwe, String erte, String tepees) {
+    private boolean checkEmptiness(String kk, String nik, String name, String birthPlace, String birthDate, String age, String tribe, String phone, String address, String region, String kec, String kel, String erwe, String erte, String tepees) {
         Drawable error = getApplicationContext().getResources().getDrawable(R.drawable.ic_error);
         Drawable success = getApplicationContext().getResources().getDrawable(R.drawable.ic_success);
 
@@ -548,6 +561,8 @@ public class InputPendukung extends AppCompatActivity {
         if(kk.isEmpty()){
             KK.setCompoundDrawables(null, null, error, null);
             KK.setHint("KK tidak boleh kosong!");
+
+            return false;
         } else {
             KK.setCompoundDrawables(null, null, success, null);
         }
@@ -555,6 +570,8 @@ public class InputPendukung extends AppCompatActivity {
         if(nik.isEmpty()){
             NIK.setCompoundDrawables(null, null, error, null);
             NIK.setHint("NIK tidak boleh kosong!");
+
+            return false;
         } else {
             NIK.setCompoundDrawables(null, null, success, null);
         }
@@ -562,6 +579,8 @@ public class InputPendukung extends AppCompatActivity {
         if(name.isEmpty()){
             nama.setCompoundDrawables(null, null, error, null);
             nama.setHint("Nama tidak boleh kosong!");
+
+            return false;
         } else {
             nama.setCompoundDrawables(null, null, success, null);
         }
@@ -569,6 +588,8 @@ public class InputPendukung extends AppCompatActivity {
         if(birthPlace.isEmpty()){
             tempat_lahir.setCompoundDrawables(null, null, error, null);
             tempat_lahir.setHint("Tempat Lahir tidak boleh kosong!");
+
+            return false;
         } else {
             tempat_lahir.setCompoundDrawables(null, null, success, null);
         }
@@ -576,6 +597,8 @@ public class InputPendukung extends AppCompatActivity {
         if(birthDate.isEmpty()){
             tanggal_lahir.setCompoundDrawables(null, null, error, null);
             tanggal_lahir.setHint("Tanggal Lahir tidak boleh kosong!");
+
+            return false;
         } else {
             tanggal_lahir.setCompoundDrawables(null, null, success, null);
         }
@@ -583,6 +606,8 @@ public class InputPendukung extends AppCompatActivity {
         if(age.isEmpty()){
             umur.setCompoundDrawables(null, null, error, null);
             umur.setHint("Umur tidak boleh kosong!");
+
+            return false;
         } else {
             umur.setCompoundDrawables(null, null, success, null);
         }
@@ -590,6 +615,8 @@ public class InputPendukung extends AppCompatActivity {
         if(tribe.isEmpty()){
             suku.setCompoundDrawables(null, null, error, null);
             suku.setHint("Suku tidak boleh kosong!");
+
+            return false;
         } else {
             suku.setCompoundDrawables(null, null, success, null);
         }
@@ -597,6 +624,8 @@ public class InputPendukung extends AppCompatActivity {
         if(phone.isEmpty()){
             hp.setCompoundDrawables(null, null, error, null);
             hp.setHint("Nomor HP tidak boleh kosong");
+
+            return false;
         } else {
             hp.setCompoundDrawables(null, null, success, null);
         }
@@ -604,6 +633,8 @@ public class InputPendukung extends AppCompatActivity {
         if(address.isEmpty()){
             alamat.setCompoundDrawables(null, null, error, null);
             alamat.setHint("Alamat tidak boleh kosong!");
+
+            return false;
         } else {
             alamat.setCompoundDrawables(null, null, success, null);
         }
@@ -611,6 +642,8 @@ public class InputPendukung extends AppCompatActivity {
         if(erte.isEmpty()){
             rt.setCompoundDrawables(null, null, error, null);
             rt.setHint("RT tidak boleh kosong!");
+
+            return false;
         } else {
             rt.setCompoundDrawables(null, null, success, null);
         }
@@ -618,6 +651,8 @@ public class InputPendukung extends AppCompatActivity {
         if(erwe.isEmpty()){
             rw.setCompoundDrawables(null, null, error, null);
             rw.setHint("RW tidak boleh kosong!");
+
+            return false;
         } else {
             rw.setCompoundDrawables(null, null, success, null);
         }
@@ -625,11 +660,13 @@ public class InputPendukung extends AppCompatActivity {
         if(tepees.isEmpty()){
             tps.setCompoundDrawables(null, null, error, null);
             tps.setHint("TPS tidak boleh kosong!");
+
+            return false;
         } else {
             tps.setCompoundDrawables(null, null, success, null);
         }
 
-        return;
+        return true;
     }
 
     @Override
