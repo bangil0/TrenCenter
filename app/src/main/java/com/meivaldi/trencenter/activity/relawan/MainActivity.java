@@ -31,8 +31,7 @@ import com.meivaldi.trencenter.model.Message;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements FragmentHomeRelawan.OnFragmentInteractionListener,
-    ProfileRelawan.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
@@ -134,12 +133,6 @@ public class MainActivity extends AppCompatActivity implements FragmentHomeRelaw
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override

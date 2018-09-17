@@ -41,14 +41,6 @@ import java.util.TimerTask;
 
 public class FragmentHomeRelawan extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
     private TextView hari, detik, menit, jam;
     private RelativeLayout programKerja, profilCaleg, platform, penghargaan, visiMisi;
 
@@ -62,32 +54,14 @@ public class FragmentHomeRelawan extends Fragment {
 
     String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
-    public FragmentHomeRelawan() {
-    }
-
-    public static FragmentHomeRelawan newInstance(String param1, String param2) {
-        FragmentHomeRelawan fragment = new FragmentHomeRelawan();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_home_relawan, container, false);
+
+        rootView.setAlpha(0f);
+        rootView.setVisibility(View.GONE);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -154,6 +128,12 @@ public class FragmentHomeRelawan extends Fragment {
         });
 
         countDown();
+
+        rootView.setVisibility(View.VISIBLE);
+        rootView.animate()
+                .alpha(1f)
+                .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
+                .setListener(null);
 
         return rootView;
     }
@@ -261,24 +241,6 @@ public class FragmentHomeRelawan extends Fragment {
             }
         }.start();
 
-    }
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
 }

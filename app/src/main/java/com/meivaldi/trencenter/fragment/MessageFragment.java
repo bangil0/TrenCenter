@@ -32,6 +32,10 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+
+        rootView.setAlpha(0f);
+        rootView.setVisibility(View.GONE);
+
         button = rootView.findViewById(R.id.create_message);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
@@ -50,6 +54,12 @@ public class MessageFragment extends Fragment {
                 startActivity(new Intent(getContext(), KirimPesan.class));
             }
         });
+
+        rootView.setVisibility(View.VISIBLE);
+        rootView.animate()
+                .alpha(1f)
+                .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
+                .setListener(null);
 
         return rootView;
     }

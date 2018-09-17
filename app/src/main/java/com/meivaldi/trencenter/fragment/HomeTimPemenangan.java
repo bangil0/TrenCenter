@@ -63,14 +63,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeTimPemenangan extends Fragment  {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     private TextView hari, detik, menit, jam, selanjutnya;
     private FloatingActionButton create;
@@ -92,33 +84,13 @@ public class HomeTimPemenangan extends Fragment  {
 
     String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
-    public HomeTimPemenangan() {
-
-    }
-
-    public static HomeTimPemenangan newInstance(String param1, String param2) {
-        HomeTimPemenangan fragment = new HomeTimPemenangan();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_home_tim_pemenangan, container, false);
+
+        rootView.setAlpha(0f);
+        rootView.setVisibility(View.GONE);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -180,6 +152,12 @@ public class HomeTimPemenangan extends Fragment  {
 
         countDown();
 
+        rootView.setVisibility(View.VISIBLE);
+        rootView.animate()
+                .alpha(1f)
+                .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
+                .setListener(null);
+
         return rootView;
     }
 
@@ -218,12 +196,6 @@ public class HomeTimPemenangan extends Fragment  {
         });
 
         rq.add(jsonArrayRequest);
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     public class MyTimerTask extends TimerTask{
@@ -289,22 +261,6 @@ public class HomeTimPemenangan extends Fragment  {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     private void countDown(){

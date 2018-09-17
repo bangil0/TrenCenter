@@ -21,7 +21,7 @@ import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.helper.SessionManager;
 
-public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFragmentInteractionListener{
+public class Pendukung extends AppCompatActivity {
 
     private Toolbar toolbar;
 
@@ -112,10 +112,6 @@ public class Pendukung extends AppCompatActivity implements ProfileRelawan.OnFra
         super.onPause();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public void onBackPressed() {

@@ -47,10 +47,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FragmentHomePendukung extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private TextView hari, detik, menit, jam;
     private RelativeLayout programKerja, profilCaleg, platform, penghargaan, visiMisi;
@@ -63,36 +59,13 @@ public class FragmentHomePendukung extends Fragment {
 
     String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public FragmentHomePendukung() {
-    }
-
-    public static FragmentHomePendukung newInstance(String param1, String param2) {
-        FragmentHomePendukung fragment = new FragmentHomePendukung();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_pendukung, container, false);
+
+        rootView.setAlpha(0f);
+        rootView.setVisibility(View.GONE);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -152,6 +125,12 @@ public class FragmentHomePendukung extends Fragment {
 
 
         countDown();
+
+        rootView.setVisibility(View.VISIBLE);
+        rootView.animate()
+                .alpha(1f)
+                .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
+                .setListener(null);
 
         return rootView;
     }
@@ -259,27 +238,6 @@ public class FragmentHomePendukung extends Fragment {
             }
         }.start();
 
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
 }

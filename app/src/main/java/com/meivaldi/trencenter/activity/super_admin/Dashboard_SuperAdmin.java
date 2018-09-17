@@ -25,8 +25,7 @@ import com.meivaldi.trencenter.helper.SessionManager;
 
 import java.util.HashMap;
 
-public class Dashboard_SuperAdmin extends AppCompatActivity implements
-        HomeFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener {
+public class Dashboard_SuperAdmin extends AppCompatActivity {
 
     private SessionManager session;
     private SQLiteHandler db;
@@ -116,11 +115,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.commit();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override
