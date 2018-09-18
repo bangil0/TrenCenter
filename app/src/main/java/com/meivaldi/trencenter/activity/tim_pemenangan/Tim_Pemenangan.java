@@ -1,15 +1,14 @@
 package com.meivaldi.trencenter.activity.tim_pemenangan;
 
-import android.app.Dialog;
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
-import android.provider.MediaStore;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,9 +19,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
@@ -30,9 +26,7 @@ import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
-import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
 import com.meivaldi.trencenter.fragment.AccountFragment;
-import com.meivaldi.trencenter.fragment.HomeFragment;
 import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.fragment.MessageFragment;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -93,6 +87,18 @@ public class Tim_Pemenangan extends AppCompatActivity {
                         return true;
                     case R.id.nav_penghargaan:
                         startActivity(new Intent(getApplicationContext(), Penghargaan.class));
+
+                        return true;
+                    case R.id.nav_call:
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:085761806490"));
+
+                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                            return false;
+                        }
+
+                        startActivity(callIntent);
 
                         return true;
                     default:

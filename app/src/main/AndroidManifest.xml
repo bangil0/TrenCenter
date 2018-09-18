@@ -6,8 +6,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!--<uses-feature
+    <!--
+    <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
     <uses-feature
@@ -15,8 +17,8 @@
         android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true" />-->
-
+        android:required="true" />
+    -->
     <application
         android:name=".app.AppController"
         android:allowBackup="true"
@@ -83,9 +85,9 @@
         <activity android:name=".activity.VisiMisi" />
         <activity android:name=".activity.Platform" />
         <activity android:name=".activity.Penghargaan" />
-        <activity android:name=".activity.DetailVisiMisi"></activity>
-        <activity android:name=".activity.DetailPlatform"></activity>
-        <activity android:name=".activity.DetailPenghargaan"></activity>
+        <activity android:name=".activity.DetailVisiMisi" />
+        <activity android:name=".activity.DetailPlatform" />
+        <activity android:name=".activity.DetailPenghargaan" />
     </application>
 
 </manifest>
