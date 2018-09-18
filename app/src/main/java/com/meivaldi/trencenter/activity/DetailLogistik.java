@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DetailLogistik extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class DetailLogistik extends AppCompatActivity {
     private SQLiteHandler db;
     private HashMap<String, String> user;
     private String nama;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public class DetailLogistik extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.scan);
+        listView = (ListView) findViewById(R.id.penerima);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +124,8 @@ public class DetailLogistik extends AppCompatActivity {
                         title.setText(nama);
                         description.setText(deskripsi);
 
+                        getReceiver(nama);
+
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
@@ -137,6 +146,64 @@ public class DetailLogistik extends AppCompatActivity {
                         "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
         });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void getReceiver(final String nama) {
+        String tag_string_req = "req_receiver";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_RECEIVER, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+
+                    if(!error){
+                        List<String> users = new ArrayList<>();
+
+                        JSONArray array = jsonObject.getJSONArray("data");
+
+                        for(int i=0; i<array.length(); i++){
+                            users.add(array.getString(i));
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
+                        listView.setAdapter(adapter);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("SCAN KARTU", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("logistik", nama);
+
+                return params;
+            }
+
+        };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }

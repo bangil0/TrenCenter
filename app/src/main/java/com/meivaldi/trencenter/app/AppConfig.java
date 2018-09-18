@@ -37,4 +37,5 @@ public class AppConfig {
     public static String URL_GET_NAMES = "http://103.28.53.181/~millenn1/android/get_nama_user.php";
     public static String URL_GET_USER_DETAIL = "http://103.28.53.181/~millenn1/android/get_user_detail.php";
     public static String URL_GET_PESERTA = "http://103.28.53.181/~millenn1/android/get_peserta.php";
+    public static String URL_GET_RECEIVER = "http://103.28.53.181/~millenn1/android/get_logistik_receiver.php";
 }

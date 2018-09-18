@@ -35,6 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
@@ -81,6 +82,7 @@ public class HomeTimPemenangan extends Fragment  {
 
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
+    private RelativeLayout logistik;
 
     String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
 
@@ -98,6 +100,14 @@ public class HomeTimPemenangan extends Fragment  {
         detik = (TextView) rootView.findViewById(R.id.detik);
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        logistik = (RelativeLayout) rootView.findViewById(R.id.logistik);
+
+        logistik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), LogistikActivity.class));
+            }
+        });
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
