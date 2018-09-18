@@ -58,7 +58,7 @@ public class DetailPlatform extends AppCompatActivity{
         });
 
 
-        getVisiMisi(id);
+        getVisiMisi("51");
     }
 
     private void getVisiMisi(final String id){

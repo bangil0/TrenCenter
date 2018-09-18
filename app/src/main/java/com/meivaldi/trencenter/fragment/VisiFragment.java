@@ -69,7 +69,7 @@ public class VisiFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.visi_list);
         String id = getActivity().getIntent().getStringExtra("id_caleg");
 
-        getVisi(id);
+        getVisi("51");
         return rootView;
     }
 

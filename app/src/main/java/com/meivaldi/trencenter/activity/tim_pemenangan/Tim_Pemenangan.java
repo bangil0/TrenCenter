@@ -21,7 +21,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailPenghargaan;
+import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailUser;
+import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
@@ -76,11 +79,11 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_target:
-                        startActivity(new Intent(getApplicationContext(), VisiMisi.class));
+                        startActivity(new Intent(getApplicationContext(), DetailVisiMisi.class));
 
                         return true;
                     case R.id.nav_platform:
-                        startActivity(new Intent(getApplicationContext(), Platform.class));
+                        startActivity(new Intent(getApplicationContext(), DetailPlatform.class));
 
                         return true;
                     case R.id.nav_progja:
@@ -88,7 +91,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_penghargaan:
-                        startActivity(new Intent(getApplicationContext(), Penghargaan.class));
+                        startActivity(new Intent(getApplicationContext(), DetailPenghargaan.class));
 
                         return true;
                     case R.id.nav_call:

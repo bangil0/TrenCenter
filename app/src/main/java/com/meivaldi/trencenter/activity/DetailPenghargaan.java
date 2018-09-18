@@ -57,7 +57,7 @@ public class DetailPenghargaan extends AppCompatActivity{
         });
 
 
-        getVisiMisi(id);
+        getVisiMisi("51");
     }
 
     private void getVisiMisi(final String id){
