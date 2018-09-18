@@ -21,9 +21,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailUser;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
+import com.meivaldi.trencenter.activity.ScanKartu;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.fragment.AccountFragment;
@@ -99,6 +101,11 @@ public class Tim_Pemenangan extends AppCompatActivity {
                         }
 
                         startActivity(callIntent);
+
+                        return true;
+                    case R.id.nav_scan:
+
+                        startActivity(new Intent(getApplicationContext(), ScanKartu.class));
 
                         return true;
                     default:

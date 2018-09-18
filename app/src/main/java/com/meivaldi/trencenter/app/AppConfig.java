@@ -35,4 +35,5 @@ public class AppConfig {
     public static String URL_GET_PLATFORM = "http://103.28.53.181/~millenn1/android/get_platform.php";
     public static String URL_GET_PENGHARGAAN = "http://103.28.53.181/~millenn1/android/get_penghargaan.php";
     public static String URL_GET_NAMES = "http://103.28.53.181/~millenn1/android/get_nama_user.php";
+    public static String URL_GET_USER_DETAIL = "http://103.28.53.181/~millenn1/android/get_user_detail.php";
 }
