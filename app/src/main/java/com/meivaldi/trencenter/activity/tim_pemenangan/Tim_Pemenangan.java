@@ -43,7 +43,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
     private SQLiteHandler db;
     private Toolbar toolbar;
 
-    private  BottomNavigationView navigation;
+    private BottomNavigationView navigation;
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;

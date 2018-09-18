@@ -74,7 +74,7 @@ public class DetailLogistik extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), LogistikActivity.class));
+                finish();
             }
         });
     }

@@ -1,13 +1,20 @@
 package com.meivaldi.trencenter.activity.relawan;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,9 +24,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailPenghargaan;
+import com.meivaldi.trencenter.activity.DetailPlatform;
+import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.ScanKartu;
+import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
+import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.fragment.FragmentHomePendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
@@ -39,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private SessionManager session;
     private BottomNavigationView navigation;
 
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +69,66 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.nav_profile:
+                        startActivity(new Intent(getApplicationContext(), DataCaleg.class));
+
+                        return true;
+                    case R.id.nav_target:
+                        startActivity(new Intent(getApplicationContext(), DetailVisiMisi.class));
+
+                        return true;
+                    case R.id.nav_platform:
+                        startActivity(new Intent(getApplicationContext(), DetailPlatform.class));
+
+                        return true;
+                    case R.id.nav_progja:
+                        startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+
+                        return true;
+                    case R.id.nav_penghargaan:
+                        startActivity(new Intent(getApplicationContext(), DetailPenghargaan.class));
+
+                        return true;
+                    case R.id.nav_call:
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:085761806490"));
+
+                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                            return false;
+                        }
+
+                        startActivity(callIntent);
+
+                        return true;
+                    case R.id.nav_scan:
+
+                        startActivity(new Intent(getApplicationContext(), ScanKartu.class));
+
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
 
         db = new SQLiteHandler(getApplicationContext());
 
@@ -116,6 +193,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(toggle.onOptionsItemSelected(item))
+            return true;
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -137,6 +217,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawers();
+            return;
+        }
+
         MenuItem homeItem = navigation.getMenu().getItem(0);
 
         if (navigation.getSelectedItemId() != homeItem.getItemId()) {
