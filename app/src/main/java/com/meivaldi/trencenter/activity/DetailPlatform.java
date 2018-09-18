@@ -57,7 +57,6 @@ public class DetailPlatform extends AppCompatActivity{
             }
         });
 
-
         getVisiMisi("51");
     }
 

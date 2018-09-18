@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class DetailProgram_TimPemenangan extends AppCompatActivity {
 
     private static final String TAG = DetailProgram.class.getSimpleName();
@@ -42,6 +49,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     private Button scan;
     private String id;
     private boolean nav;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         scan = (Button) findViewById(R.id.scanPeserta);
+        listView = (ListView) findViewById(R.id.peserta);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,6 +130,8 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(image);
 
+                        loadPeserta(id);
+
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
@@ -141,6 +152,64 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                         "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
         });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void loadPeserta(final String id) {
+        String tag_string_req = "req_user_detail";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PESERTA, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+
+                    if(!error){
+                        List<String> users = new ArrayList<>();
+
+                        JSONArray array = jsonObject.getJSONArray("data");
+
+                        for(int i=0; i<array.length(); i++){
+                            users.add(array.getString(i));
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
+                        listView.setAdapter(adapter);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("SCAN KARTU", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_program", id);
+
+                return params;
+            }
+
+        };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
