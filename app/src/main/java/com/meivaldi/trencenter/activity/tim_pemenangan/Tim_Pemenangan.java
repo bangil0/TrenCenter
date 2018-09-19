@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -95,15 +96,14 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_call:
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:085761806490"));
 
-                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                            return false;
+                        if (ActivityCompat.checkSelfPermission(Tim_Pemenangan.this,
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                            ActivityCompat.requestPermissions(Tim_Pemenangan.this,
+                                    new String[]{Manifest.permission.CALL_PHONE},
+                                    0);
                         }
-
-                        startActivity(callIntent);
 
                         return true;
                     case R.id.nav_scan:
@@ -128,6 +128,26 @@ public class Tim_Pemenangan extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new HomeTimPemenangan());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "Permission Granted");
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:085761806490"));
+
+                    startActivity(callIntent);
+                } else {
+
+                }
+                return;
+            }
+
+        }
     }
 
     @Override
