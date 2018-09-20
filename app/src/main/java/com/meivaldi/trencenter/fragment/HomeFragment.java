@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DaftarPendukung;
+import com.meivaldi.trencenter.activity.DaftarRelawan;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
@@ -28,7 +30,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private TextView hari, detik, menit, jam;
-    private RelativeLayout one, two, three, four, five, six;
+    private RelativeLayout one, two, three, four, five, six, seven, eight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         four = (RelativeLayout) rootView.findViewById(R.id.layout_four);
         five = (RelativeLayout) rootView.findViewById(R.id.layout_five);
         six = (RelativeLayout) rootView.findViewById(R.id.layout_six);
+        seven = (RelativeLayout) rootView.findViewById(R.id.layout_seven);
+        eight = (RelativeLayout) rootView.findViewById(R.id.layout_eight);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -54,6 +58,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         four.setOnClickListener(this);
         five.setOnClickListener(this);
         six.setOnClickListener(this);
+        seven.setOnClickListener(this);
+        eight.setOnClickListener(this);
 
         countDown();
 
@@ -134,6 +140,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 return;
             case R.id.layout_six:
                 startActivity(new Intent(getContext(), ProgramKerja.class));
+
+                return;
+            case R.id.layout_seven:
+                startActivity(new Intent(getContext(), DaftarRelawan.class));
+
+                return;
+            case R.id.layout_eight:
+                startActivity(new Intent(getContext(), DaftarPendukung.class));
 
                 return;
         }
