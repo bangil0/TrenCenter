@@ -73,7 +73,7 @@ public class HomeTimPemenangan extends Fragment  {
     private List<Card> cardList;
 
     private static final String TAG = HomeTimPemenangan.class.getSimpleName();
-    private static final String url = "http://103.28.53.181/~millenn1/android/getCard.php";
+    private static final String url = "http://156.67.221.225/trencenter/voting/android/getCard.php";
 
     Dialog dialog;
 
@@ -84,7 +84,7 @@ public class HomeTimPemenangan extends Fragment  {
     private List<SliderUtils> sliderImg;
     private RelativeLayout logistik;
 
-    String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
+    String request_url = "http://156.67.221.225/trencenter/voting/android/debug.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -176,7 +176,7 @@ public class HomeTimPemenangan extends Fragment  {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                String url = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/";
+                String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
 
                 for (int i=0; i<response.length(); i++){

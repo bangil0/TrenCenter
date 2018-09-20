@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,10 +26,13 @@ import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.ScanKartu;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
+import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.fragment.FragmentHomePendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
@@ -79,7 +83,7 @@ public class Pendukung extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.nav_profile:
-                        startActivity(new Intent(getApplicationContext(), DataCaleg.class));
+                        startActivity(new Intent(getApplicationContext(), DetailCaleg.class));
 
                         return true;
                     case R.id.nav_target:
@@ -91,7 +95,7 @@ public class Pendukung extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_progja:
-                        startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                        startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
 
                         return true;
                     case R.id.nav_penghargaan:
@@ -99,15 +103,9 @@ public class Pendukung extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_call:
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:085761806490"));
-
-                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                            return false;
-                        }
-
-                        startActivity(callIntent);
+                        ActivityCompat.requestPermissions(Pendukung.this,
+                                new String[]{Manifest.permission.CALL_PHONE},
+                                0);
 
                         return true;
                     case R.id.nav_scan:
@@ -150,6 +148,27 @@ public class Pendukung extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "Permission Granted");
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:085761806490"));
+
+                    startActivity(callIntent);
+                } else {
+
+                }
+                return;
+            }
+
+        }
+    }
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

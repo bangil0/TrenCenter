@@ -16,6 +16,7 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
+import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.InputTimPemenangan;
@@ -112,7 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.layout_one:
-                startActivity(new Intent(getContext(), DataCaleg.class));
+                startActivity(new Intent(getContext(), DetailCaleg.class));
 
                 return;
             case R.id.layout_two:

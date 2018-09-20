@@ -119,7 +119,7 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                         String lokasi = program.getString(4);
                         String deskripsi = program.getString(5);
                         String penanggungJawab = program.getString(6);
-                        String gambar = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/" + program.getString(7);
+                        String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/" + program.getString(7);
 
                         title.setText(nama);
                         description.setText(deskripsi);

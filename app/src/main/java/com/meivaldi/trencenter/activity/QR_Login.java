@@ -107,11 +107,11 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                         String foto;
 
                         if(tipe.equals("pendukung")){
-                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pendukung/" + user.getString("foto");
+                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pendukung/" + user.getString("foto");
                         } else if(tipe.equals("tim_pemenangan")){
-                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pemenangan/" + user.getString("foto");
                         } else {
-                            foto = "http://103.28.53.181/~millenn1/dashboard/save/foto/" + user.getString("foto");
+                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto/" + user.getString("foto");
                         }
 
                         if(tipe.equals("super_admin")){

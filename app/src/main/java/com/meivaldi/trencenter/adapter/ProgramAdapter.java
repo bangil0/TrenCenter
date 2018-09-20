@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ProgramAdapter extends ArrayAdapter<Program> {
 
-    private String base = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/";
+    private String base = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/";
 
     private Context context;
     private List<Program> programList = new ArrayList<>();

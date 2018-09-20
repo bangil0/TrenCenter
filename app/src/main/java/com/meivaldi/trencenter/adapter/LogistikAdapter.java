@@ -28,6 +28,8 @@ public class LogistikAdapter extends ArrayAdapter<Logistik>{
     private Context context;
     private List<Logistik> logistikList = new ArrayList<>();
 
+    private String base = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/";
+
     public LogistikAdapter(Context context, List<Logistik> logistikList) {
         super(context, 0, logistikList);
         this.context = context;
@@ -53,7 +55,7 @@ public class LogistikAdapter extends ArrayAdapter<Logistik>{
         dateStart.setText(currentLogistik.getDate());
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.logo);
-        String url = currentLogistik.getImage();
+        String url = base + currentLogistik.getImage();
 
         Glide.with(getContext()).load(url)
                 .crossFade()

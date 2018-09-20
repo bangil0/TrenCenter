@@ -41,7 +41,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         Card card = cardList.get(position);
         holder.title.setText(card.getTitle());
         holder.date.setText("Tanggal Mulai: " + card.getDate());
-        String imageUrl = "http://103.28.53.181/~millenn1/dashboard/save/foto_program/" + card.getImage();
+        String imageUrl = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/" + card.getImage();
 
         Glide.with(context).load(imageUrl).into(holder.cardImage);
     }

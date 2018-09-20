@@ -98,7 +98,7 @@ public class DetailCaleg extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("caleg");
                     JSONArray calegData = jsonArray.getJSONArray(index);
 
-                    String foto = "http://103.28.53.181/~millenn1/dashboard/save/foto_caleg/" + calegData.getString(1);
+                    String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_caleg/" + calegData.getString(1);
                     String namaValue = calegData.getString(4);
                     String tempatLahirValue = calegData.getString(5);
                     String tanggalLahirValue = calegData.getString(6);

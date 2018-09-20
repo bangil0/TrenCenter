@@ -22,11 +22,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailPenghargaan;
+import com.meivaldi.trencenter.activity.DetailPlatform;
+import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
+import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
@@ -57,7 +61,7 @@ public class FragmentHomePendukung extends Fragment {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    String request_url = "http://103.28.53.181/~millenn1/android/debug.php";
+    String request_url = "http://156.67.221.225/trencenter/voting/android/debug.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,21 +85,21 @@ public class FragmentHomePendukung extends Fragment {
         penghargaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Penghargaan.class));
+                startActivity(new Intent(getContext(), DetailPenghargaan.class));
             }
         });
 
         platform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Platform.class));
+                startActivity(new Intent(getContext(), DetailPlatform.class));
             }
         });
 
         visiMisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), VisiMisi.class));
+                startActivity(new Intent(getContext(), DetailVisiMisi.class));
             }
         });
 
@@ -119,7 +123,7 @@ public class FragmentHomePendukung extends Fragment {
         profilCaleg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), DataCaleg.class));
+                startActivity(new Intent(getContext(), DetailCaleg.class));
             }
         });
 
@@ -165,7 +169,7 @@ public class FragmentHomePendukung extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                String url = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/";
+                String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
 
                 for (int i=0; i<response.length(); i++){

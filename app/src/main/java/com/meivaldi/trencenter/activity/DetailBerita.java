@@ -97,7 +97,7 @@ public class DetailBerita extends AppCompatActivity {
                         String title = program.getString(2);
                         String content = program.getString(4);
                         String sender = program.getString(5);
-                        String gambar = "http://103.28.53.181/~millenn1/dashboard/save/foto_berita/" + program.getString(7);
+                        String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/" + program.getString(7);
                         String maker = program.getString(8);
 
                         Glide.with(getApplicationContext()).load(gambar)

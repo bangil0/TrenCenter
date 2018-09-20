@@ -32,6 +32,7 @@ import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ScanKartu;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
+import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.fragment.MessageFragment;
@@ -76,7 +77,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.nav_profile:
-                        startActivity(new Intent(getApplicationContext(), DataCaleg.class));
+                        startActivity(new Intent(getApplicationContext(), DetailCaleg.class));
 
                         return true;
                     case R.id.nav_target:
