@@ -34,4 +34,5 @@ public class AppConfig {
     public static String URL_GET_USER_DETAIL = "http://156.67.221.225/trencenter/voting/android/get_user_detail.php";
     public static String URL_GET_PESERTA = "http://156.67.221.225/trencenter/voting/android/get_peserta.php";
     public static String URL_GET_RECEIVER = "http://156.67.221.225/trencenter/voting/android/get_logistik_receiver.php";
+    public static String URL_CEK_PROGRAM = "http://156.67.221.225/trencenter/voting/android/cek_join.php";
 }

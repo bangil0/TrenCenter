@@ -60,6 +60,10 @@ public class DetailProgram extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
 
+        idProgram = getIntent().getStringExtra("id");
+        uid = user.get("id");
+
+        cekJoin(idProgram, uid);
         getProgram();
 
         title = (TextView) findViewById(R.id.titleProgram);
@@ -70,7 +74,6 @@ public class DetailProgram extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                idProgram = getIntent().getStringExtra("id");
                 joinProgram();
             }
         });
@@ -89,9 +92,63 @@ public class DetailProgram extends AppCompatActivity {
         });
     }
 
-    private void joinProgram(){
-        uid = user.get("id");
+    private void cekJoin(final String idProgram, final String uid) {
+        String tag_string_req = "req_cek_program";
 
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_CEK_PROGRAM, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+                        String data = jObj.getString("data");
+
+                        if(data.equals("0")){
+                            button.setEnabled(false);
+                            button.setText("Menunggu Verifikasi");
+                        } else if(data.equals("1")){
+                            button.setEnabled(false);
+                            button.setText("Diverifikasi");
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Error", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_user", uid);
+                params.put("id_program", idProgram);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void joinProgram(){
         String tag_string_req = "req_join_program";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
