@@ -10,11 +10,10 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.meivaldi.trencenter.app.Config;
 
 /**
- * Created by root on 19/09/18.
+ * Created by root on 21/09/18.
  */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
-
     private static final String TAG = MyFirebaseInstanceIDService.class.getSimpleName();
 
     @Override

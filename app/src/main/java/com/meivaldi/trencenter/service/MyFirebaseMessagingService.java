@@ -5,27 +5,21 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.meivaldi.trencenter.activity.ProgramKerja;
-import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.app.Config;
-import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.util.NotificationUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-
 /**
- * Created by root on 19/09/18.
+ * Created by root on 21/09/18.
  */
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService{
-
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     private NotificationUtils notificationUtils;
@@ -87,6 +81,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
             Log.e(TAG, "imageUrl: " + imageUrl);
             Log.e(TAG, "timestamp: " + timestamp);
 
+
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
                 Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
                 pushNotification.putExtra("message", message);
@@ -95,14 +90,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
             } else {
-
-               /* Class destination = null;
-                db = new SQLiteHandler(getApplicationContext());
-                HashMap<String, String> user = db.getUserDetails();
-                String tipe = user.get("type");
-
-                Toast.makeText(getApplicationContext(), tipe, Toast.LENGTH_SHORT).show();*/
-
                 Intent resultIntent = new Intent(getApplicationContext(), ProgramKerja.class);
                 resultIntent.putExtra("message", message);
 
@@ -130,5 +117,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
     }
-
 }
