@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.app.Config;
 import com.meivaldi.trencenter.util.NotificationUtils;
@@ -72,12 +73,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             boolean isBackground = data.getBoolean("is_background");
             String imageUrl = data.getString("image");
             String timestamp = data.getString("timestamp");
-            JSONObject payload = data.getJSONObject("payload");
 
             Log.e(TAG, "title: " + title);
             Log.e(TAG, "message: " + message);
             Log.e(TAG, "isBackground: " + isBackground);
-            Log.e(TAG, "payload: " + payload.toString());
             Log.e(TAG, "imageUrl: " + imageUrl);
             Log.e(TAG, "timestamp: " + timestamp);
 
@@ -90,7 +89,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
             } else {
-                Intent resultIntent = new Intent(getApplicationContext(), ProgramKerja.class);
+                Intent resultIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 resultIntent.putExtra("message", message);
 
                 if (TextUtils.isEmpty(imageUrl)) {

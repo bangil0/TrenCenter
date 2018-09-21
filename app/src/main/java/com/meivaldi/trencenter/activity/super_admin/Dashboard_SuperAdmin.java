@@ -53,7 +53,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         loadFragment(new HomeFragment());
 
         db = new SQLiteHandler(getApplicationContext());
@@ -62,6 +61,9 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         if (!session.isLoggedIn()) {
             logoutUser();
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+        FirebaseMessaging.getInstance().subscribeToTopic("berita");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -190,6 +192,5 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(Config.TOPIC_GLOBAL);
     }
 }

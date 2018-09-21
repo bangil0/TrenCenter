@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
@@ -33,6 +34,7 @@ import com.meivaldi.trencenter.activity.ScanKartu;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
+import com.meivaldi.trencenter.app.Config;
 import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.fragment.MessageFragment;
@@ -54,6 +56,9 @@ public class Tim_Pemenangan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tim__pemenangan);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+        FirebaseMessaging.getInstance().subscribeToTopic("berita");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

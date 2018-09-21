@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
@@ -33,6 +34,7 @@ import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
+import com.meivaldi.trencenter.app.Config;
 import com.meivaldi.trencenter.fragment.FragmentHomePendukung;
 import com.meivaldi.trencenter.fragment.FragmentHomeRelawan;
 import com.meivaldi.trencenter.fragment.ProfileRelawan;
@@ -55,6 +57,9 @@ public class Pendukung extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pendukung);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+        FirebaseMessaging.getInstance().subscribeToTopic("berita");
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
