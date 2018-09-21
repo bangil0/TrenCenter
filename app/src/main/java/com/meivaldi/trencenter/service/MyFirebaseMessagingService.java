@@ -29,7 +29,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     private NotificationUtils notificationUtils;
-    private SQLiteHandler db;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

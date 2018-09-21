@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-
+                    FirebaseMessaging.getInstance().subscribeToTopic("berita");
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     String message = intent.getStringExtra("message");
                     Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
