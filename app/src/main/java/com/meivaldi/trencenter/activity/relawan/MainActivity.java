@@ -96,14 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-                    Log.d("SUBSCRIBE", "SUCCESS");
+                    FirebaseMessaging.getInstance().subscribeToTopic("berita");
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     String message = intent.getStringExtra("message");
                     Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
                 }
             }
         };
-
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
