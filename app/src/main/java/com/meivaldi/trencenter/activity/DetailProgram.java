@@ -56,15 +56,11 @@ public class DetailProgram extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_program);
+        getProgram();
 
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
-
-        idProgram = getIntent().getStringExtra("id");
         uid = user.get("id");
-
-        cekJoin(idProgram, uid);
-        getProgram();
 
         title = (TextView) findViewById(R.id.titleProgram);
         description = (TextView) findViewById(R.id.descriptionProgram);
@@ -221,7 +217,7 @@ public class DetailProgram extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
-                        String uid = program.getString(0);
+                        idProgram = program.getString(0);
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String tanggalSelesai = program.getString(3);
@@ -238,6 +234,8 @@ public class DetailProgram extends AppCompatActivity {
 
                         title.setText(nama);
                         description.setText(deskripsi);
+
+                        cekJoin(idProgram, uid);
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");
