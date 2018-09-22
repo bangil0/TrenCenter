@@ -80,7 +80,19 @@ public class ScanLogistik extends AppCompatActivity implements ZXingScannerView.
             public void onResponse(String response) {
                 Log.d("Update Logistik", "Update Response: " + response.toString());
 
-                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    String msg = jsonObject.getString("error_msg");
+
+                    if(!error){
+                        Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 finish();
                 startActivity(new Intent(getApplicationContext(), DetailLogistik.class));
