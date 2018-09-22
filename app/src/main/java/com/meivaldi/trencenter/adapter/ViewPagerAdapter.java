@@ -28,14 +28,17 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private List<SliderUtils> sliderImg;
-    private List<String> headlineList;
+    private List<String> headlineList, sourceList, deskripsiList;
     private ImageLoader imageLoader;
     //private Integer[] images = {R.drawable.bank, R.drawable.attach, R.drawable.check_mark, R.drawable.delivery_truck};
 
-    public ViewPagerAdapter(List<SliderUtils> sliderImg, List<String> headlineList, Context context){
+    public ViewPagerAdapter(List<SliderUtils> sliderImg, List<String> headlineList, List<String> sourceList,
+                            List<String> deskripsiList, Context context){
         this.context = context;
         this.sliderImg = sliderImg;
         this.headlineList = headlineList;
+        this.sourceList = sourceList;
+        this.deskripsiList = deskripsiList;
     }
 
     @Override
@@ -54,10 +57,15 @@ public class ViewPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.berita_item, null);
         ImageView image = (ImageView) view.findViewById(R.id.image);
+        ImageView background = (ImageView) view.findViewById(R.id.background);
         TextView headLine = (TextView) view.findViewById(R.id.headline);
+        TextView deskripsi = (TextView) view.findViewById(R.id.deskripsi);
+        TextView sumber = (TextView) view.findViewById(R.id.sumber);
 
         SliderUtils utils = sliderImg.get(position);
         headLine.setText(headlineList.get(position));
+        deskripsi.setText(deskripsiList.get(position));
+        sumber.setText("Sumber: " + sourceList.get(position));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +98,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         //image.setImageResource(images[position]);
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
         imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(image, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
+        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(background, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

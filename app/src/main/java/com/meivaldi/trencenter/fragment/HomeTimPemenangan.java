@@ -34,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
@@ -83,6 +84,7 @@ public class HomeTimPemenangan extends Fragment  {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
     private RelativeLayout logistik;
+    private ImageView background;
 
     String request_url = "http://156.67.221.225/trencenter/voting/android/debug.php";
 
@@ -178,6 +180,8 @@ public class HomeTimPemenangan extends Fragment  {
             public void onResponse(JSONArray response) {
                 String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
+                List<String> sourceList = new ArrayList<>();
+                List<String> deskripsiList = new ArrayList<>();
 
                 for (int i=0; i<response.length(); i++){
                     SliderUtils sliderUtils = new SliderUtils();
@@ -185,6 +189,8 @@ public class HomeTimPemenangan extends Fragment  {
                        JSONArray array = response.getJSONArray(i);
                        String image = url + array.getString(0);
                        headlineList.add(array.getString(1));
+                       sourceList.add(array.getString(2));
+                       deskripsiList.add(array.getString(3));
 
                        sliderUtils.setSliderImageUrl(image);
                    } catch (JSONException e) {
@@ -194,7 +200,7 @@ public class HomeTimPemenangan extends Fragment  {
                     sliderImg.add(sliderUtils);
                 }
 
-                adapter = new ViewPagerAdapter(sliderImg, headlineList, getContext());
+                adapter = new ViewPagerAdapter(sliderImg, headlineList, sourceList, deskripsiList, getContext());
                 viewPager.setAdapter(adapter);
 
             }

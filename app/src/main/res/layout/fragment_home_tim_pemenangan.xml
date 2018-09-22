@@ -127,8 +127,10 @@
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
+                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="280dp" />
+
 
             <RelativeLayout
                 android:id="@+id/berita"
