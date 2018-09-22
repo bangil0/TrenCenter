@@ -103,6 +103,7 @@ public class ScanQR extends AppCompatActivity implements ZXingScannerView.Result
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                     }

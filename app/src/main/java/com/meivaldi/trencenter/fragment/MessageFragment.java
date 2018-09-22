@@ -42,7 +42,7 @@ public class MessageFragment extends Fragment {
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabLayout);
 
         adapter = new TabAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new InboxFragment(), "Top");
+        adapter.addFragment(new InboxFragment(), "Masuk");
         adapter.addFragment(new OutboxFragment(), "Keluar");
 
         viewPager.setAdapter(adapter);
