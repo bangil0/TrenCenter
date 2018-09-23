@@ -28,17 +28,16 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private List<SliderUtils> sliderImg;
-    private List<String> headlineList, sourceList, deskripsiList;
+    private List<String> headlineList, sourceList;
     private ImageLoader imageLoader;
     //private Integer[] images = {R.drawable.bank, R.drawable.attach, R.drawable.check_mark, R.drawable.delivery_truck};
 
     public ViewPagerAdapter(List<SliderUtils> sliderImg, List<String> headlineList, List<String> sourceList,
-                            List<String> deskripsiList, Context context){
+                            Context context){
         this.context = context;
         this.sliderImg = sliderImg;
         this.headlineList = headlineList;
         this.sourceList = sourceList;
-        this.deskripsiList = deskripsiList;
     }
 
     @Override
@@ -59,12 +58,10 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView image = (ImageView) view.findViewById(R.id.image);
         ImageView background = (ImageView) view.findViewById(R.id.background);
         TextView headLine = (TextView) view.findViewById(R.id.headline);
-        TextView deskripsi = (TextView) view.findViewById(R.id.deskripsi);
         TextView sumber = (TextView) view.findViewById(R.id.sumber);
 
         SliderUtils utils = sliderImg.get(position);
         headLine.setText(headlineList.get(position));
-        deskripsi.setText(deskripsiList.get(position));
         sumber.setText("Sumber: " + sourceList.get(position));
 
         view.setOnClickListener(new View.OnClickListener() {

@@ -82,12 +82,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
-                Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
+                /*Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
                 pushNotification.putExtra("message", message);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-                notificationUtils.playNotificationSound();
+                notificationUtils.playNotificationSound();*/
+                Intent resultIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                resultIntent.putExtra("message", message);
+
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
             } else {
                 Intent resultIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 resultIntent.putExtra("message", message);

@@ -163,7 +163,6 @@ public class FragmentHomeRelawan extends Fragment {
                 String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
                 List<String> sourceList = new ArrayList<>();
-                List<String> deskripsiList = new ArrayList<>();
 
                 for (int i=0; i<response.length(); i++){
                     SliderUtils sliderUtils = new SliderUtils();
@@ -172,7 +171,6 @@ public class FragmentHomeRelawan extends Fragment {
                         String image = url + array.getString(0);
                         headlineList.add(array.getString(1));
                         sourceList.add(array.getString(2));
-                        deskripsiList.add(array.getString(3));
 
                         sliderUtils.setSliderImageUrl(image);
                     } catch (JSONException e) {
@@ -182,7 +180,7 @@ public class FragmentHomeRelawan extends Fragment {
                     sliderImg.add(sliderUtils);
                 }
 
-                adapter = new ViewPagerAdapter(sliderImg, headlineList, sourceList, deskripsiList, getContext());
+                adapter = new ViewPagerAdapter(sliderImg, headlineList, sourceList, getContext());
                 viewPager.setAdapter(adapter);
 
             }
