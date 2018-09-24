@@ -279,6 +279,8 @@ public class InputPendukung extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Jangan ada yang kosong", Toast.LENGTH_SHORT).show();
                 }
+
+                emptyField();
             }
         });
 
@@ -343,6 +345,24 @@ public class InputPendukung extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    private void emptyField() {
+        KK.setText("");
+        NIK.setText("");
+        nama.setText("");
+        tempat_lahir.setText("");
+        umur.setText("");
+        suku.setText("");
+        hp.setText("");;
+        alamat.setText("");
+        rw.setText("");
+        rt.setText("");
+        tps.setText("");
+        agama.setText("");
+        username.setText("");
+        facebook.setText("");
+        instagram.setText("");
     }
 
     public String toBase64(Bitmap bitmap) {

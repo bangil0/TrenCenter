@@ -223,15 +223,34 @@ public class HomeTimPemenangan extends Fragment  {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(viewPager.getCurrentItem() == 0){
-                        viewPager.setCurrentItem(1);
-                    } else if(viewPager.getCurrentItem() == 1){
-                        viewPager.setCurrentItem(2);
-                    } else if(viewPager.getCurrentItem() == 2){
-                        viewPager.setCurrentItem(3);
-                    } else {
-                        viewPager.setCurrentItem(0);
+                    int length = adapter.getCount();
+
+                    if(length == 2){
+                        if(viewPager.getCurrentItem() == 0){
+                            viewPager.setCurrentItem(1);
+                        } else if(viewPager.getCurrentItem() == 1){
+                            viewPager.setCurrentItem(0);
+                        }
+                    } else if(length == 3){
+                        if(viewPager.getCurrentItem() == 0){
+                            viewPager.setCurrentItem(1);
+                        } else if(viewPager.getCurrentItem() == 1){
+                            viewPager.setCurrentItem(2);
+                        } else {
+                            viewPager.setCurrentItem(0);
+                        }
+                    } else if(length == 4){
+                        if(viewPager.getCurrentItem() == 0){
+                            viewPager.setCurrentItem(1);
+                        } else if(viewPager.getCurrentItem() == 1){
+                            viewPager.setCurrentItem(2);
+                        } else if(viewPager.getCurrentItem() == 2){
+                            viewPager.setCurrentItem(3);
+                        } else {
+                            viewPager.setCurrentItem(0);
+                        }
                     }
+
                 }
             });
         }

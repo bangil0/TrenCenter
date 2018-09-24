@@ -258,6 +258,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
                 }
 
+                emptyField();
             }
         });
 
@@ -376,6 +377,24 @@ public class InputTimPemenangan extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void emptyField() {
+        KK.setText("");
+        NIK.setText("");
+        nama.setText("");
+        tempat_lahir.setText("");
+        umur.setText("");
+        suku.setText("");
+        hp.setText("");;
+        alamat.setText("");
+        rw.setText("");
+        rt.setText("");
+        tps.setText("");
+        agama.setText("");
+        username.setText("");
+        facebook.setText("");
+        instagram.setText("");
     }
 
     private void getKecamatan(final String kabs) {

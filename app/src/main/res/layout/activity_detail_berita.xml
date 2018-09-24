@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ini isi berita"
                 android:textSize="18dp"
+                android:justificationMode="inter_word"
                 android:textAlignment="textStart" />
 
             <TextView
@@ -83,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Sumber: "/>
+                android:text="Penulis: "/>
 
         </RelativeLayout>
 

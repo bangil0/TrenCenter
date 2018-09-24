@@ -110,7 +110,7 @@ public class DetailBerita extends AppCompatActivity {
                         pembuat.setText("Oleh: " + maker);
                         kategori.setText("Kategori: " + category);
                         isi.setText(content);
-                        sumber.setText("Sumber: " + sender);
+                        sumber.setText("Penulis: " + sender);
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");

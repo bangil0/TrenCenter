@@ -194,6 +194,9 @@ public class Pendukung extends AppCompatActivity {
         if(id == R.id.action_logout){
             logoutUser();
             return true;
+        } else if(id == R.id.action_refresh){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
         }
 
         if(toggle.onOptionsItemSelected(item))

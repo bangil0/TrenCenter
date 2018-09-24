@@ -269,6 +269,7 @@ public class InputRelawan extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
                 }
 
+                emptyField();
             }
         });
 
@@ -334,6 +335,24 @@ public class InputRelawan extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void emptyField() {
+        KK.setText("");
+        NIK.setText("");
+        nama.setText("");
+        tempat_lahir.setText("");
+        umur.setText("");
+        suku.setText("");
+        hp.setText("");;
+        alamat.setText("");
+        rw.setText("");
+        rt.setText("");
+        tps.setText("");
+        agama.setText("");
+        username.setText("");
+        facebook.setText("");
+        instagram.setText("");
     }
 
     private void getKelurahan(final String kec) {
