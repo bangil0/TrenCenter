@@ -64,7 +64,7 @@ import java.util.TimerTask;
 
 public class FragmentHomeRelawan extends Fragment {
 
-    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2;
 
     private FloatingActionButton createPendukung;
 
@@ -74,12 +74,11 @@ public class FragmentHomeRelawan extends Fragment {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    private RecyclerView recyclerView, logistikRecycler, layananRecycler;;
+    private RecyclerView recyclerView, layananRecycler;;
     private Adapter Adapter;
-    private List<Card> cardList, logistikList, layananList;
+    private List<Card> cardList, layananList;
 
     private CardAdapter cardAdapter;
-    private CardLogistik logistikAdapter;
     private LayananAdapter layananAdapter;
 
     private static final String TAG = HomeTimPemenangan.class.getSimpleName();
@@ -102,9 +101,7 @@ public class FragmentHomeRelawan extends Fragment {
         detik = (TextView) rootView.findViewById(R.id.detik);
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
         selanjutnya2 = (TextView) rootView.findViewById(R.id.selanjutnya2);
-        selanjutnya3 = (TextView) rootView.findViewById(R.id.selanjutnya3);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        logistikRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_logistik);
         layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
@@ -119,13 +116,6 @@ public class FragmentHomeRelawan extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), LayananActivity.class));
-            }
-        });
-
-        selanjutnya3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), LogistikActivity.class));
             }
         });
 
@@ -148,7 +138,6 @@ public class FragmentHomeRelawan extends Fragment {
         countDown();
         new GetCards().execute();
         new GetLayanan().execute();
-        new GetLogistic().execute();
 
         rootView.setVisibility(View.VISIBLE);
         rootView.animate()
@@ -402,85 +391,6 @@ public class FragmentHomeRelawan extends Fragment {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(Adapter);
 
-        }
-    }
-
-    private class GetLogistic extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            logistikList = new ArrayList<>();
-            logistikAdapter = new CardLogistik(getContext(), logistikList);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler sh = new HttpHandler();
-
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LOGISTIC);
-
-            Log.e(TAG, "Response from url: " + jsonStr);
-
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    JSONArray programs = jsonObj.getJSONArray("logistik");
-
-                    for (int i = 0; i < programs.length(); i++) {
-                        JSONArray program = programs.getJSONArray(i);
-
-                        String nama = program.getString(1);
-                        String tanggalMulai = program.getString(2);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/" + program.getString(7);
-
-                        logistikList.add(new Card(nama, tanggalMulai, foto));
-                    }
-
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
-
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(isAdded()){
-                getResources().getString(R.string.app_name);
-            }
-
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-            logistikRecycler.setLayoutManager(layoutManager);
-            logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-            logistikRecycler.setItemAnimator(new DefaultItemAnimator());
-            logistikRecycler.setAdapter(logistikAdapter);
         }
     }
 

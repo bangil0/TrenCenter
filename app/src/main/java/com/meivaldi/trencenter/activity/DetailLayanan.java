@@ -97,7 +97,7 @@ public class DetailLayanan extends AppCompatActivity {
                         JSONArray program = jsonArray.getJSONArray(index);
 
                         nama = program.getString(1);
-                        String tanggalMulai = program.getString(2);
+                        String tanggalMulai = program.getString(3);
                         String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                         Glide.with(getApplicationContext()).load(gambar)
