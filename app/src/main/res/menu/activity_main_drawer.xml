@@ -18,7 +18,12 @@
                 <item
                     android:id="@+id/nav_progja"
                     android:icon="@drawable/icon"
-                    android:title="Layanan" />
+                    android:title="Program Kegiatan" />
+
+                <item
+                    android:id="@+id/nav_layanan"
+                    android:icon="@drawable/ic_layanan"
+                    android:title="Layanan"/>
 
                 <item
                     android:id="@+id/nav_penghargaan"
