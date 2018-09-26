@@ -27,6 +27,7 @@ import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailUser;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
+import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
@@ -95,6 +96,10 @@ public class Tim_Pemenangan extends AppCompatActivity {
                         return true;
                     case R.id.nav_progja:
                         startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
+
+                        return true;
+                    case R.id.nav_layanan:
+                        startActivity(new Intent(getApplicationContext(), LayananActivity.class));
 
                         return true;
                     case R.id.nav_penghargaan:

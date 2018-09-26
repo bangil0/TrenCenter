@@ -24,6 +24,7 @@
                 android:layout_height="160dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
+                android:fitsSystemWindows="true"
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
