@@ -152,7 +152,7 @@ public class InputRelawan extends AppCompatActivity {
         });
 
         String[] JenisKelamin = { "Pria", "Wanita" };
-        String[] Status = { "Belum Menikah", "Menikah"};
+        String[] Status = { "Belum Menikah", "Menikah", "Pisah"};
 
         getKabupaten();
 
