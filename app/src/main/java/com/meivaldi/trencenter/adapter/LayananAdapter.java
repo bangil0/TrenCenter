@@ -8,22 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.DetailProgram;
+import com.meivaldi.trencenter.activity.DetailLayanan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
 import com.meivaldi.trencenter.model.Card;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 /**
- * Created by root on 05/09/18.
+ * Created by root on 26/09/18.
  */
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
+public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHolder> {
 
     private Context context;
     private List<Card> cardList;
@@ -40,7 +38,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Card card = cardList.get(position);
         holder.title.setText(card.getTitle());
-        holder.date.setText("Tanggal Mulai: " + card.getDate());
+        holder.date.setText("Lokasi: " + card.getDate());
         String imageUrl = card.getImage();
 
         Glide.with(context).load(imageUrl).into(holder.cardImage);
@@ -67,7 +65,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             cardImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailLayanan.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -77,7 +75,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailLayanan.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -87,8 +85,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     }
 
-    public CardAdapter(Context context, List<Card> cardList){
+    public LayananAdapter(Context context, List<Card> cardList){
         this.context = context;
         this.cardList = cardList;
     }
 }
+

@@ -68,67 +68,93 @@
         <activity
             android:name=".activity.tim_pemenangan.Tim_Pemenangan"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.tim_pemenangan.ProgramKerja_TimPemenangan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.tim_pemenangan.DetailProgram_TimPemenangan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.pendukung.Pendukung"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.caleg.DataCaleg"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.tim_pemenangan.InputTimPemenangan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.KirimPesan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailPesan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.tim_pemenangan.DetailOutbox"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailBerita"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ScanQR"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.LogistikActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailLogistik"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ScanLogistik"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.caleg.DetailCaleg"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.VisiMisi"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.Platform"
+        <activity
+            android:name=".activity.tim_pemenangan.ProgramKerja_TimPemenangan"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.Penghargaan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailVisiMisi"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailPlatform"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailPenghargaan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ScanKartu"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DetailUser"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DaftarRelawan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.DaftarPendukung"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.tim_pemenangan.DetailProgram_TimPemenangan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.pendukung.Pendukung"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.caleg.DataCaleg"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tim_pemenangan.InputTimPemenangan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.KirimPesan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailPesan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tim_pemenangan.DetailOutbox"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailBerita"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScanQR"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LogistikActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailLogistik"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScanLogistik"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.caleg.DetailCaleg"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VisiMisi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Platform"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Penghargaan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailVisiMisi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailPlatform"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailPenghargaan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScanKartu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailUser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DaftarRelawan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DaftarPendukung"
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".service.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".activity.DetailLayanan" />
+        <activity android:name=".activity.LayananActivity" />
+        <activity android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan"></activity>
     </application>
 
 </manifest>

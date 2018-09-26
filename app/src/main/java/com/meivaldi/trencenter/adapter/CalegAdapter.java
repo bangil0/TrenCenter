@@ -37,7 +37,7 @@ public class CalegAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItem = convertView;
         if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.caleg_list,parent,false);
+            listItem = LayoutInflater.from(context).inflate(R.layout.user_list,parent,false);
 
         Caleg currentCaleg = calegList.get(position);
 

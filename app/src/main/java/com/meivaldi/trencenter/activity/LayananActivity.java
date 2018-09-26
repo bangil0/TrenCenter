@@ -12,12 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.pendukung.Pendukung;
-import com.meivaldi.trencenter.activity.relawan.MainActivity;
-import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
-import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.LogistikAdapter;
-import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -30,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LogistikActivity extends AppCompatActivity {
+public class LayananActivity extends AppCompatActivity {
 
     private ListView listView;
     private LogistikAdapter adapter;
@@ -40,7 +35,7 @@ public class LogistikActivity extends AppCompatActivity {
     private SQLiteHandler db;
 
     private String tipe;
-    private static final String TAG = LogistikActivity.class.getSimpleName();
+    private static final String TAG = LayananActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +64,13 @@ public class LogistikActivity extends AppCompatActivity {
         new GetLogistic().execute();
     }
 
-    private class GetLogistic extends AsyncTask<Void, Void, Void>{
+    private class GetLogistic extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
             HttpHandler sh = new HttpHandler();
 
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LOGISTIC);
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LAYANAN);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -83,15 +78,15 @@ public class LogistikActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
-                    JSONArray programs = jsonObj.getJSONArray("logistik");
+                    JSONArray programs = jsonObj.getJSONArray("layanan");
 
                     for (int i = 0; i < programs.length(); i++) {
                         JSONArray program = programs.getJSONArray(i);
 
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
-                        String lokasi = program.getString(4);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/" + program.getString(7);
+                        String lokasi = program.getString(3);
+                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                         logistikList.add(new Logistik(nama, tanggalMulai, lokasi, foto));
                     }
@@ -132,7 +127,7 @@ public class LogistikActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DetailLogistik.class);
+                    Intent intent = new Intent(getApplicationContext(), DetailLayanan.class);
                     intent.putExtra("INDEX", i);
                     startActivity(intent);
                 }

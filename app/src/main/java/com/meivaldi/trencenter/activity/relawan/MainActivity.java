@@ -35,6 +35,7 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
+import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.ScanKartu;
@@ -118,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_progja:
                         startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+
+                        return true;
+                    case R.id.nav_layanan:
+                        startActivity(new Intent(getApplicationContext(), LayananActivity.class));
 
                         return true;
                     case R.id.nav_penghargaan:

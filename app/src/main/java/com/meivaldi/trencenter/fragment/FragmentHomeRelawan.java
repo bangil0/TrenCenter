@@ -31,6 +31,8 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
+import com.meivaldi.trencenter.activity.LayananActivity;
+import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
@@ -40,7 +42,10 @@ import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.adapter.Adapter;
 import com.meivaldi.trencenter.adapter.CardAdapter;
+import com.meivaldi.trencenter.adapter.CardLogistik;
+import com.meivaldi.trencenter.adapter.LayananAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
+import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SliderUtils;
 import com.meivaldi.trencenter.model.Card;
@@ -59,7 +64,7 @@ import java.util.TimerTask;
 
 public class FragmentHomeRelawan extends Fragment {
 
-    private TextView hari, detik, menit, jam, selanjutnya;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2;
 
     private FloatingActionButton createPendukung;
 
@@ -69,9 +74,12 @@ public class FragmentHomeRelawan extends Fragment {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, layananRecycler;;
     private Adapter Adapter;
-    private List<Card> cardList;
+    private List<Card> cardList, layananList;
+
+    private CardAdapter cardAdapter;
+    private LayananAdapter layananAdapter;
 
     private static final String TAG = HomeTimPemenangan.class.getSimpleName();
     private static final String url = "http://156.67.221.225/trencenter/voting/android/getCard.php";
@@ -92,13 +100,22 @@ public class FragmentHomeRelawan extends Fragment {
         menit = (TextView) rootView.findViewById(R.id.menit);
         detik = (TextView) rootView.findViewById(R.id.detik);
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
+        selanjutnya2 = (TextView) rootView.findViewById(R.id.selanjutnya2);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ProgramKerja.class));
+            }
+        });
+
+        selanjutnya2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), LayananActivity.class));
             }
         });
 
@@ -120,6 +137,7 @@ public class FragmentHomeRelawan extends Fragment {
 
         countDown();
         new GetCards().execute();
+        new GetLayanan().execute();
 
         rootView.setVisibility(View.VISIBLE);
         rootView.animate()
@@ -367,12 +385,90 @@ public class FragmentHomeRelawan extends Fragment {
                 getResources().getString(R.string.app_name);
             }
 
-            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-            recyclerView.setLayoutManager(mLayoutManager);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+            recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(Adapter);
 
+        }
+    }
+
+    private class GetLayanan extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            layananList = new ArrayList<>();
+            layananAdapter = new LayananAdapter(getContext(), layananList);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LAYANAN);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    JSONArray programs = jsonObj.getJSONArray("layanan");
+
+                    for (int i = 0; i < programs.length(); i++) {
+                        JSONArray program = programs.getJSONArray(i);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+
+                        layananList.add(new Card(nama, tanggalMulai, foto));
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if(isAdded()){
+                getResources().getString(R.string.app_name);
+            }
+
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+            layananRecycler.setLayoutManager(layoutManager);
+            layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+            layananRecycler.setItemAnimator(new DefaultItemAnimator());
+            layananRecycler.setAdapter(layananAdapter);
         }
     }
 
