@@ -363,8 +363,8 @@ public class FragmentHomePendukung extends Fragment {
                 getResources().getString(R.string.app_name);
             }
 
-            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-            recyclerView.setLayoutManager(mLayoutManager);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+            recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapters);

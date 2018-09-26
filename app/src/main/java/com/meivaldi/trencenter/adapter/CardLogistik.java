@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailLogistik;
 import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
 import com.meivaldi.trencenter.model.Card;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by root on 05/09/18.
  */
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
+public class CardLogistik extends RecyclerView.Adapter<CardLogistik.MyViewHolder> {
 
     private Context context;
     private List<Card> cardList;
@@ -67,7 +68,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             cardImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailLogistik.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -77,7 +78,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailLogistik.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -87,8 +88,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     }
 
-    public CardAdapter(Context context, List<Card> cardList){
+    public CardLogistik(Context context, List<Card> cardList){
         this.context = context;
         this.cardList = cardList;
     }
+
 }

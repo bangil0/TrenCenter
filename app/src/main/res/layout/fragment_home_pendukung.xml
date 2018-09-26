@@ -172,11 +172,21 @@
 
                 </RelativeLayout>
 
-                <include android:id="@+id/cardLayout"
-                    layout="@layout/content_main"
-                    android:layout_below="@id/labelKegiatan"
+                <HorizontalScrollView
+                    android:id="@+id/horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelKegiatan"
+                    android:scrollbars="none">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:scrollbars="vertical" />
+
+                </HorizontalScrollView>
 
             </RelativeLayout>
 
