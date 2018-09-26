@@ -46,6 +46,7 @@ import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.CardAdapter;
 import com.meivaldi.trencenter.adapter.CardLogistik;
 import com.meivaldi.trencenter.adapter.LayananAdapter;
+import com.meivaldi.trencenter.adapter.LayananPemenanganAdapter;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -76,7 +77,7 @@ public class HomeTimPemenangan extends Fragment  {
     private RecyclerView recyclerView, logistikRecycler, layananRecycler;
     private CardAdapter cardAdapter;
     private CardLogistik logistikAdapter;
-    private LayananAdapter layananAdapter;
+    private LayananPemenanganAdapter layananAdapter;
     private List<Card> cardList, logistikList, layananList;
 
     private static final String TAG = HomeTimPemenangan.class.getSimpleName();
@@ -360,7 +361,7 @@ public class HomeTimPemenangan extends Fragment  {
         protected void onPreExecute() {
             super.onPreExecute();
             layananList = new ArrayList<>();
-            layananAdapter = new LayananAdapter(getContext(), layananList);
+            layananAdapter = new LayananPemenanganAdapter(getContext(), layananList);
         }
 
         @Override

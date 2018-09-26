@@ -4,7 +4,7 @@
     android:id="@+id/activity_detail_logistik"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.DetailLayanan">
+    tools:context="com.meivaldi.trencenter.activity.tim_pemenangan.DetailLayanan_TimPemenangan">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -54,13 +54,22 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
-    <Button
-        android:id="@+id/pakaiLayanan"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/label"
+        android:layout_below="@id/descriptionProgram"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="Pakai Layanan"
-        android:textColor="@android:color/white"/>
+        android:text="Yang ingin menggunakan layanan: "
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/activity_vertical_margin"/>
+
+    <ListView
+        android:id="@+id/penerima"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

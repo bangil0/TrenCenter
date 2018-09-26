@@ -38,4 +38,5 @@ public class AppConfig {
     public static String URL_GET_RELAWAN = "http://156.67.221.225/trencenter/voting/android/get_relawan.php";
     public static String URL_GET_PENDUKUNG = "http://156.67.221.225/trencenter/voting/android/get_pendukung.php";
     public static String URL_GET_LAYANAN = "http://156.67.221.225/trencenter/voting/android/get_layanan.php";
+    public static String URL_GET_PELANGGAN = "http://156.67.221.225/trencenter/voting/android/get_pelanggan.php";
 }
