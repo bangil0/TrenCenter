@@ -217,7 +217,7 @@ public class HomeTimPemenangan extends Fragment  {
         @Override
         public void run() {
 
-            if(getActivity() ==gi null)
+            if(getActivity() == null)
                 return;
 
             getActivity().runOnUiThread(new Runnable() {
