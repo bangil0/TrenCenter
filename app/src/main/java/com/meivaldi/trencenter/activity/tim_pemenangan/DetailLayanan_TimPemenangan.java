@@ -24,6 +24,7 @@ import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.model.Caleg;
+import com.meivaldi.trencenter.model.Layanan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -100,12 +101,12 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         JSONArray jsonArray = jObj.getJSONArray("data");
                         JSONArray fotoArray = jObj.getJSONArray("foto");
 
-                        String nama, foto;
+                        String nama_user, foto;
                         for(int i=0; i<jsonArray.length(); i++){
-                            nama = jsonArray.getString(i);
+                            nama_user = jsonArray.getString(i);
                             foto = fotoArray.getString(i);
 
-                            person.add(new Caleg(foto, nama));
+                            person.add(new Caleg(foto, nama_user));
                         }
                     } else {
                         Toast.makeText(getApplicationContext(),
@@ -196,64 +197,6 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
         });
-
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-
-    private void getReceiver(final String nama) {
-        String tag_string_req = "req_receiver";
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_GET_RECEIVER, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean error = jsonObject.getBoolean("error");
-
-                    if(!error){
-                        List<String> users = new ArrayList<>();
-
-                        JSONArray array = jsonObject.getJSONArray("data");
-
-                        for(int i=0; i<array.length(); i++){
-                            users.add(array.getString(i));
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
-                        listView.setAdapter(adapter);
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("SCAN KARTU", "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("logistik", nama);
-
-                return params;
-            }
-
-        };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }

@@ -40,7 +40,7 @@ public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemena
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Card card = cardList.get(position);
         holder.title.setText(card.getTitle());
-        holder.date.setText("Lokasi: " + card.getDate());
+        holder.date.setText(card.getDate());
         String imageUrl = card.getImage();
 
         Glide.with(context)

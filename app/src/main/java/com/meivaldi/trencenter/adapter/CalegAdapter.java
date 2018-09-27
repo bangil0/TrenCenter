@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -39,13 +41,21 @@ public class CalegAdapter extends ArrayAdapter {
         if(listItem == null)
             listItem = LayoutInflater.from(context).inflate(R.layout.user_list,parent,false);
 
-        Caleg currentCaleg = calegList.get(position);
+        final Caleg currentCaleg = calegList.get(position);
 
         TextView nama = (TextView) listItem.findViewById(R.id.namaCaleg);
         nama.setText(currentCaleg.getNama());
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.calegImage);
         String url = currentCaleg.getImage();
+
+        LinearLayout panggil = (LinearLayout) listItem.findViewById(R.id.panggil);
+        panggil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage(currentCaleg.getNama());
+            }
+        });
 
         Glide.with(getContext()).load(url)
                 .crossFade()
@@ -55,5 +65,9 @@ public class CalegAdapter extends ArrayAdapter {
                 .into(imageView);
 
         return listItem;
+    }
+
+    private void sendMessage(final String nama) {
+
     }
 }

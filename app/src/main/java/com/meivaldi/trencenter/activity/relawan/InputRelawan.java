@@ -165,6 +165,7 @@ public class InputRelawan extends AppCompatActivity {
         kabupatenSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                kecamatanList.clear();
                 String kabs = adapterView.getSelectedItem().toString();
                 getKecamatan(kabs);
                 kecamatanSP.setEnabled(true);
@@ -179,6 +180,7 @@ public class InputRelawan extends AppCompatActivity {
         kecamatanSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                kelurahanList.clear();
                 String kec = adapterView.getSelectedItem().toString();
                 getKelurahan(kec);
                 kelurahanSP.setEnabled(true);
