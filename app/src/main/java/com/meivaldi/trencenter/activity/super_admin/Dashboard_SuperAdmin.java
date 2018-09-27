@@ -64,6 +64,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");
+        FirebaseMessaging.getInstance().subscribeToTopic("layanan");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -195,5 +196,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("layanan");
     }
 }

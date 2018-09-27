@@ -22,6 +22,7 @@ import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.InputTimPemenangan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -139,7 +140,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.layout_six:
-                startActivity(new Intent(getContext(), ProgramKerja.class));
+                startActivity(new Intent(getContext(), ProgramKerja_TimPemenangan.class));
 
                 return;
             case R.id.layout_seven:
