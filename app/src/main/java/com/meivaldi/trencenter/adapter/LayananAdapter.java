@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailLayanan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
@@ -41,7 +42,12 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
         holder.date.setText("Lokasi: " + card.getDate());
         String imageUrl = card.getImage();
 
-        Glide.with(context).load(imageUrl).into(holder.cardImage);
+        Glide.with(context)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .override(512, 160)
+                .into(holder.cardImage);
     }
 
     @Override

@@ -46,6 +46,7 @@ public class DetailLayanan extends AppCompatActivity {
     private HashMap<String, String> user;
     private String nama;
     private ListView listView;
+    private String id_layanan, id_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class DetailLayanan extends AppCompatActivity {
 
         db = new SQLiteHandler(getApplicationContext());
         user = db.getUserDetails();
+        id_user = user.get("id");
 
         getDetailLogistik();
 
@@ -61,6 +63,7 @@ public class DetailLayanan extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         listView = (ListView) findViewById(R.id.penerima);
+        button = (Button) findViewById(R.id.pakaiLayanan);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,6 +77,63 @@ public class DetailLayanan extends AppCompatActivity {
                 finish();
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pakaiLayanan();
+            }
+        });
+    }
+
+    private void pakaiLayanan() {
+        String tag_string_req = "req_receiver";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_PAKAI_LAYANAN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+                    String msg = jsonObject.getString("error_msg");
+
+                    if(!error){
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("PAKAI LAYANAN", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_layanan", id_layanan);
+                params.put("id_user", id_user);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void getDetailLogistik() {
@@ -96,6 +156,7 @@ public class DetailLayanan extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
+                        id_layanan = program.getString(0);
                         nama = program.getString(1);
                         String tanggalMulai = program.getString(3);
                         String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);

@@ -45,7 +45,7 @@ public class CalegAdapter extends ArrayAdapter {
         nama.setText(currentCaleg.getNama());
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.calegImage);
-        String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_caleg/" + currentCaleg.getImage();
+        String url = currentCaleg.getImage();
 
         Glide.with(getContext()).load(url)
                 .crossFade()

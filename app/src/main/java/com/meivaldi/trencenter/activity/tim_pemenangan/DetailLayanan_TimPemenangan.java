@@ -19,9 +19,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.adapter.CalegAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.model.Caleg;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,9 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
     private String nama;
     private ListView listView;
 
+    private CalegAdapter userAdapter;
+    private List<Caleg> person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,8 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         listView = (ListView) findViewById(R.id.penerima);
+        person = new ArrayList<>();
+        userAdapter = new CalegAdapter(this, person);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,6 +80,64 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getPelanggan(final String id_layanan){
+        String tag_string_req = "req_get_pelanggan";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PELANGGAN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+                        JSONArray jsonArray = jObj.getJSONArray("data");
+                        JSONArray fotoArray = jObj.getJSONArray("foto");
+
+                        String nama, foto;
+                        for(int i=0; i<jsonArray.length(); i++){
+                            nama = jsonArray.getString(i);
+                            foto = fotoArray.getString(i);
+
+                            person.add(new Caleg(foto, nama));
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Gagal mendapatkan data!", Toast.LENGTH_LONG).show();
+                    }
+
+                    listView.setAdapter(userAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_layanan", id_layanan);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void getDetailLogistik() {
@@ -95,6 +160,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
+                        String id_service = program.getString(0);
                         nama = program.getString(1);
                         String tanggalMulai = program.getString(3);
                         String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
@@ -107,6 +173,8 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
 
                         title.setText(nama);
                         description.setText(tanggalMulai);
+
+                        getPelanggan(id_service);
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");

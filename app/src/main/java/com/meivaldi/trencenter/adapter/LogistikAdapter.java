@@ -60,6 +60,8 @@ public class LogistikAdapter extends ArrayAdapter<Logistik>{
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(getContext()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .override(512, 160)
                 .into(imageView);
 
         return listItem;

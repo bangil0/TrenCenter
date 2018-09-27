@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
@@ -43,7 +44,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         holder.date.setText("Tanggal Mulai: " + card.getDate());
         String imageUrl = card.getImage();
 
-        Glide.with(context).load(imageUrl).into(holder.cardImage);
+        Glide.with(context)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .override(512, 160)
+                .into(holder.cardImage);
     }
 
     @Override
