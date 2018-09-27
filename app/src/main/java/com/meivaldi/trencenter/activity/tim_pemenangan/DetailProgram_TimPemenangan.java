@@ -25,10 +25,13 @@ import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.ScanQR;
+import com.meivaldi.trencenter.adapter.CalegAdapter;
+import com.meivaldi.trencenter.adapter.UserAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.helper.CircleTransform;
+import com.meivaldi.trencenter.model.Caleg;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +54,9 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
     private boolean nav;
     private ListView listView;
 
+    private UserAdapter userAdapter;
+    private List<Caleg> userList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,9 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
         scan = (Button) findViewById(R.id.scanPeserta);
         listView = (ListView) findViewById(R.id.peserta);
+
+        userList = new ArrayList<>();
+        userAdapter = new UserAdapter(this, userList);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -171,16 +180,17 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                     boolean error = jsonObject.getBoolean("error");
 
                     if(!error){
-                        List<String> users = new ArrayList<>();
-
                         JSONArray array = jsonObject.getJSONArray("data");
+                        JSONArray foto = jsonObject.getJSONArray("foto");
+
+                        String nama, fotos;
 
                         for(int i=0; i<array.length(); i++){
-                            users.add(array.getString(i));
-                        }
+                            nama = array.getString(i);
+                            fotos = foto.getString(i);
 
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
-                        listView.setAdapter(adapter);
+                            userList.add(new Caleg(fotos, nama));
+                        }
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
@@ -189,6 +199,8 @@ public class DetailProgram_TimPemenangan extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                listView.setAdapter(userAdapter);
 
             }
         }, new Response.ErrorListener() {

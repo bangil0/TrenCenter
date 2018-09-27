@@ -20,9 +20,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.adapter.CalegAdapter;
+import com.meivaldi.trencenter.adapter.UserAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.model.Caleg;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +49,8 @@ public class DetailLogistik extends AppCompatActivity {
     private HashMap<String, String> user;
     private String nama;
     private ListView listView;
+    private List<Caleg> person;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,8 @@ public class DetailLogistik extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.scan);
         listView = (ListView) findViewById(R.id.penerima);
+        person = new ArrayList<>();
+        userAdapter = new UserAdapter(this, person);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,21 +172,23 @@ public class DetailLogistik extends AppCompatActivity {
                     boolean error = jsonObject.getBoolean("error");
 
                     if(!error){
-                        List<String> users = new ArrayList<>();
-
                         JSONArray array = jsonObject.getJSONArray("data");
+                        JSONArray foto = jsonObject.getJSONArray("foto");
+
+                        String nama, fotos;
 
                         for(int i=0; i<array.length(); i++){
-                            users.add(array.getString(i));
-                        }
+                            nama = array.getString(i);
+                            fotos = foto.getString(i);
 
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
-                        listView.setAdapter(adapter);
+                            person.add(new Caleg(fotos, nama));
+                        }
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
                     }
 
+                    listView.setAdapter(userAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
