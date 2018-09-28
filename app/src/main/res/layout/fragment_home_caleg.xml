@@ -109,15 +109,62 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/countDown"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/countDown"
+        android:layout_marginTop="20dp">
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:text="Jumlah Tim Pemenangan dalam Seminggu Terakhir"/>
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/grafikPemenangan"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_marginTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:text="Jumlah Relawan dalam Seminggu Terakhir"/>
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/grafikRelawan"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_marginTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:text="Jumlah Pendukung dalam Seminggu Terakhir"/>
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/grafikPendukung"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

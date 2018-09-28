@@ -66,14 +66,12 @@ public class Caleg extends AppCompatActivity {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
                     displayFirebaseRegId();
 
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
-
                     String message = intent.getStringExtra("message");
 
                     Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();

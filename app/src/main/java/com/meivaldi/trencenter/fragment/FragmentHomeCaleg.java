@@ -1,38 +1,189 @@
 package com.meivaldi.trencenter.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FragmentHomeCaleg extends Fragment {
 
     private TextView hari, jam, menit, detik;
+    private GraphView pemenanganView, relawanView, pendukungView;
+    private Calendar calendar;
+    private Date d1, d2, d3, d4, d5, d6, d7;
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    private static String TAG = FragmentHomeCaleg.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_home_caleg, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_caleg, container, false);
 
         hari = (TextView) view.findViewById(R.id.hari);
         jam = (TextView) view.findViewById(R.id.jam);
         menit = (TextView) view.findViewById(R.id.menit);
         detik = (TextView) view.findViewById(R.id.detik);
+        pemenanganView = (GraphView) view.findViewById(R.id.grafikPemenangan);
+        relawanView = (GraphView) view.findViewById(R.id.grafikRelawan);
+        pendukungView = (GraphView) view.findViewById(R.id.grafikPendukung);
+        calendar = Calendar.getInstance();
+
+        getCharts(dateFormat.format(calendar.getTime()));
+        Toast.makeText(getContext(), "" + calendar.getTime(), Toast.LENGTH_SHORT).show();
+
+        calendar.add(Calendar.DATE, -6);
+        d1 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d2 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d3 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d4 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d5 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d6 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        d7 = calendar.getTime();
 
         countDown();
 
         return view;
+    }
+
+    private void getCharts(final String date) {
+        String tag_string_req = "req_charts";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_CHART, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+
+                    if(!error){
+                        JSONArray pemenangan = jsonObject.getJSONArray("pemenangan");
+                        JSONArray relawan = jsonObject.getJSONArray("relawan");
+                        JSONArray pendukung = jsonObject.getJSONArray("pendukung");
+
+                        LineGraphSeries<DataPoint> pemenanganChart = new LineGraphSeries<>(new DataPoint[] {
+                                new DataPoint(d1, pemenangan.getInt(0)),
+                                new DataPoint(d2, pemenangan.getInt(1)),
+                                new DataPoint(d3, pemenangan.getInt(2)),
+                                new DataPoint(d4, pemenangan.getInt(3)),
+                                new DataPoint(d5, pemenangan.getInt(4)),
+                                new DataPoint(d6, pemenangan.getInt(5)),
+                                new DataPoint(d7, pemenangan.getInt(6))
+                        });
+
+                        LineGraphSeries<DataPoint> relawanChart = new LineGraphSeries<>(new DataPoint[] {
+                                new DataPoint(d1, relawan.getInt(0)),
+                                new DataPoint(d2, relawan.getInt(1)),
+                                new DataPoint(d3, relawan.getInt(2)),
+                                new DataPoint(d4, relawan.getInt(3)),
+                                new DataPoint(d5, relawan.getInt(4)),
+                                new DataPoint(d6, relawan.getInt(5)),
+                                new DataPoint(d7, relawan.getInt(6))
+                        });
+
+                        LineGraphSeries<DataPoint> pendukungChart = new LineGraphSeries<>(new DataPoint[] {
+                                new DataPoint(d1, pendukung.getInt(0)),
+                                new DataPoint(d2, pendukung.getInt(1)),
+                                new DataPoint(d3, pendukung.getInt(2)),
+                                new DataPoint(d4, pendukung.getInt(3)),
+                                new DataPoint(d5, pendukung.getInt(4)),
+                                new DataPoint(d6, pendukung.getInt(5)),
+                                new DataPoint(d7, pendukung.getInt(6))
+                        });
+
+                        pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pemenanganView.getViewport().setMinX(d1.getTime());
+                        pemenanganView.getViewport().setMaxX(d7.getTime());
+                        pemenanganView.getViewport().setXAxisBoundsManual(true);
+                        pemenanganView.getGridLabelRenderer().setHumanRounding(false);
+                        pemenanganView.addSeries(pemenanganChart);
+
+                        relawanView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        relawanView.getViewport().setMinX(d1.getTime());
+                        relawanView.getViewport().setMaxX(d7.getTime());
+                        relawanView.getViewport().setXAxisBoundsManual(true);
+                        relawanView.getGridLabelRenderer().setHumanRounding(false);
+                        relawanView.addSeries(relawanChart);
+
+                        pendukungView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pendukungView.getViewport().setMinX(d1.getTime());
+                        pendukungView.getViewport().setMaxX(d7.getTime());
+                        pendukungView.getViewport().setXAxisBoundsManual(true);
+                        pendukungView.getGridLabelRenderer().setHumanRounding(false);
+                        pendukungView.addSeries(pendukungChart);
+                    } else {
+                        Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("CHART", "Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("date", date);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void countDown(){
