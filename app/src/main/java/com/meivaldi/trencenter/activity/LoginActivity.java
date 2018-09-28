@@ -87,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
             } else if(tipe.equals("caleg")){
                 Intent intent = new Intent(getApplicationContext(),
                         Caleg.class);
+
+                startActivity(intent);
             }
         }
 
