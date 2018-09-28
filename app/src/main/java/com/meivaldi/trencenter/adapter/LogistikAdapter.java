@@ -47,10 +47,10 @@ public class LogistikAdapter extends ArrayAdapter<Logistik>{
         title.setText(currentLogistik.getTitle());
 
         TextView location = (TextView) listItem.findViewById(R.id.location);
-        location.setText("Lokasi: " + currentLogistik.getLokasi());
+        location.setText(currentLogistik.getDate());
 
-        TextView dateStart = (TextView) listItem.findViewById(R.id.tanggalMulai);
-        dateStart.setText(currentLogistik.getDate());
+        /*TextView dateStart = (TextView) listItem.findViewById(R.id.tanggalMulai);
+        dateStart.setText(currentLogistik.getDate());*/
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.logo);
         String url = currentLogistik.getImage();
@@ -60,6 +60,8 @@ public class LogistikAdapter extends ArrayAdapter<Logistik>{
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(getContext()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .override(512, 160)
                 .into(imageView);
 
         return listItem;

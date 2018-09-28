@@ -1,11 +1,10 @@
-package com.meivaldi.trencenter.activity.super_admin;
+package com.meivaldi.trencenter.activity.caleg;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,20 +21,16 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.LoginActivity;
-import com.meivaldi.trencenter.activity.relawan.MainActivity;
-import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.Config;
 import com.meivaldi.trencenter.fragment.AccountFragment;
+import com.meivaldi.trencenter.fragment.FragmentHomeCaleg;
 import com.meivaldi.trencenter.fragment.HomeFragment;
 import com.meivaldi.trencenter.fragment.MessageFragment;
-import com.meivaldi.trencenter.fragment.ProfileRelawan;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.helper.SessionManager;
 import com.meivaldi.trencenter.util.NotificationUtils;
 
-import java.util.HashMap;
-
-public class Dashboard_SuperAdmin extends AppCompatActivity {
+public class Caleg extends AppCompatActivity {
 
     private SessionManager session;
     private SQLiteHandler db;
@@ -48,12 +42,12 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_super_admin);
+        setContentView(R.layout.activity_caleg);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new HomeFragment());
+        loadFragment(new FragmentHomeCaleg());
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
@@ -64,7 +58,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");
-        FirebaseMessaging.getInstance().subscribeToTopic("layanan");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,14 +66,12 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
                     displayFirebaseRegId();
 
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
-
                     String message = intent.getStringExtra("message");
 
                     Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
@@ -124,7 +115,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
         db.deleteUsers();
 
-        Intent intent = new Intent(Dashboard_SuperAdmin.this, LoginActivity.class);
+        Intent intent = new Intent(Caleg.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -137,7 +128,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment = new HomeFragment();
+                    fragment = new FragmentHomeCaleg();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_message:
@@ -198,4 +189,5 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         FirebaseMessaging.getInstance().unsubscribeFromTopic("layanan");
     }
+
 }

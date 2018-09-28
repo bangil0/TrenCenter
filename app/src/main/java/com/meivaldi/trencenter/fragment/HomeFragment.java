@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DaftarPendukung;
 import com.meivaldi.trencenter.activity.DaftarRelawan;
+import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
@@ -22,6 +23,7 @@ import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
 import com.meivaldi.trencenter.activity.tim_pemenangan.InputTimPemenangan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,7 +32,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private TextView hari, detik, menit, jam;
-    private RelativeLayout one, two, three, four, five, six, seven, eight;
+    private RelativeLayout one, two, three, four, five, six, seven, eight, nine;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         six = (RelativeLayout) rootView.findViewById(R.id.layout_six);
         seven = (RelativeLayout) rootView.findViewById(R.id.layout_seven);
         eight = (RelativeLayout) rootView.findViewById(R.id.layout_eight);
+        nine = (RelativeLayout) rootView.findViewById(R.id.layout_nine);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -60,6 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         six.setOnClickListener(this);
         seven.setOnClickListener(this);
         eight.setOnClickListener(this);
+        nine.setOnClickListener(this);
 
         countDown();
 
@@ -139,7 +143,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 return;
             case R.id.layout_six:
-                startActivity(new Intent(getContext(), ProgramKerja.class));
+                startActivity(new Intent(getContext(), ProgramKerja_TimPemenangan.class));
 
                 return;
             case R.id.layout_seven:
@@ -148,6 +152,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 return;
             case R.id.layout_eight:
                 startActivity(new Intent(getContext(), DaftarPendukung.class));
+
+                return;
+            case R.id.layout_nine:
+                startActivity(new Intent(getContext(), LayananActivity.class));
 
                 return;
         }

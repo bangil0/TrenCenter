@@ -201,6 +201,7 @@ public class InputPendukung extends AppCompatActivity {
         kabupaten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                kecamatanList.clear();
                 String kabs = adapterView.getSelectedItem().toString();
                 getKecamatan(kabs);
             }
@@ -214,6 +215,7 @@ public class InputPendukung extends AppCompatActivity {
         kecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                kelurahanList.clear();
                 String kec = adapterView.getSelectedItem().toString();
                 getKelurahan(kec);
                 kelurahan.setEnabled(true);
@@ -261,13 +263,23 @@ public class InputPendukung extends AppCompatActivity {
                 String erwe = rw.getText().toString();
                 String erte = rt.getText().toString();
                 String tepees = tps.getText().toString();
-                String gender = jenisKelamin.getSelectedItem().toString();
                 String marriage = status.getSelectedItem().toString();
                 String maker = user.get("type");
                 String referensi = user.get("name");
                 String userName = username.getText().toString();
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
+
+                String gn = jenisKelamin.getSelectedItem().toString();
+                String gender = "B";
+
+                if(gn.equals("Belum Menikah")){
+                    gender = "B";
+                } else if(gn.equals("Menikah")){
+                    gender = "S";
+                } else if(gn.equals("Pisah")){
+                    gender = "P";
+                }
 
                 boolean status = checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                         region, kec, kel, erwe, erte, tepees);

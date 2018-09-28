@@ -19,9 +19,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.adapter.CalegAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.model.Caleg;
+import com.meivaldi.trencenter.model.Layanan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +49,9 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
     private String nama;
     private ListView listView;
 
+    private CalegAdapter userAdapter;
+    private List<Caleg> person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,8 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         listView = (ListView) findViewById(R.id.penerima);
+        person = new ArrayList<>();
+        userAdapter = new CalegAdapter(this, person);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,6 +81,64 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getPelanggan(final String id_layanan){
+        String tag_string_req = "req_get_pelanggan";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PELANGGAN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+                        JSONArray jsonArray = jObj.getJSONArray("data");
+                        JSONArray fotoArray = jObj.getJSONArray("foto");
+
+                        String nama_user, foto;
+                        for(int i=0; i<jsonArray.length(); i++){
+                            nama_user = jsonArray.getString(i);
+                            foto = fotoArray.getString(i);
+
+                            person.add(new Caleg(foto, nama_user));
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Gagal mendapatkan data!", Toast.LENGTH_LONG).show();
+                    }
+
+                    listView.setAdapter(userAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_layanan", id_layanan);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void getDetailLogistik() {
@@ -95,6 +161,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         int index = getIntent().getIntExtra("INDEX", 0);
                         JSONArray program = jsonArray.getJSONArray(index);
 
+                        String id_service = program.getString(0);
                         nama = program.getString(1);
                         String tanggalMulai = program.getString(3);
                         String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
@@ -107,6 +174,8 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
 
                         title.setText(nama);
                         description.setText(tanggalMulai);
+
+                        getPelanggan(id_service);
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");
@@ -128,64 +197,6 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
         });
-
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-
-    private void getReceiver(final String nama) {
-        String tag_string_req = "req_receiver";
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_GET_RECEIVER, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean error = jsonObject.getBoolean("error");
-
-                    if(!error){
-                        List<String> users = new ArrayList<>();
-
-                        JSONArray array = jsonObject.getJSONArray("data");
-
-                        for(int i=0; i<array.length(); i++){
-                            users.add(array.getString(i));
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, users);
-                        listView.setAdapter(adapter);
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("SCAN KARTU", "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("logistik", nama);
-
-                return params;
-            }
-
-        };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }

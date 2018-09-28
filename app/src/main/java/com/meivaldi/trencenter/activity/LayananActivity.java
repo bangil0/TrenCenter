@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.tim_pemenangan.DetailLayanan_TimPemenangan;
 import com.meivaldi.trencenter.adapter.LogistikAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;
@@ -127,9 +128,15 @@ public class LayananActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DetailLayanan.class);
-                    intent.putExtra("INDEX", i);
-                    startActivity(intent);
+                    if(tipe.equals("tim_pemenangan") || tipe.equals("super_admin") || tipe.equals("caleg")){
+                        Intent intent = new Intent(getApplicationContext(), DetailLayanan_TimPemenangan.class);
+                        intent.putExtra("INDEX", i);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), DetailLayanan.class);
+                        intent.putExtra("INDEX", i);
+                        startActivity(intent);
+                    }
                 }
             });
         }

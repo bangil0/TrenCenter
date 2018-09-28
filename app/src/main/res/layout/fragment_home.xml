@@ -390,6 +390,56 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/layout_nine"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/layout_border"
+                android:layout_weight="50"
+                android:layout_marginRight="5dp">
+
+                <ImageView
+                    android:layout_weight="50"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/layanan"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar Layanan"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_ten"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="50"
+                android:layout_marginRight="5dp">
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -152,9 +152,22 @@
             </intent-filter>
         </service>
 
+<<<<<<< HEAD
         <activity android:name=".activity.DetailLayanan" />
         <activity android:name=".activity.LayananActivity" />
         <activity android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan" />
+=======
+        <activity
+            android:name=".activity.DetailLayanan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LayananActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.caleg.Caleg"></activity>
+>>>>>>> layanan
     </application>
 
 </manifest>

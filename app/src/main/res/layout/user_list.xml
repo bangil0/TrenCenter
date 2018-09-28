@@ -45,17 +45,17 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_call_biru"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Panggil"
+                android:text="Kirim Pesan"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_send"
                 android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
