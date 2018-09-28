@@ -128,7 +128,7 @@ public class LayananActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(tipe.equals("tim_pemenangan") || tipe.equals("super_admin")){
+                    if(tipe.equals("tim_pemenangan") || tipe.equals("super_admin") || tipe.equals("caleg")){
                         Intent intent = new Intent(getApplicationContext(), DetailLayanan_TimPemenangan.class);
                         intent.putExtra("INDEX", i);
                         startActivity(intent);
