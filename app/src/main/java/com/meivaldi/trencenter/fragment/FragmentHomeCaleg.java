@@ -60,7 +60,6 @@ public class FragmentHomeCaleg extends Fragment {
         calendar = Calendar.getInstance();
 
         getCharts(dateFormat.format(calendar.getTime()));
-        Toast.makeText(getContext(), "" + calendar.getTime(), Toast.LENGTH_SHORT).show();
 
         calendar.add(Calendar.DATE, -6);
         d1 = calendar.getTime();
