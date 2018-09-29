@@ -151,6 +151,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".activity.DetailLayanan"
             android:screenOrientation="portrait" />
@@ -160,8 +161,8 @@
         <activity
             android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.caleg.Caleg"></activity>
-
+        <activity android:name=".activity.caleg.Caleg" />
+        <activity android:name=".activity.Berita"></activity>
     </application>
 
 </manifest>

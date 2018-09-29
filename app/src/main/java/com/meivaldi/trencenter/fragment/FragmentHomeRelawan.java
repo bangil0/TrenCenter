@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Berita;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
@@ -64,7 +65,7 @@ import java.util.TimerTask;
 
 public class FragmentHomeRelawan extends Fragment {
 
-    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, seeBerita;
 
     private FloatingActionButton createPendukung;
 
@@ -104,6 +105,14 @@ public class FragmentHomeRelawan extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        seeBerita = (TextView) rootView.findViewById(R.id.seeBerita);
+
+        seeBerita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Berita.class));
+            }
+        });
 
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override

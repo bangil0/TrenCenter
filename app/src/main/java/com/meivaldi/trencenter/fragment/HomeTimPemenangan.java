@@ -36,6 +36,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Berita;
 import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.ProgramKerja;
@@ -71,7 +72,7 @@ import java.util.TimerTask;
 
 public class HomeTimPemenangan extends Fragment  {
 
-    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3, seeBerita;
     private FloatingActionButton create;
 
     private RecyclerView recyclerView, logistikRecycler, layananRecycler;
@@ -111,6 +112,14 @@ public class HomeTimPemenangan extends Fragment  {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         logistikRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_logistik);
         layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
+        seeBerita = (TextView) rootView.findViewById(R.id.seeBerita);
+
+        seeBerita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Berita.class));
+            }
+        });
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 

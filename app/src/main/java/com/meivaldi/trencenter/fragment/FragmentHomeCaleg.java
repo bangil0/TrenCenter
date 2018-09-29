@@ -40,7 +40,6 @@ public class FragmentHomeCaleg extends Fragment {
     private TextView hari, jam, menit, detik;
     private GraphView pemenanganView, relawanView, pendukungView;
     private Calendar calendar;
-    private Date d1, d2, d3, d4, d5, d6, d7;
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private static String TAG = FragmentHomeCaleg.class.getSimpleName();
@@ -60,21 +59,6 @@ public class FragmentHomeCaleg extends Fragment {
         calendar = Calendar.getInstance();
 
         getCharts(dateFormat.format(calendar.getTime()));
-
-        calendar.add(Calendar.DATE, -6);
-        d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d3 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d4 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d5 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d6 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d7 = calendar.getTime();
 
         countDown();
 
@@ -99,6 +83,21 @@ public class FragmentHomeCaleg extends Fragment {
                         JSONArray pemenangan = jsonObject.getJSONArray("pemenangan");
                         JSONArray relawan = jsonObject.getJSONArray("relawan");
                         JSONArray pendukung = jsonObject.getJSONArray("pendukung");
+
+                        calendar.add(Calendar.DATE, -6);
+                        Date d1 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d2 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d3 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d4 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d5 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d6 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d7 = calendar.getTime();
 
                         LineGraphSeries<DataPoint> pemenanganChart = new LineGraphSeries<>(new DataPoint[] {
                                 new DataPoint(d1, pemenangan.getInt(0)),
@@ -131,7 +130,7 @@ public class FragmentHomeCaleg extends Fragment {
                         });
 
                         pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(4);
                         pemenanganView.getViewport().setMinX(d1.getTime());
                         pemenanganView.getViewport().setMaxX(d7.getTime());
                         pemenanganView.getViewport().setXAxisBoundsManual(true);
@@ -139,7 +138,7 @@ public class FragmentHomeCaleg extends Fragment {
                         pemenanganView.addSeries(pemenanganChart);
 
                         relawanView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(4);
                         relawanView.getViewport().setMinX(d1.getTime());
                         relawanView.getViewport().setMaxX(d7.getTime());
                         relawanView.getViewport().setXAxisBoundsManual(true);
@@ -147,7 +146,7 @@ public class FragmentHomeCaleg extends Fragment {
                         relawanView.addSeries(relawanChart);
 
                         pendukungView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(4);
                         pendukungView.getViewport().setMinX(d1.getTime());
                         pendukungView.getViewport().setMaxX(d7.getTime());
                         pendukungView.getViewport().setXAxisBoundsManual(true);

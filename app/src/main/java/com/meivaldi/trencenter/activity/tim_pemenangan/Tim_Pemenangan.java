@@ -20,7 +20,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
@@ -35,12 +41,20 @@ import com.meivaldi.trencenter.activity.ScanKartu;
 import com.meivaldi.trencenter.activity.VisiMisi;
 import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
+import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.app.Config;
 import com.meivaldi.trencenter.fragment.AccountFragment;
 import com.meivaldi.trencenter.fragment.HomeTimPemenangan;
 import com.meivaldi.trencenter.fragment.MessageFragment;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.helper.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tim_Pemenangan extends AppCompatActivity {
 
@@ -52,6 +66,8 @@ public class Tim_Pemenangan extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+
+    private static String TAG = Tim_Pemenangan.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +151,56 @@ public class Tim_Pemenangan extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new HomeTimPemenangan());
+
+        HashMap<String, String> details = db.getUserDetails();
+        String id = details.get("id");
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        sendToken(id, token);
+    }
+
+    private void sendToken(final String id, final String token){
+        String tag_string_req = "req_save_token";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_SAVE_TOKEN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String msg = jObj.getString("error_msg");
+
+                    Log.d("TOKEN", msg);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Token Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_user", id);
+                params.put("token", token);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override
