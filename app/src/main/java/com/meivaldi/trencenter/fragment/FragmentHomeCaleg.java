@@ -130,7 +130,7 @@ public class FragmentHomeCaleg extends Fragment {
                         });
 
                         pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(4);
+                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(5);
                         pemenanganView.getViewport().setMinX(d1.getTime());
                         pemenanganView.getViewport().setMaxX(d7.getTime());
                         pemenanganView.getViewport().setXAxisBoundsManual(true);
@@ -138,7 +138,7 @@ public class FragmentHomeCaleg extends Fragment {
                         pemenanganView.addSeries(pemenanganChart);
 
                         relawanView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(4);
+                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(2);
                         relawanView.getViewport().setMinX(d1.getTime());
                         relawanView.getViewport().setMaxX(d7.getTime());
                         relawanView.getViewport().setXAxisBoundsManual(true);
@@ -146,7 +146,7 @@ public class FragmentHomeCaleg extends Fragment {
                         relawanView.addSeries(relawanChart);
 
                         pendukungView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(4);
+                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(3);
                         pendukungView.getViewport().setMinX(d1.getTime());
                         pendukungView.getViewport().setMaxX(d7.getTime());
                         pendukungView.getViewport().setXAxisBoundsManual(true);

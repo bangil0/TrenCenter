@@ -109,337 +109,343 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/countDown"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/countDown">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_marginTop="10dp">
+       <LinearLayout
+           android:id="@+id/content"
+           android:layout_marginTop="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:background="@android:color/white">
 
-            <RelativeLayout
-                android:id="@+id/layout_one"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/boss"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_one"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data Caleg"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/boss"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Data Caleg"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_two"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+               </RelativeLayout>
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/trophy"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_two"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data Tim \nPemenangan"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/trophy"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Data Tim \nPemenangan"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-        </LinearLayout>
+               </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_marginTop="10dp">
+           </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_three"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/team"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_three"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:text="Data Relawan \natau Saksi"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/team"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="12dp"
+                       android:text="Data Relawan \natau Saksi"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_four"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+               </RelativeLayout>
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/check_mark"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_four"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data \nPendukung"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/check_mark"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Data \nPendukung"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-        </LinearLayout>
+               </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_marginTop="10dp">
+           </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_five"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/delivery_truck"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_five"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data Logistik"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/delivery_truck"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Data Logistik"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_six"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+               </RelativeLayout>
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/presentation"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_six"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data Program"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/presentation"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Data Program"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-        </LinearLayout>
+               </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_marginTop="10dp">
+           </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_seven"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/pendukung2"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_seven"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Daftar Relawan"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/pendukung2"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Daftar Relawan"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_eight"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+               </RelativeLayout>
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/relawan2"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_eight"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Daftar Pendukung"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/relawan2"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Daftar Pendukung"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-        </LinearLayout>
+               </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_marginTop="10dp">
+           </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_nine"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/layout_border"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_weight="50"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/layanan"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginStart="20dp"/>
+               <RelativeLayout
+                   android:id="@+id/layout_nine"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:background="@drawable/layout_border"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Daftar Layanan"
-                    android:textSize="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="10dp"/>
+                   <ImageView
+                       android:layout_weight="50"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:src="@drawable/layanan"
+                       android:layout_centerVertical="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_marginStart="20dp"/>
 
-            </RelativeLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Daftar Layanan"
+                       android:textSize="12dp"
+                       android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_marginEnd="10dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_ten"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_weight="50"
-                android:layout_marginRight="5dp">
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:id="@+id/layout_ten"
+                   android:layout_width="match_parent"
+                   android:layout_height="80dp"
+                   android:layout_weight="50"
+                   android:layout_marginRight="5dp">
 
 
 
-            </RelativeLayout>
+               </RelativeLayout>
 
-        </LinearLayout>
+           </LinearLayout>
 
-    </LinearLayout>
+       </LinearLayout>
+
+   </ScrollView>
 
 </RelativeLayout>

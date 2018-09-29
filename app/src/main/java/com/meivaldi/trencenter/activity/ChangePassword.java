@@ -33,7 +33,7 @@ public class ChangePassword extends AppCompatActivity {
     private Button change;
 
     private SQLiteHandler db;
-    private String tipe;
+    private String tipe, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,9 @@ public class ChangePassword extends AppCompatActivity {
 
         db = new SQLiteHandler(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
+
         tipe = user.get("type");
+        id = user.get("id");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,12 +69,12 @@ public class ChangePassword extends AppCompatActivity {
                 String lama = passwordLama.getText().toString();
                 String baru = passwordBaru.getText().toString();
 
-                updatePassword(lama, baru);
+                updatePassword(lama, baru, id);
             }
         });
     }
 
-    private void updatePassword(final String lama, final String baru) {
+    private void updatePassword(final String lama, final String baru, final String id) {
         String tag_string_req = "req_update";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -99,6 +101,7 @@ public class ChangePassword extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("lama", lama);
                 params.put("baru", baru);
+                params.put("id", id);
 
                 return params;
             }
