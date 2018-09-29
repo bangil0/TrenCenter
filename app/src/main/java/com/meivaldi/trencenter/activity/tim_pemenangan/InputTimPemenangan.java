@@ -61,7 +61,7 @@ public class InputTimPemenangan extends AppCompatActivity {
     private SQLiteHandler db;
     private Spinner status, jenisKelamin, kabupaten, kecamatan, kelurahan;
     private EditText KK, NIK, nama, tempat_lahir, tanggal_lahir, umur, suku, hp,
-            alamat, rt, rw, tps, username, facebook, instagram, agama;
+            alamat, rt, rw, tps, username, facebook, instagram, agama, jabatan;
     private Button input, upload;
     private Calendar calendar;
     private ImageView profilePicture;
@@ -125,6 +125,7 @@ public class InputTimPemenangan extends AppCompatActivity {
         facebook = (EditText) findViewById(R.id.facebook);
         instagram = (EditText) findViewById(R.id.instagram);
         agama = (EditText) findViewById(R.id.agama);
+        jabatan = (EditText) findViewById(R.id.jabatan);
 
         setSupportActionBar(toolbar);
 
@@ -231,6 +232,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                 String birthPlace = tempat_lahir.getText().toString();
                 String birthDate = tanggal_lahir.getText().toString();
                 String age = umur.getText().toString();
+                String gender = jenisKelamin.getSelectedItem().toString();
                 String tribe = suku.getText().toString();
                 String phone = hp.getText().toString();
                 String address = alamat.getText().toString();
@@ -240,32 +242,32 @@ public class InputTimPemenangan extends AppCompatActivity {
                 String erwe = rw.getText().toString();
                 String erte = rt.getText().toString();
                 String tepees = tps.getText().toString();
-                String marriage = status.getSelectedItem().toString();
                 String maker = user.get("type");
                 String makerName = user.get("name");
                 String Agama = agama.getText().toString();
                 String userName = username.getText().toString();
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
+                String jab = jabatan.getText().toString();
 
-                String gn = jenisKelamin.getSelectedItem().toString();
-                String gender = "B";
+                String mr = status.getSelectedItem().toString();
+                String marriage = "B";
 
-                if(gn.equals("Belum Menikah")){
-                    gender = "B";
-                } else if(gn.equals("Menikah")){
-                    gender = "S";
-                } else if(gn.equals("Pisah")){
-                    gender = "P";
+                if(mr.equals("Belum Menikah")){
+                    marriage = "B";
+                } else if(mr.equals("Menikah")){
+                    marriage = "S";
+                } else if(mr.equals("Pisah")){
+                    marriage = "P";
                 }
 
                 boolean status = checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
-                        region, kec, kel, erwe, erte, tepees);
+                        region, kec, kel, erwe, erte, tepees, jab);
 
                 if(status){
                     addPemenang(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
                             region, kec, kel, erwe, erte, tepees, gender, marriage, maker, foto, userName,
-                            fbAkun, igAkun, makerName, Agama);
+                            fbAkun, igAkun, makerName, Agama, jab);
                 } else {
                     Toast.makeText(getApplicationContext(), "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
                 }
@@ -407,6 +409,7 @@ public class InputTimPemenangan extends AppCompatActivity {
         username.setText("");
         facebook.setText("");
         instagram.setText("");
+        jabatan.setText("");
     }
 
     private void getKecamatan(final String kabs) {
@@ -528,7 +531,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                             final String age, final String tribe, final String phone, final String address, final String region,
                             final String kec, final String kel, final String erwe, final String erte, final String tepees,
                             final String gender, final String marriage, final String maker, final String foto, final String userName,
-                            final String fbAkun, final String igAkun, final String makerName, final String agama) {
+                            final String fbAkun, final String igAkun, final String makerName, final String agama, final String jab) {
         String tag_string_req = "req_add_pemangan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -592,6 +595,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                 params.put("instagram", igAkun);
                 params.put("agama", agama);
                 params.put("referensi", makerName);
+                params.put("jabatan", jab);
 
                 return params;
             }
@@ -601,7 +605,9 @@ public class InputTimPemenangan extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private boolean checkEmptiness(String kk, String nik, String name, String birthPlace, String birthDate, String age, String tribe, String phone, String address, String region, String kec, String kel, String erwe, String erte, String tepees) {
+    private boolean checkEmptiness(String kk, String nik, String name, String birthPlace, String birthDate,
+                                   String age, String tribe, String phone, String address, String region, String kec, String kel,
+                                   String erwe, String erte, String tepees, String jab) {
         Drawable error = getApplicationContext().getResources().getDrawable(R.drawable.ic_error);
         Drawable success = getApplicationContext().getResources().getDrawable(R.drawable.ic_success);
 
@@ -710,6 +716,15 @@ public class InputTimPemenangan extends AppCompatActivity {
         if(tepees.isEmpty()){
             tps.setCompoundDrawables(null, null, error, null);
             tps.setHint("TPS tidak boleh kosong!");
+
+            return false;
+        } else {
+            tps.setCompoundDrawables(null, null, success, null);
+        }
+
+        if(jab.isEmpty()){
+            tps.setCompoundDrawables(null, null, error, null);
+            tps.setHint("Jabatan tidak boleh kosong!");
 
             return false;
         } else {

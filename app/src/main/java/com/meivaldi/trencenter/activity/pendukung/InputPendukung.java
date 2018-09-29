@@ -263,22 +263,22 @@ public class InputPendukung extends AppCompatActivity {
                 String erwe = rw.getText().toString();
                 String erte = rt.getText().toString();
                 String tepees = tps.getText().toString();
-                String marriage = status.getSelectedItem().toString();
+                String gender = jenisKelamin.getSelectedItem().toString();
                 String maker = user.get("type");
                 String referensi = user.get("name");
                 String userName = username.getText().toString();
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
 
-                String gn = jenisKelamin.getSelectedItem().toString();
-                String gender = "B";
+                String mr = status.getSelectedItem().toString();
+                String marriage = "B";
 
-                if(gn.equals("Belum Menikah")){
-                    gender = "B";
-                } else if(gn.equals("Menikah")){
-                    gender = "S";
-                } else if(gn.equals("Pisah")){
-                    gender = "P";
+                if(mr.equals("Belum Menikah")){
+                    marriage = "B";
+                } else if(mr.equals("Menikah")){
+                    marriage = "S";
+                } else if(mr.equals("Pisah")){
+                    marriage = "P";
                 }
 
                 boolean status = checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
