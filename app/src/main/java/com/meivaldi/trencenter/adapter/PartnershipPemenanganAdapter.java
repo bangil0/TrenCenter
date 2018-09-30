@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.DetailLayanan;
-import com.meivaldi.trencenter.activity.tim_pemenangan.DetailLayanan_TimPemenangan;
-import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
+import com.meivaldi.trencenter.activity.DetailPartnership;
 import com.meivaldi.trencenter.model.Card;
 
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.List;
  * Created by root on 26/09/18.
  */
 
-public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemenanganAdapter.MyViewHolder> {
+public class PartnershipPemenanganAdapter extends RecyclerView.Adapter<PartnershipPemenanganAdapter.MyViewHolder> {
 
     private Context context;
     private List<Card> cardList;
@@ -71,7 +69,7 @@ public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemena
             cardImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailLayanan_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailPartnership.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -81,7 +79,7 @@ public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemena
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailLayanan_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailPartnership.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -91,7 +89,7 @@ public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemena
 
     }
 
-    public LayananPemenanganAdapter(Context context, List<Card> cardList){
+    public PartnershipPemenanganAdapter(Context context, List<Card> cardList){
         this.context = context;
         this.cardList = cardList;
     }

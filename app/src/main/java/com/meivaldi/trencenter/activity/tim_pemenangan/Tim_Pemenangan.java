@@ -31,15 +31,10 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
-import com.meivaldi.trencenter.activity.DetailUser;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LoginActivity;
-import com.meivaldi.trencenter.activity.Penghargaan;
-import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ScanKartu;
-import com.meivaldi.trencenter.activity.VisiMisi;
-import com.meivaldi.trencenter.activity.caleg.DataCaleg;
 import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -72,7 +67,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tim__pemenangan);
+        setContentView(R.layout.activity_tim_pemenangan);
 
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");

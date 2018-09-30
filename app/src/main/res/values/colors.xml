@@ -10,6 +10,7 @@
     <color name="tab_background_selected">#153773</color>
     <color name="tab_background_unselected">#1B458D</color>
     <color name="button_disable">#ccc</color>
+    <color name="yellow">#ffff00</color>
 
     <array name="array_dot_active">
         <item>@android:color/white</item>

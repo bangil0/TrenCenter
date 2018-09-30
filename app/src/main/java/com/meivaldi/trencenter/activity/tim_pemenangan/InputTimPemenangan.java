@@ -365,7 +365,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kelurahanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kelurahanList);
+                            R.layout.spinner_item, kelurahanList);
 
                     kelurahan.setAdapter(kelurahanAdapter);
 
@@ -431,7 +431,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kecamatanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kecamatanList);
+                            R.layout.spinner_item, kecamatanList);
 
                     kecamatan.setAdapter(kecamatanAdapter);
 
@@ -478,7 +478,7 @@ public class InputTimPemenangan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kabupatenList);
+                            R.layout.spinner_item, kabupatenList);
 
                     kabupaten.setAdapter(kabupatenAdapter);
 

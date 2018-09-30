@@ -386,7 +386,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kelurahanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kelurahanList);
+                            R.layout.spinner_item, kelurahanList);
 
                     kelurahanSP.setAdapter(kelurahanAdapter);
 
@@ -433,7 +433,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kecamatanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kecamatanList);
+                            R.layout.spinner_item, kecamatanList);
 
                     kecamatanSP.setAdapter(kecamatanAdapter);
 
@@ -480,7 +480,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kabupatenList);
+                            R.layout.spinner_item, kabupatenList);
 
                     kabupatenSP.setAdapter(kabupatenAdapter);
 

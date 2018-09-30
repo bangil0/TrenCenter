@@ -45,4 +45,5 @@ public class AppConfig {
     public static String URL_SAVE_TOKEN = "http://156.67.221.225/trencenter/voting/android/save_token.php";
     public static String URL_GET_SUMMARIES = "http://156.67.221.225/trencenter/voting/android/summary.php";
     public static String URL_GET_STATUS = "http://156.67.221.225/trencenter/voting/android/status.php";
+    public static String URL_GET_PARTNERSHIP = "http://156.67.221.225/trencenter/voting/android/get_partnership.php";
 }

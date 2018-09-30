@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <group>
-                <item
-                    android:id="@+id/nav_profile"
-                    android:icon="@drawable/baseline_person_white_24dp"
-                    android:title="Profile Calon" />
-                <item
-                    android:id="@+id/nav_target"
-                    android:icon="@drawable/targets"
-                    android:title="Visi dan Misi" />
-                <item
-                    android:id="@+id/nav_platform"
-                    android:icon="@drawable/tasks"
-                    android:title="Platform" />
+    <group>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/baseline_person_black_24dp"
+            android:title="Profile Calon" />
+        <item
+            android:id="@+id/nav_target"
+            android:icon="@drawable/ic_target"
+            android:title="Visi dan Misi" />
+        <item
+            android:id="@+id/nav_platform"
+            android:icon="@drawable/ic_task"
+            android:title="Platform" />
 
-                <item
-                    android:id="@+id/nav_progja"
-                    android:icon="@drawable/icon"
-                    android:title="Program Kegiatan" />
+        <item
+            android:id="@+id/nav_progja"
+            android:icon="@drawable/ic_progja"
+            android:title="Program Kegiatan" />
 
-                <item
-                    android:id="@+id/nav_layanan"
-                    android:icon="@drawable/ic_layanan"
-                    android:title="Layanan"/>
+        <item
+            android:id="@+id/nav_layanan"
+            android:icon="@drawable/ic_service"
+            android:title="Layanan" />
 
-                <item
-                    android:id="@+id/nav_penghargaan"
-                    android:icon="@drawable/medals"
-                    android:title="Penghargaan" />
+        <item
+            android:id="@+id/nav_penghargaan"
+            android:icon="@drawable/ic_penghargaan"
+            android:title="Penghargaan" />
 
-        </group>
+    </group>
 
-        <item android:title="Lainnya">
-                <menu>
-                        <item
-                            android:id="@+id/nav_call"
-                            android:icon="@drawable/ic_call"
-                            android:title="Call Center" />
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_call"
+                android:icon="@drawable/ic_panggil"
+                android:title="Call Center" />
 
-                        <item
-                            android:id="@+id/nav_scan"
-                            android:icon="@drawable/ic_qrcode_white_24dp"
-                            android:title="Scan Kartu" />
-                </menu>
-        </item>
+            <item
+                android:id="@+id/nav_scan"
+                android:icon="@drawable/ic_qrcode_black_24dp"
+                android:title="Scan Kartu" />
+        </menu>
+    </item>
 
 </menu>

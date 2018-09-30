@@ -162,7 +162,9 @@
             android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.caleg.Caleg" />
-        <activity android:name=".activity.Berita"></activity>
+        <activity android:name=".activity.Berita" />
+        <activity android:name=".activity.Partnership" />
+        <activity android:name=".activity.DetailPartnership"></activity>
     </application>
 
 </manifest>
