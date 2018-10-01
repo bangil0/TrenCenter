@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.Result;
+import com.meivaldi.trencenter.activity.caleg.Caleg;
 import com.meivaldi.trencenter.activity.pendukung.Pendukung;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
@@ -110,6 +111,10 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                             foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pendukung/" + user.getString("foto");
                         } else if(tipe.equals("tim_pemenangan")){
                             foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                        } else if(tipe.equals("caleg")){
+                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_caleg/" + user.getString("foto");
+                        } else if(tipe.equals("super_admin")) {
+                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto/admin.png";
                         } else {
                             foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto/" + user.getString("foto");
                         }
@@ -129,6 +134,10 @@ public class QR_Login extends AppCompatActivity implements ZXingScannerView.Resu
                         } else if(tipe.equals("tim_pemenangan")) {
                             Intent intent = new Intent(QR_Login.this,
                                     Tim_Pemenangan.class);
+                            startActivity(intent);
+                        } else if(tipe.equals("caleg")){
+                            Intent intent = new Intent(QR_Login.this,
+                                    Caleg.class);
                             startActivity(intent);
                         }
 

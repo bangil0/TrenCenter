@@ -74,7 +74,7 @@ public class Partnership extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             HttpHandler sh = new HttpHandler();
 
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_PARTNERSHIP);
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_ALL_PARTNERSHIP);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 

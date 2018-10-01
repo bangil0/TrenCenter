@@ -211,6 +211,10 @@ public class FragmentHomeCaleg extends Fragment {
                                 new DataPoint(d7, pendukung.getInt(6))
                         });
 
+                        pemenanganChart.setDataPointsRadius(1f);
+                        relawanChart.setDataPointsRadius(1f);
+                        pendukungChart.setDataPointsRadius(1f);
+
                         pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                         pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(3);
                         pemenanganView.getViewport().setMinX(d1.getTime());

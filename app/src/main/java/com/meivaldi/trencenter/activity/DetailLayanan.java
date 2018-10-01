@@ -140,7 +140,7 @@ public class DetailLayanan extends AppCompatActivity {
         String tag_string_req = "req_layanan";
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.URL_GET_LAYANAN, new Response.Listener<String>() {
+                AppConfig.URL_GET_ALL_LAYANAN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

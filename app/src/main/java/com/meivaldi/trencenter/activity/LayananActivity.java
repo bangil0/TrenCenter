@@ -71,7 +71,7 @@ public class LayananActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             HttpHandler sh = new HttpHandler();
 
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LAYANAN);
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_ALL_LAYANAN);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 

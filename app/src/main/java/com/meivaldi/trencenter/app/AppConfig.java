@@ -47,4 +47,7 @@ public class AppConfig {
     public static String URL_GET_STATUS = "http://156.67.221.225/trencenter/voting/android/status.php";
     public static String URL_GET_PARTNERSHIP = "http://156.67.221.225/trencenter/voting/android/get_partnership.php";
     public static String URL_GET_PEMENANGAN = "http://156.67.221.225/trencenter/voting/android/get_pemenangan.php";
+    public static String URL_GET_CARD = "http://156.67.221.225/trencenter/voting/android/getCard.php";
+    public static String URL_GET_ALL_LAYANAN = "http://156.67.221.225/trencenter/voting/android/get_all_layanan.php";
+    public static String URL_GET_ALL_PARTNERSHIP = "http://156.67.221.225/trencenter/voting/android/get_all_partnership.php";
 }

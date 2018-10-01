@@ -71,7 +71,7 @@ public class DetailPartnership extends AppCompatActivity {
         String tag_string_req = "req_partnership";
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.URL_GET_PARTNERSHIP, new Response.Listener<String>() {
+                AppConfig.URL_GET_ALL_PARTNERSHIP, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

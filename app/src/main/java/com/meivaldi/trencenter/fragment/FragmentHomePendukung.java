@@ -25,10 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.Berita;
@@ -54,6 +56,7 @@ import com.meivaldi.trencenter.adapter.PartnershipPemenanganAdapter;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.FragmentSlider;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SliderIndicator;
@@ -156,9 +159,16 @@ public class FragmentHomePendukung extends Fragment {
 
         countDown();
 
-        new GetCards().execute();
-        new GetLayanan().execute();
-        new GetPartnership().execute();
+        layananList = new ArrayList<>();
+        layananAdapter = new LayananAdapter(getContext(), layananList);
+        cardList = new ArrayList<>();
+        cardAdapter = new CardAdapter(getContext(), cardList);
+        partnershipList = new ArrayList<>();
+        partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
+
+        getLayanan();
+        getCards();
+        getPartnership();
 
         rootView.setVisibility(View.VISIBLE);
         rootView.animate()
@@ -346,241 +356,174 @@ public class FragmentHomePendukung extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    private class GetCards extends AsyncTask<Void, Void, Void> {
+    private void getLayanan() {
+        String tag_string_req = "req_layanan";
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            cardList = new ArrayList<>();
-            adapters = new Adapter(getContext(), cardList);
-        }
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_GET_LAYANAN, new Response.Listener<String>() {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler sh = new HttpHandler();
+            @Override
+            public void onResponse(String response) {
+                Log.d("BERITA", "Login Response: " + response.toString());
 
-            String jsonStr = sh.makeServiceCall(url);
-
-            Log.e(TAG, "Response from url: " + jsonStr);
-
-            if (jsonStr != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
 
-                    JSONArray programs = jsonObj.getJSONArray("cards");
+                    if (!error) {
+                        JSONArray programs = jObj.getJSONArray("layanan");
 
-                    for (int i = 0; i < programs.length(); i++) {
-                        JSONArray program = programs.getJSONArray(i);
+                        for (int i = 0; i < programs.length(); i++) {
+                            JSONArray program = programs.getJSONArray(i);
 
-                        String nama = program.getString(1);
-                        String tanggalMulai = program.getString(2);
-                        String foto = program.getString(7);
+                            String nama = program.getString(1);
+                            String tanggalMulai = program.getString(2);
+                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
-                        cardList.add(new Card(nama, tanggalMulai, foto));
-                    }
-
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                            layananList.add(new Card(nama, tanggalMulai, foto));
                         }
-                    });
 
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                        layananRecycler.setLayoutManager(layoutManager);
+                        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                        layananRecycler.setItemAnimator(new DefaultItemAnimator());
+                        layananRecycler.setAdapter(layananAdapter);
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
+                                errorMsg, Toast.LENGTH_LONG).show();
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
             }
+        }, new Response.ErrorListener() {
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(isAdded()){
-                getResources().getString(R.string.app_name);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Berita", "Login Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
+        });
 
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapters);
-
-        }
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private class GetLayanan extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            layananList = new ArrayList<>();
-            layananAdapter = new LayananAdapter(getContext(), layananList);
-        }
+    private void getCards() {
+        String tag_string_req = "req_card";
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler sh = new HttpHandler();
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_GET_CARD, new Response.Listener<String>() {
 
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_LAYANAN);
+            @Override
+            public void onResponse(String response) {
+                Log.d("BERITA", "Login Response: " + response.toString());
 
-            Log.e(TAG, "Response from url: " + jsonStr);
-
-            if (jsonStr != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
 
-                    JSONArray programs = jsonObj.getJSONArray("layanan");
+                    if (!error) {
 
-                    for (int i = 0; i < programs.length(); i++) {
-                        JSONArray program = programs.getJSONArray(i);
+                        JSONArray programs = jObj.getJSONArray("cards");
 
-                        String nama = program.getString(1);
-                        String tanggalMulai = program.getString(2);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+                        for (int i = 0; i < programs.length(); i++) {
+                            JSONArray program = programs.getJSONArray(i);
 
-                        layananList.add(new Card(nama, tanggalMulai, foto));
-                    }
+                            String nama = program.getString(1);
+                            String tanggalMulai = program.getString(2);
+                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/" + program.getString(7);
 
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                            cardList.add(new Card(nama, tanggalMulai, foto));
                         }
-                    });
 
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setAdapter(cardAdapter);
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
+                                errorMsg, Toast.LENGTH_LONG).show();
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
             }
+        }, new Response.ErrorListener() {
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(isAdded()){
-                getResources().getString(R.string.app_name);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Berita", "Login Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
+        });
 
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-            layananRecycler.setLayoutManager(layoutManager);
-            layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-            layananRecycler.setItemAnimator(new DefaultItemAnimator());
-            layananRecycler.setAdapter(layananAdapter);
-        }
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private class GetPartnership extends AsyncTask<Void, Void, Void>{
+    private void getPartnership() {
+        String tag_string_req = "req_partnership";
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            partnershipList = new ArrayList<>();
-            partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
-        }
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_GET_PARTNERSHIP, new Response.Listener<String>() {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler sh = new HttpHandler();
+            @Override
+            public void onResponse(String response) {
+                Log.d("BERITA", "Login Response: " + response.toString());
 
-            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_PARTNERSHIP);
-
-            Log.e(TAG, "Response from url: " + jsonStr);
-
-            if (jsonStr != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
 
-                    JSONArray programs = jsonObj.getJSONArray("partnership");
+                    if (!error) {
 
-                    for (int i = 0; i < programs.length(); i++) {
-                        JSONArray program = programs.getJSONArray(i);
+                        JSONArray programs = jObj.getJSONArray("partnership");
 
-                        String nama = program.getString(1);
-                        String tanggalMulai = program.getString(2);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
+                        for (int i = 0; i < programs.length(); i++) {
+                            JSONArray program = programs.getJSONArray(i);
 
-                        partnershipList.add(new Card(nama, tanggalMulai, foto));
-                    }
+                            String nama = program.getString(1);
+                            String tanggalMulai = program.getString(2);
+                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
 
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                            partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }
-                    });
 
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                        partnershipRecycler.setLayoutManager(layoutManager);
+                        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+                        partnershipRecycler.setAdapter(partnershipAdapter);
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
+                                errorMsg, Toast.LENGTH_LONG).show();
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
             }
+        }, new Response.ErrorListener() {
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(isAdded()){
-                getResources().getString(R.string.app_name);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Berita", "Login Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
+        });
 
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-            partnershipRecycler.setLayoutManager(layoutManager);
-            partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-            partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
-            partnershipRecycler.setAdapter(partnershipAdapter);
-        }
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override
