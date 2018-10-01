@@ -32,18 +32,16 @@
 
     </group>
 
-    <item android:title="">
-        <menu>
-            <item
-                android:id="@+id/nav_call"
-                android:icon="@drawable/ic_panggil"
-                android:title="Call Center" />
+    <group>
+        <item
+            android:id="@+id/nav_call"
+            android:icon="@drawable/ic_panggil"
+            android:title="Call Center" />
 
-            <item
-                android:id="@+id/nav_scan"
-                android:icon="@drawable/ic_qrcode_black_24dp"
-                android:title="Scan Kartu" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/ic_qrcode_black_24dp"
+            android:title="Scan Kartu" />
+    </group>
 
 </menu>
