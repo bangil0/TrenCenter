@@ -30,6 +30,9 @@
             android:icon="@drawable/ic_penghargaan"
             android:title="Penghargaan" />
 
+        <item
+            android:title=""/>
+
     </group>
 
     <group>

@@ -211,11 +211,15 @@ public class HomeTimPemenangan extends Fragment  {
                 .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                 .setListener(null);
 
+        return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         getFragmentManager().beginTransaction()
                 .replace(R.id.frame_container, this)
                 .commit();
-
-        return rootView;
     }
 
     public void sendRequest(){
