@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,22 +24,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class DaftarPendukung extends AppCompatActivity {
+public class DaftarPemenangan extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ListView listView;
-    private ArrayList<Caleg> pendukungList;
+
+    private ArrayList<Caleg> pemenanganList;
     private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daftar_pendukung);
+        setContentView(R.layout.activity_daftar_pemenangan);
 
-        listView = (ListView) findViewById(R.id.pendukung_list);
+        listView = (ListView) findViewById(R.id.pemenangan_list);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        pendukungList = new ArrayList<>();
-        adapter = new UserAdapter(this, pendukungList);
+        pemenanganList = new ArrayList<>();
+        adapter = new UserAdapter(this, pemenanganList);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -53,14 +53,14 @@ public class DaftarPendukung extends AppCompatActivity {
             }
         });
 
-        getPendukung();
+        getRelawan();
     }
 
-    private void getPendukung(){
-        String tag_string_req = "req_pendukung";
+    private void getRelawan(){
+        String tag_string_req = "req_pemenangan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_GET_PENDUKUNG, new Response.Listener<String>() {
+                AppConfig.URL_GET_PEMENANGAN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -74,11 +74,12 @@ public class DaftarPendukung extends AppCompatActivity {
                         JSONArray foto = jObj.getJSONArray("foto");
 
                         for(int i=0; i<data.length(); i++){
-                            pendukungList.add(new Caleg("http://156.67.221.225/trencenter/voting/dashboard/save/foto_pendukung/"
-                                    + foto.getString(i), data.getString(i)));
+                            pemenanganList.add(new Caleg("http://156.67.221.225/trencenter/voting/dashboard/save/foto_pemenangan/" + foto.getString(i),
+                                    data.getString(i)));
                         }
 
                         listView.setAdapter(adapter);
+
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),

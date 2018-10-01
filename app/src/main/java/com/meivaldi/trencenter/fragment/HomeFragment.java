@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DaftarPemenangan;
 import com.meivaldi.trencenter.activity.DaftarPendukung;
 import com.meivaldi.trencenter.activity.DaftarRelawan;
 import com.meivaldi.trencenter.activity.LayananActivity;
@@ -32,7 +33,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private TextView hari, detik, menit, jam;
-    private RelativeLayout one, two, three, four, five, six, seven, eight, nine;
+    private RelativeLayout one, two, three, four, five, six, seven, eight, nine, ten;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         seven = (RelativeLayout) rootView.findViewById(R.id.layout_seven);
         eight = (RelativeLayout) rootView.findViewById(R.id.layout_eight);
         nine = (RelativeLayout) rootView.findViewById(R.id.layout_nine);
+        ten = (RelativeLayout) rootView.findViewById(R.id.layout_ten);
 
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
@@ -64,6 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         seven.setOnClickListener(this);
         eight.setOnClickListener(this);
         nine.setOnClickListener(this);
+        ten.setOnClickListener(this);
 
         countDown();
 
@@ -156,6 +159,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 return;
             case R.id.layout_nine:
                 startActivity(new Intent(getContext(), LayananActivity.class));
+
+                return;
+            case R.id.layout_ten:
+                startActivity(new Intent(getContext(), DaftarPemenangan.class));
 
                 return;
         }

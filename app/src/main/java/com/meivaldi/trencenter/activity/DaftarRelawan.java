@@ -18,9 +18,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.adapter.LogistikAdapter;
+import com.meivaldi.trencenter.adapter.UserAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.HttpHandler;
+import com.meivaldi.trencenter.model.Caleg;
 import com.meivaldi.trencenter.model.Logistik;
 
 import org.json.JSONArray;
@@ -36,7 +38,8 @@ public class DaftarRelawan extends AppCompatActivity {
     private Toolbar toolbar;
     private ListView listView;
 
-    private ArrayList<String> relawanList;
+    private ArrayList<Caleg> relawanList;
+    private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class DaftarRelawan extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.relawan_list);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         relawanList = new ArrayList<>();
+        adapter = new UserAdapter(this, relawanList);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -76,12 +80,13 @@ public class DaftarRelawan extends AppCompatActivity {
 
                     if (!error) {
                         JSONArray data = jObj.getJSONArray("data");
+                        JSONArray foto = jObj.getJSONArray("foto");
 
                         for(int i=0; i<data.length(); i++){
-                            relawanList.add(data.getString(i));
+                            relawanList.add(new Caleg("http://156.67.221.225/trencenter/voting/dashboard/save/foto/" + foto.getString(i),
+                                    data.getString(i)));
                         }
 
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, relawanList);
                         listView.setAdapter(adapter);
 
                     } else {
