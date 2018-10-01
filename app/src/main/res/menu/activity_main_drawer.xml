@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group>
         <item
@@ -30,21 +31,22 @@
             android:icon="@drawable/ic_penghargaan"
             android:title="Penghargaan" />
 
-        <item
-            android:title=""/>
-
     </group>
 
-    <group>
-        <item
-            android:id="@+id/nav_call"
-            android:icon="@drawable/ic_panggil"
-            android:title="Call Center" />
+    <item android:title="Lainnya"
+        android:showAsAction="never"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/nav_call"
+                android:icon="@drawable/ic_panggil"
+                android:title="Call Center" />
 
-        <item
-            android:id="@+id/nav_scan"
-            android:icon="@drawable/ic_qrcode_black_24dp"
-            android:title="Scan Kartu" />
-    </group>
+            <item
+                android:id="@+id/nav_scan"
+                android:icon="@drawable/ic_qrcode_black_24dp"
+                android:title="Scan Kartu" />
+        </menu>
+    </item>
 
 </menu>

@@ -16,4 +16,9 @@
         <item name="titleTextColor">@android:color/black</item>
     </style>
 
+    <style name="NavigationView" >
+        <item name="android:listDivider">@color/yellow</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
+
 </resources>

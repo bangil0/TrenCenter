@@ -36,6 +36,7 @@ import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LayananActivity;
+import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.Partnership;
 import com.meivaldi.trencenter.activity.Penghargaan;
@@ -330,7 +331,18 @@ public class FragmentHomePendukung extends Fragment {
     }
 
     private int dpToPx(int dp) {
-        Resources r = getResources();
+        Resources r = null;
+
+        try{
+            r = getResources();
+        } catch (IllegalStateException e){
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Koneksi Server Lambat, Sedang merestart ...", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
+        }
+
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
