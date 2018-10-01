@@ -246,28 +246,28 @@ public class InputRelawan extends AppCompatActivity {
                 String Agama = agama.getText().toString();
                 String phone = hp.getText().toString();
                 String address = alamat.getText().toString();
+                String gender = jenisKelamin.getSelectedItem().toString();
                 String region = kabupatenSP.getSelectedItem().toString();
                 String kec = kecamatanSP.getSelectedItem().toString();
                 String kel = kelurahanSP.getSelectedItem().toString();
                 String erwe = rw.getText().toString();
                 String erte = rt.getText().toString();
                 String tepees = tps.getText().toString();
-                String marriage = status.getSelectedItem().toString();
                 String maker = user.get("type");
                 String makerName = user.get("name");
                 String userName = username.getText().toString();
                 String fbAkun = facebook.getText().toString();
                 String igAkun = instagram.getText().toString();
 
-                String gn = jenisKelamin.getSelectedItem().toString();
-                String gender = "B";
+                String mr = status.getSelectedItem().toString();
+                String marriage = "B";
 
-                if(gn.equals("Belum Menikah")){
-                    gender = "B";
-                } else if(gn.equals("Menikah")){
-                    gender = "S";
-                } else if(gn.equals("Pisah")){
-                    gender = "P";
+                if(mr.equals("Belum Menikah")){
+                    marriage = "B";
+                } else if(mr.equals("Menikah")){
+                    marriage = "S";
+                } else if(mr.equals("Pisah")){
+                    marriage = "P";
                 }
 
                 boolean status = checkEmptiness(kk, nik, name, birthPlace, birthDate, age, tribe, phone, address,
@@ -386,7 +386,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kelurahanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kelurahanList);
+                            R.layout.spinner_item, kelurahanList);
 
                     kelurahanSP.setAdapter(kelurahanAdapter);
 
@@ -433,7 +433,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kecamatanAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kecamatanList);
+                            R.layout.spinner_item, kecamatanList);
 
                     kecamatanSP.setAdapter(kecamatanAdapter);
 
@@ -480,7 +480,7 @@ public class InputRelawan extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_spinner_dropdown_item, kabupatenList);
+                            R.layout.spinner_item, kabupatenList);
 
                     kabupatenSP.setAdapter(kabupatenAdapter);
 

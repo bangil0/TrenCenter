@@ -36,8 +36,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Berita;
 import com.meivaldi.trencenter.activity.LayananActivity;
+import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.LogistikActivity;
+import com.meivaldi.trencenter.activity.Partnership;
 import com.meivaldi.trencenter.activity.ProgramKerja;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.activity.relawan.InputRelawan;
@@ -47,6 +50,8 @@ import com.meivaldi.trencenter.adapter.CardAdapter;
 import com.meivaldi.trencenter.adapter.CardLogistik;
 import com.meivaldi.trencenter.adapter.LayananAdapter;
 import com.meivaldi.trencenter.adapter.LayananPemenanganAdapter;
+import com.meivaldi.trencenter.adapter.PartnershipAdapter;
+import com.meivaldi.trencenter.adapter.PartnershipPemenanganAdapter;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -55,6 +60,7 @@ import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SliderIndicator;
 import com.meivaldi.trencenter.helper.SliderUtils;
 import com.meivaldi.trencenter.helper.SliderView;
+import com.meivaldi.trencenter.model.BeritaModel;
 import com.meivaldi.trencenter.model.Card;
 
 import org.json.JSONArray;
@@ -71,14 +77,15 @@ import java.util.TimerTask;
 
 public class HomeTimPemenangan extends Fragment  {
 
-    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3, selanjutnya4, seeBerita;
     private FloatingActionButton create;
 
-    private RecyclerView recyclerView, logistikRecycler, layananRecycler;
+    private RecyclerView recyclerView, logistikRecycler, layananRecycler, partnershipRecycler;
     private CardAdapter cardAdapter;
     private CardLogistik logistikAdapter;
-    private LayananPemenanganAdapter layananAdapter;
-    private List<Card> cardList, logistikList, layananList;
+    private LayananAdapter layananAdapter;
+    private PartnershipPemenanganAdapter partnershipAdapter;
+    private List<Card> cardList, logistikList, layananList, partnershipList;
 
     private static final String TAG = HomeTimPemenangan.class.getSimpleName();
     private static final String url = "http://156.67.221.225/trencenter/voting/android/getCard.php";
@@ -108,15 +115,26 @@ public class HomeTimPemenangan extends Fragment  {
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
         selanjutnya2 = (TextView) rootView.findViewById(R.id.selanjutnya2);
         selanjutnya3 = (TextView) rootView.findViewById(R.id.selanjutnya3);
+        selanjutnya4 = (TextView) rootView.findViewById(R.id.selanjutnya4);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         logistikRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_logistik);
         layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
+        partnershipRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_partnership);
+        seeBerita = (TextView) rootView.findViewById(R.id.seeBerita);
+
+        seeBerita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Berita.class));
+            }
+        });
 
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 
         new GetCards().execute();
         new GetLogistic().execute();
         new GetLayanan().execute();
+        new GetPartnership().execute();
 
         rq = Volley.newRequestQueue(getContext());
         sliderImg = new ArrayList<>();
@@ -144,6 +162,13 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), LogistikActivity.class));
+            }
+        });
+
+        selanjutnya4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Partnership.class));
             }
         });
 
@@ -188,6 +213,14 @@ public class HomeTimPemenangan extends Fragment  {
                 .setListener(null);
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frame_container, this)
+                .commit();
     }
 
     public void sendRequest(){
@@ -309,7 +342,18 @@ public class HomeTimPemenangan extends Fragment  {
     }
 
     private int dpToPx(int dp) {
-        Resources r = getResources();
+        Resources r = null;
+
+        try{
+            r = getResources();
+        } catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Koneksi Server Lambat, Sedang merestart ...", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
+        }
+
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
@@ -361,7 +405,7 @@ public class HomeTimPemenangan extends Fragment  {
         protected void onPreExecute() {
             super.onPreExecute();
             layananList = new ArrayList<>();
-            layananAdapter = new LayananPemenanganAdapter(getContext(), layananList);
+            layananAdapter = new LayananAdapter(getContext(), layananList);
         }
 
         @Override
@@ -584,11 +628,90 @@ public class HomeTimPemenangan extends Fragment  {
                 getResources().getString(R.string.app_name);
             }
 
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
             logistikRecycler.setLayoutManager(layoutManager);
             logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
             logistikRecycler.setItemAnimator(new DefaultItemAnimator());
             logistikRecycler.setAdapter(logistikAdapter);
+        }
+    }
+
+    private class GetPartnership extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            partnershipList = new ArrayList<>();
+            partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_PARTNERSHIP);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    JSONArray programs = jsonObj.getJSONArray("partnership");
+
+                    for (int i = 0; i < programs.length(); i++) {
+                        JSONArray program = programs.getJSONArray(i);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
+
+                        partnershipList.add(new Card(nama, tanggalMulai, foto));
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if(isAdded()){
+                getResources().getString(R.string.app_name);
+            }
+
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+            partnershipRecycler.setLayoutManager(layoutManager);
+            partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+            partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+            partnershipRecycler.setAdapter(partnershipAdapter);
         }
     }
 

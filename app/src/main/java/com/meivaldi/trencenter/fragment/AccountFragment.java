@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.ChangePassword;
 import com.meivaldi.trencenter.activity.ChangeUsername;
+import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.CircleTransform;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class AccountFragment extends Fragment implements View.OnClickListener{
 
@@ -54,7 +66,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         String foto = user.get("foto");
 
         name.setText(nama);
-        status.setText(tipe);
+
+        if(tipe.equals("tim_pemenangan")){
+            getStatus(tipe, nama);
+        } else {
+            status.setText(tipe);
+        }
 
         Glide.with(getContext()).load(foto)
                 .crossFade()
@@ -73,6 +90,56 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 .setListener(null);
 
         return rootView;
+    }
+
+    private void getStatus(final String tipe, final String nama) {
+        String tag_string_req = "req_status";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_STATUS, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("STATUS", "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+                        String jabatan = jObj.getString("jabatan");
+                        status.setText(jabatan + " " + tipe);
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("STATUS", "Login Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("type", tipe);
+                params.put("nama", nama);
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override

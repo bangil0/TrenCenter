@@ -31,11 +31,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.Berita;
 import com.meivaldi.trencenter.activity.DetailPenghargaan;
 import com.meivaldi.trencenter.activity.DetailPlatform;
 import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LayananActivity;
+import com.meivaldi.trencenter.activity.LoginActivity;
 import com.meivaldi.trencenter.activity.LogistikActivity;
+import com.meivaldi.trencenter.activity.Partnership;
 import com.meivaldi.trencenter.activity.Penghargaan;
 import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
@@ -47,6 +50,7 @@ import com.meivaldi.trencenter.adapter.Adapter;
 import com.meivaldi.trencenter.adapter.CardAdapter;
 import com.meivaldi.trencenter.adapter.CardLogistik;
 import com.meivaldi.trencenter.adapter.LayananAdapter;
+import com.meivaldi.trencenter.adapter.PartnershipPemenanganAdapter;
 import com.meivaldi.trencenter.adapter.SliderPagerAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -71,7 +75,7 @@ import java.util.TimerTask;
 
 public class FragmentHomePendukung extends Fragment {
 
-    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2;
+    private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3, seeBerita;
 
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -80,9 +84,10 @@ public class FragmentHomePendukung extends Fragment {
     private List<SliderUtils> sliderImg;
 
     private Adapter adapters;
-    private RecyclerView recyclerView, layananRecycler;;
+    private RecyclerView recyclerView, layananRecycler, partnershipRecycler;
     private Adapter Adapter;
-    private List<Card> cardList, layananList;
+    private List<Card> cardList, layananList, partnershipList;
+    private PartnershipPemenanganAdapter partnershipAdapter;
 
     private CardAdapter cardAdapter;
     private LayananAdapter layananAdapter;
@@ -106,9 +111,19 @@ public class FragmentHomePendukung extends Fragment {
         detik = (TextView) rootView.findViewById(R.id.detik);
         selanjutnya = (TextView) rootView.findViewById(R.id.selanjutnya);
         selanjutnya2 = (TextView) rootView.findViewById(R.id.selanjutnya2);
+        selanjutnya3 = (TextView) rootView.findViewById(R.id.selanjutnya3);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        partnershipRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_partnership);
         layananRecycler = (RecyclerView) rootView.findViewById(R.id.recycler_layanan);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        seeBerita = (TextView) rootView.findViewById(R.id.seeBerita);
+
+        seeBerita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Berita.class));
+            }
+        });
 
         selanjutnya.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +139,13 @@ public class FragmentHomePendukung extends Fragment {
             }
         });
 
+        selanjutnya3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Partnership.class));
+            }
+        });
+
         rq = Volley.newRequestQueue(getContext());
         sliderImg = new ArrayList<>();
 
@@ -136,6 +158,7 @@ public class FragmentHomePendukung extends Fragment {
 
         new GetCards().execute();
         new GetLayanan().execute();
+        new GetPartnership().execute();
 
         rootView.setVisibility(View.VISIBLE);
         rootView.animate()
@@ -308,7 +331,18 @@ public class FragmentHomePendukung extends Fragment {
     }
 
     private int dpToPx(int dp) {
-        Resources r = getResources();
+        Resources r = null;
+
+        try{
+            r = getResources();
+        } catch (IllegalStateException e){
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Koneksi Server Lambat, Sedang merestart ...", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
+        }
+
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
@@ -468,6 +502,90 @@ public class FragmentHomePendukung extends Fragment {
             layananRecycler.setItemAnimator(new DefaultItemAnimator());
             layananRecycler.setAdapter(layananAdapter);
         }
+    }
+
+    private class GetPartnership extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            partnershipList = new ArrayList<>();
+            partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr = sh.makeServiceCall(AppConfig.URL_GET_PARTNERSHIP);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    JSONArray programs = jsonObj.getJSONArray("partnership");
+
+                    for (int i = 0; i < programs.length(); i++) {
+                        JSONArray program = programs.getJSONArray(i);
+
+                        String nama = program.getString(1);
+                        String tanggalMulai = program.getString(2);
+                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
+
+                        partnershipList.add(new Card(nama, tanggalMulai, foto));
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if(isAdded()){
+                getResources().getString(R.string.app_name);
+            }
+
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+            partnershipRecycler.setLayoutManager(layoutManager);
+            partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+            partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+            partnershipRecycler.setAdapter(partnershipAdapter);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
 }

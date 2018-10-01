@@ -118,7 +118,7 @@ public class KirimPesan extends AppCompatActivity {
                         }
 
                         ArrayAdapter<String> namaAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                                android.R.layout.simple_spinner_dropdown_item, nameList);
+                                R.layout.spinner_item, nameList);
 
                         list.setAdapter(namaAdapter);
                     } else {

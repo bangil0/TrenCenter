@@ -258,6 +258,19 @@
                 android:textColorHint="#ccc" />
 
             <EditText
+                android:id="@+id/jabatan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/white"
+                android:hint="Jabatan"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
+                android:textColorHint="#ccc" />
+
+            <EditText
                 android:id="@+id/username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

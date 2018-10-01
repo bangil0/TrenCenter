@@ -47,7 +47,6 @@ public class LayananPemenanganAdapter extends RecyclerView.Adapter<LayananPemena
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .fitCenter()
-                .override(512, 160)
                 .into(holder.cardImage);
     }
 

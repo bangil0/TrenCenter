@@ -4,10 +4,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.meivaldi.trencenter.app.AppConfig;
+import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.app.Config;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by root on 21/09/18.

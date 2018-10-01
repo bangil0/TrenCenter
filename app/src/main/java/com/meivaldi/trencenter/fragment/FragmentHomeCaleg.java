@@ -5,9 +5,10 @@ import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,10 @@ import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.adapter.LogisticReportAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
+import com.meivaldi.trencenter.model.LogisticReport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,13 +40,16 @@ import java.util.Map;
 
 public class FragmentHomeCaleg extends Fragment {
 
-    private TextView hari, jam, menit, detik;
+    private TextView hari, jam, menit, detik, pemenangan, relawan, pendukung;
     private GraphView pemenanganView, relawanView, pendukungView;
     private Calendar calendar;
-    private Date d1, d2, d3, d4, d5, d6, d7;
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private static String TAG = FragmentHomeCaleg.class.getSimpleName();
+
+    private LogisticReportAdapter adapter;
+    private List<LogisticReport> list;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,32 +60,91 @@ public class FragmentHomeCaleg extends Fragment {
         jam = (TextView) view.findViewById(R.id.jam);
         menit = (TextView) view.findViewById(R.id.menit);
         detik = (TextView) view.findViewById(R.id.detik);
+        pemenangan = (TextView) view.findViewById(R.id.totalPemenangan);
+        relawan = (TextView) view.findViewById(R.id.totalRelawan);
+        pendukung = (TextView) view.findViewById(R.id.totalPendukung);
+
+        listView = (ListView) view.findViewById(R.id.logistikList);
         pemenanganView = (GraphView) view.findViewById(R.id.grafikPemenangan);
         relawanView = (GraphView) view.findViewById(R.id.grafikRelawan);
         pendukungView = (GraphView) view.findViewById(R.id.grafikPendukung);
         calendar = Calendar.getInstance();
 
-        getCharts(dateFormat.format(calendar.getTime()));
-        Toast.makeText(getContext(), "" + calendar.getTime(), Toast.LENGTH_SHORT).show();
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
-        calendar.add(Calendar.DATE, -6);
-        d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d3 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d4 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d5 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d6 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        d7 = calendar.getTime();
+        list = new ArrayList<>();
+
+        getSummaries();
+        getCharts(dateFormat.format(calendar.getTime()));
 
         countDown();
 
         return view;
+    }
+
+    private void getSummaries(){
+        String tag_string_req = "req_summaries";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_SUMMARIES, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean error = jsonObject.getBoolean("error");
+
+                    if(!error){
+                        String totalPemenangan = jsonObject.getString("pemenangan");
+                        String totalRelawan = jsonObject.getString("relawan");
+                        String totalPendukung = jsonObject.getString("pendukung");
+
+                        pemenangan.setText(totalPemenangan);
+                        relawan.setText(totalRelawan);
+                        pendukung.setText(totalPendukung);
+
+                        JSONArray logistik = jsonObject.getJSONArray("logistik");
+
+                        String nama, foto, total;
+                        for(int i=0; i<logistik.length(); i++){
+                            nama = logistik.getJSONArray(i).getString(0);
+                            foto = logistik.getJSONArray(i).getString(1);
+                            total = logistik.getJSONArray(i).getString(2);
+
+                            list.add(new LogisticReport(nama, total, foto));
+                        }
+
+                        adapter = new LogisticReportAdapter(getContext(), list);
+                        listView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("SUMMARIES", "Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Terjadi kesalahan.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
     private void getCharts(final String date) {
@@ -100,6 +165,21 @@ public class FragmentHomeCaleg extends Fragment {
                         JSONArray pemenangan = jsonObject.getJSONArray("pemenangan");
                         JSONArray relawan = jsonObject.getJSONArray("relawan");
                         JSONArray pendukung = jsonObject.getJSONArray("pendukung");
+
+                        calendar.add(Calendar.DATE, -6);
+                        Date d1 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d2 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d3 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d4 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d5 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d6 = calendar.getTime();
+                        calendar.add(Calendar.DATE, 1);
+                        Date d7 = calendar.getTime();
 
                         LineGraphSeries<DataPoint> pemenanganChart = new LineGraphSeries<>(new DataPoint[] {
                                 new DataPoint(d1, pemenangan.getInt(0)),
