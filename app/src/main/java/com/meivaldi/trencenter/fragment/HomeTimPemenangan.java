@@ -567,16 +567,6 @@ public class HomeTimPemenangan extends Fragment {
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        try {
-                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                            recyclerView.setItemAnimator(new DefaultItemAnimator());
-                            recyclerView.setAdapter(cardAdapter);
-                        } catch (IllegalStateException e){
-                            e.printStackTrace();
-                            Toast.makeText(getActivity(), "Koneksi lambat", Toast.LENGTH_SHORT).show();
-                        }
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -678,6 +668,12 @@ public class HomeTimPemenangan extends Fragment {
         partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
         partnershipRecycler.setAdapter(partnershipAdapter);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(cardAdapter);
+
     }
 
     @Override
