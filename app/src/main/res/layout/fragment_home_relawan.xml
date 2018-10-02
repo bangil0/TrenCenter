@@ -183,21 +183,13 @@
 
                 </RelativeLayout>
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelKegiatan"
-                    android:scrollbars="none">
-
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/labelKegiatan"
                         android:clipToPadding="false"
                         android:scrollbars="vertical" />
-
-                </HorizontalScrollView>
 
             </RelativeLayout>
 
@@ -244,21 +236,13 @@
 
                 </RelativeLayout>
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelLayanan"
-                    android:scrollbars="none">
-
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_layanan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/labelLayanan"
                         android:clipToPadding="false"
                         android:scrollbars="vertical" />
-
-                </HorizontalScrollView>
 
             </RelativeLayout>
 
@@ -305,21 +289,13 @@
 
                 </RelativeLayout>
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelPartnership"
-                    android:scrollbars="none">
-
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_partnership"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/labelPartnership"
                         android:clipToPadding="false"
                         android:scrollbars="vertical" />
-
-                </HorizontalScrollView>
 
             </RelativeLayout>
 

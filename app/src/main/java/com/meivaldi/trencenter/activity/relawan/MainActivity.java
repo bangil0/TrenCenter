@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("PERMISSION", "Permission Granted");
 
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:085761806490"));
+                    callIntent.setData(Uri.parse("tel:+6281366666322"));
 
                     startActivity(callIntent);
                 } else {

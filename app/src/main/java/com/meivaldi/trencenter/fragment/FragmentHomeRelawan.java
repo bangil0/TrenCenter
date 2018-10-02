@@ -375,7 +375,7 @@ public class FragmentHomeRelawan extends Fragment {
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                         layananRecycler.setLayoutManager(layoutManager);
                         layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
                         layananRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -432,7 +432,7 @@ public class FragmentHomeRelawan extends Fragment {
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
