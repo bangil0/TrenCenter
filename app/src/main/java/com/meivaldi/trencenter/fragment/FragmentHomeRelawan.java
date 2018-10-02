@@ -343,17 +343,7 @@ public class FragmentHomeRelawan extends Fragment {
     }
 
     private int dpToPx(int dp) {
-        Resources r = null;
-
-        try{
-            r = getResources();
-        } catch (IllegalStateException e){
-            e.printStackTrace();
-            Toast.makeText(getContext(), "Koneksi Server Lambat, Sedang merestart ...", Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(getContext(), LoginActivity.class));
-            getActivity().finish();
-        }
+        Resources r = getActivity().getResources();
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }

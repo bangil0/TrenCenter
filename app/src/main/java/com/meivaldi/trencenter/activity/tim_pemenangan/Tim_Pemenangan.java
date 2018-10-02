@@ -289,7 +289,11 @@ public class Tim_Pemenangan extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
 
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
     }
 
     @Override

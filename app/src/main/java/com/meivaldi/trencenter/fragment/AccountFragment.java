@@ -125,7 +125,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("STATUS", "Login Error: " + error.getMessage());
-                Toast.makeText(getContext(),
+                Toast.makeText(getActivity(),
                         "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
             }
         }){

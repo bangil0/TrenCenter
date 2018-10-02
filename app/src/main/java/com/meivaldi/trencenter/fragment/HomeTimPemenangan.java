@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -80,7 +81,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeTimPemenangan extends Fragment  {
+public class HomeTimPemenangan extends Fragment {
 
     private TextView hari, detik, menit, jam, selanjutnya, selanjutnya2, selanjutnya3, selanjutnya4, seeBerita;
     private FloatingActionButton create;
@@ -108,7 +109,7 @@ public class HomeTimPemenangan extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_home_tim_pemenangan, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home_tim_pemenangan, container, false);
 
         rootView.setAlpha(0f);
         rootView.setVisibility(View.GONE);
@@ -149,6 +150,8 @@ public class HomeTimPemenangan extends Fragment  {
         getLogistik();
         getCards();
         getPartnership();
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.HORIZONTAL);
 
         rq = Volley.newRequestQueue(getContext());
         sliderImg = new ArrayList<>();
@@ -237,7 +240,7 @@ public class HomeTimPemenangan extends Fragment  {
                 .commit();
     }
 
-    public void sendRequest(){
+    public void sendRequest() {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
@@ -246,18 +249,18 @@ public class HomeTimPemenangan extends Fragment  {
                 List<String> headlineList = new ArrayList<>();
                 List<String> sourceList = new ArrayList<>();
 
-                for (int i=0; i<response.length(); i++){
+                for (int i = 0; i < response.length(); i++) {
                     SliderUtils sliderUtils = new SliderUtils();
-                   try {
-                       JSONArray array = response.getJSONArray(i);
-                       String image = url + array.getString(0);
-                       headlineList.add(array.getString(1));
-                       sourceList.add(array.getString(2));
+                    try {
+                        JSONArray array = response.getJSONArray(i);
+                        String image = url + array.getString(0);
+                        headlineList.add(array.getString(1));
+                        sourceList.add(array.getString(2));
 
-                       sliderUtils.setSliderImageUrl(image);
-                   } catch (JSONException e) {
-                       e.printStackTrace();
-                   }
+                        sliderUtils.setSliderImageUrl(image);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     sliderImg.add(sliderUtils);
                 }
@@ -276,12 +279,12 @@ public class HomeTimPemenangan extends Fragment  {
         rq.add(jsonArrayRequest);
     }
 
-    public class MyTimerTask extends TimerTask{
+    public class MyTimerTask extends TimerTask {
 
         @Override
         public void run() {
 
-            if(getActivity() == null)
+            if (getActivity() == null)
                 return;
 
             getActivity().runOnUiThread(new Runnable() {
@@ -291,31 +294,31 @@ public class HomeTimPemenangan extends Fragment  {
 
                     try {
                         length = adapter.getCount();
-                    } catch (NullPointerException e){
+                    } catch (NullPointerException e) {
                         e.printStackTrace();
 
                     }
 
-                    if(length == 2){
-                        if(viewPager.getCurrentItem() == 0){
+                    if (length == 2) {
+                        if (viewPager.getCurrentItem() == 0) {
                             viewPager.setCurrentItem(1);
-                        } else if(viewPager.getCurrentItem() == 1){
+                        } else if (viewPager.getCurrentItem() == 1) {
                             viewPager.setCurrentItem(0);
                         }
-                    } else if(length == 3){
-                        if(viewPager.getCurrentItem() == 0){
+                    } else if (length == 3) {
+                        if (viewPager.getCurrentItem() == 0) {
                             viewPager.setCurrentItem(1);
-                        } else if(viewPager.getCurrentItem() == 1){
+                        } else if (viewPager.getCurrentItem() == 1) {
                             viewPager.setCurrentItem(2);
                         } else {
                             viewPager.setCurrentItem(0);
                         }
-                    } else if(length == 4){
-                        if(viewPager.getCurrentItem() == 0){
+                    } else if (length == 4) {
+                        if (viewPager.getCurrentItem() == 0) {
                             viewPager.setCurrentItem(1);
-                        } else if(viewPager.getCurrentItem() == 1){
+                        } else if (viewPager.getCurrentItem() == 1) {
                             viewPager.setCurrentItem(2);
-                        } else if(viewPager.getCurrentItem() == 2){
+                        } else if (viewPager.getCurrentItem() == 2) {
                             viewPager.setCurrentItem(3);
                         } else {
                             viewPager.setCurrentItem(0);
@@ -362,13 +365,13 @@ public class HomeTimPemenangan extends Fragment  {
         }
     }
 
-    private int dpToPx(int dp) {
-        Resources r = getResources();
+    private int dpToPx(int dp) throws IllegalStateException {
+        Resources r = getActivity().getResources();
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    private void countDown(){
+    private void countDown() {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -397,7 +400,7 @@ public class HomeTimPemenangan extends Fragment  {
         menit.setText("" + diffMinutes);
         detik.setText("" + diffSeconds);
 
-        new CountDownTimer(diffSeconds * 1000, 1000){
+        new CountDownTimer(diffSeconds * 1000, 1000) {
             @Override
             public void onTick(long l) {
                 detik.setText("" + l / 1000);
@@ -420,9 +423,6 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onResponse(String response) {
                 Log.d("BERITA", "Login Response: " + response.toString());
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, HomeTimPemenangan.this)
-                        .commit();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -441,11 +441,16 @@ public class HomeTimPemenangan extends Fragment  {
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-                        layananRecycler.setLayoutManager(layoutManager);
-                        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        layananRecycler.setItemAnimator(new DefaultItemAnimator());
-                        layananRecycler.setAdapter(layananAdapter);
+                        try {
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                            layananRecycler.setLayoutManager(layoutManager);
+                            layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                            layananRecycler.setItemAnimator(new DefaultItemAnimator());
+                            layananRecycler.setAdapter(layananAdapter);
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Koneksi lambat", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -462,7 +467,7 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Activity activity = getActivity();
-                if(activity != null && isAdded()) {
+                if (activity != null && isAdded()) {
                     if (error instanceof NoConnectionError) {
                         String errormsg = "Tidak Ada Koneksi Internet!";
                         Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
@@ -487,14 +492,6 @@ public class HomeTimPemenangan extends Fragment  {
             public void onResponse(String response) {
                 Log.d("BERITA", "Login Response: " + response.toString());
 
-                try{
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.frame_container, HomeTimPemenangan.this)
-                            .commit();
-                } catch (NullPointerException e){
-                    Toast.makeText(getActivity(), "Koneksi tidak stabil", Toast.LENGTH_SHORT).show();
-                }
-
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
@@ -512,11 +509,16 @@ public class HomeTimPemenangan extends Fragment  {
                             logistikList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        logistikRecycler.setLayoutManager(layoutManager);
-                        logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        logistikRecycler.setItemAnimator(new DefaultItemAnimator());
-                        logistikRecycler.setAdapter(logistikAdapter);
+                        try {
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                            logistikRecycler.setLayoutManager(layoutManager);
+                            logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                            logistikRecycler.setItemAnimator(new DefaultItemAnimator());
+                            logistikRecycler.setAdapter(logistikAdapter);
+                        } catch (IllegalStateException e){
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Koneksi lambat", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -533,14 +535,14 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Activity activity = getActivity();
-                if(activity != null && isAdded())
-                if (error instanceof NoConnectionError) {
-                    String errormsg = "Tidak Ada Koneksi Internet!";
-                    Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
-                } else {
-                    String errormsg = "Tidak Ada Koneksi Internet!";
-                    Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
-                }
+                if (activity != null && isAdded())
+                    if (error instanceof NoConnectionError) {
+                        String errormsg = "Tidak Ada Koneksi Internet!";
+                        Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
+                    } else {
+                        String errormsg = "Tidak Ada Koneksi Internet!";
+                        Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
+                    }
             }
         });
 
@@ -556,9 +558,6 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onResponse(String response) {
                 Log.d("BERITA", "Login Response: " + response.toString());
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, HomeTimPemenangan.this)
-                        .commit();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -578,11 +577,16 @@ public class HomeTimPemenangan extends Fragment  {
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(cardAdapter);
+                        try {
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(cardAdapter);
+                        } catch (IllegalStateException e){
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Koneksi lambat", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -599,7 +603,7 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Activity activity = getActivity();
-                if(activity != null && isAdded()) {
+                if (activity != null && isAdded()) {
                     if (error instanceof NoConnectionError) {
                         String errormsg = "Tidak Ada Koneksi Internet!";
                         Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
@@ -623,9 +627,6 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onResponse(String response) {
                 Log.d("BERITA", "Login Response: " + response.toString());
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, HomeTimPemenangan.this)
-                        .commit();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -645,11 +646,16 @@ public class HomeTimPemenangan extends Fragment  {
                             partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        partnershipRecycler.setLayoutManager(layoutManager);
-                        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
-                        partnershipRecycler.setAdapter(partnershipAdapter);
+                        try {
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                            partnershipRecycler.setLayoutManager(layoutManager);
+                            partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                            partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+                            partnershipRecycler.setAdapter(partnershipAdapter);
+                        } catch (IllegalStateException e){
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Koneksi lambat", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -666,7 +672,7 @@ public class HomeTimPemenangan extends Fragment  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Activity activity = getActivity();
-                if(activity != null && isAdded()) {
+                if (activity != null && isAdded()) {
                     if (error instanceof NoConnectionError) {
                         String errormsg = "Tidak Ada Koneksi Internet!";
                         Toast.makeText(activity, errormsg, Toast.LENGTH_LONG).show();
