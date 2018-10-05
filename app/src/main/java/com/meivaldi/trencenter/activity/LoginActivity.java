@@ -154,15 +154,15 @@ public class LoginActivity extends AppCompatActivity {
                         String foto;
 
                         if(tipe.equals("pendukung")){
-                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pendukung/" + user.getString("foto");
+                            foto = "http://156.67.221.225/voting/dashboard/save/foto_pendukung/" + user.getString("foto");
                         } else if(tipe.equals("tim_pemenangan")){
-                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_pemenangan/" + user.getString("foto");
+                            foto = "http://156.67.221.225/voting/dashboard/save/foto_pemenangan/" + user.getString("foto");
                         } else if(tipe.equals("caleg")){
-                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_caleg/" + user.getString("foto");
+                            foto = "http://156.67.221.225/voting/dashboard/save/foto_caleg/" + user.getString("foto");
                         } else if(tipe.equals("super_admin")) {
-                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto/admin.png";
+                            foto = "http://156.67.221.225/voting/dashboard/save/foto/admin.png";
                         } else {
-                            foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto/" + user.getString("foto");
+                            foto = "http://156.67.221.225/voting/dashboard/save/foto/" + user.getString("foto");
                         }
 
                         if(tipe.equals("super_admin")){

@@ -30,7 +30,7 @@ import static java.security.AccessController.getContext;
 
 public class PartnershipAdapter extends ArrayAdapter<BeritaModel> {
 
-    private String base = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/";
+    private String base = "http://156.67.221.225/voting/dashboard/save/foto_partnership/";
 
     private Context context;
     private List<BeritaModel> beritaList = new ArrayList<>();

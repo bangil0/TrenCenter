@@ -81,7 +81,7 @@ public class HomeTimPemenangan extends Fragment {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    String request_url = "http://156.67.221.225/trencenter/voting/android/debug.php";
+    String request_url = "http://156.67.221.225/voting/android/debug.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -220,7 +220,7 @@ public class HomeTimPemenangan extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
+                String url = "http://156.67.221.225/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
                 List<String> sourceList = new ArrayList<>();
 
@@ -411,7 +411,7 @@ public class HomeTimPemenangan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
@@ -466,7 +466,7 @@ public class HomeTimPemenangan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/" + program.getString(7);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_logistik/" + program.getString(7);
 
                             logistikList.add(new Card(nama, tanggalMulai, foto));
                         }
@@ -521,7 +521,7 @@ public class HomeTimPemenangan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/" + program.getString(7);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_program/" + program.getString(7);
 
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
@@ -576,7 +576,7 @@ public class HomeTimPemenangan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_partnership/" + program.getString(7);
 
                             partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }

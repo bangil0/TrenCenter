@@ -133,7 +133,6 @@ public class InputRelawan extends AppCompatActivity {
         facebook = (EditText) findViewById(R.id.facebook);
         instagram = (EditText) findViewById(R.id.instagram);
 
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

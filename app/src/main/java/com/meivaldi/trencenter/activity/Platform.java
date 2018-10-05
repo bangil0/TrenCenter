@@ -12,10 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.pendukung.Pendukung;
-import com.meivaldi.trencenter.activity.relawan.MainActivity;
-import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
-import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.CalegAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.helper.HttpHandler;

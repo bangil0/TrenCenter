@@ -31,7 +31,7 @@ public class Berita extends AppCompatActivity {
     private Toolbar toolbar;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
-    private static final String url = "http://156.67.221.225/trencenter/voting/android/getBerita.php";
+    private static final String url = "http://156.67.221.225/voting/android/getBerita.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

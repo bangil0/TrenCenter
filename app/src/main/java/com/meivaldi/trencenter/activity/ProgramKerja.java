@@ -12,10 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.meivaldi.trencenter.R;
-import com.meivaldi.trencenter.activity.pendukung.Pendukung;
-import com.meivaldi.trencenter.activity.relawan.MainActivity;
-import com.meivaldi.trencenter.activity.super_admin.Dashboard_SuperAdmin;
-import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.adapter.ProgramAdapter;
 import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
@@ -43,7 +39,7 @@ public class ProgramKerja extends AppCompatActivity {
     private String tipe;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
-    private static final String url = "http://156.67.221.225/trencenter/voting/android/getProgram.php";
+    private static final String url = "http://156.67.221.225/voting/android/getProgram.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

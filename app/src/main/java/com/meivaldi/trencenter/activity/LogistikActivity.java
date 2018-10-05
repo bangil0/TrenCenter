@@ -91,7 +91,7 @@ public class LogistikActivity extends AppCompatActivity {
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String lokasi = program.getString(4);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/" + program.getString(7);
+                        String foto = "http://156.67.221.225/voting/dashboard/save/foto_logistik/" + program.getString(7);
 
                         logistikList.add(new Logistik(nama, tanggalMulai, lokasi, foto));
                     }

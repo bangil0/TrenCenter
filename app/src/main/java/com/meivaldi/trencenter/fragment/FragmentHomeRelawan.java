@@ -3,8 +3,6 @@ package com.meivaldi.trencenter.fragment;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +16,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,29 +28,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.Berita;
-import com.meivaldi.trencenter.activity.DetailPenghargaan;
-import com.meivaldi.trencenter.activity.DetailPlatform;
-import com.meivaldi.trencenter.activity.DetailVisiMisi;
 import com.meivaldi.trencenter.activity.LayananActivity;
-import com.meivaldi.trencenter.activity.LoginActivity;
-import com.meivaldi.trencenter.activity.LogistikActivity;
 import com.meivaldi.trencenter.activity.Partnership;
-import com.meivaldi.trencenter.activity.Penghargaan;
-import com.meivaldi.trencenter.activity.Platform;
 import com.meivaldi.trencenter.activity.ProgramKerja;
-import com.meivaldi.trencenter.activity.VisiMisi;
-import com.meivaldi.trencenter.activity.caleg.DataCaleg;
-import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.pendukung.InputPendukung;
 import com.meivaldi.trencenter.adapter.Adapter;
 import com.meivaldi.trencenter.adapter.CardAdapter;
-import com.meivaldi.trencenter.adapter.CardLogistik;
 import com.meivaldi.trencenter.adapter.LayananAdapter;
 import com.meivaldi.trencenter.adapter.PartnershipPemenanganAdapter;
 import com.meivaldi.trencenter.adapter.ViewPagerAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
-import com.meivaldi.trencenter.helper.HttpHandler;
 import com.meivaldi.trencenter.helper.SliderUtils;
 import com.meivaldi.trencenter.model.Card;
 
@@ -89,10 +74,7 @@ public class FragmentHomeRelawan extends Fragment {
     private CardAdapter cardAdapter;
     private LayananAdapter layananAdapter;
 
-    private static final String TAG = HomeTimPemenangan.class.getSimpleName();
-    private static final String url = "http://156.67.221.225/trencenter/voting/android/getCard.php";
-
-    String request_url = "http://156.67.221.225/trencenter/voting/android/debug.php";
+    String request_url = "http://156.67.221.225/voting/android/debug.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -230,7 +212,7 @@ public class FragmentHomeRelawan extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(request_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
+                String url = "http://156.67.221.225/voting/dashboard/save/foto_berita/";
                 List<String> headlineList = new ArrayList<>();
                 List<String> sourceList = new ArrayList<>();
 
@@ -370,7 +352,7 @@ public class FragmentHomeRelawan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
@@ -427,7 +409,7 @@ public class FragmentHomeRelawan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_program/" + program.getString(7);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_program/" + program.getString(7);
 
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
@@ -484,7 +466,7 @@ public class FragmentHomeRelawan extends Fragment {
 
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
-                            String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_partnership/" + program.getString(7);
+                            String foto = "http://156.67.221.225/voting/dashboard/save/foto_partnership/" + program.getString(7);
 
                             partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }

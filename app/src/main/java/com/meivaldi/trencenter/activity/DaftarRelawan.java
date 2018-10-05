@@ -83,7 +83,7 @@ public class DaftarRelawan extends AppCompatActivity {
                         JSONArray foto = jObj.getJSONArray("foto");
 
                         for(int i=0; i<data.length(); i++){
-                            relawanList.add(new Caleg("http://156.67.221.225/trencenter/voting/dashboard/save/foto/" + foto.getString(i),
+                            relawanList.add(new Caleg("http://156.67.221.225/voting/dashboard/save/foto/" + foto.getString(i),
                                     data.getString(i)));
                         }
 

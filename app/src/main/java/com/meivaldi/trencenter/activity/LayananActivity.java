@@ -87,7 +87,7 @@ public class LayananActivity extends AppCompatActivity {
                         String nama = program.getString(1);
                         String tanggalMulai = program.getString(2);
                         String lokasi = program.getString(3);
-                        String foto = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+                        String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                         logistikList.add(new Logistik(nama, tanggalMulai, lokasi, foto));
                     }

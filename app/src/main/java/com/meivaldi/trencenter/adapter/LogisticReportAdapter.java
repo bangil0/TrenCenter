@@ -50,7 +50,7 @@ public class LogisticReportAdapter extends ArrayAdapter<LogisticReport> {
         total.setText(currentLogistik.getTotal());
 
         ImageView imageView = (ImageView) listItem.findViewById(R.id.logo);
-        String url = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_logistik/" + currentLogistik.getImage();
+        String url = "http://156.67.221.225/voting/dashboard/save/foto_logistik/" + currentLogistik.getImage();
 
         Glide.with(getContext()).load(url)
                 .crossFade()

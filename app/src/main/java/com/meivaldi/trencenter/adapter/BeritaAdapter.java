@@ -25,7 +25,7 @@ import java.util.List;
 
 public class BeritaAdapter extends ArrayAdapter<BeritaModel> {
 
-    private String base = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_berita/";
+    private String base = "http://156.67.221.225/voting/dashboard/save/foto_berita/";
 
     private Context context;
     private List<BeritaModel> beritaList = new ArrayList<>();

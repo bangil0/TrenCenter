@@ -159,7 +159,7 @@ public class DetailLayanan extends AppCompatActivity {
                         id_layanan = program.getString(0);
                         nama = program.getString(1);
                         String tanggalMulai = program.getString(3);
-                        String gambar = "http://156.67.221.225/trencenter/voting/dashboard/save/foto_layanan/" + program.getString(5);
+                        String gambar = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
                         Glide.with(getApplicationContext()).load(gambar)
                                 .crossFade()

@@ -74,7 +74,7 @@ public class DaftarPendukung extends AppCompatActivity {
                         JSONArray foto = jObj.getJSONArray("foto");
 
                         for(int i=0; i<data.length(); i++){
-                            pendukungList.add(new Caleg("http://156.67.221.225/trencenter/voting/dashboard/save/foto_pendukung/"
+                            pendukungList.add(new Caleg("http://156.67.221.225/voting/dashboard/save/foto_pendukung/"
                                     + foto.getString(i), data.getString(i)));
                         }
 
