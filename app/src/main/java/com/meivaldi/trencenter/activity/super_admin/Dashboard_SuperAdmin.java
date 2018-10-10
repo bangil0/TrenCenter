@@ -1,5 +1,6 @@
 package com.meivaldi.trencenter.activity.super_admin;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +9,15 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +34,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.DetailCalegAdmin;
+import com.meivaldi.trencenter.activity.DetailPenghargaan;
+import com.meivaldi.trencenter.activity.DetailPlatform;
+import com.meivaldi.trencenter.activity.DetailVisiMisi;
+import com.meivaldi.trencenter.activity.LayananActivity;
 import com.meivaldi.trencenter.activity.LoginActivity;
+import com.meivaldi.trencenter.activity.ProgramKerja;
+import com.meivaldi.trencenter.activity.ScanKartu;
+import com.meivaldi.trencenter.activity.VisiMisiAdmin;
+import com.meivaldi.trencenter.activity.caleg.DetailCaleg;
 import com.meivaldi.trencenter.activity.relawan.MainActivity;
 import com.meivaldi.trencenter.activity.tim_pemenangan.Tim_Pemenangan;
 import com.meivaldi.trencenter.app.AppConfig;
@@ -56,6 +72,10 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+
     private static String TAG = Dashboard_SuperAdmin.class.getSimpleName();
 
     @Override
@@ -68,6 +88,68 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toggle = new ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.nav_profile:
+                        startActivity(new Intent(getApplicationContext(), DetailCalegAdmin.class));
+
+                        return true;
+                    case R.id.nav_target:
+                        startActivity(new Intent(getApplicationContext(), VisiMisiAdmin.class));
+
+                        return true;
+                    case R.id.nav_platform:
+                        startActivity(new Intent(getApplicationContext(), DetailPlatform.class));
+
+                        return true;
+                    case R.id.nav_progja:
+                        startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+
+                        return true;
+                    case R.id.nav_layanan:
+                        startActivity(new Intent(getApplicationContext(), LayananActivity.class));
+
+                        return true;
+                    case R.id.nav_penghargaan:
+                        startActivity(new Intent(getApplicationContext(), DetailPenghargaan.class));
+
+                        return true;
+                    case R.id.nav_call:
+                        ActivityCompat.requestPermissions(Dashboard_SuperAdmin.this,
+                                new String[]{Manifest.permission.CALL_PHONE},
+                                0);
+
+                        return true;
+                    case R.id.nav_scan:
+
+                        startActivity(new Intent(getApplicationContext(), ScanKartu.class));
+
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
 
@@ -78,10 +160,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");
         FirebaseMessaging.getInstance().subscribeToTopic("layanan");
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -175,6 +253,9 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
             return true;
         }
 
+        if(toggle.onOptionsItemSelected(item))
+            return true;
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -240,6 +321,10 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawers();
+            return;
+        }
 
         MenuItem homeItem = navigation.getMenu().getItem(0);
 

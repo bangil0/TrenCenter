@@ -165,7 +165,10 @@
         <activity android:name=".activity.Berita" />
         <activity android:name=".activity.Partnership" />
         <activity android:name=".activity.DetailPartnership" />
-        <activity android:name=".activity.DaftarPemenangan"></activity>
+        <activity android:name=".activity.DaftarPemenangan" />
+        <activity android:name=".activity.VisiMisiAdmin" />
+        <activity android:name=".activity.DetailCalegAdmin" />
+        <activity android:name=".activity.EditData"></activity>
     </application>
 
 </manifest>
