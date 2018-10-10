@@ -173,9 +173,6 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         if(id == R.id.action_logout){
             logoutUser();
             return true;
-        } else if(id == R.id.action_refresh){
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
         }
 
         return super.onOptionsItemSelected(item);

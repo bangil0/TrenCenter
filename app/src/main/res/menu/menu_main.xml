@@ -5,13 +5,6 @@
     tools:context=".activity.super_admin.Dashboard_SuperAdmin">
 
     <item
-        android:id="@+id/action_refresh"
-        android:orderInCategory="300"
-        android:title="Refresh"
-        android:icon="@drawable/ic_logout"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_logout"
         android:orderInCategory="300"
         android:title="Logout"

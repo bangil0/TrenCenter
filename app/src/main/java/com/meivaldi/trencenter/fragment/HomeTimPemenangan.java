@@ -231,7 +231,19 @@ public class HomeTimPemenangan extends Fragment {
                     SliderUtils sliderUtils = new SliderUtils();
                     try {
                         JSONArray array = response.getJSONArray(i);
-                        String image = url + array.getString(0);
+
+                        String foto = array.getString(0);
+                        String tes = "";
+
+                        for(int j=0; j<foto.length(); j++){
+                            if(foto.charAt(j) == ' '){
+                                tes += "%20";
+                            } else {
+                                tes += foto.charAt(j);
+                            }
+                        }
+
+                        String image = url + tes;
                         headlineList.add(array.getString(1));
                         sourceList.add(array.getString(2));
 
