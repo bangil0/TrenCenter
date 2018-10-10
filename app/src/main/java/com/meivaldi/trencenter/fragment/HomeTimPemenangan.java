@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -80,6 +81,7 @@ public class HomeTimPemenangan extends Fragment {
 
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     String request_url = "http://156.67.221.225/voting/android/debug.php";
 
@@ -91,6 +93,7 @@ public class HomeTimPemenangan extends Fragment {
         rootView.setAlpha(0f);
         rootView.setVisibility(View.GONE);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);

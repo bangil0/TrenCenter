@@ -5,20 +5,31 @@
     android:layout_height="match_parent"
     tools:context="com.meivaldi.trencenter.fragment.HomeTimPemenangan">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
-        android:id="@+id/label"
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/label"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sisa waktu menuju Pemilu 2019" />
+            android:layout_below="@id/toolbar"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sisa waktu menuju Pemilu 2019" />
 
     </LinearLayout>
 
@@ -365,6 +376,10 @@
             </LinearLayout>
 
         </ScrollView>
+
+    </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/createUser"
