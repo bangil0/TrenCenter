@@ -245,7 +245,7 @@ public class FragmentHomeRelawan extends Fragment {
                     try {
                         JSONArray array = response.getJSONArray(i);
 
-                        String foto = array.getString(0);
+                        String foto = array.getString(7);
                         String tes = "";
 
                         for(int j=0; j<foto.length(); j++){
@@ -257,8 +257,8 @@ public class FragmentHomeRelawan extends Fragment {
                         }
 
                         String image = url + tes;
-                        headlineList.add(array.getString(1));
-                        sourceList.add(array.getString(2));
+                        headlineList.add(array.getString(3));
+                        sourceList.add(array.getString(8));
 
                         sliderUtils.setSliderImageUrl(image);
                     } catch (JSONException e) {

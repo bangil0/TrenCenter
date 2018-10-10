@@ -89,8 +89,8 @@ public class DetailBerita extends AppCompatActivity {
 
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("berita");
-
                         int index = getIntent().getIntExtra("INDEX", 0);
+
                         JSONArray program = jsonArray.getJSONArray(index);
 
                         String category = program.getString(1);

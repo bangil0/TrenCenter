@@ -15,9 +15,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan;
+import com.meivaldi.trencenter.helper.SQLiteHandler;
 import com.meivaldi.trencenter.model.Card;
 
 import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,6 +30,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     private Context context;
     private List<Card> cardList;
+
+    private SQLiteHandler db;
+    private HashMap<String, String> user;
+    private String type;
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,7 +79,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             cardImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = new Intent(context, DetailProgram.class);
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
@@ -83,7 +89,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    Intent intent = null;
+
+                    db = new SQLiteHandler(context);
+                    user = new HashMap<String, String>();
+                    user = db.getUserDetails();
+                    type = user.get("type");
+
+                    if(type.equals("pendukung") || type.equals("relawan")){
+                        intent = new Intent(context, DetailProgram.class);
+                    } else {
+                        intent = new Intent(context, DetailProgram_TimPemenangan.class);
+                    }
+
                     intent.putExtra("INDEX", getAdapterPosition());
                     intent.putExtra("MAIN", true);
                     context.startActivity(intent);
