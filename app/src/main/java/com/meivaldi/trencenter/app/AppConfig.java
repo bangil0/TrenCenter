@@ -50,4 +50,6 @@ public class AppConfig {
     public static String URL_GET_CARD = "http://156.67.221.225/voting/android/getCard.php";
     public static String URL_GET_ALL_LAYANAN = "http://156.67.221.225/voting/android/get_all_layanan.php";
     public static String URL_GET_ALL_PARTNERSHIP = "http://156.67.221.225/voting/android/get_all_partnership.php";
+    public static String URL_DELETE_MESSAGE = "http://156.67.221.225/voting/android/delete_message.php";
+    public static String URL_DELETE_MESSAGE_ANOTHER = "http://156.67.221.225/voting/android/delete_message_another.php";
 }

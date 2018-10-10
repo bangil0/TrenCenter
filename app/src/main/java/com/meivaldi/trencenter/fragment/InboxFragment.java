@@ -160,23 +160,72 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
     }
 
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+    public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof MessageAdapter.MyViewHolder) {
-            final Message deletedItem = messagesList.get(viewHolder.getAdapterPosition());
-            final int deletedIndex = viewHolder.getAdapterPosition();
+            Message msg = messagesList.get(position);
+            final String title = msg.getTitle();
+            final String date = msg.getDate();
+            final String foto = msg.getImage();
 
             mAdapter.removeItem(viewHolder.getAdapterPosition());
 
             Snackbar snackbar = Snackbar
                     .make(relativeLayout, "Pesan telah dihapus!", Snackbar.LENGTH_LONG);
-            snackbar.setAction("Batal", new View.OnClickListener() {
+
+            snackbar.setCallback(new Snackbar.Callback(){
                 @Override
-                public void onClick(View view) {
-                    mAdapter.restoreItem(deletedItem, deletedIndex);
+                public void onDismissed(Snackbar transientBottomBar, int event) {
+                    super.onDismissed(transientBottomBar, event);
+
+                    deleteMessage(title, date, foto);
                 }
             });
-            snackbar.setActionTextColor(Color.YELLOW);
             snackbar.show();
         }
+    }
+
+    private void deleteMessage(final String title, final String date, final String foto) {
+        String tag_string_req = "req_delete_message";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_DELETE_MESSAGE_ANOTHER, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Hapus Pesan", "Menghapus Pesan");
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Hapus Pesan", "Delete Error: " + error.getMessage());
+                Toast.makeText(getContext(),
+                        "Terjadi kesalahan, silahkan periksa koneksi internet!", Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("judul", title);
+                params.put("tanggal", date);
+                params.put("foto", foto);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }
