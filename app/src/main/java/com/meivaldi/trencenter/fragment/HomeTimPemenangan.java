@@ -74,10 +74,12 @@ public class HomeTimPemenangan extends Fragment {
     private PartnershipPemenanganAdapter partnershipAdapter;
     private List<Card> cardList, logistikList, layananList, partnershipList;
 
-    Dialog dialog;
+    private Dialog dialog;
 
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+
+    private TextView emptyLayanan, emptyProgram, emptyLogistik, emptyPartnership;
 
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
@@ -125,6 +127,35 @@ public class HomeTimPemenangan extends Fragment {
         cardAdapter = new CardAdapter(getContext(), cardList);
         partnershipList = new ArrayList<>();
         partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        partnershipRecycler.setLayoutManager(layoutManager);
+        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+        partnershipRecycler.setAdapter(partnershipAdapter);
+
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2);
+        layananRecycler.setLayoutManager(layoutManager1);
+        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        layananRecycler.setItemAnimator(new DefaultItemAnimator());
+        layananRecycler.setAdapter(layananAdapter);
+
+        RecyclerView.LayoutManager layoutManager2 = new GridLayoutManager(getContext(), 2);
+        logistikRecycler.setLayoutManager(layoutManager2);
+        logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        logistikRecycler.setItemAnimator(new DefaultItemAnimator());
+        logistikRecycler.setAdapter(logistikAdapter);
+
+        RecyclerView.LayoutManager layoutManager3 = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager3);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(cardAdapter);
+
+        emptyLayanan = (TextView) rootView.findViewById(R.id.emptyLayanan);
+        emptyLogistik = (TextView) rootView.findViewById(R.id.emptyLogistik);
+        emptyProgram = (TextView) rootView.findViewById(R.id.emptyKegiatan);
+        emptyPartnership = (TextView) rootView.findViewById(R.id.emptyPartnership);
 
         getCards();
         getLayanan();
@@ -412,7 +443,7 @@ public class HomeTimPemenangan extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d("BERITA", "Login Response: " + response.toString());
+                Log.d("LAYANAN", "Login Response: " + response.toString());
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -424,6 +455,12 @@ public class HomeTimPemenangan extends Fragment {
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
 
+                            if(program.length() == 0){
+                                emptyLayanan.setVisibility(View.VISIBLE);
+                            } else {
+                                emptyLayanan.setVisibility(View.GONE);
+                            }
+
                             String nama = program.getString(1);
                             String tanggalMulai = program.getString(2);
                             String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
@@ -431,11 +468,7 @@ public class HomeTimPemenangan extends Fragment {
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        layananRecycler.setLayoutManager(layoutManager);
-                        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        layananRecycler.setItemAnimator(new DefaultItemAnimator());
-                        layananRecycler.setAdapter(layananAdapter);
+                        layananAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -467,7 +500,7 @@ public class HomeTimPemenangan extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d("BERITA", "Login Response: " + response.toString());
+                Log.d("LOGISTIK", "Login Response: " + response.toString());
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -475,6 +508,12 @@ public class HomeTimPemenangan extends Fragment {
 
                     if (!error) {
                         JSONArray programs = jObj.getJSONArray("logistik");
+
+                        if(programs.length() == 0){
+                            emptyLogistik.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyLogistik.setVisibility(View.GONE);
+                        }
 
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
@@ -486,11 +525,7 @@ public class HomeTimPemenangan extends Fragment {
                             logistikList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        logistikRecycler.setLayoutManager(layoutManager);
-                        logistikRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        logistikRecycler.setItemAnimator(new DefaultItemAnimator());
-                        logistikRecycler.setAdapter(logistikAdapter);
+                        logistikAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -521,7 +556,7 @@ public class HomeTimPemenangan extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d("BERITA", "Login Response: " + response.toString());
+                Log.d("PROGRAM", "Login Response: " + response.toString());
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -530,6 +565,12 @@ public class HomeTimPemenangan extends Fragment {
                     if (!error) {
 
                         JSONArray programs = jObj.getJSONArray("cards");
+
+                        if(programs.length() == 0){
+                            emptyProgram.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyProgram.setVisibility(View.GONE);
+                        }
 
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
@@ -541,11 +582,7 @@ public class HomeTimPemenangan extends Fragment {
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(cardAdapter);
+                        cardAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -576,7 +613,7 @@ public class HomeTimPemenangan extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d("BERITA", "Login Response: " + response.toString());
+                Log.d("PARTNERSHIP", "Login Response: " + response.toString());
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -585,6 +622,12 @@ public class HomeTimPemenangan extends Fragment {
                     if (!error) {
 
                         JSONArray programs = jObj.getJSONArray("partnership");
+
+                        if(programs.length() == 0){
+                            emptyPartnership.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyPartnership.setVisibility(View.GONE);
+                        }
 
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
@@ -596,11 +639,7 @@ public class HomeTimPemenangan extends Fragment {
                             partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        partnershipRecycler.setLayoutManager(layoutManager);
-                        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
-                        partnershipRecycler.setAdapter(partnershipAdapter);
+                        partnershipAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),

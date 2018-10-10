@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.meivaldi.trencenter.fragment.FragmentHomeRelawan">
 
     <LinearLayout
@@ -10,101 +10,109 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
+        android:background="@android:color/white"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:background="@android:color/white">
+        android:paddingTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sisa waktu menuju Pemilu 2019"/>
+            android:text="Sisa waktu menuju Pemilu 2019" />
 
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/countDown"
-        android:layout_below="@id/label"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_below="@id/label"
         android:background="@android:color/white"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginRight="10dp">
+
                 <TextView
                     android:id="@+id/hari"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="15"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Hari"/>
+                    android:text="  Hari" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
                 <TextView
                     android:id="@+id/jam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="24"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Jam"/>
+                    android:text="  Jam" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
                 <TextView
                     android:id="@+id/menit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="29"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Menit"/>
+                    android:text="  Menit" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
                 <TextView
                     android:id="@+id/detik"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="03"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Detik"/>
+                    android:text="  Detik" />
             </LinearLayout>
 
         </LinearLayout>
@@ -113,27 +121,27 @@
 
     <ScrollView
         android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/countDown"
         android:layout_marginTop="10dp"
-        android:background="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/seeBerita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Lihat Semua Berita >>"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="10dp"
+                android:text="Lihat Semua Berita >>" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
@@ -142,9 +150,9 @@
 
             <RelativeLayout
                 android:id="@+id/berita"
-                android:layout_below="@id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/view_pager"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white">
 
@@ -154,50 +162,60 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentStart="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Program Kegiatan"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="20dp"
-                        android:textStyle="bold"
-                        android:textSize="20dp"/>
+                        android:text="Program Kegiatan"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/next"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentRight="true"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_next"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_next" />
 
                     <TextView
                         android:id="@+id/selanjutnya"
-                        android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@id/next"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toLeftOf="@id/next"
                         android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginStart="20dp" />
+                        android:textColor="@color/colorPrimary" />
 
                 </RelativeLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/labelKegiatan"
-                        android:clipToPadding="false"
-                        android:scrollbars="vertical" />
+                <TextView
+                    android:id="@+id/emptyKegiatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelKegiatan"
+                    android:padding="20dp"
+                    android:text="Program Kegiatan Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emptyKegiatan"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layanan"
-                android:layout_below="@id/berita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/berita"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white">
 
@@ -207,50 +225,60 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentStart="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Layanan"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="20dp"
-                        android:textStyle="bold"
-                        android:textSize="20dp"/>
+                        android:text="Layanan"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/next2"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentRight="true"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_next"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_next" />
 
                     <TextView
                         android:id="@+id/selanjutnya2"
-                        android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@id/next2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toLeftOf="@id/next2"
                         android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginStart="20dp" />
+                        android:textColor="@color/colorPrimary" />
 
                 </RelativeLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_layanan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/labelLayanan"
-                        android:clipToPadding="false"
-                        android:scrollbars="vertical" />
+                <TextView
+                    android:id="@+id/emptyLayanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelLayanan"
+                    android:padding="20dp"
+                    android:text="Layanan Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_layanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emptyLayanan"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/partnership"
-                android:layout_below="@id/layanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/layanan"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white">
 
@@ -260,42 +288,52 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentStart="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TREN Partnership"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="20dp"
-                        android:textStyle="bold"
-                        android:textSize="20dp"/>
+                        android:text="TREN Partnership"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/next3"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentRight="true"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_next"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_next" />
 
                     <TextView
                         android:id="@+id/selanjutnya3"
-                        android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@id/next3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toLeftOf="@id/next3"
                         android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginStart="20dp" />
+                        android:textColor="@color/colorPrimary" />
 
                 </RelativeLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_partnership"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/labelPartnership"
-                        android:clipToPadding="false"
-                        android:scrollbars="vertical" />
+                <TextView
+                    android:id="@+id/emptyPartnership"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelPartnership"
+                    android:padding="20dp"
+                    android:text="Partnership Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_partnership"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emptyPartnership"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
 
             </RelativeLayout>
 
@@ -307,12 +345,12 @@
         android:id="@+id/createPendukung"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/baseline_create_24"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        app:elevation="8dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/baseline_create_24"
+        app:elevation="8dp" />
 
 </RelativeLayout>

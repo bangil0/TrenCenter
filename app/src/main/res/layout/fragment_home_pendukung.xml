@@ -190,11 +190,21 @@
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/emptyKegiatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelKegiatan"
+                    android:padding="20dp"
+                    android:text="Program Kegiatan Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/labelKegiatan"
+                    android:layout_below="@id/emptyKegiatan"
                     android:clipToPadding="false"
                     android:scrollbars="vertical" />
 
@@ -243,11 +253,21 @@
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/emptyLayanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelLayanan"
+                    android:padding="20dp"
+                    android:text="Layanan Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_layanan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/labelLayanan"
+                    android:layout_below="@id/emptyLayanan"
                     android:clipToPadding="false"
                     android:scrollbars="vertical" />
 
@@ -296,11 +316,21 @@
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/emptyPartnership"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelPartnership"
+                    android:padding="20dp"
+                    android:text="Partnership Kosong"
+                    android:textColor="@android:color/black"
+                    android:visibility="visible" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_partnership"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/labelPartnership"
+                    android:layout_below="@id/emptyPartnership"
                     android:clipToPadding="false"
                     android:scrollbars="vertical" />
 

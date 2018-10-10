@@ -74,6 +74,8 @@ public class FragmentHomeRelawan extends Fragment {
     private CardAdapter cardAdapter;
     private LayananAdapter layananAdapter;
 
+    private TextView emptyProgram, emptyLayanan, emptyPartnership;
+
     String request_url = "http://156.67.221.225/voting/android/debug.php";
 
     @Override
@@ -149,6 +151,28 @@ public class FragmentHomeRelawan extends Fragment {
         partnershipList = new ArrayList<>();
         partnershipAdapter = new PartnershipPemenanganAdapter(getContext(), partnershipList);
 
+        emptyProgram = (TextView) rootView.findViewById(R.id.emptyKegiatan);
+        emptyLayanan = (TextView) rootView.findViewById(R.id.emptyLayanan);
+        emptyPartnership = (TextView) rootView.findViewById(R.id.emptyPartnership);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        partnershipRecycler.setLayoutManager(layoutManager);
+        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
+        partnershipRecycler.setAdapter(partnershipAdapter);
+
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(layoutManager1);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(cardAdapter);
+
+        RecyclerView.LayoutManager layoutManager2 = new GridLayoutManager(getContext(), 2);
+        layananRecycler.setLayoutManager(layoutManager2);
+        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        layananRecycler.setItemAnimator(new DefaultItemAnimator());
+        layananRecycler.setAdapter(layananAdapter);
+
         countDown();
         getLayanan();
         getCards();
@@ -220,7 +244,19 @@ public class FragmentHomeRelawan extends Fragment {
                     SliderUtils sliderUtils = new SliderUtils();
                     try {
                         JSONArray array = response.getJSONArray(i);
-                        String image = url + array.getString(0);
+
+                        String foto = array.getString(0);
+                        String tes = "";
+
+                        for(int j=0; j<foto.length(); j++){
+                            if(foto.charAt(j) == ' '){
+                                tes += "%20";
+                            } else {
+                                tes += foto.charAt(j);
+                            }
+                        }
+
+                        String image = url + tes;
                         headlineList.add(array.getString(1));
                         sourceList.add(array.getString(2));
 
@@ -347,6 +383,12 @@ public class FragmentHomeRelawan extends Fragment {
                     if (!error) {
                         JSONArray programs = jObj.getJSONArray("layanan");
 
+                        if(programs.length() == 0){
+                            emptyLayanan.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyLayanan.setVisibility(View.GONE);
+                        }
+
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
 
@@ -357,11 +399,7 @@ public class FragmentHomeRelawan extends Fragment {
                             layananList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        layananRecycler.setLayoutManager(layoutManager);
-                        layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        layananRecycler.setItemAnimator(new DefaultItemAnimator());
-                        layananRecycler.setAdapter(layananAdapter);
+                        layananAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -404,6 +442,12 @@ public class FragmentHomeRelawan extends Fragment {
 
                         JSONArray programs = jObj.getJSONArray("cards");
 
+                        if(programs.length() == 0){
+                            emptyProgram.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyProgram.setVisibility(View.GONE);
+                        }
+
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
 
@@ -414,11 +458,7 @@ public class FragmentHomeRelawan extends Fragment {
                             cardList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(cardAdapter);
+                        cardAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
@@ -461,6 +501,12 @@ public class FragmentHomeRelawan extends Fragment {
 
                         JSONArray programs = jObj.getJSONArray("partnership");
 
+                        if(programs.length() == 0){
+                            emptyPartnership.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyPartnership.setVisibility(View.GONE);
+                        }
+
                         for (int i = 0; i < programs.length(); i++) {
                             JSONArray program = programs.getJSONArray(i);
 
@@ -471,11 +517,7 @@ public class FragmentHomeRelawan extends Fragment {
                             partnershipList.add(new Card(nama, tanggalMulai, foto));
                         }
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                        partnershipRecycler.setLayoutManager(layoutManager);
-                        partnershipRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                        partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
-                        partnershipRecycler.setAdapter(partnershipAdapter);
+                        partnershipAdapter.notifyDataSetChanged();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getContext(),
