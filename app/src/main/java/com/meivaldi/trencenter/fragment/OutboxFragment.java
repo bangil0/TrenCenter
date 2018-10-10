@@ -3,9 +3,11 @@ package com.meivaldi.trencenter.fragment;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,6 +20,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,10 +29,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPesan;
+import com.meivaldi.trencenter.activity.tim_pemenangan.DetailOutbox;
 import com.meivaldi.trencenter.adapter.MessageAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.listener.RecyclerItemTouchHelper;
 import com.meivaldi.trencenter.listener.RecyclerTouchListener;
 import com.meivaldi.trencenter.model.Message;
 
@@ -41,11 +46,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OutboxFragment extends Fragment {
+public class OutboxFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     private RecyclerView recyclerView;
     private MessageAdapter mAdapter;
     private ArrayList<Message> messagesList;
+    private RelativeLayout relativeLayout;
 
     private SQLiteHandler db;
 
@@ -57,6 +63,7 @@ public class OutboxFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_outbox, container, false);
 
+        relativeLayout = (RelativeLayout) rootView.findViewById(R.id.fragment_outbox);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_outbox);
         messagesList = new ArrayList<>();
         mAdapter = new MessageAdapter(getContext(), messagesList);
@@ -70,7 +77,7 @@ public class OutboxFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(getContext(), DetailPesan.class);
+                Intent intent = new Intent(getContext(), DetailOutbox.class);
                 intent.putExtra("INDEX", position);
                 startActivity(intent);
             }
@@ -80,6 +87,9 @@ public class OutboxFragment extends Fragment {
 
             }
         }));
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         db = new SQLiteHandler(getContext());
         HashMap<String, String> user = db.getUserDetails();
@@ -152,5 +162,26 @@ public class OutboxFragment extends Fragment {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof MessageAdapter.MyViewHolder) {
+            final Message deletedItem = messagesList.get(viewHolder.getAdapterPosition());
+            final int deletedIndex = viewHolder.getAdapterPosition();
+
+            mAdapter.removeItem(viewHolder.getAdapterPosition());
+
+            Snackbar snackbar = Snackbar
+                    .make(relativeLayout, "Pesan telah dihapus!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("Batal", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mAdapter.restoreItem(deletedItem, deletedIndex);
+                }
+            });
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+        }
     }
 }
