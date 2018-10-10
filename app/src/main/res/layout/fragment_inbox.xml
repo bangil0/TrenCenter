@@ -2,12 +2,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     tools:context="com.meivaldi.trencenter.fragment.InboxFragment">
 
-    <ListView
-        android:id="@+id/inbox_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_inbox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

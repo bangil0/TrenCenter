@@ -1,12 +1,22 @@
 package com.meivaldi.trencenter.fragment;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +30,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
 import com.meivaldi.trencenter.activity.DetailPesan;
-import com.meivaldi.trencenter.activity.DetailProgram;
 import com.meivaldi.trencenter.adapter.MessageAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
 import com.meivaldi.trencenter.helper.SQLiteHandler;
+import com.meivaldi.trencenter.listener.RecyclerTouchListener;
 import com.meivaldi.trencenter.model.Message;
 
 import org.json.JSONArray;
@@ -37,7 +47,7 @@ import java.util.Map;
 
 public class InboxFragment extends Fragment {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
     private MessageAdapter mAdapter;
     private ArrayList<Message> messagesList;
 
@@ -52,8 +62,29 @@ public class InboxFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
 
-        listView = (ListView) rootView.findViewById(R.id.inbox_list);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_inbox);
         messagesList = new ArrayList<>();
+        mAdapter = new MessageAdapter(getContext(), messagesList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(mAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), DetailPesan.class);
+                intent.putExtra("INDEX", position);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
         db = new SQLiteHandler(getContext());
         HashMap<String, String> user = db.getUserDetails();
@@ -61,15 +92,6 @@ public class InboxFragment extends Fragment {
         String tipe = user.get("type");
 
         loadMessage(penerima, tipe);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), DetailPesan.class);
-                intent.putExtra("INDEX", i);
-                startActivity(intent);
-            }
-        });
 
         return rootView;
     }
@@ -102,8 +124,8 @@ public class InboxFragment extends Fragment {
                             messagesList.add(new Message(pengirim, tanggal, foto));
                         }
 
-                        mAdapter = new MessageAdapter(getContext(), messagesList);
-                        listView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
                     } else {
                         Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
@@ -136,4 +158,5 @@ public class InboxFragment extends Fragment {
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
 }

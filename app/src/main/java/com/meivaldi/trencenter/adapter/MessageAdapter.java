@@ -3,6 +3,7 @@ package com.meivaldi.trencenter.adapter;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,46 +27,63 @@ import java.util.List;
  * Created by root on 26/08/18.
  */
 
-public class MessageAdapter extends ArrayAdapter<Message> {
-
-    private SQLiteHandler db;
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHolder> {
 
     private Context context;
     private List<Message> messageList = new ArrayList<>();
 
-    public MessageAdapter(@NonNull Context context, @LayoutRes ArrayList<Message> list) {
-        super(context, 0, list);
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, release;
+        private ImageView foto;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            release = (TextView) view.findViewById(R.id.description);
+            foto = (ImageView) view.findViewById(R.id.image);
+        }
+
+    }
+
+    public MessageAdapter(Context context, ArrayList<Message> list) {
         this.context = context;
         this.messageList = list;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItem = convertView;
-        if(listItem == null)
-            listItem = LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item, parent, false);
 
-        db = new SQLiteHandler(getContext());
-        HashMap<String, String> user = db.getUserDetails();
-        String tipe = user.get("type");
+        return new MyViewHolder(itemView);
+    }
 
-        Message currentMessage = messageList.get(position);
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Message message = messageList.get(position);
+        holder.title.setText(message.getTitle());
+        holder.release.setText(message.getDate());
 
-        ImageView image = (ImageView)listItem.findViewById(R.id.image);
-        Glide.with(getContext()).load(currentMessage.getImage())
+        Glide.with(context).load(message.getImage())
                 .crossFade()
                 .thumbnail(0.5f)
-                .bitmapTransform(new CircleTransform(getContext()))
+                .bitmapTransform(new CircleTransform(context))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image);
+                .into(holder.foto);
+    }
 
-        TextView title = (TextView) listItem.findViewById(R.id.title);
-        title.setText(currentMessage.getTitle());
+    @Override
+    public int getItemCount() {
+        return messageList.size();
+    }
 
-        TextView release = (TextView) listItem.findViewById(R.id.description);
-        release.setText(currentMessage.getDate());
+    public void removeItem(int position) {
+        messageList.remove(position);
+        notifyItemRemoved(position);
+    }
 
-        return listItem;
+    public void restoreItem(Message message, int position) {
+        messageList.add(position, message);
+        notifyItemInserted(position);
     }
 }
