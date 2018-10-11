@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.meivaldi.trencenter.fragment.OutboxFragment">
+    tools:context="com.bmc.trencenter.fragment.OutboxFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_outbox"

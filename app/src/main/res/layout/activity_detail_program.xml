@@ -4,7 +4,7 @@
     android:id="@+id/activity_detail_program"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.DetailProgram">
+    tools:context="com.bmc.trencenter.activity.DetailProgram">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

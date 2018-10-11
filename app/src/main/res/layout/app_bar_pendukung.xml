@@ -5,7 +5,7 @@
     android:id="@+id/activity_pendukung"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.pendukung.Pendukung">
+    tools:context="com.bmc.trencenter.activity.pendukung.Pendukung">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

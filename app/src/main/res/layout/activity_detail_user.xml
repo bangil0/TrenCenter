@@ -4,7 +4,7 @@
     android:id="@+id/activity_data_caleg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.DetailUser">
+    tools:context="com.bmc.trencenter.activity.DetailUser">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

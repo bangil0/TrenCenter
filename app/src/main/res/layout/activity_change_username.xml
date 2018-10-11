@@ -4,7 +4,7 @@
     android:id="@+id/activity_change_username"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.ChangeUsername">
+    tools:context="com.bmc.trencenter.activity.ChangeUsername">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

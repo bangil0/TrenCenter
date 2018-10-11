@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "28.0.1"
     defaultConfig {
-        applicationId "com.meivaldi.trencenter"
+        applicationId "com.bmc.trencenter"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 3
@@ -43,8 +43,5 @@ dependencies {
     compile 'com.jjoe64:graphview:4.2.2'
     testCompile 'junit:junit:4.12'
 }
-
-
-
 
 apply plugin: 'com.google.gms.google-services'

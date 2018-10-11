@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "476869153160",
+    "firebase_url": "https://trencenter-9b5c8.firebaseio.com",
+    "project_id": "trencenter-9b5c8",
+    "storage_bucket": "trencenter-9b5c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476869153160:android:e7d889e5fcb5a5ca",
+        "android_client_info": {
+          "package_name": "com.meivaldi.trencenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476869153160-dihgub7btvfi3c1matstu41u407c947c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meivaldi.trencenter",
+            "certificate_hash": "fec02f8d4fcfe3e3839a001bc448792ce82b784b"
+          }
+        },
+        {
+          "client_id": "476869153160-pirmtviktpct0s5rda57oivrvg2i4rc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7TSCW38BhkCg4K5PeHMLi7YMUA7_gMiE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476869153160-pirmtviktpct0s5rda57oivrvg2i4rc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

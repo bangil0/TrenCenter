@@ -4,7 +4,7 @@
     android:id="@+id/activity_main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meivaldi.trencenter.activity.SplashScreen"
+    tools:context="com.bmc.trencenter.activity.SplashScreen"
     android:background="@drawable/splash_screen">
 
 </RelativeLayout>
