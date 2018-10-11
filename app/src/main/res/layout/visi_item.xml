@@ -63,7 +63,7 @@
             android:textSize="15dp"/>
 
         <RelativeLayout
-            android:id="@+id/deleteContainer"
+            android:id="@+id/tes"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:orientation="vertical"/>
