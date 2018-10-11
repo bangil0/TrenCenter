@@ -1,5 +1,6 @@
 package com.meivaldi.trencenter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.EditVisiMisi;
 import com.meivaldi.trencenter.adapter.VisiAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -56,18 +58,6 @@ public class VisiAdminFragment extends Fragment implements VisiListener.Recycler
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new VisiListener(0, ItemTouchHelper.RIGHT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
@@ -135,6 +125,12 @@ public class VisiAdminFragment extends Fragment implements VisiListener.Recycler
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        VisiMisiModel visi_misi = visi.get(position);
+        String old = visi_misi.getValue();
 
+        Intent intent = new Intent(getContext(), EditVisiMisi.class);
+        intent.putExtra("OLD", old);
+        intent.putExtra("TIPE", "Visi");
+        startActivity(intent);
     }
 }

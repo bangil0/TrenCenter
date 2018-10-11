@@ -168,7 +168,8 @@
         <activity android:name=".activity.DaftarPemenangan" />
         <activity android:name=".activity.VisiMisiAdmin" />
         <activity android:name=".activity.DetailCalegAdmin" />
-        <activity android:name=".activity.EditData"></activity>
+        <activity android:name=".activity.EditData" />
+        <activity android:name=".activity.EditVisiMisi"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.meivaldi.trencenter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.meivaldi.trencenter.R;
+import com.meivaldi.trencenter.activity.EditVisiMisi;
 import com.meivaldi.trencenter.adapter.MisiAdapter;
 import com.meivaldi.trencenter.app.AppConfig;
 import com.meivaldi.trencenter.app.AppController;
@@ -80,7 +82,7 @@ public class MisiAdminFragment extends Fragment implements MisiListener.Recycler
                         JSONArray data = jObj.getJSONArray("data");
 
                         for(int i=0; i<data.length(); i++){
-                            misi.add(new VisiMisiModel(data.getJSONArray(i).getString(0)));
+                            misi.add(new VisiMisiModel(data.getJSONArray(i).getString(1)));
                         }
 
                         adapter.notifyDataSetChanged();
@@ -122,6 +124,12 @@ public class MisiAdminFragment extends Fragment implements MisiListener.Recycler
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        VisiMisiModel visi_misi = misi.get(position);
+        String old = visi_misi.getValue();
 
+        Intent intent = new Intent(getContext(), EditVisiMisi.class);
+        intent.putExtra("OLD", old);
+        intent.putExtra("TIPE", "Misi");
+        startActivity(intent);
     }
 }
