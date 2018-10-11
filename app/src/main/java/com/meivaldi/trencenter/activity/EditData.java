@@ -173,8 +173,6 @@ public class EditData extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Update Caleg", "Update Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Gagal mengupdate data!", Toast.LENGTH_LONG).show();
             }
         }) {
 

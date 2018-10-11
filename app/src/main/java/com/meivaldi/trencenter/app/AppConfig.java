@@ -52,5 +52,5 @@ public class AppConfig {
     public static String URL_GET_ALL_PARTNERSHIP = "http://156.67.221.225/voting/android/get_all_partnership.php";
     public static String URL_DELETE_MESSAGE = "http://156.67.221.225/voting/android/delete_message.php";
     public static String URL_DELETE_MESSAGE_ANOTHER = "http://156.67.221.225/voting/android/delete_message_another.php";
-    public static String URL_UPDATE_CALEG = "http://156.67.221.225/voting/android/update_data_caleg.php";
+    public static String URL_UPDATE_CALEG = "http://156.67.221.225/voting/android/edit_data_caleg.php";
 }
