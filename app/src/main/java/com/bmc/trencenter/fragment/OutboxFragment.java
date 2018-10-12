@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,6 +49,7 @@ public class OutboxFragment extends Fragment implements RecyclerItemTouchHelper.
 
     private SQLiteHandler db;
     private String pengirim, tipe;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class OutboxFragment extends Fragment implements RecyclerItemTouchHelper.
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_outbox);
         messagesList = new ArrayList<>();
         mAdapter = new MessageAdapter(getContext(), messagesList);
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -91,6 +94,15 @@ public class OutboxFragment extends Fragment implements RecyclerItemTouchHelper.
         tipe = user.get("type");
 
         loadMessage(pengirim, tipe);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                messagesList.clear();
+                loadMessage(pengirim, tipe);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return rootView;
     }

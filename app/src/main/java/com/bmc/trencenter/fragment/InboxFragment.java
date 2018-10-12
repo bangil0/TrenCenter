@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,7 +47,9 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
     private ArrayList<Message> messagesList;
     private RelativeLayout relativeLayout;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private SQLiteHandler db;
+    private String penerima, tipe;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_inbox);
         messagesList = new ArrayList<>();
         mAdapter = new MessageAdapter(getContext(), messagesList);
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -87,10 +91,18 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
 
         db = new SQLiteHandler(getContext());
         HashMap<String, String> user = db.getUserDetails();
-        String penerima = user.get("username");
-        String tipe = user.get("type");
-
+        penerima = user.get("username");
+        tipe = user.get("type");
         loadMessage(penerima, tipe);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                messagesList.clear();
+                loadMessage(penerima, tipe);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return rootView;
     }

@@ -1,5 +1,6 @@
 package com.bmc.trencenter.activity;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +36,7 @@ public class DetailBerita extends AppCompatActivity {
     
     private TextView judul, pembuat, kategori, isi, sumber;
     private ImageView fotoBerita;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class DetailBerita extends AppCompatActivity {
         isi = (TextView) findViewById(R.id.isiBerita);
         sumber = (TextView) findViewById(R.id.sumber); 
         fotoBerita = (ImageView) findViewById(R.id.fotoBerita);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +65,14 @@ public class DetailBerita extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getBerita();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         

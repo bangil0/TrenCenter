@@ -2,6 +2,7 @@ package com.bmc.trencenter.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,7 @@ public class Berita extends AppCompatActivity {
     private BeritaAdapter adapter;
 
     private Toolbar toolbar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final String TAG = ProgramKerja.class.getSimpleName();
     private static final String url = "http://156.67.221.225/voting/android/getBerita.php";
@@ -38,6 +40,7 @@ public class Berita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_berita);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         listView = (ListView) findViewById(R.id.listBerita);
         beritaList = new ArrayList<>();
 
@@ -51,6 +54,15 @@ public class Berita extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                beritaList.clear();
+                new GetBerita().execute();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 

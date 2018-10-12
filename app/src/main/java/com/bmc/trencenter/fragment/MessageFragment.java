@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class MessageFragment extends Fragment {
         rootView.setVisibility(View.GONE);
 
         button = rootView.findViewById(R.id.create_message);
-
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabLayout);
 

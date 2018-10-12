@@ -6,340 +6,348 @@
     tools:context="com.bmc.trencenter.fragment.FragmentHomeRelawan">
 
     <LinearLayout
-        android:id="@+id/label"
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sisa waktu menuju Pemilu 2019" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/countDown"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/label"
-        android:background="@android:color/white"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sisa waktu menuju Pemilu 2019" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/countDown"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/label"
             android:background="@android:color/white"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginRight="10dp">
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/white"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/hari"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="start"
+                    android:layout_marginRight="10dp">
 
-                <TextView
+                    <TextView
+                        android:id="@+id/hari"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  Hari" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Hari" />
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:id="@+id/jam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  Jam" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:id="@+id/menit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="29"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  Menit" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:id="@+id/detik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="03"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  Detik" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp">
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/jam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  Jam" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:id="@+id/menit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="29"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  Menit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:id="@+id/detik"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="03"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  Detik" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/countDown"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/white">
-
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:layout_below="@id/countDown"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white">
 
-            <TextView
-                android:id="@+id/seeBerita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Lihat Semua Berita >>" />
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="280dp" />
-
-            <RelativeLayout
-                android:id="@+id/berita"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/view_pager"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/seeBerita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Lihat Semua Berita >>" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp" />
 
                 <RelativeLayout
-                    android:id="@+id/labelKegiatan"
+                    android:id="@+id/berita"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_pager"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white">
+
+                    <RelativeLayout
+                        android:id="@+id/labelKegiatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:text="Program Kegiatan"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/next"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_next" />
+
+                        <TextView
+                            android:id="@+id/selanjutnya"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toLeftOf="@id/next"
+                            android:text="Selanjutnya"
+                            android:textColor="@color/colorPrimary" />
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/emptyKegiatan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:text="Program Kegiatan"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                        android:layout_below="@id/labelKegiatan"
+                        android:padding="20dp"
+                        android:text="Program Kegiatan Kosong"
+                        android:textColor="@android:color/black"
+                        android:visibility="visible" />
 
-                    <ImageView
-                        android:id="@+id/next"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_next" />
-
-                    <TextView
-                        android:id="@+id/selanjutnya"
-                        android:layout_width="wrap_content"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_toLeftOf="@id/next"
-                        android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary" />
+                        android:layout_below="@id/emptyKegiatan"
+                        android:clipToPadding="false"
+                        android:scrollbars="vertical" />
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/emptyKegiatan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelKegiatan"
-                    android:padding="20dp"
-                    android:text="Program Kegiatan Kosong"
-                    android:textColor="@android:color/black"
-                    android:visibility="visible" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/emptyKegiatan"
-                    android:clipToPadding="false"
-                    android:scrollbars="vertical" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layanan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/berita"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white">
-
                 <RelativeLayout
-                    android:id="@+id/labelLayanan"
+                    android:id="@+id/layanan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/berita"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white">
+
+                    <RelativeLayout
+                        android:id="@+id/labelLayanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:text="Layanan"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/next2"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_next" />
+
+                        <TextView
+                            android:id="@+id/selanjutnya2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toLeftOf="@id/next2"
+                            android:text="Selanjutnya"
+                            android:textColor="@color/colorPrimary" />
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/emptyLayanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:text="Layanan"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                        android:layout_below="@id/labelLayanan"
+                        android:padding="20dp"
+                        android:text="Layanan Kosong"
+                        android:textColor="@android:color/black"
+                        android:visibility="visible" />
 
-                    <ImageView
-                        android:id="@+id/next2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_next" />
-
-                    <TextView
-                        android:id="@+id/selanjutnya2"
-                        android:layout_width="wrap_content"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_layanan"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_toLeftOf="@id/next2"
-                        android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary" />
+                        android:layout_below="@id/emptyLayanan"
+                        android:clipToPadding="false"
+                        android:scrollbars="vertical" />
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/emptyLayanan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelLayanan"
-                    android:padding="20dp"
-                    android:text="Layanan Kosong"
-                    android:textColor="@android:color/black"
-                    android:visibility="visible" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_layanan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/emptyLayanan"
-                    android:clipToPadding="false"
-                    android:scrollbars="vertical" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/partnership"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layanan"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white">
-
                 <RelativeLayout
-                    android:id="@+id/labelPartnership"
+                    android:id="@+id/partnership"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layanan"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white">
+
+                    <RelativeLayout
+                        android:id="@+id/labelPartnership"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:text="TREN Partnership"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/next3"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_next" />
+
+                        <TextView
+                            android:id="@+id/selanjutnya3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toLeftOf="@id/next3"
+                            android:text="Selanjutnya"
+                            android:textColor="@color/colorPrimary" />
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/emptyPartnership"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:text="TREN Partnership"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                        android:layout_below="@id/labelPartnership"
+                        android:padding="20dp"
+                        android:text="Partnership Kosong"
+                        android:textColor="@android:color/black"
+                        android:visibility="visible" />
 
-                    <ImageView
-                        android:id="@+id/next3"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_next" />
-
-                    <TextView
-                        android:id="@+id/selanjutnya3"
-                        android:layout_width="wrap_content"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_partnership"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_toLeftOf="@id/next3"
-                        android:text="Selanjutnya"
-                        android:textColor="@color/colorPrimary" />
+                        android:layout_below="@id/emptyPartnership"
+                        android:clipToPadding="false"
+                        android:scrollbars="vertical" />
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/emptyPartnership"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/labelPartnership"
-                    android:padding="20dp"
-                    android:text="Partnership Kosong"
-                    android:textColor="@android:color/black"
-                    android:visibility="visible" />
+            </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_partnership"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/emptyPartnership"
-                    android:clipToPadding="false"
-                    android:scrollbars="vertical" />
+        </ScrollView>
 
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/createPendukung"

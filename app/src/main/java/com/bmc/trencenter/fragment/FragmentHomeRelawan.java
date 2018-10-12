@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -67,7 +68,6 @@ public class FragmentHomeRelawan extends Fragment {
     private List<SliderUtils> sliderImg;
 
     private RecyclerView recyclerView, layananRecycler, partnershipRecycler;
-    private Adapter Adapter;
     private List<Card> cardList, layananList, partnershipList;
     private PartnershipPemenanganAdapter partnershipAdapter;
 

@@ -1,9 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     tools:context="com.bmc.trencenter.fragment.MessageFragment">
 
     <android.support.design.widget.TabLayout
@@ -11,18 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
+        app:tabBackground="@drawable/tab_color_selector"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabSelectedTextColor="@android:color/white"
         app:tabIndicatorHeight="4dp"
-        app:tabBackground="@drawable/tab_color_selector"
-        app:tabMode="fixed" />
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@android:color/white" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_below="@id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"  />
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/create_message"
@@ -30,9 +29,9 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        app:elevation="8dp"
-        android:src="@drawable/baseline_create_white_24"/>
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/baseline_create_white_24"
+        app:elevation="8dp" />
 
 </RelativeLayout>
