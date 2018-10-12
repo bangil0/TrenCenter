@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.meivaldi.trencenter.fragment.MessageFragment">
+    tools:context="com.bmc.trencenter.fragment.MessageFragment">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
