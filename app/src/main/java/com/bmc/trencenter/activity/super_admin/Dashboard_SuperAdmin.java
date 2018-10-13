@@ -34,7 +34,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.bmc.trencenter.R;
 import com.bmc.trencenter.activity.DetailCalegAdmin;
 import com.bmc.trencenter.activity.DetailPenghargaan;
-import com.bmc.trencenter.activity.DetailPlatform;
+import com.bmc.trencenter.activity.DetailPlatformAdmin;
 import com.bmc.trencenter.activity.LayananActivity;
 import com.bmc.trencenter.activity.LoginActivity;
 import com.bmc.trencenter.activity.ProgramKerja;
@@ -111,7 +111,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_platform:
-                        startActivity(new Intent(getApplicationContext(), DetailPlatform.class));
+                        startActivity(new Intent(getApplicationContext(), DetailPlatformAdmin.class));
 
                         return true;
                     case R.id.nav_progja:

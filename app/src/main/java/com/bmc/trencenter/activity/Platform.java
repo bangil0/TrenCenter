@@ -132,7 +132,7 @@ public class Platform extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), DetailPlatform.class);
+                    Intent intent = new Intent(getApplicationContext(), DetailPlatformAdmin.class);
                     intent.putExtra("id_caleg", id);
                     startActivity(intent);
                 }
