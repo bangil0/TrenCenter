@@ -2,6 +2,7 @@ package com.bmc.trencenter.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Email atau Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 }
+
+                Toast.makeText(getApplicationContext(), Build.VERSION.INCREMENTAL, Toast.LENGTH_SHORT).show();
             }
         });
 

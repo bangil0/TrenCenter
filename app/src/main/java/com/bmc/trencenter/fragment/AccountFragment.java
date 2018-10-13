@@ -76,7 +76,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(getContext()))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(fotoProfil);
 
         userName.setOnClickListener(this);

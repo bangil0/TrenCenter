@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bmc.trencenter.activity.DetailPlatform;
+import com.bmc.trencenter.activity.Partnership;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.bmc.trencenter.R;
@@ -112,6 +113,10 @@ public class Tim_Pemenangan extends AppCompatActivity {
                         return true;
                     case R.id.nav_layanan:
                         startActivity(new Intent(getApplicationContext(), LayananActivity.class));
+
+                        return true;
+                    case R.id.nav_partnership:
+                        startActivity(new Intent(getApplicationContext(), Partnership. class));
 
                         return true;
                     case R.id.nav_penghargaan:

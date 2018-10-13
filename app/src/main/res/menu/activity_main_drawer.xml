@@ -27,6 +27,11 @@
             android:title="Layanan" />
 
         <item
+            android:id="@+id/nav_partnership"
+            android:icon="@drawable/support"
+            android:title="Partnership" />
+
+        <item
             android:id="@+id/nav_penghargaan"
             android:icon="@drawable/ic_penghargaan"
             android:title="Penghargaan" />

@@ -56,4 +56,6 @@ public class AppConfig {
     public static String URL_EDIT_VISI_MISI = "http://156.67.221.225/voting/android/edit_visi_misi.php";
     public static String URL_EDIT_PLATFORM = "http://156.67.221.225/voting/android/edit_platform.php";
     public static String URL_EDIT_PENGHARGAAN = "http://156.67.221.225/voting/android/edit_penghargaan.php";
+    public static String URL_EDIT_FOTO = "http://156.67.221.225/voting/android/edit_foto.php";
+
 }
