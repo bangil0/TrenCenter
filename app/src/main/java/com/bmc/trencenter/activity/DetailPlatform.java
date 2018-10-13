@@ -2,7 +2,11 @@ package com.bmc.trencenter.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,39 +18,57 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bmc.trencenter.R;
+import com.bmc.trencenter.adapter.PlatformAdapter;
 import com.bmc.trencenter.app.AppConfig;
 import com.bmc.trencenter.app.AppController;
+import com.bmc.trencenter.helper.DividerItemDecoration;
+import com.bmc.trencenter.listener.PlatformListener;
+import com.bmc.trencenter.model.PlatformModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by root on 12/09/18.
  */
-public class DetailPlatform extends AppCompatActivity{
+public class DetailPlatform extends AppCompatActivity implements PlatformListener.RecyclerItemTouchHelperListener {
 
     private Toolbar toolbar;
-    private String[] platform;
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private PlatformAdapter platformAdapter;
+    private List<PlatformModel> platform;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_detail_platform);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        listView = (ListView) findViewById(R.id.caleg_list);
-
-        String id = getIntent().getStringExtra("id_caleg");
+        recyclerView = (RecyclerView) findViewById(R.id.platform_list);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Platform Caleg");
         getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        platform = new ArrayList<>();
+        platformAdapter = new PlatformAdapter(platform, this);
+        recyclerView.setAdapter(platformAdapter);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(platformAdapter);
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new PlatformListener(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,14 +96,11 @@ public class DetailPlatform extends AppCompatActivity{
                     if (!error) {
                         JSONArray data = jObj.getJSONArray("data");
 
-                        platform = new String[data.length()];
-
                         for(int i=0; i<data.length(); i++){
-                            platform[i] = data.getJSONArray(i).getString(0);
+                            platform.add(new PlatformModel(data.getJSONArray(i).getString(0)));
                         }
 
-                        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.my_text, platform);
-                        listView.setAdapter(adapter);
+                        platformAdapter.notifyDataSetChanged();
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");
@@ -128,6 +147,11 @@ public class DetailPlatform extends AppCompatActivity{
         super.onBackPressed();
 
         finish();
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
     }
 }
 
