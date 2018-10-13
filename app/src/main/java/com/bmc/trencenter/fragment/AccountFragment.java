@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bmc.trencenter.activity.ProfilePicture;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -48,6 +49,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         rootView.setAlpha(0f);
         rootView.setVisibility(View.GONE);
 
+        userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);
         userName = (RelativeLayout) rootView.findViewById(R.id.username_settings);
         userPassword = (RelativeLayout) rootView.findViewById(R.id.password_settings);
 
@@ -79,6 +81,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         userName.setOnClickListener(this);
         userPassword.setOnClickListener(this);
+        userPhoto.setOnClickListener(this);
 
         rootView.setVisibility(View.VISIBLE);
         rootView.animate()
@@ -142,8 +145,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.fotoProfil:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+            case R.id.foto:
+                startActivity(new Intent(getContext(), ProfilePicture.class));
 
                 return;
             case R.id.username_settings:

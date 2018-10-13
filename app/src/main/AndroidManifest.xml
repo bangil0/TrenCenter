@@ -194,7 +194,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.EditPlatform" />
         <activity android:name=".activity.DetailPenghargaanAdmin" />
-        <activity android:name=".activity.EditPenghargaan"></activity>
+        <activity android:name=".activity.EditPenghargaan" />
+        <activity android:name=".activity.ProfilePicture"></activity>
     </application>
 
 </manifest>
