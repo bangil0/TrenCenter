@@ -192,7 +192,9 @@
         <activity
             android:name=".activity.DetailPlatform"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.EditPlatform"></activity>
+        <activity android:name=".activity.EditPlatform" />
+        <activity android:name=".activity.DetailPenghargaanAdmin" />
+        <activity android:name=".activity.EditPenghargaan"></activity>
     </application>
 
 </manifest>
