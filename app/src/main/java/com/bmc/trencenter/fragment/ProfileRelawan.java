@@ -56,7 +56,8 @@ public class ProfileRelawan extends Fragment implements View.OnClickListener {
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(getContext()))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(fotoProfil);
 
         userPhoto = (RelativeLayout) rootView.findViewById(R.id.foto);

@@ -73,9 +73,12 @@ public class ProfilePicture extends AppCompatActivity {
         });
 
         String uri = user.get("foto");
+
         Glide.with(this).load(uri)
                 .bitmapTransform(new CircleTransform(this))
                 .fitCenter()
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(foto);
 
         update.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +104,7 @@ public class ProfilePicture extends AppCompatActivity {
                     .thumbnail(0.5f)
                     .bitmapTransform(new CircleTransform(this))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(false)
+                    .skipMemoryCache(true)
                     .into(foto);
 
             Bitmap bitmap = null;
