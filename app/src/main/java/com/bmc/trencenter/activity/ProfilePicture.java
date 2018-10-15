@@ -1,6 +1,5 @@
 package com.bmc.trencenter.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -45,9 +43,7 @@ public class ProfilePicture extends AppCompatActivity {
 
     private SQLiteHandler db;
     private HashMap<String, String> user;
-    private Dialog dialog;
 
-    private static final int FROM_CAMERA = 100;
     private static final int FROM_GALLERY = 200;
     private int imageStatus;
 
@@ -85,62 +81,9 @@ public class ProfilePicture extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new Dialog(ProfilePicture.this);
-                dialog.setContentView(R.layout.custom_dialog);
-                dialog.setCancelable(true);
-
-                TextView camera = (TextView) dialog.findViewById(R.id.camera);
-                TextView gallery = (TextView) dialog.findViewById(R.id.gallery);
-                ImageView galleryImg = (ImageView) dialog.findViewById(R.id.galleryLogo);
-                ImageView cameraImg = (ImageView) dialog.findViewById(R.id.cameraLogo);
-
-                cameraImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, 0);
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-
-                camera.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, 0);
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-
-                galleryImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(pickPhoto, 1);
-
-                        dialog.dismiss();
-                    }
-                });
-
-                gallery.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(pickPhoto, 1);
-
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, 1);
             }
         });
     }
@@ -149,14 +92,7 @@ public class ProfilePicture extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            imageStatus = FROM_CAMERA;
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            foto.setImageBitmap(imageBitmap);
-
-            dialog.dismiss();
-        } else if(requestCode == 1 && resultCode == RESULT_OK){
+        if(requestCode == 1 && resultCode == RESULT_OK){
             imageStatus = FROM_GALLERY;
             selectedImage = data.getData();
 
@@ -181,8 +117,6 @@ public class ProfilePicture extends AppCompatActivity {
             String name = user.get("name");
 
             uploadFoto(foto, tipe, name);
-
-            dialog.dismiss();
         }
     }
 

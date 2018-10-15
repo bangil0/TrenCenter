@@ -58,5 +58,6 @@ public class AppConfig {
     public static String URL_EDIT_PENGHARGAAN = "http://156.67.221.225/voting/android/edit_penghargaan.php";
     public static String URL_EDIT_FOTO = "http://156.67.221.225/voting/android/edit_foto.php";
     public static String URL_CEK_UPDATE = "http://156.67.221.225/voting/android/cek_update.php";
+    public static String URL_STORE_APK = "http://156.67.221.225/voting/android/store_apk_version.php";
 
 }

@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                     String versionApk = packageInfo.versionName;
 
                     if(version.equals(versionApk)){
-
+                        storeApkVersion(versionApk);
                     } else {
                         startActivity(new Intent(getApplicationContext(), Update.class));
                     }
@@ -173,6 +173,39 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void storeApkVersion(final String versionApk) {
+        String tag_string_req = "req_store_apk";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_STORE_APK, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "APK Response: " + response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "APK Error: " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("apk", versionApk);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
     private void loginUser(final String username, final String password) {

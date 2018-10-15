@@ -27,4 +27,13 @@
         android:textSize="15dp"
         android:text="Silahkan Update Aplikasi di Play Store"/>
 
+    <Button
+        android:id="@+id/openBrowser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="Buka Playstore"/>
+
 </RelativeLayout>
