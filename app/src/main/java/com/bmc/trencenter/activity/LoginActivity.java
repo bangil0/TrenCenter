@@ -2,6 +2,8 @@ package com.bmc.trencenter.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
+        checkUpdate();
+
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
 
@@ -111,8 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Email atau Password tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 }
-
-                Toast.makeText(getApplicationContext(), Build.VERSION.INCREMENTAL, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -123,6 +125,54 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkUpdate() {
+        String tag_string_req = "req_cek_update";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_CEK_UPDATE, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Cek Update Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String version = jObj.getString("version");
+
+                    PackageInfo packageInfo = null;
+                    try {
+                        packageInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    String versionApk = packageInfo.versionName;
+
+                    if(version.equals(versionApk)){
+
+                    } else {
+                        startActivity(new Intent(getApplicationContext(), Update.class));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void loginUser(final String username, final String password) {

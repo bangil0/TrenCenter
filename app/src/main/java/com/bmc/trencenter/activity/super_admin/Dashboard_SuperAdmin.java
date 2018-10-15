@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bmc.trencenter.activity.DetailPenghargaanAdmin;
 import com.bmc.trencenter.activity.Partnership;
+import com.bmc.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.bmc.trencenter.R;
@@ -117,7 +118,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
                         return true;
                     case R.id.nav_progja:
-                        startActivity(new Intent(getApplicationContext(), ProgramKerja.class));
+                        startActivity(new Intent(getApplicationContext(), ProgramKerja_TimPemenangan.class));
 
                         return true;
                     case R.id.nav_layanan:

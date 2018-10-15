@@ -195,7 +195,8 @@
         <activity android:name=".activity.EditPlatform" />
         <activity android:name=".activity.DetailPenghargaanAdmin" />
         <activity android:name=".activity.EditPenghargaan" />
-        <activity android:name=".activity.ProfilePicture"></activity>
+        <activity android:name=".activity.ProfilePicture" />
+        <activity android:name=".activity.Update"></activity>
     </application>
 
 </manifest>

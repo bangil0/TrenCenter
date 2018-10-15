@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bmc.trencenter.activity.ProfilePicture;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -79,7 +80,7 @@ public class ProfileRelawan extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.foto:
-                Toast.makeText(getContext(), "Masih Dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ProfilePicture.class));
 
                 return;
             case R.id.username_settings:
