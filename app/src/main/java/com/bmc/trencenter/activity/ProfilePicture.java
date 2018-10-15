@@ -45,7 +45,6 @@ public class ProfilePicture extends AppCompatActivity {
     private HashMap<String, String> user;
 
     private static final int FROM_GALLERY = 200;
-    private int imageStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +95,6 @@ public class ProfilePicture extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1 && resultCode == RESULT_OK){
-            imageStatus = FROM_GALLERY;
             selectedImage = data.getData();
 
             Glide.with(this).load(selectedImage)
@@ -137,7 +135,7 @@ public class ProfilePicture extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     String msg = jObj.getString("message");
 
-                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), msg + ", Foto akan terupdate kurang dari 5 menit!", Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e){
                     e.printStackTrace();
