@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -29,6 +31,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bmc.trencenter.activity.ChangePhone;
 import com.bmc.trencenter.activity.DetailPenghargaanAdmin;
 import com.bmc.trencenter.activity.Partnership;
 import com.bmc.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan;
@@ -36,11 +39,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.bmc.trencenter.R;
 import com.bmc.trencenter.activity.DetailCalegAdmin;
-import com.bmc.trencenter.activity.DetailPenghargaan;
 import com.bmc.trencenter.activity.DetailPlatformAdmin;
 import com.bmc.trencenter.activity.LayananActivity;
 import com.bmc.trencenter.activity.LoginActivity;
-import com.bmc.trencenter.activity.ProgramKerja;
 import com.bmc.trencenter.activity.ScanKartu;
 import com.bmc.trencenter.activity.VisiMisiAdmin;
 import com.bmc.trencenter.app.AppConfig;
@@ -186,6 +187,60 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         sendToken(id, token);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "Permission Granted");
+
+                    makeCall();
+
+                } else {
+
+                }
+                return;
+            }
+
+        }
+    }
+
+    private void makeCall() {
+        String tag_string_req = "req_get_phone";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PHONE, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String phone = jObj.getString("hp");
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + phone));
+                    startActivity(callIntent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Token Error: " + error.getMessage());
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
+    }
+
     private void sendToken(final String id, final String token){
         String tag_string_req = "req_save_token";
 
@@ -240,7 +295,7 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_admin, menu);
         return true;
     }
 
@@ -251,6 +306,8 @@ public class Dashboard_SuperAdmin extends AppCompatActivity {
         if(id == R.id.action_logout){
             logoutUser();
             return true;
+        } else if(id == R.id.action_change_phone){
+            startActivity(new Intent(getApplicationContext(), ChangePhone.class));
         }
 
         if(toggle.onOptionsItemSelected(item))

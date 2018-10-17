@@ -213,10 +213,8 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("PERMISSION", "Permission Granted");
 
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:+6281366666322"));
+                    makeCall();
 
-                    startActivity(callIntent);
                 } else {
 
                 }
@@ -224,6 +222,41 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void makeCall() {
+        String tag_string_req = "req_get_phone";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PHONE, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String phone = jObj.getString("hp");
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + phone));
+                    startActivity(callIntent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Token Error: " + error.getMessage());
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
