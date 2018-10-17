@@ -83,7 +83,7 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
                 public void onClick(View view) {
                     Intent intent = null;
 
-                    if(tipe.equals("tim_pemenangan") || tipe.equals("admin")){
+                    if(tipe.equals("admin")){
                         intent = new Intent(context, DetailLayanan_TimPemenangan.class);
                     } else {
                         intent = new Intent(context, DetailLayanan.class);

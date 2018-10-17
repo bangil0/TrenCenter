@@ -94,7 +94,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
                     user = db.getUserDetails();
                     type = user.get("type");
 
-                    if(type.equals("pendukung") || type.equals("relawan")){
+                    if(type.equals("tim_pemenangan") || type.equals("pendukung") || type.equals("relawan")){
                         intent = new Intent(context, DetailProgram.class);
                     } else {
                         intent = new Intent(context, DetailProgram_TimPemenangan.class);
