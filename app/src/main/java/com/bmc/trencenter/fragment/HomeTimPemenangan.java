@@ -49,6 +49,7 @@ import com.bmc.trencenter.app.AppConfig;
 import com.bmc.trencenter.app.AppController;
 import com.bmc.trencenter.helper.SliderUtils;
 import com.bmc.trencenter.model.Card;
+import com.bmc.trencenter.model.LayananModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +73,8 @@ public class HomeTimPemenangan extends Fragment {
     private CardLogistik logistikAdapter;
     private LayananAdapter layananAdapter;
     private PartnershipPemenanganAdapter partnershipAdapter;
-    private List<Card> cardList, logistikList, layananList, partnershipList;
+    private List<Card> cardList, logistikList, partnershipList;
+    private List<LayananModel> layananList;
 
     private Dialog dialog;
 
@@ -83,7 +85,6 @@ public class HomeTimPemenangan extends Fragment {
 
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     String request_url = "http://156.67.221.225/voting/android/debug.php";
 
@@ -95,7 +96,6 @@ public class HomeTimPemenangan extends Fragment {
         rootView.setAlpha(0f);
         rootView.setVisibility(View.GONE);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         hari = (TextView) rootView.findViewById(R.id.hari);
         jam = (TextView) rootView.findViewById(R.id.jam);
         menit = (TextView) rootView.findViewById(R.id.menit);
@@ -134,7 +134,7 @@ public class HomeTimPemenangan extends Fragment {
         partnershipRecycler.setItemAnimator(new DefaultItemAnimator());
         partnershipRecycler.setAdapter(partnershipAdapter);
 
-        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2);
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 1);
         layananRecycler.setLayoutManager(layoutManager1);
         layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         layananRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -462,10 +462,9 @@ public class HomeTimPemenangan extends Fragment {
                             }
 
                             String nama = program.getString(1);
-                            String tanggalMulai = program.getString(2);
                             String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
-                            layananList.add(new Card(nama, tanggalMulai, foto));
+                            layananList.add(new LayananModel(nama, foto));
                         }
 
                         layananAdapter.notifyDataSetChanged();

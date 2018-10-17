@@ -39,6 +39,7 @@ import com.bmc.trencenter.app.AppConfig;
 import com.bmc.trencenter.app.AppController;
 import com.bmc.trencenter.helper.SliderUtils;
 import com.bmc.trencenter.model.Card;
+import com.bmc.trencenter.model.LayananModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,10 +63,9 @@ public class FragmentHomePendukung extends Fragment {
     private RequestQueue rq;
     private List<SliderUtils> sliderImg;
 
-    private Adapter adapters;
     private RecyclerView recyclerView, layananRecycler, partnershipRecycler;
-    private Adapter Adapter;
-    private List<Card> cardList, layananList, partnershipList;
+    private List<Card> cardList, partnershipList;
+    private List<LayananModel> layananList;
     private PartnershipPemenanganAdapter partnershipAdapter;
 
     private CardAdapter cardAdapter;
@@ -152,7 +152,7 @@ public class FragmentHomePendukung extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(cardAdapter);
 
-        RecyclerView.LayoutManager layoutManager2 = new GridLayoutManager(getContext(), 2);
+        RecyclerView.LayoutManager layoutManager2 = new GridLayoutManager(getContext(), 1);
         layananRecycler.setLayoutManager(layoutManager2);
         layananRecycler.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         layananRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -381,10 +381,9 @@ public class FragmentHomePendukung extends Fragment {
                             JSONArray program = programs.getJSONArray(i);
 
                             String nama = program.getString(1);
-                            String tanggalMulai = program.getString(2);
                             String foto = "http://156.67.221.225/voting/dashboard/save/foto_layanan/" + program.getString(5);
 
-                            layananList.add(new Card(nama, tanggalMulai, foto));
+                            layananList.add(new LayananModel(nama, foto));
                         }
 
                         layananAdapter.notifyDataSetChanged();

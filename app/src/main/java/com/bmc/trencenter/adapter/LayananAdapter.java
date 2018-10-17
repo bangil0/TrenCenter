@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bmc.trencenter.activity.tim_pemenangan.DetailLayanan_TimPemenangan;
 import com.bmc.trencenter.helper.SQLiteHandler;
+import com.bmc.trencenter.model.LayananModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -27,23 +28,21 @@ import java.util.List;
 public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHolder> {
 
     private Context context;
-    private List<Card> cardList;
-    private SQLiteHandler db;
+    private List<LayananModel> layananList;
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.program_card, parent, false);
+                .inflate(R.layout.layanan_item, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Card card = cardList.get(position);
-        holder.title.setText(card.getTitle());
-        holder.date.setText(card.getDate());
-        String imageUrl = card.getImage();
+        LayananModel layanan = layananList.get(position);
+        holder.title.setText(layanan.getTitle());
+        String imageUrl = layanan.getImage();
 
         Glide.with(context)
                 .load(imageUrl)
@@ -55,45 +54,20 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return cardList.size();
+        return layananList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title, date, image;
+        public TextView title;
         public ImageView cardImage;
         public View view;
-
-        private HashMap<String, String> user = new HashMap<>();
-        private String tipe;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            title = (TextView) itemView.findViewById(R.id.title);
-            date = (TextView) itemView.findViewById(R.id.date);
-            cardImage = (ImageView) itemView.findViewById(R.id.thumbnail);
-
-            db = new SQLiteHandler(context);
-            user = db.getUserDetails();
-            tipe = user.get("type");
-
-            cardImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = null;
-
-                    if(tipe.equals("admin")){
-                        intent = new Intent(context, DetailLayanan_TimPemenangan.class);
-                    } else {
-                        intent = new Intent(context, DetailLayanan.class);
-                    }
-
-                    intent.putExtra("INDEX", getAdapterPosition());
-                    intent.putExtra("MAIN", true);
-                    context.startActivity(intent);
-                }
-            });
+            title = (TextView) itemView.findViewById(R.id.nama_layanan);
+            cardImage = (ImageView) itemView.findViewById(R.id.gambar_layanan);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,9 +82,9 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
 
     }
 
-    public LayananAdapter(Context context, List<Card> cardList){
+    public LayananAdapter(Context context, List<LayananModel> layananList){
         this.context = context;
-        this.cardList = cardList;
+        this.layananList = layananList;
     }
 }
 
