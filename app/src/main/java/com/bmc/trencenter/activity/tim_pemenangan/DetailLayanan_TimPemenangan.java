@@ -2,6 +2,10 @@ package com.bmc.trencenter.activity.tim_pemenangan;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bmc.trencenter.adapter.NewAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -45,9 +50,9 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
     private SQLiteHandler db;
     private HashMap<String, String> user;
     private String nama;
-    private ListView listView;
+    private RecyclerView recyclerView;
 
-    private CalegAdapter userAdapter;
+    private NewAdapter userAdapter;
     private List<Caleg> person;
 
     @Override
@@ -63,9 +68,17 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         title = (TextView) findViewById(R.id.titleProgram);
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
-        listView = (ListView) findViewById(R.id.penerima);
+
+        recyclerView = (RecyclerView) findViewById(R.id.penerima);
+
         person = new ArrayList<>();
-        userAdapter = new CalegAdapter(this, person);
+        userAdapter = new NewAdapter(this, person);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(userAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,7 +124,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                                 "Gagal mendapatkan data!", Toast.LENGTH_LONG).show();
                     }
 
-                    listView.setAdapter(userAdapter);
+                    userAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
