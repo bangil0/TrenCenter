@@ -39,7 +39,9 @@ public class AppConfig {
     public static String URL_GET_PENDUKUNG = "http://156.67.221.225/voting/android/get_pendukung.php";
     public static String URL_GET_LAYANAN = "http://156.67.221.225/voting/android/get_layanan.php";
     public static String URL_GET_PELANGGAN = "http://156.67.221.225/voting/android/get_pelanggan.php";
+    public static String URL_GET_PENGGUNA = "http://156.67.221.225/voting/android/get_pengguna.php";
     public static String URL_PAKAI_LAYANAN = "http://156.67.221.225/voting/android/pakai_layanan.php";
+    public static String URL_PAKAI_PARTNERSHIP = "http://156.67.221.225/voting/android/pakai_partnership.php";
     public static String URL_BROADCAST = "http://156.67.221.225/voting/android/send_broadcast.php";
     public static String URL_GET_CHART = "http://156.67.221.225/voting/android/get_count.php";
     public static String URL_SAVE_TOKEN = "http://156.67.221.225/voting/android/save_token.php";

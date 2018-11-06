@@ -14,8 +14,18 @@
         app:titleTextColor="@android:color/white"
         android:background="@color/colorPrimary" />
 
+    <Button
+        android:id="@+id/pakaiPartnership"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="Pakai"/>
+
     <ScrollView
         android:id="@+id/scrollView"
+        android:layout_above="@id/pakaiPartnership"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,7 +42,6 @@
                 android:id="@+id/judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title"
                 android:textSize="35dp"
                 android:textColor="@android:color/black"/>
 
@@ -47,7 +56,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pembuat"
                     android:layout_alignParentStart="true"/>
 
                 <TextView
@@ -55,7 +63,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kategori"
                     android:layout_alignParentEnd="true"/>
 
             </RelativeLayout>
@@ -73,18 +80,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ini isi berita"
                 android:textSize="18dp"
                 android:justificationMode="inter_word"
                 android:textAlignment="textStart" />
 
-            <TextView
-                android:id="@+id/sumber"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/pengguna"
                 android:layout_below="@id/isiBerita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Penulis: "/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
