@@ -240,4 +240,8 @@ public class OutboxFragment extends Fragment implements RecyclerItemTouchHelper.
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

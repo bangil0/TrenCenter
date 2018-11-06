@@ -93,6 +93,7 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
         HashMap<String, String> user = db.getUserDetails();
         penerima = user.get("username");
         tipe = user.get("type");
+
         loadMessage(penerima, tipe);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -238,5 +239,10 @@ public class InboxFragment extends Fragment implements RecyclerItemTouchHelper.R
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }
