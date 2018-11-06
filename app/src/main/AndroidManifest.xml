@@ -197,7 +197,8 @@
         <activity android:name=".activity.EditPenghargaan" />
         <activity android:name=".activity.ProfilePicture" />
         <activity android:name=".activity.Update" />
-        <activity android:name=".activity.ChangePhone"></activity>
+        <activity android:name=".activity.ChangePhone" />
+        <activity android:name=".activity.TambahPenghargaan"></activity>
     </application>
 
 </manifest>

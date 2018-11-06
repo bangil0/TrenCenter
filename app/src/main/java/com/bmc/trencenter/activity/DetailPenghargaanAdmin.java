@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -49,7 +51,7 @@ public class DetailPenghargaanAdmin extends AppCompatActivity implements Platfor
         recyclerView = (RecyclerView) findViewById(R.id.penghargaan_list);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Platform Caleg");
+        getSupportActionBar().setTitle("Penghargaan Caleg");
         getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -133,8 +135,28 @@ public class DetailPenghargaanAdmin extends AppCompatActivity implements Platfor
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.penghargaan, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.tambah_penghargaan){
+            startActivity(new Intent(getApplicationContext(), TambahPenghargaan.class));
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
+
         finish();
     }
 
