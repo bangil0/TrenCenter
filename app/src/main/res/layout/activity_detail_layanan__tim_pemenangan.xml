@@ -39,8 +39,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:textColor="@android:color/black"
-                android:textSize="25dp"
-                android:text="Title"/>
+                android:textSize="25dp"/>
 
             <ImageView
                 android:id="@+id/image"
@@ -50,8 +49,7 @@
                 android:layout_below="@id/titleProgram"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_logo"/>
+                android:layout_marginRight="16dp"/>
 
             <TextView
                 android:id="@+id/descriptionProgram"
