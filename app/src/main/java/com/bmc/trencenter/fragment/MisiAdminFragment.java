@@ -60,11 +60,11 @@ public class MisiAdminFragment extends Fragment implements MisiListener.Recycler
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new MisiListener(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
-        getVisi("51");
+        getMisi("51");
         return rootView;
     }
 
-    private void getVisi(final String id){
+    private void getMisi(final String id){
         String tag_string_req = "req_visi";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -121,7 +121,6 @@ public class MisiAdminFragment extends Fragment implements MisiListener.Recycler
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         VisiMisiModel visi_misi = misi.get(position);
@@ -132,4 +131,5 @@ public class MisiAdminFragment extends Fragment implements MisiListener.Recycler
         intent.putExtra("TIPE", "Misi");
         startActivity(intent);
     }
+
 }

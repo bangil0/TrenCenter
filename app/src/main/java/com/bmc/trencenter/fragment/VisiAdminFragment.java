@@ -131,4 +131,5 @@ public class VisiAdminFragment extends Fragment implements VisiListener.Recycler
         intent.putExtra("TIPE", "Visi");
         startActivity(intent);
     }
+
 }
