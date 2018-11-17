@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -156,6 +159,26 @@ public class DetailPlatformAdmin extends AppCompatActivity implements PlatformLi
         Intent intent = new Intent(getApplicationContext(), EditPlatform.class);
         intent.putExtra("OLD", old);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.platform, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.tambah_platform){
+            startActivity(new Intent(getApplicationContext(), TambahPlatform.class));
+
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

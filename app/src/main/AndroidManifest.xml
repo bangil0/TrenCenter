@@ -200,7 +200,8 @@
         <activity android:name=".activity.ChangePhone" />
         <activity android:name=".activity.TambahPenghargaan" />
         <activity android:name=".activity.DetailVisiMisiAdmin" />
-        <activity android:name=".activity.TambahMisi"></activity>
+        <activity android:name=".activity.TambahMisi" />
+        <activity android:name=".activity.TambahPlatform"></activity>
     </application>
 
 </manifest>

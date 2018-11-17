@@ -217,26 +217,29 @@ public class FragmentHomeCaleg extends Fragment {
 
                         pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                         pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pemenanganView.getGridLabelRenderer().setNumVerticalLabels(5);
                         pemenanganView.getViewport().setMinX(d1.getTime());
                         pemenanganView.getViewport().setMaxX(d7.getTime());
                         pemenanganView.getViewport().setXAxisBoundsManual(true);
-                        pemenanganView.getGridLabelRenderer().setHumanRounding(false);
+                        //pemenanganView.getGridLabelRenderer().setHumanRounding(false);
                         pemenanganView.addSeries(pemenanganChart);
 
                         relawanView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                         relawanView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        relawanView.getGridLabelRenderer().setNumVerticalLabels(5);
                         relawanView.getViewport().setMinX(d1.getTime());
                         relawanView.getViewport().setMaxX(d7.getTime());
                         relawanView.getViewport().setXAxisBoundsManual(true);
-                        relawanView.getGridLabelRenderer().setHumanRounding(false);
+                        //relawanView.getGridLabelRenderer().setHumanRounding(false);
                         relawanView.addSeries(relawanChart);
 
                         pendukungView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
                         pendukungView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pendukungView.getGridLabelRenderer().setNumVerticalLabels(5);
                         pendukungView.getViewport().setMinX(d1.getTime());
                         pendukungView.getViewport().setMaxX(d7.getTime());
                         pendukungView.getViewport().setXAxisBoundsManual(true);
-                        pendukungView.getGridLabelRenderer().setHumanRounding(false);
+                        //pendukungView.getGridLabelRenderer().setHumanRounding(false);
                         pendukungView.addSeries(pendukungChart);
                     } else {
                         Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();

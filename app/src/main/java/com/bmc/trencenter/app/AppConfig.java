@@ -64,7 +64,7 @@ public class AppConfig {
     public static String URL_GET_PHONE = "http://156.67.221.225/voting/android/get_phone.php";
     public static String URL_CHANGE_PHONE = "http://156.67.221.225/voting/android/change_phone.php";
     public static String URL_TAMBAH_PENGHARGAAN= "http://156.67.221.225/voting/android/add_penghargaan.php";
-    public static String URL_TAMBAH_VISI = "http://156.67.221.225/voting/android/tambah_visi.php";
     public static String URL_TAMBAH_MISI = "http://156.67.221.225/voting/android/tambah_misi.php";
+    public static String URL_TAMBAH_PLATFORM = "http://156.67.221.225/voting/android/add_platform.php";
 
 }
