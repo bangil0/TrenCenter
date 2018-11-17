@@ -72,7 +72,7 @@
         android:textColor="@android:color/white"
         android:text="Scan"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/penerima"
         android:layout_above="@id/scan"
         android:layout_marginTop="5dp"

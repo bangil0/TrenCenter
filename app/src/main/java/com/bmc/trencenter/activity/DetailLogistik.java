@@ -1,10 +1,16 @@
 package com.bmc.trencenter.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +22,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bmc.trencenter.adapter.ReceiverAdapter;
+import com.bmc.trencenter.fragment.HomeTimPemenangan;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -46,9 +54,10 @@ public class DetailLogistik extends AppCompatActivity {
     private SQLiteHandler db;
     private HashMap<String, String> user;
     private String nama;
-    private ListView listView;
+
+    private RecyclerView recyclerView;
     private List<Caleg> person;
-    private UserAdapter userAdapter;
+    private ReceiverAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +73,16 @@ public class DetailLogistik extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.scan);
-        listView = (ListView) findViewById(R.id.penerima);
+
+        recyclerView = (RecyclerView) findViewById(R.id.penerima);
         person = new ArrayList<>();
-        userAdapter = new UserAdapter(this, person);
+        userAdapter = new ReceiverAdapter(this, person);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(userAdapter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,11 +198,11 @@ public class DetailLogistik extends AppCompatActivity {
                             person.add(new Caleg("", nama));
                         }
 
+                        userAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getApplicationContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
                     }
 
-                    listView.setAdapter(userAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -213,6 +229,47 @@ public class DetailLogistik extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view);
+            int column = position % spanCount;
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount;
+                outRect.right = (column + 1) * spacing / spanCount;
+
+                if (position < spanCount) {
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing;
+            } else {
+                outRect.left = column * spacing / spanCount;
+                outRect.right = spacing - (column + 1) * spacing / spanCount;
+                if (position >= spanCount) {
+                    outRect.top = spacing;
+                }
+            }
+        }
+    }
+
+    private int dpToPx(int dp) throws IllegalStateException {
+        Resources r = getResources();
+
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
     @Override
