@@ -193,9 +193,9 @@ public class DetailLogistik extends AppCompatActivity {
 
                         for(int i=0; i<array.length(); i++){
                             nama = array.getString(i);
-                            //fotos = foto.getString(i);
+                            fotos = foto.getString(i);
 
-                            person.add(new Caleg("", nama));
+                            person.add(new Caleg(fotos, nama));
                         }
 
                         userAdapter.notifyDataSetChanged();
