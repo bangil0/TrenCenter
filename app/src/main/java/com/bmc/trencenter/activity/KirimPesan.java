@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,7 +37,7 @@ public class KirimPesan extends AppCompatActivity {
     private SQLiteHandler db;
     private String nama, pengirim, init = " -- PILIH NAMA -- ";
 
-    private Spinner list;
+    private AutoCompleteTextView list;
     private EditText message;
     private Button send;
     private List<String> nameList;
@@ -48,7 +49,7 @@ public class KirimPesan extends AppCompatActivity {
 
         message = (EditText) findViewById(R.id.message);
         send = (Button) findViewById(R.id.send);
-        list = (Spinner) findViewById(R.id.list_nama);
+        list = (AutoCompleteTextView) findViewById(R.id.list_nama);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,7 +75,7 @@ public class KirimPesan extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String penerima = list.getSelectedItem().toString();
+                String penerima = list.getText().toString();
                 String isi = message.getText().toString();
 
                 if(penerima.equals(init)){

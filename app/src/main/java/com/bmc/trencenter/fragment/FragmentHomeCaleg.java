@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -51,6 +52,8 @@ public class FragmentHomeCaleg extends Fragment {
     private List<LogisticReport> list;
     private ListView listView;
 
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM");
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +87,11 @@ public class FragmentHomeCaleg extends Fragment {
         getCharts(dateFormat.format(calendar.getTime()));
 
         countDown();
+
+        int i = 93;
+        double d = Double.valueOf(i);
+
+        Toast.makeText(getContext(), String.valueOf(Math.ceil(d)) + " " + String.valueOf(Math.floor(d)), Toast.LENGTH_LONG).show();
 
         return view;
     }
@@ -216,30 +224,30 @@ public class FragmentHomeCaleg extends Fragment {
                         pendukungChart.setDataPointsRadius(1f);
 
                         pemenanganView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pemenanganView.getGridLabelRenderer().setNumHorizontalLabels(7);
                         pemenanganView.getGridLabelRenderer().setNumVerticalLabels(5);
                         pemenanganView.getViewport().setMinX(d1.getTime());
                         pemenanganView.getViewport().setMaxX(d7.getTime());
                         pemenanganView.getViewport().setXAxisBoundsManual(true);
-                        //pemenanganView.getGridLabelRenderer().setHumanRounding(false);
+                        pemenanganView.getGridLabelRenderer().setHumanRounding(false);
                         pemenanganView.addSeries(pemenanganChart);
 
                         relawanView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        relawanView.getGridLabelRenderer().setNumHorizontalLabels(7);
                         relawanView.getGridLabelRenderer().setNumVerticalLabels(5);
                         relawanView.getViewport().setMinX(d1.getTime());
                         relawanView.getViewport().setMaxX(d7.getTime());
                         relawanView.getViewport().setXAxisBoundsManual(true);
-                        //relawanView.getGridLabelRenderer().setHumanRounding(false);
+                        relawanView.getGridLabelRenderer().setHumanRounding(false);
                         relawanView.addSeries(relawanChart);
 
                         pendukungView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(3);
+                        pendukungView.getGridLabelRenderer().setNumHorizontalLabels(7);
                         pendukungView.getGridLabelRenderer().setNumVerticalLabels(5);
                         pendukungView.getViewport().setMinX(d1.getTime());
                         pendukungView.getViewport().setMaxX(d7.getTime());
                         pendukungView.getViewport().setXAxisBoundsManual(true);
-                        //pendukungView.getGridLabelRenderer().setHumanRounding(false);
+                        pendukungView.getGridLabelRenderer().setHumanRounding(false);
                         pendukungView.addSeries(pendukungChart);
                     } else {
                         Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
