@@ -315,13 +315,248 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
-                android:text="Jumlah Tim Pemenangan dalam Seminggu Terakhir"/>
+                android:text="Jumlah Tim Pemenangan dalam \nSeminggu Terakhir"/>
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/grafikPemenangan"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date1Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(12/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart1Pemenangan"
+                        android:layout_toRightOf="@id/date1Pemenangan"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum1Pemenangan"
+                        android:layout_toRightOf="@id/chart1Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date2Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(13/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart2Pemenangan"
+                        android:layout_toRightOf="@id/date2Pemenangan"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum2Pemenangan"
+                        android:layout_toRightOf="@id/chart2Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date3Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(14/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart3Pemenangan"
+                        android:layout_toRightOf="@id/date3Pemenangan"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum3Pemenangan"
+                        android:layout_toRightOf="@id/chart3Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date4Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(15/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart4Pemenangan"
+                        android:layout_toRightOf="@id/date4Pemenangan"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum4Pemenangan"
+                        android:layout_toRightOf="@id/chart4Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date5Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(16/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart5Pemenangan"
+                        android:layout_toRightOf="@id/date5Pemenangan"
+                        android:background="@android:color/holo_blue_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum5Pemenangan"
+                        android:layout_toRightOf="@id/chart5Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date6Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(17/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart6Pemenangan"
+                        android:layout_toRightOf="@id/date6Pemenangan"
+                        android:background="@android:color/holo_blue_bright"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum6Pemenangan"
+                        android:layout_toRightOf="@id/chart6Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date7Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(18/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart7Pemenangan"
+                        android:layout_toRightOf="@id/date7Pemenangan"
+                        android:background="#ff00ff"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum7Pemenangan"
+                        android:layout_toRightOf="@id/chart7Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_marginTop="50dp"
@@ -331,11 +566,246 @@
                 android:textColor="@android:color/black"
                 android:text="Jumlah Relawan dalam Seminggu Terakhir"/>
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/grafikRelawan"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(12/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart1"
+                        android:layout_toRightOf="@id/date1"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum1"
+                        android:layout_toRightOf="@id/chart1"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(13/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart2"
+                        android:layout_toRightOf="@id/date2"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum2"
+                        android:layout_toRightOf="@id/chart2"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(14/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart3"
+                        android:layout_toRightOf="@id/date3"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum3"
+                        android:layout_toRightOf="@id/chart3"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(15/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart4"
+                        android:layout_toRightOf="@id/date4"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum4"
+                        android:layout_toRightOf="@id/chart4"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(16/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart5"
+                        android:layout_toRightOf="@id/date5"
+                        android:background="@android:color/holo_blue_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum5"
+                        android:layout_toRightOf="@id/chart5"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(17/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart6"
+                        android:layout_toRightOf="@id/date6"
+                        android:background="@android:color/holo_blue_bright"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum6"
+                        android:layout_toRightOf="@id/chart6"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(18/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart7"
+                        android:layout_toRightOf="@id/date7"
+                        android:background="#ff00ff"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum7"
+                        android:layout_toRightOf="@id/chart7"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_marginTop="50dp"
@@ -345,11 +815,246 @@
                 android:textColor="@android:color/black"
                 android:text="Jumlah Pendukung dalam Seminggu Terakhir"/>
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/grafikPendukung"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date1Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(12/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart1Pendukung"
+                        android:layout_toRightOf="@id/date1Pendukung"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum1Pendukung"
+                        android:layout_toRightOf="@id/chart1Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date2Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(13/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart2Pendukung"
+                        android:layout_toRightOf="@id/date2Pendukung"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum2Pendukung"
+                        android:layout_toRightOf="@id/chart2Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date3Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(14/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart3Pendukung"
+                        android:layout_toRightOf="@id/date3Pendukung"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum3Pendukung"
+                        android:layout_toRightOf="@id/chart3Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date4Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(15/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart4Pendukung"
+                        android:layout_toRightOf="@id/date4Pendukung"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum4Pendukung"
+                        android:layout_toRightOf="@id/chart4Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date5Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(16/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart5Pendukung"
+                        android:layout_toRightOf="@id/date5Pendukung"
+                        android:background="@android:color/holo_blue_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum5Pendukung"
+                        android:layout_toRightOf="@id/chart5Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date6Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(17/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart6Pendukung"
+                        android:layout_toRightOf="@id/date6Pendukung"
+                        android:background="@android:color/holo_blue_bright"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum6Pendukung"
+                        android:layout_toRightOf="@id/chart6Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date7Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(18/Nov)"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart7Pendukung"
+                        android:layout_toRightOf="@id/date7Pendukung"
+                        android:background="#ff00ff"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum7Pendukung"
+                        android:layout_toRightOf="@id/chart7Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
