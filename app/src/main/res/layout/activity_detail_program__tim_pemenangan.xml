@@ -16,41 +16,9 @@
             android:id="@+id/logo"
             android:layout_width="200dp"
             android:layout_height="20dp"
-            android:src="@drawable/icon_logo_white"/>
+            android:src="@drawable/icon_logo_white" />
 
     </android.support.v7.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/titleProgram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="25dp"/>
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_centerHorizontal="true"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/titleProgram"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
-
-    <TextView
-        android:id="@+id/descriptionProgram"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/image"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
 
     <Button
         android:id="@+id/scanPeserta"
@@ -58,26 +26,73 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="Scan Peserta"/>
+        android:text="Scan Peserta"
+        android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_below="@id/descriptionProgram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Peserta yang Ikut Berpartisipasi: "
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="@dimen/activity_vertical_margin"/>
-
-    <ListView
-        android:id="@+id/peserta"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/label"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/scanPeserta"/>
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/scanPeserta">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleProgram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="25dp" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/titleProgram"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:id="@+id/descriptionProgram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descriptionProgram"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginTop="10dp"
+                android:text="Peserta yang Ikut Berpartisipasi: "
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/peserta"
+                android:layout_below="@id/label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

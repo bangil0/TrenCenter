@@ -2,6 +2,10 @@ package com.bmc.trencenter.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 public class DaftarRelawan extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ListView listView;
+    private RecyclerView recyclerView;
 
     private ArrayList<Caleg> relawanList;
     private UserAdapter adapter;
@@ -37,10 +41,16 @@ public class DaftarRelawan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_relawan);
 
-        listView = (ListView) findViewById(R.id.relawan_list);
+        recyclerView = (RecyclerView) findViewById(R.id.relawan_list);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         relawanList = new ArrayList<>();
         adapter = new UserAdapter(this, relawanList);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -78,7 +88,7 @@ public class DaftarRelawan extends AppCompatActivity {
                                     data.getString(i)));
                         }
 
-                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");
