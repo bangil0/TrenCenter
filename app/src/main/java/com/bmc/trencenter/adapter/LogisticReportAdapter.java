@@ -2,6 +2,7 @@ package com.bmc.trencenter.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,60 @@ import java.util.List;
  * Created by root on 29/09/18.
  */
 
-public class LogisticReportAdapter extends ArrayAdapter<LogisticReport> {
+public class LogisticReportAdapter extends RecyclerView.Adapter<LogisticReportAdapter.MyViewHolder> {
 
     private Context context;
     private List<LogisticReport> list;
 
-
     public LogisticReportAdapter(Context context, List<LogisticReport> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.logistic_report, parent, false);
+
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        final LogisticReport currentLogistic = list.get(position);
+        holder.title.setText(currentLogistic.getName());
+        holder.total.setText(currentLogistic.getTotal());
+
+        Glide.with(context).load("http://156.67.221.225/voting/dashboard/save/foto_logistik/"
+                + currentLogistic.getImage())
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(context))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .override(512, 160)
+                .into(holder.logo);
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        private ImageView logo;
+        private TextView title, total;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            logo = itemView.findViewById(R.id.logo);
+            title = itemView.findViewById(R.id.title);
+            total = itemView.findViewById(R.id.total);
+        }
+    }
+
+    /*public LogisticReportAdapter(Context context, List<LogisticReport> list) {
         super(context, 0, list);
         this.context = context;
         this.list = list;
@@ -61,5 +109,5 @@ public class LogisticReportAdapter extends ArrayAdapter<LogisticReport> {
                 .into(imageView);
 
         return listItem;
-    }
+    }*/
 }

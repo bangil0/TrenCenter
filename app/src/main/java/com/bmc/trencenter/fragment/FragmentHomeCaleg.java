@@ -4,6 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -52,7 +56,7 @@ public class FragmentHomeCaleg extends Fragment {
 
     private LogisticReportAdapter adapter;
     private List<LogisticReport> list;
-    private ListView listView;
+    private RecyclerView recyclerView;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd MMM");
 
@@ -159,18 +163,17 @@ public class FragmentHomeCaleg extends Fragment {
         relawan = (TextView) view.findViewById(R.id.totalRelawan);
         pendukung = (TextView) view.findViewById(R.id.totalPendukung);
 
-        listView = (ListView) view.findViewById(R.id.logistikList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.logistikList);
         calendar = Calendar.getInstance();
 
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
         list = new ArrayList<>();
+        adapter = new LogisticReportAdapter(getContext(), list);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
 
         getSummaries();
         getCharts(dateFormat.format(calendar.getTime()));
@@ -262,8 +265,7 @@ public class FragmentHomeCaleg extends Fragment {
                             list.add(new LogisticReport(nama, total, foto));
                         }
 
-                        adapter = new LogisticReportAdapter(getContext(), list);
-                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
                     }
