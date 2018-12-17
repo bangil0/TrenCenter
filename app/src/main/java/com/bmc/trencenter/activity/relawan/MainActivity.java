@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");
+        FirebaseMessaging.getInstance().subscribeToTopic("broadcast");
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

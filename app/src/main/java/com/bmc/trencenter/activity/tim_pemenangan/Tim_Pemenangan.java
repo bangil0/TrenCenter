@@ -73,6 +73,7 @@ public class Tim_Pemenangan extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
         FirebaseMessaging.getInstance().subscribeToTopic("berita");
+        FirebaseMessaging.getInstance().subscribeToTopic("broadcast");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
