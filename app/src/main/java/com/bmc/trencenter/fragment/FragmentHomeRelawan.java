@@ -200,7 +200,12 @@ public class FragmentHomeRelawan extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    int length = adapter.getCount();
+                    int length;
+                    if(adapter == null) {
+                        length = 0;
+                    } else {
+                        length = adapter.getCount();
+                    }
 
                     if(length == 2){
                         if(viewPager.getCurrentItem() == 0){
@@ -315,8 +320,13 @@ public class FragmentHomeRelawan extends Fragment {
 
         new CountDownTimer(diffSeconds, 1000){
             @Override
-            public void onTick(long l) {
-                detik.setText("" + l / 1000);
+            public void onTick(final long l) {
+                detik.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        detik.setText("" + l / 1000);
+                    }
+                });
             }
 
             @Override

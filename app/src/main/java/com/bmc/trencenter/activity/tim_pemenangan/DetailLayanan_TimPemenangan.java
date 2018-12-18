@@ -50,10 +50,10 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
     private SQLiteHandler db;
     private HashMap<String, String> user;
     private String nama;
-    private RecyclerView recyclerView;
 
+    /*private RecyclerView recyclerView;
     private NewAdapter userAdapter;
-    private List<Caleg> person;
+    private List<Caleg> person;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         description = (TextView) findViewById(R.id.descriptionProgram);
         image = (ImageView) findViewById(R.id.image);
 
-        recyclerView = (RecyclerView) findViewById(R.id.penerima);
+        /*recyclerView = (RecyclerView) findViewById(R.id.penerima);
 
         person = new ArrayList<>();
         userAdapter = new NewAdapter(this, person);
@@ -78,7 +78,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(userAdapter);
+        recyclerView.setAdapter(userAdapter);*/
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,7 +94,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         });
     }
 
-    private void getPelanggan(final String id_layanan){
+    /*private void getPelanggan(final String id_layanan){
         String tag_string_req = "req_get_pelanggan";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -150,7 +150,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
+    }*/
 
     private void getDetailLogistik() {
         String tag_string_req = "req_layanan";
@@ -186,7 +186,7 @@ public class DetailLayanan_TimPemenangan extends AppCompatActivity {
                         title.setText(nama);
                         description.setText(tanggalMulai);
 
-                        getPelanggan(id_service);
+                        //getPelanggan(id_service);
 
                     } else {
                         String errorMsg = jObj.getString("error_msg");

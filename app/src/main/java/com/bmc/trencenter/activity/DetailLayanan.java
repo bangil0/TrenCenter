@@ -1,5 +1,11 @@
 package com.bmc.trencenter.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bmc.trencenter.activity.relawan.MainActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bmc.trencenter.R;
@@ -46,6 +53,8 @@ public class DetailLayanan extends AppCompatActivity {
     private String nama;
     private ListView listView;
     private String id_layanan, id_user;
+
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +89,16 @@ public class DetailLayanan extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pakaiLayanan();
+                ActivityCompat.requestPermissions(DetailLayanan.this,
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        0);
+
+                flag = false;
             }
         });
     }
 
-    private void pakaiLayanan() {
+    /*private void pakaiLayanan() {
         String tag_string_req = "req_receiver";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -133,6 +146,62 @@ public class DetailLayanan extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "Permission Granted");
+
+                    makeCall();
+
+                    flag = true;
+
+                } else {
+
+                }
+                return;
+            }
+
+        }
+    }
+
+    private void makeCall() {
+        String tag_string_req = "req_get_phone";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_GET_PHONE, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String phone = jObj.getString("hp");
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + phone));
+                    startActivity(callIntent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Token Error: " + error.getMessage());
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
     private void getDetailLogistik() {
@@ -262,6 +331,8 @@ public class DetailLayanan extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        finish();
+        if(flag) {
+            finish();
+        }
     }
 }
