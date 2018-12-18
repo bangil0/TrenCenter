@@ -105,8 +105,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         new CountDownTimer(diffSeconds * 1000, 1000){
             @Override
-            public void onTick(long l) {
-                detik.setText("" + l / 1000);
+            public void onTick(final long l) {
+                detik.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        detik.setText("" + l / 1000);
+                    }
+                });
             }
 
             @Override
