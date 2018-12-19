@@ -60,36 +60,39 @@ public class FragmentHomeCaleg extends Fragment {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd MMM");
 
-    private LinearLayout senin, selasa, rabu, kamis, jumat, sabtu, minggu;
-    private TextView total1, total2, total3, total4, total5, total6, total7;
-    private TextView hari1, hari2, hari3, hari4, hari5, hari6, hari7;
+    private LinearLayout kota, denai, deli, belawan, amplas, area, marelan, labuhan, tembung, perjuangan, timur;
+    private TextView total1, total2, total3, total4, total5, total6, total7, total8, total9, total10, total11;
 
-    private LinearLayout seninPemenangan, selasaPemenangan, rabuPemenangan, kamisPemenangan,
-            jumatPemenangan, sabtuPemenangan, mingguPemenangan;
+    private LinearLayout kotaPemenangan, denaiPemenangan, deliPemenangan, belawanPemenangan,
+            amplasPemenangan, areaPemenangan, marelanPemenangan, labuhanPemenangan, tembungPemenangan
+            , perjuanganPemenangan, timurPemenangan;
     private TextView total1Pemenangan, total2Pemenangan, total3Pemenangan, total4Pemenangan,
-            total5Pemenangan, total6Pemenangan, total7Pemenangan;
-    private TextView hari1Pemenangan, hari2Pemenangan, hari3Pemenangan, hari4Pemenangan,
-            hari5Pemenangan, hari6Pemenangan, hari7Pemenangan;
+            total5Pemenangan, total6Pemenangan, total7Pemenangan, total8Pemenangan, total9Pemenangan,
+            total10Pemenangan, total11Pemenangan;
 
-    private LinearLayout seninPendukung, selasaPendukung, rabuPendukung, kamisPendukung,
-            jumatPendukung, sabtuPendukung, mingguPendukung;
+    private LinearLayout kotaPendukung, denaiPendukung, deliPendukung, belawanPendukung,
+            amplasPendukung, areaPendukung, marelanPendukung, labuhanPendukung, tembungPendukung
+            , perjuanganPendukung, timurPendukung;
     private TextView total1Pendukung, total2Pendukung, total3Pendukung, total4Pendukung,
-            total5Pendukung, total6Pendukung, total7Pendukung;
-    private TextView hari1Pendukung, hari2Pendukung, hari3Pendukung, hari4Pendukung,
-            hari5Pendukung, hari6Pendukung, hari7Pendukung;
+            total5Pendukung, total6Pendukung, total7Pendukung, total8Pendukung, total9Pendukung,
+            total10Pendukung, total11Pendukung;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_caleg, container, false);
 
-        senin = (LinearLayout) view.findViewById(R.id.chart1);
-        selasa = (LinearLayout) view.findViewById(R.id.chart2);
-        rabu = (LinearLayout) view.findViewById(R.id.chart3);
-        kamis = (LinearLayout) view.findViewById(R.id.chart4);
-        jumat = (LinearLayout) view.findViewById(R.id.chart5);
-        sabtu = (LinearLayout) view.findViewById(R.id.chart6);
-        minggu = (LinearLayout) view.findViewById(R.id.chart7);
+        kota = (LinearLayout) view.findViewById(R.id.chart1);
+        denai = (LinearLayout) view.findViewById(R.id.chart2);
+        deli = (LinearLayout) view.findViewById(R.id.chart3);
+        belawan = (LinearLayout) view.findViewById(R.id.chart4);
+        amplas = (LinearLayout) view.findViewById(R.id.chart5);
+        area = (LinearLayout) view.findViewById(R.id.chart6);
+        marelan = (LinearLayout) view.findViewById(R.id.chart7);
+        labuhan = (LinearLayout) view.findViewById(R.id.chart8);
+        tembung = (LinearLayout) view.findViewById(R.id.chart9);
+        perjuangan = (LinearLayout) view.findViewById(R.id.chart10);
+        timur = (LinearLayout) view.findViewById(R.id.chart11);
 
         total1 = (TextView) view.findViewById(R.id.sum1);
         total2 = (TextView) view.findViewById(R.id.sum2);
@@ -98,22 +101,22 @@ public class FragmentHomeCaleg extends Fragment {
         total5 = (TextView) view.findViewById(R.id.sum5);
         total6 = (TextView) view.findViewById(R.id.sum6);
         total7 = (TextView) view.findViewById(R.id.sum7);
+        total8 = (TextView) view.findViewById(R.id.sum8);
+        total9 = (TextView) view.findViewById(R.id.sum9);
+        total10 = (TextView) view.findViewById(R.id.sum10);
+        total11 = (TextView) view.findViewById(R.id.sum11);
 
-        hari1 = (TextView) view.findViewById(R.id.date1);
-        hari2 = (TextView) view.findViewById(R.id.date2);
-        hari3 = (TextView) view.findViewById(R.id.date3);
-        hari4 = (TextView) view.findViewById(R.id.date4);
-        hari5 = (TextView) view.findViewById(R.id.date5);
-        hari6 = (TextView) view.findViewById(R.id.date6);
-        hari7 = (TextView) view.findViewById(R.id.date7);
-
-        seninPemenangan = (LinearLayout) view.findViewById(R.id.chart1Pemenangan);
-        selasaPemenangan = (LinearLayout) view.findViewById(R.id.chart2Pemenangan);
-        rabuPemenangan = (LinearLayout) view.findViewById(R.id.chart3Pemenangan);
-        kamisPemenangan = (LinearLayout) view.findViewById(R.id.chart4Pemenangan);
-        jumatPemenangan = (LinearLayout) view.findViewById(R.id.chart5Pemenangan);
-        sabtuPemenangan = (LinearLayout) view.findViewById(R.id.chart6Pemenangan);
-        mingguPemenangan = (LinearLayout) view.findViewById(R.id.chart7Pemenangan);
+        kotaPemenangan = (LinearLayout) view.findViewById(R.id.chart1Pemenangan);
+        denaiPemenangan = (LinearLayout) view.findViewById(R.id.chart2Pemenangan);
+        deliPemenangan = (LinearLayout) view.findViewById(R.id.chart3Pemenangan);
+        belawanPemenangan = (LinearLayout) view.findViewById(R.id.chart4Pemenangan);
+        amplasPemenangan = (LinearLayout) view.findViewById(R.id.chart5Pemenangan);
+        areaPemenangan = (LinearLayout) view.findViewById(R.id.chart6Pemenangan);
+        marelanPemenangan = (LinearLayout) view.findViewById(R.id.chart7Pemenangan);
+        labuhanPemenangan = (LinearLayout) view.findViewById(R.id.chart8Pemenangan);
+        tembungPemenangan = (LinearLayout) view.findViewById(R.id.chart9Pemenangan);
+        perjuanganPemenangan = (LinearLayout) view.findViewById(R.id.chart10Pemenangan);
+        timurPemenangan = (LinearLayout) view.findViewById(R.id.chart11Pemenangan);
 
         total1Pemenangan = (TextView) view.findViewById(R.id.sum1Pemenangan);
         total2Pemenangan = (TextView) view.findViewById(R.id.sum2Pemenangan);
@@ -122,14 +125,22 @@ public class FragmentHomeCaleg extends Fragment {
         total5Pemenangan = (TextView) view.findViewById(R.id.sum5Pemenangan);
         total6Pemenangan = (TextView) view.findViewById(R.id.sum6Pemenangan);
         total7Pemenangan = (TextView) view.findViewById(R.id.sum7Pemenangan);
+        total8Pemenangan = (TextView) view.findViewById(R.id.sum8Pemenangan);
+        total9Pemenangan = (TextView) view.findViewById(R.id.sum9Pemenangan);
+        total10Pemenangan = (TextView) view.findViewById(R.id.sum10Pemenangan);
+        total11Pemenangan = (TextView) view.findViewById(R.id.sum11Pemenangan);
 
-        seninPendukung = (LinearLayout) view.findViewById(R.id.chart1Pendukung);
-        selasaPendukung = (LinearLayout) view.findViewById(R.id.chart2Pendukung);
-        rabuPendukung = (LinearLayout) view.findViewById(R.id.chart3Pendukung);
-        kamisPendukung = (LinearLayout) view.findViewById(R.id.chart4Pendukung);
-        jumatPendukung = (LinearLayout) view.findViewById(R.id.chart5Pendukung);
-        sabtuPendukung = (LinearLayout) view.findViewById(R.id.chart6Pendukung);
-        mingguPendukung = (LinearLayout) view.findViewById(R.id.chart7Pendukung);
+        kotaPendukung = (LinearLayout) view.findViewById(R.id.chart1Pendukung);
+        denaiPendukung = (LinearLayout) view.findViewById(R.id.chart2Pendukung);
+        deliPendukung = (LinearLayout) view.findViewById(R.id.chart3Pendukung);
+        belawanPendukung = (LinearLayout) view.findViewById(R.id.chart4Pendukung);
+        amplasPendukung = (LinearLayout) view.findViewById(R.id.chart5Pendukung);
+        areaPendukung = (LinearLayout) view.findViewById(R.id.chart6Pendukung);
+        marelanPendukung = (LinearLayout) view.findViewById(R.id.chart7Pendukung);
+        labuhanPendukung = (LinearLayout) view.findViewById(R.id.chart8Pendukung);
+        tembungPendukung = (LinearLayout) view.findViewById(R.id.chart9Pendukung);
+        perjuanganPendukung = (LinearLayout) view.findViewById(R.id.chart10Pendukung);
+        timurPendukung = (LinearLayout) view.findViewById(R.id.chart11Pendukung);
 
         total1Pendukung = (TextView) view.findViewById(R.id.sum1Pendukung);
         total2Pendukung = (TextView) view.findViewById(R.id.sum2Pendukung);
@@ -138,22 +149,10 @@ public class FragmentHomeCaleg extends Fragment {
         total5Pendukung = (TextView) view.findViewById(R.id.sum5Pendukung);
         total6Pendukung = (TextView) view.findViewById(R.id.sum6Pendukung);
         total7Pendukung = (TextView) view.findViewById(R.id.sum7Pendukung);
-
-        hari1Pendukung = (TextView) view.findViewById(R.id.date1Pendukung);
-        hari2Pendukung = (TextView) view.findViewById(R.id.date2Pendukung);
-        hari3Pendukung = (TextView) view.findViewById(R.id.date3Pendukung);
-        hari4Pendukung = (TextView) view.findViewById(R.id.date4Pendukung);
-        hari5Pendukung = (TextView) view.findViewById(R.id.date5Pendukung);
-        hari6Pendukung = (TextView) view.findViewById(R.id.date6Pendukung);
-        hari7Pendukung = (TextView) view.findViewById(R.id.date7Pendukung);
-
-        hari1Pemenangan = (TextView) view.findViewById(R.id.date1Pemenangan);
-        hari2Pemenangan = (TextView) view.findViewById(R.id.date2Pemenangan);
-        hari3Pemenangan = (TextView) view.findViewById(R.id.date3Pemenangan);
-        hari4Pemenangan = (TextView) view.findViewById(R.id.date4Pemenangan);
-        hari5Pemenangan = (TextView) view.findViewById(R.id.date5Pemenangan);
-        hari6Pemenangan = (TextView) view.findViewById(R.id.date6Pemenangan);
-        hari7Pemenangan = (TextView) view.findViewById(R.id.date7Pemenangan);
+        total8Pendukung = (TextView) view.findViewById(R.id.sum8Pendukung);
+        total9Pendukung = (TextView) view.findViewById(R.id.sum9Pendukung);
+        total10Pendukung = (TextView) view.findViewById(R.id.sum10Pendukung);
+        total11Pendukung = (TextView) view.findViewById(R.id.sum11Pendukung);
 
         hari = (TextView) view.findViewById(R.id.hari);
         jam = (TextView) view.findViewById(R.id.jam);
@@ -196,38 +195,6 @@ public class FragmentHomeCaleg extends Fragment {
         c.add(Calendar.DATE, 1);
         Date d7 = c.getTime();
 
-        String h1 = sdf.format(d1);
-        String h2 = sdf.format(d2);
-        String h3 = sdf.format(d3);
-        String h4 = sdf.format(d4);
-        String h5 = sdf.format(d5);
-        String h6 = sdf.format(d6);
-        String h7 = sdf.format(d7);
-
-        hari1.setText(h1);
-        hari2.setText(h2);
-        hari3.setText(h3);
-        hari4.setText(h4);
-        hari5.setText(h5);
-        hari6.setText(h6);
-        hari7.setText(h7);
-
-        hari1Pemenangan.setText(h1);
-        hari2Pemenangan.setText(h2);
-        hari3Pemenangan.setText(h3);
-        hari4Pemenangan.setText(h4);
-        hari5Pemenangan.setText(h5);
-        hari6Pemenangan.setText(h6);
-        hari7Pemenangan.setText(h7);
-
-        hari1Pendukung.setText(h1);
-        hari2Pendukung.setText(h2);
-        hari3Pendukung.setText(h3);
-        hari4Pendukung.setText(h4);
-        hari5Pendukung.setText(h5);
-        hari6Pendukung.setText(h6);
-        hari7Pendukung.setText(h7);
-
         return view;
     }
 
@@ -246,9 +213,9 @@ public class FragmentHomeCaleg extends Fragment {
                     boolean error = jsonObject.getBoolean("error");
 
                     if(!error){
-                        String totalPemenangan = jsonObject.getString("pemenangan");
-                        String totalRelawan = jsonObject.getString("relawan");
-                        String totalPendukung = jsonObject.getString("pendukung");
+                        String totalPemenangan = jsonObject.getString("totalPemenangan");
+                        String totalRelawan = jsonObject.getString("totalRelawan");
+                        String totalPendukung = jsonObject.getString("totalPendukung");
 
                         pemenangan.setText(totalPemenangan);
                         relawan.setText(totalRelawan);
@@ -304,157 +271,241 @@ public class FragmentHomeCaleg extends Fragment {
                     boolean error = jsonObject.getBoolean("error");
 
                     if(!error){
-                        JSONArray sum = jsonObject.getJSONArray("relawan");
-                        int monday = jsonObject.getInt("senin");
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)senin.getLayoutParams();
+                        JSONObject sum = jsonObject.getJSONObject("relawan");
+                        int first = jsonObject.getInt("kota_relawan");
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)kota.getLayoutParams();
                         layoutParams.height = dpToPx(25);
-                        layoutParams.width = dpToPx(monday);
-                        senin.setLayoutParams(layoutParams);
-                        total1.setText(sum.getString(0));
+                        layoutParams.width = dpToPx(first);
+                        kota.setLayoutParams(layoutParams);
+                        total1.setText(sum.getString("kota"));
 
-                        int tuesday = jsonObject.getInt("selasa");
-                        RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams)selasa.getLayoutParams();
+                        int second = jsonObject.getInt("denai_relawan");
+                        RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams)denai.getLayoutParams();
                         layoutParams2.height = dpToPx(25);
-                        layoutParams2.width = dpToPx(tuesday);
-                        selasa.setLayoutParams(layoutParams2);
-                        total2.setText(sum.getString(1));
+                        layoutParams2.width = dpToPx(second);
+                        denai.setLayoutParams(layoutParams2);
+                        total2.setText(sum.getString("denai"));
 
-                        int wednesday = jsonObject.getInt("rabu");
-                        RelativeLayout.LayoutParams layoutParams3 = (RelativeLayout.LayoutParams)rabu.getLayoutParams();
+                        int third = jsonObject.getInt("deli_relawan");
+                        RelativeLayout.LayoutParams layoutParams3 = (RelativeLayout.LayoutParams)deli.getLayoutParams();
                         layoutParams3.height = dpToPx(25);
-                        layoutParams3.width = dpToPx(wednesday);
-                        rabu.setLayoutParams(layoutParams3);
-                        total3.setText(sum.getString(2));
+                        layoutParams3.width = dpToPx(third);
+                        deli.setLayoutParams(layoutParams3);
+                        total3.setText(sum.getString("deli"));
 
-                        int thursday = jsonObject.getInt("kamis");
-                        RelativeLayout.LayoutParams layoutParams4 = (RelativeLayout.LayoutParams)kamis.getLayoutParams();
+                        int fourth = jsonObject.getInt("belawan_relawan");
+                        RelativeLayout.LayoutParams layoutParams4 = (RelativeLayout.LayoutParams)belawan.getLayoutParams();
                         layoutParams4.height = dpToPx(25);
-                        layoutParams4.width = dpToPx(thursday);
-                        kamis.setLayoutParams(layoutParams4);
-                        total4.setText(sum.getString(3));
+                        layoutParams4.width = dpToPx(fourth);
+                        belawan.setLayoutParams(layoutParams4);
+                        total4.setText(sum.getString("belawan"));
 
-                        int friday = jsonObject.getInt("jumat");
-                        RelativeLayout.LayoutParams layoutParams5 = (RelativeLayout.LayoutParams)jumat.getLayoutParams();
+                        int fifth = jsonObject.getInt("amplas_relawan");
+                        RelativeLayout.LayoutParams layoutParams5 = (RelativeLayout.LayoutParams)amplas.getLayoutParams();
                         layoutParams5.height = dpToPx(25);
-                        layoutParams5.width = dpToPx(friday);
-                        jumat.setLayoutParams(layoutParams5);
-                        total5.setText(sum.getString(4));
+                        layoutParams5.width = dpToPx(fifth);
+                        amplas.setLayoutParams(layoutParams5);
+                        total5.setText(sum.getString("amplas"));
 
-                        int saturday = jsonObject.getInt("sabtu");
-                        RelativeLayout.LayoutParams layoutParams6 = (RelativeLayout.LayoutParams)sabtu.getLayoutParams();
+                        int sixth = jsonObject.getInt("area_relawan");
+                        RelativeLayout.LayoutParams layoutParams6 = (RelativeLayout.LayoutParams)area.getLayoutParams();
                         layoutParams6.height = dpToPx(25);
-                        layoutParams6.width = dpToPx(saturday);
-                        sabtu.setLayoutParams(layoutParams6);
-                        total6.setText(sum.getString(5));
+                        layoutParams6.width = dpToPx(sixth);
+                        area.setLayoutParams(layoutParams6);
+                        total6.setText(sum.getString("area"));
 
-                        int sunday = jsonObject.getInt("minggu");
-                        RelativeLayout.LayoutParams layoutParams7 = (RelativeLayout.LayoutParams)minggu.getLayoutParams();
+                        int seventh = jsonObject.getInt("marelan_relawan");
+                        RelativeLayout.LayoutParams layoutParams7 = (RelativeLayout.LayoutParams)marelan.getLayoutParams();
                         layoutParams7.height = dpToPx(25);
-                        layoutParams7.width = dpToPx(sunday);
-                        minggu.setLayoutParams(layoutParams7);
-                        total7.setText(sum.getString(6));
+                        layoutParams7.width = dpToPx(seventh);
+                        marelan.setLayoutParams(layoutParams7);
+                        total7.setText(sum.getString("marelan"));
+
+                        int eight = jsonObject.getInt("labuhan_relawan");
+                        RelativeLayout.LayoutParams layoutParams8 = (RelativeLayout.LayoutParams)labuhan.getLayoutParams();
+                        layoutParams8.height = dpToPx(25);
+                        layoutParams8.width = dpToPx(eight);
+                        labuhan.setLayoutParams(layoutParams8);
+                        total8.setText(sum.getString("labuhan"));
+
+                        int nineth = jsonObject.getInt("tembung_relawan");
+                        RelativeLayout.LayoutParams layoutParams9 = (RelativeLayout.LayoutParams)tembung.getLayoutParams();
+                        layoutParams9.height = dpToPx(25);
+                        layoutParams9.width = dpToPx(nineth);
+                        tembung.setLayoutParams(layoutParams9);
+                        total9.setText(sum.getString("tembung"));
+
+                        int tenth = jsonObject.getInt("perjuangan_relawan");
+                        RelativeLayout.LayoutParams layoutParams10 = (RelativeLayout.LayoutParams)perjuangan.getLayoutParams();
+                        layoutParams10.height = dpToPx(25);
+                        layoutParams10.width = dpToPx(tenth);
+                        perjuangan.setLayoutParams(layoutParams10);
+                        total10.setText(sum.getString("perjuangan"));
+
+                        int eleven = jsonObject.getInt("timur_relawan");
+                        RelativeLayout.LayoutParams layoutParams11 = (RelativeLayout.LayoutParams)timur.getLayoutParams();
+                        layoutParams11.height = dpToPx(25);
+                        layoutParams11.width = dpToPx(eleven);
+                        timur.setLayoutParams(layoutParams11);
+                        total11.setText(sum.getString("timur"));
 
                         //pemenangan
-                        JSONArray sumPemenangan = jsonObject.getJSONArray("pemenangan");
-                        int mondayPemenangan = jsonObject.getInt("senin_pemenangan");
-                        RelativeLayout.LayoutParams layoutParamsPemenangan = (RelativeLayout.LayoutParams)seninPemenangan.getLayoutParams();
+                        JSONObject sumPemenangan = jsonObject.getJSONObject("pemenangan");
+                        int firstPemenangan = jsonObject.getInt("kota_pemenangan");
+                        RelativeLayout.LayoutParams layoutParamsPemenangan = (RelativeLayout.LayoutParams)kotaPemenangan.getLayoutParams();
                         layoutParamsPemenangan.height = dpToPx(25);
-                        layoutParamsPemenangan.width = dpToPx(mondayPemenangan);
-                        seninPemenangan.setLayoutParams(layoutParamsPemenangan);
-                        total1Pemenangan.setText(sumPemenangan.getString(0));
+                        layoutParamsPemenangan.width = dpToPx(firstPemenangan);
+                        kotaPemenangan.setLayoutParams(layoutParamsPemenangan);
+                        total1Pemenangan.setText(sumPemenangan.getString("kota"));
 
-                        int tuesdayPemenangan = jsonObject.getInt("selasa_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams2Pemenangan = (RelativeLayout.LayoutParams)selasaPemenangan.getLayoutParams();
+                        int secondPemenangan = jsonObject.getInt("denai_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams2Pemenangan = (RelativeLayout.LayoutParams)denaiPemenangan.getLayoutParams();
                         layoutParams2Pemenangan.height = dpToPx(25);
-                        layoutParams2Pemenangan.width = dpToPx(tuesdayPemenangan);
-                        selasaPemenangan.setLayoutParams(layoutParams2Pemenangan);
-                        total2Pemenangan.setText(sumPemenangan.getString(1));
+                        layoutParams2Pemenangan.width = dpToPx(secondPemenangan);
+                        denaiPemenangan.setLayoutParams(layoutParams2Pemenangan);
+                        total2Pemenangan.setText(sumPemenangan.getString("denai"));
 
-                        int wednesdayPemenangan = jsonObject.getInt("rabu_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams3Pemenangan = (RelativeLayout.LayoutParams)rabuPemenangan.getLayoutParams();
+                        int thirdPemenangan = jsonObject.getInt("deli_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams3Pemenangan = (RelativeLayout.LayoutParams)deliPemenangan.getLayoutParams();
                         layoutParams3Pemenangan.height = dpToPx(25);
-                        layoutParams3Pemenangan.width = dpToPx(wednesdayPemenangan);
-                        rabuPemenangan.setLayoutParams(layoutParams3Pemenangan);
-                        total3Pemenangan.setText(sumPemenangan.getString(2));
+                        layoutParams3Pemenangan.width = dpToPx(thirdPemenangan);
+                        deliPemenangan.setLayoutParams(layoutParams3Pemenangan);
+                        total3Pemenangan.setText(sumPemenangan.getString("deli"));
 
-                        int thursdayPemenangan = jsonObject.getInt("kamis_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams4Pemenangan = (RelativeLayout.LayoutParams)kamisPemenangan.getLayoutParams();
+                        int fourthPemenangan = jsonObject.getInt("belawan_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams4Pemenangan = (RelativeLayout.LayoutParams)belawanPemenangan.getLayoutParams();
                         layoutParams4Pemenangan.height = dpToPx(25);
-                        layoutParams4Pemenangan.width = dpToPx(thursdayPemenangan);
-                        kamisPemenangan.setLayoutParams(layoutParams4Pemenangan);
-                        total4Pemenangan.setText(sumPemenangan.getString(3));
+                        layoutParams4Pemenangan.width = dpToPx(fourthPemenangan);
+                        belawanPemenangan.setLayoutParams(layoutParams4Pemenangan);
+                        total4Pemenangan.setText(sumPemenangan.getString("belawan"));
 
-                        int fridayPemenangan = jsonObject.getInt("jumat_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams5Pemenangan = (RelativeLayout.LayoutParams)jumatPemenangan.getLayoutParams();
+                        int fifthPemenangan = jsonObject.getInt("amplas_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams5Pemenangan = (RelativeLayout.LayoutParams)amplasPemenangan.getLayoutParams();
                         layoutParams5Pemenangan.height = dpToPx(25);
-                        layoutParams5Pemenangan.width = dpToPx(fridayPemenangan);
-                        jumatPemenangan.setLayoutParams(layoutParams5Pemenangan);
-                        total5Pemenangan.setText(sumPemenangan.getString(4));
+                        layoutParams5Pemenangan.width = dpToPx(fifthPemenangan);
+                        amplasPemenangan.setLayoutParams(layoutParams5Pemenangan);
+                        total5Pemenangan.setText(sumPemenangan.getString("amplas"));
 
-                        int saturdayPemenangan = jsonObject.getInt("sabtu_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams6Pemenangan = (RelativeLayout.LayoutParams)sabtuPemenangan.getLayoutParams();
+                        int sixthPemenangan = jsonObject.getInt("area_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams6Pemenangan = (RelativeLayout.LayoutParams)areaPemenangan.getLayoutParams();
                         layoutParams6Pemenangan.height = dpToPx(25);
-                        layoutParams6Pemenangan.width = dpToPx(saturdayPemenangan);
-                        sabtuPemenangan.setLayoutParams(layoutParams6Pemenangan);
-                        total6Pemenangan.setText(sumPemenangan.getString(5));
+                        layoutParams6Pemenangan.width = dpToPx(sixthPemenangan);
+                        areaPemenangan.setLayoutParams(layoutParams6Pemenangan);
+                        total6Pemenangan.setText(sumPemenangan.getString("area"));
 
-                        int sundayPemenangan = jsonObject.getInt("minggu_pemenangan");
-                        RelativeLayout.LayoutParams layoutParams7Pemenangan = (RelativeLayout.LayoutParams)mingguPemenangan.getLayoutParams();
+                        int seventhPemenangan = jsonObject.getInt("marelan_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams7Pemenangan = (RelativeLayout.LayoutParams)marelanPemenangan.getLayoutParams();
                         layoutParams7Pemenangan.height = dpToPx(25);
-                        layoutParams7Pemenangan.width = dpToPx(sundayPemenangan);
-                        mingguPemenangan.setLayoutParams(layoutParams7Pemenangan);
-                        total7Pemenangan.setText(sumPemenangan.getString(6));
+                        layoutParams7Pemenangan.width = dpToPx(seventhPemenangan);
+                        marelanPemenangan.setLayoutParams(layoutParams7Pemenangan);
+                        total7Pemenangan.setText(sumPemenangan.getString("marelan"));
+
+                        int eighthPemenangan = jsonObject.getInt("labuhan_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams8Pemenangan = (RelativeLayout.LayoutParams)labuhanPemenangan.getLayoutParams();
+                        layoutParams8Pemenangan.height = dpToPx(25);
+                        layoutParams8Pemenangan.width = dpToPx(eighthPemenangan);
+                        labuhanPemenangan.setLayoutParams(layoutParams8Pemenangan);
+                        total8Pemenangan.setText(sumPemenangan.getString("labuhan"));
+
+                        int ninethPemenangan = jsonObject.getInt("tembung_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams9Pemenangan = (RelativeLayout.LayoutParams)tembungPemenangan.getLayoutParams();
+                        layoutParams9Pemenangan.height = dpToPx(25);
+                        layoutParams9Pemenangan.width = dpToPx(ninethPemenangan);
+                        tembungPemenangan.setLayoutParams(layoutParams9Pemenangan);
+                        total9Pemenangan.setText(sumPemenangan.getString("tembung"));
+
+                        int tenthPemenangan = jsonObject.getInt("perjuangan_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams10Pemenangan = (RelativeLayout.LayoutParams)perjuanganPemenangan.getLayoutParams();
+                        layoutParams10Pemenangan.height = dpToPx(25);
+                        layoutParams10Pemenangan.width = dpToPx(tenthPemenangan);
+                        perjuanganPemenangan.setLayoutParams(layoutParams10Pemenangan);
+                        total10Pemenangan.setText(sumPemenangan.getString("perjuangan"));
+
+                        int elevenPemenangan = jsonObject.getInt("timur_pemenangan");
+                        RelativeLayout.LayoutParams layoutParams11Pemenangan = (RelativeLayout.LayoutParams)timurPemenangan.getLayoutParams();
+                        layoutParams11Pemenangan.height = dpToPx(25);
+                        layoutParams11Pemenangan.width = dpToPx(elevenPemenangan);
+                        timurPemenangan.setLayoutParams(layoutParams11Pemenangan);
+                        total11Pemenangan.setText(sumPemenangan.getString("timur"));
 
                         //pendukung
-                        JSONArray sumPendukung = jsonObject.getJSONArray("pendukung");
-                        int mondayPendukung = jsonObject.getInt("senin_pendukung");
-                        RelativeLayout.LayoutParams layoutParamsPendukung = (RelativeLayout.LayoutParams)seninPendukung.getLayoutParams();
+                        JSONObject sumPendukung = jsonObject.getJSONObject("pendukung");
+                        int firstPendukung = jsonObject.getInt("kota_pendukung");
+                        RelativeLayout.LayoutParams layoutParamsPendukung = (RelativeLayout.LayoutParams)kotaPendukung.getLayoutParams();
                         layoutParamsPendukung.height = dpToPx(25);
-                        layoutParamsPendukung.width = dpToPx(mondayPendukung);
-                        seninPendukung.setLayoutParams(layoutParamsPendukung);
-                        total1Pendukung.setText(sumPendukung.getString(0));
+                        layoutParamsPendukung.width = dpToPx(firstPendukung);
+                        kotaPendukung.setLayoutParams(layoutParamsPendukung);
+                        total1Pendukung.setText(sumPendukung.getString("kota"));
 
-                        int tuesdayPendukung = jsonObject.getInt("selasa_pendukung");
-                        RelativeLayout.LayoutParams layoutParams2Pendukung = (RelativeLayout.LayoutParams)selasaPendukung.getLayoutParams();
+                        int secondPendukung = jsonObject.getInt("denai_pendukung");
+                        RelativeLayout.LayoutParams layoutParams2Pendukung = (RelativeLayout.LayoutParams)denaiPendukung.getLayoutParams();
                         layoutParams2Pendukung.height = dpToPx(25);
-                        layoutParams2Pendukung.width = dpToPx(tuesdayPendukung);
-                        selasaPendukung.setLayoutParams(layoutParams2Pendukung);
-                        total2Pendukung.setText(sumPendukung.getString(1));
+                        layoutParams2Pendukung.width = dpToPx(secondPendukung);
+                        denaiPendukung.setLayoutParams(layoutParams2Pendukung);
+                        total2Pendukung.setText(sumPendukung.getString("denai"));
 
-                        int wednesdayPendukung = jsonObject.getInt("rabu_pendukung");
-                        RelativeLayout.LayoutParams layoutParams3Pendukung = (RelativeLayout.LayoutParams)rabuPendukung.getLayoutParams();
+                        int thirdPendukung = jsonObject.getInt("deli_pendukung");
+                        RelativeLayout.LayoutParams layoutParams3Pendukung = (RelativeLayout.LayoutParams)deliPendukung.getLayoutParams();
                         layoutParams3Pendukung.height = dpToPx(25);
-                        layoutParams3Pendukung.width = dpToPx(wednesdayPendukung);
-                        rabuPendukung.setLayoutParams(layoutParams3Pendukung);
-                        total3Pendukung.setText(sumPendukung.getString(2));
+                        layoutParams3Pendukung.width = dpToPx(thirdPendukung);
+                        deliPendukung.setLayoutParams(layoutParams3Pendukung);
+                        total3Pendukung.setText(sumPendukung.getString("deli"));
 
-                        int thursdayPendukung = jsonObject.getInt("kamis_pendukung");
-                        RelativeLayout.LayoutParams layoutParams4Pendukung = (RelativeLayout.LayoutParams)kamisPendukung.getLayoutParams();
+                        int fourthPendukung = jsonObject.getInt("belawan_pendukung");
+                        RelativeLayout.LayoutParams layoutParams4Pendukung = (RelativeLayout.LayoutParams)belawanPendukung.getLayoutParams();
                         layoutParams4Pendukung.height = dpToPx(25);
-                        layoutParams4Pendukung.width = dpToPx(thursdayPendukung);
-                        kamisPendukung.setLayoutParams(layoutParams4Pendukung);
-                        total4Pendukung.setText(sumPendukung.getString(3));
+                        layoutParams4Pendukung.width = dpToPx(fourthPendukung);
+                        belawanPendukung.setLayoutParams(layoutParams4Pendukung);
+                        total4Pendukung.setText(sumPendukung.getString("belawan"));
 
-                        int fridayPendukung = jsonObject.getInt("jumat_pendukung");
-                        RelativeLayout.LayoutParams layoutParams5Pendukung = (RelativeLayout.LayoutParams)jumatPendukung.getLayoutParams();
+                        int fifthPendukung = jsonObject.getInt("amplas_pendukung");
+                        RelativeLayout.LayoutParams layoutParams5Pendukung = (RelativeLayout.LayoutParams)amplasPendukung.getLayoutParams();
                         layoutParams5Pendukung.height = dpToPx(25);
-                        layoutParams5Pendukung.width = dpToPx(fridayPendukung);
-                        jumatPendukung.setLayoutParams(layoutParams5Pendukung);
-                        total5Pendukung.setText(sumPendukung.getString(4));
+                        layoutParams5Pendukung.width = dpToPx(fifthPendukung);
+                        amplasPendukung.setLayoutParams(layoutParams5Pendukung);
+                        total5Pendukung.setText(sumPendukung.getString("amplas"));
 
-                        int saturdayPendukung = jsonObject.getInt("sabtu_pendukung");
-                        RelativeLayout.LayoutParams layoutParams6Pendukung = (RelativeLayout.LayoutParams)sabtuPendukung.getLayoutParams();
+                        int sixthPendukung = jsonObject.getInt("area_pendukung");
+                        RelativeLayout.LayoutParams layoutParams6Pendukung = (RelativeLayout.LayoutParams)areaPendukung.getLayoutParams();
                         layoutParams6Pendukung.height = dpToPx(25);
-                        layoutParams6Pendukung.width = dpToPx(saturdayPendukung);
-                        sabtuPendukung.setLayoutParams(layoutParams6Pendukung);
-                        total6Pendukung.setText(sumPendukung.getString(5));
+                        layoutParams6Pendukung.width = dpToPx(sixthPendukung);
+                        areaPendukung.setLayoutParams(layoutParams6Pendukung);
+                        total6Pendukung.setText(sumPendukung.getString("area"));
 
-                        int sundayPendukung = jsonObject.getInt("minggu_pendukung");
-                        RelativeLayout.LayoutParams layoutParams7Pendukung = (RelativeLayout.LayoutParams)mingguPendukung.getLayoutParams();
+                        int seventhPendukung = jsonObject.getInt("marelan_pendukung");
+                        RelativeLayout.LayoutParams layoutParams7Pendukung = (RelativeLayout.LayoutParams)marelanPendukung.getLayoutParams();
                         layoutParams7Pendukung.height = dpToPx(25);
-                        layoutParams7Pendukung.width = dpToPx(sundayPendukung);
-                        mingguPendukung.setLayoutParams(layoutParams7Pendukung);
-                        total7Pendukung.setText(sumPendukung.getString(6));
+                        layoutParams7Pendukung.width = dpToPx(seventhPendukung);
+                        marelanPendukung.setLayoutParams(layoutParams7Pendukung);
+                        total7Pendukung.setText(sumPendukung.getString("marelan"));
+
+                        int eighthPendukung = jsonObject.getInt("labuhan_pendukung");
+                        RelativeLayout.LayoutParams layoutParams8Pendukung = (RelativeLayout.LayoutParams)labuhanPendukung.getLayoutParams();
+                        layoutParams8Pendukung.height = dpToPx(25);
+                        layoutParams8Pendukung.width = dpToPx(eighthPendukung);
+                        labuhanPendukung.setLayoutParams(layoutParams8Pendukung);
+                        total8Pendukung.setText(sumPendukung.getString("labuhan"));
+
+                        int ninethPendukung = jsonObject.getInt("tembung_pendukung");
+                        RelativeLayout.LayoutParams layoutParams9Pendukung = (RelativeLayout.LayoutParams)tembungPendukung.getLayoutParams();
+                        layoutParams9Pendukung.height = dpToPx(25);
+                        layoutParams9Pendukung.width = dpToPx(ninethPendukung);
+                        tembungPendukung.setLayoutParams(layoutParams9Pendukung);
+                        total9Pendukung.setText(sumPendukung.getString("tembung"));
+
+                        int tenthPendukung = jsonObject.getInt("perjuangan_pendukung");
+                        RelativeLayout.LayoutParams layoutParams10Pendukung = (RelativeLayout.LayoutParams)perjuanganPendukung.getLayoutParams();
+                        layoutParams10Pendukung.height = dpToPx(25);
+                        layoutParams10Pendukung.width = dpToPx(tenthPendukung);
+                        perjuanganPendukung.setLayoutParams(layoutParams10Pendukung);
+                        total10Pendukung.setText(sumPendukung.getString("perjuangan"));
+
+                        int elevenPendukung = jsonObject.getInt("timur_pendukung");
+                        RelativeLayout.LayoutParams layoutParams11Pendukung = (RelativeLayout.LayoutParams)timurPendukung.getLayoutParams();
+                        layoutParams11Pendukung.height = dpToPx(25);
+                        layoutParams11Pendukung.width = dpToPx(elevenPendukung);
+                        timurPendukung.setLayoutParams(layoutParams11Pendukung);
+                        total11Pendukung.setText(sumPendukung.getString("timur"));
 
                     } else {
                         Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();

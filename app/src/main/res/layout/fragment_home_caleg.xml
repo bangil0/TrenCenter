@@ -334,7 +334,7 @@
                         android:id="@+id/date1Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(12/Nov)"
+                        android:text="Medan Kota"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -367,7 +367,7 @@
                         android:id="@+id/date2Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(13/Nov)"
+                        android:text="Medan Denai"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -400,7 +400,7 @@
                         android:id="@+id/date3Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(14/Nov)"
+                        android:text="Medan Deli"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -433,7 +433,7 @@
                         android:id="@+id/date4Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(15/Nov)"
+                        android:text="Medan Belawan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -466,7 +466,7 @@
                         android:id="@+id/date5Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(16/Nov)"
+                        android:text="Medan Amplas"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -499,7 +499,7 @@
                         android:id="@+id/date6Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(17/Nov)"
+                        android:text="Medan Area"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -532,7 +532,7 @@
                         android:id="@+id/date7Pemenangan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(18/Nov)"
+                        android:text="Medan Marelan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -548,6 +548,138 @@
                     <TextView
                         android:id="@+id/sum7Pemenangan"
                         android:layout_toRightOf="@id/chart7Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date8Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Labuhan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart8Pemenangan"
+                        android:layout_toRightOf="@id/date8Pemenangan"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum8Pemenangan"
+                        android:layout_toRightOf="@id/chart8Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date9Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Tembung"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart9Pemenangan"
+                        android:layout_toRightOf="@id/date9Pemenangan"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum9Pemenangan"
+                        android:layout_toRightOf="@id/chart9Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date10Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Perjuangan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart10Pemenangan"
+                        android:layout_toRightOf="@id/date10Pemenangan"
+                        android:background="#ffff00"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum10Pemenangan"
+                        android:layout_toRightOf="@id/chart10Pemenangan"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date11Pemenangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Timur"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart11Pemenangan"
+                        android:layout_toRightOf="@id/date11Pemenangan"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum11Pemenangan"
+                        android:layout_toRightOf="@id/chart11Pemenangan"
                         android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -583,7 +715,7 @@
                         android:id="@+id/date1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(12/Nov)"
+                        android:text="Medan Kota"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -616,7 +748,7 @@
                         android:id="@+id/date2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(13/Nov)"
+                        android:text="Medan Denai"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -649,7 +781,7 @@
                         android:id="@+id/date3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(14/Nov)"
+                        android:text="Medan Deli"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -682,7 +814,7 @@
                         android:id="@+id/date4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(15/Nov)"
+                        android:text="Medan Belawan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -715,7 +847,7 @@
                         android:id="@+id/date5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(16/Nov)"
+                        android:text="Medan Amplas"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -748,7 +880,7 @@
                         android:id="@+id/date6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(17/Nov)"
+                        android:text="Medan Area"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -781,7 +913,7 @@
                         android:id="@+id/date7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(18/Nov)"
+                        android:text="Medan Marelan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -797,6 +929,138 @@
                     <TextView
                         android:id="@+id/sum7"
                         android:layout_toRightOf="@id/chart7"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Labuhan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart8"
+                        android:layout_toRightOf="@id/date8"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum8"
+                        android:layout_toRightOf="@id/chart8"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Tembung"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart9"
+                        android:layout_toRightOf="@id/date9"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum9"
+                        android:layout_toRightOf="@id/chart9"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Perjuangan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart10"
+                        android:layout_toRightOf="@id/date10"
+                        android:background="#ffff00"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum10"
+                        android:layout_toRightOf="@id/chart10"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Timur"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart11"
+                        android:layout_toRightOf="@id/date11"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum11"
+                        android:layout_toRightOf="@id/chart11"
                         android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -832,7 +1096,7 @@
                         android:id="@+id/date1Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(12/Nov)"
+                        android:text="Medan Kota"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -865,7 +1129,7 @@
                         android:id="@+id/date2Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(13/Nov)"
+                        android:text="Medan Denai"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -898,7 +1162,7 @@
                         android:id="@+id/date3Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(14/Nov)"
+                        android:text="Medan Deli"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -931,7 +1195,7 @@
                         android:id="@+id/date4Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(15/Nov)"
+                        android:text="Medan Belawan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -964,7 +1228,7 @@
                         android:id="@+id/date5Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(16/Nov)"
+                        android:text="Medan Amplas"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -997,7 +1261,7 @@
                         android:id="@+id/date6Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(17/Nov)"
+                        android:text="Medan Area"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -1030,7 +1294,7 @@
                         android:id="@+id/date7Pendukung"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(18/Nov)"
+                        android:text="Medan Marelan"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"/>
 
@@ -1046,6 +1310,139 @@
                     <TextView
                         android:id="@+id/sum7Pendukung"
                         android:layout_toRightOf="@id/chart7Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date8Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Labuhan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart8Pendukung"
+                        android:layout_toRightOf="@id/date8Pendukung"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum8Pendukung"
+                        android:layout_toRightOf="@id/chart8Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date9Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Tembung"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart9Pendukung"
+                        android:layout_toRightOf="@id/date9Pendukung"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum9Pendukung"
+                        android:layout_toRightOf="@id/chart9Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/date10Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Perjuangan"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart10Pendukung"
+                        android:layout_toRightOf="@id/date10Pendukung"
+                        android:background="#ffff00"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum10Pendukung"
+                        android:layout_toRightOf="@id/chart10Pendukung"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/date11Pendukung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medan Timur"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/chart11Pendukung"
+                        android:layout_toRightOf="@id/date11Pendukung"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"/>
+
+                    <TextView
+                        android:id="@+id/sum11Pendukung"
+                        android:layout_toRightOf="@id/chart11Pendukung"
                         android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
