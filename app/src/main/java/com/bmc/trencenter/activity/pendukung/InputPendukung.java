@@ -453,7 +453,12 @@ public class InputPendukung extends AppCompatActivity {
     }
 
     private void getKabupaten() {
-        String tag_string_req = "req_get_kabupaten";
+        kabupatenList.add("KOTA MEDAN");
+        ArrayAdapter<String> kabupatenAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.spinner_item, kabupatenList);
+
+        kabupaten.setAdapter(kabupatenAdapter);
+        /*String tag_string_req = "req_get_kabupaten";
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
                 AppConfig.URL_GET_KABUPATEN, new Response.Listener<String>() {
@@ -486,7 +491,7 @@ public class InputPendukung extends AppCompatActivity {
             }
         });
 
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);*/
     }
 
     @Override

@@ -332,7 +332,7 @@
 
                     <TextView
                         android:id="@+id/date1Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Kota"
                         android:layout_centerVertical="true"
@@ -365,7 +365,7 @@
 
                     <TextView
                         android:id="@+id/date2Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Denai"
                         android:layout_centerVertical="true"
@@ -398,7 +398,7 @@
 
                     <TextView
                         android:id="@+id/date3Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Deli"
                         android:layout_centerVertical="true"
@@ -431,7 +431,7 @@
 
                     <TextView
                         android:id="@+id/date4Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Belawan"
                         android:layout_centerVertical="true"
@@ -464,7 +464,7 @@
 
                     <TextView
                         android:id="@+id/date5Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Amplas"
                         android:layout_centerVertical="true"
@@ -497,7 +497,7 @@
 
                     <TextView
                         android:id="@+id/date6Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Area"
                         android:layout_centerVertical="true"
@@ -530,7 +530,7 @@
 
                     <TextView
                         android:id="@+id/date7Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Marelan"
                         android:layout_centerVertical="true"
@@ -563,7 +563,7 @@
 
                     <TextView
                         android:id="@+id/date8Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Labuhan"
                         android:layout_centerVertical="true"
@@ -596,7 +596,7 @@
 
                     <TextView
                         android:id="@+id/date9Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Tembung"
                         android:layout_centerVertical="true"
@@ -629,7 +629,7 @@
 
                     <TextView
                         android:id="@+id/date10Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Perjuangan"
                         android:layout_centerVertical="true"
@@ -662,7 +662,7 @@
 
                     <TextView
                         android:id="@+id/date11Pemenangan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Timur"
                         android:layout_centerVertical="true"
@@ -713,7 +713,7 @@
 
                     <TextView
                         android:id="@+id/date1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Kota"
                         android:layout_centerVertical="true"
@@ -746,7 +746,7 @@
 
                     <TextView
                         android:id="@+id/date2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Denai"
                         android:layout_centerVertical="true"
@@ -779,7 +779,7 @@
 
                     <TextView
                         android:id="@+id/date3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Deli"
                         android:layout_centerVertical="true"
@@ -812,7 +812,7 @@
 
                     <TextView
                         android:id="@+id/date4"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Belawan"
                         android:layout_centerVertical="true"
@@ -845,7 +845,7 @@
 
                     <TextView
                         android:id="@+id/date5"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Amplas"
                         android:layout_centerVertical="true"
@@ -878,7 +878,7 @@
 
                     <TextView
                         android:id="@+id/date6"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Area"
                         android:layout_centerVertical="true"
@@ -911,7 +911,7 @@
 
                     <TextView
                         android:id="@+id/date7"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Marelan"
                         android:layout_centerVertical="true"
@@ -944,7 +944,7 @@
 
                     <TextView
                         android:id="@+id/date8"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Labuhan"
                         android:layout_centerVertical="true"
@@ -977,7 +977,7 @@
 
                     <TextView
                         android:id="@+id/date9"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Tembung"
                         android:layout_centerVertical="true"
@@ -1010,7 +1010,7 @@
 
                     <TextView
                         android:id="@+id/date10"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Perjuangan"
                         android:layout_centerVertical="true"
@@ -1043,7 +1043,7 @@
 
                     <TextView
                         android:id="@+id/date11"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Timur"
                         android:layout_centerVertical="true"
@@ -1094,7 +1094,7 @@
 
                     <TextView
                         android:id="@+id/date1Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Kota"
                         android:layout_centerVertical="true"
@@ -1127,7 +1127,7 @@
 
                     <TextView
                         android:id="@+id/date2Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Denai"
                         android:layout_centerVertical="true"
@@ -1160,7 +1160,7 @@
 
                     <TextView
                         android:id="@+id/date3Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Deli"
                         android:layout_centerVertical="true"
@@ -1193,7 +1193,7 @@
 
                     <TextView
                         android:id="@+id/date4Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Belawan"
                         android:layout_centerVertical="true"
@@ -1226,7 +1226,7 @@
 
                     <TextView
                         android:id="@+id/date5Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Amplas"
                         android:layout_centerVertical="true"
@@ -1259,7 +1259,7 @@
 
                     <TextView
                         android:id="@+id/date6Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Area"
                         android:layout_centerVertical="true"
@@ -1292,7 +1292,7 @@
 
                     <TextView
                         android:id="@+id/date7Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Marelan"
                         android:layout_centerVertical="true"
@@ -1325,7 +1325,7 @@
 
                     <TextView
                         android:id="@+id/date8Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Labuhan"
                         android:layout_centerVertical="true"
@@ -1358,7 +1358,7 @@
 
                     <TextView
                         android:id="@+id/date9Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Tembung"
                         android:layout_centerVertical="true"
@@ -1391,7 +1391,7 @@
 
                     <TextView
                         android:id="@+id/date10Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Perjuangan"
                         android:layout_centerVertical="true"
@@ -1425,7 +1425,7 @@
 
                     <TextView
                         android:id="@+id/date11Pendukung"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Medan Timur"
                         android:layout_centerVertical="true"

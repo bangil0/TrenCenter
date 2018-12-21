@@ -76,7 +76,7 @@
                 android:layout_below="@id/descriptionProgram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yang ingin menggunakan layanan: "
+                android:text="Yang sudah mendapatkan layanan: "
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_marginTop="10dp"
