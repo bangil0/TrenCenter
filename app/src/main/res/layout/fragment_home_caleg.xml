@@ -315,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
-                android:text="Jumlah Tim Pemenangan dalam \nSeminggu Terakhir"/>
+                android:text="Jumlah total tim pemenangan perkecamatan"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -696,7 +696,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
-                android:text="Jumlah Relawan dalam Seminggu Terakhir"/>
+                android:text="Jumlah total relawan perkecamatan"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1077,7 +1077,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@android:color/black"
-                android:text="Jumlah Pendukung dalam Seminggu Terakhir"/>
+                android:text="Jumlah total pendukung perkecamatan"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
