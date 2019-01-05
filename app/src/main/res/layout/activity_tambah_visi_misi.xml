@@ -5,7 +5,7 @@
     android:id="@+id/activity_tambah_misi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmc.trencenter.activity.TambahMisi">
+    tools:context="com.tren.trencenter.activity.TambahMisi">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

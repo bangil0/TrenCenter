@@ -5,7 +5,7 @@
     android:id="@+id/activity_dashboard_super_admin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmc.trencenter.activity.tim_pemenangan.Tim_Pemenangan">
+    tools:context="com.tren.trencenter.activity.tim_pemenangan.Tim_Pemenangan">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

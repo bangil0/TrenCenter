@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bmc.trencenter">
+    package="com.tren.trencenter">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,7 +20,7 @@
         android:required="true" />
     -->
     <application
-        android:name=".app.AppController"
+        android:name="com.tren.trencenter.app.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,10 +28,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.relawan.MainActivity"
+            android:name="com.tren.trencenter.activity.relawan.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SplashScreen"
+            android:name="com.tren.trencenter.activity.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,168 +40,168 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.tren.trencenter.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.QR_Login"
+            android:name="com.tren.trencenter.activity.QR_Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.super_admin.Dashboard_SuperAdmin"
+            android:name="com.tren.trencenter.activity.super_admin.Dashboard_SuperAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ChangeUsername"
+            android:name="com.tren.trencenter.activity.ChangeUsername"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ChangePassword"
+            android:name="com.tren.trencenter.activity.ChangePassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ProgramKerja"
+            android:name="com.tren.trencenter.activity.ProgramKerja"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailProgram"
+            android:name="com.tren.trencenter.activity.DetailProgram"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.relawan.InputRelawan"
+            android:name="com.tren.trencenter.activity.relawan.InputRelawan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.pendukung.InputPendukung"
+            android:name="com.tren.trencenter.activity.pendukung.InputPendukung"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.Tim_Pemenangan"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.Tim_Pemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.ProgramKerja_TimPemenangan"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.DetailProgram_TimPemenangan"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.DetailProgram_TimPemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.pendukung.Pendukung"
+            android:name="com.tren.trencenter.activity.pendukung.Pendukung"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.caleg.DataCaleg"
+            android:name="com.tren.trencenter.activity.caleg.DataCaleg"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.InputTimPemenangan"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.InputTimPemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.KirimPesan"
+            android:name="com.tren.trencenter.activity.KirimPesan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailPesan"
+            android:name="com.tren.trencenter.activity.DetailPesan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.DetailOutbox"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.DetailOutbox"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailBerita"
+            android:name="com.tren.trencenter.activity.DetailBerita"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ScanQR"
+            android:name="com.tren.trencenter.activity.ScanQR"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.LogistikActivity"
+            android:name="com.tren.trencenter.activity.LogistikActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailLogistik"
+            android:name="com.tren.trencenter.activity.DetailLogistik"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ScanLogistik"
+            android:name="com.tren.trencenter.activity.ScanLogistik"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.caleg.DetailCaleg"
+            android:name="com.tren.trencenter.activity.caleg.DetailCaleg"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.VisiMisi"
+            android:name="com.tren.trencenter.activity.VisiMisi"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Platform"
+            android:name="com.tren.trencenter.activity.Platform"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Penghargaan"
+            android:name="com.tren.trencenter.activity.Penghargaan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailVisiMisi"
+            android:name="com.tren.trencenter.activity.DetailVisiMisi"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailPlatformAdmin"
+            android:name="com.tren.trencenter.activity.DetailPlatformAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailPenghargaan"
+            android:name="com.tren.trencenter.activity.DetailPenghargaan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ScanKartu"
+            android:name="com.tren.trencenter.activity.ScanKartu"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailUser"
+            android:name="com.tren.trencenter.activity.DetailUser"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DaftarRelawan"
+            android:name="com.tren.trencenter.activity.DaftarRelawan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DaftarPendukung"
+            android:name="com.tren.trencenter.activity.DaftarPendukung"
             android:screenOrientation="portrait" />
 
-        <service android:name=".service.MyFirebaseMessagingService">
+        <service android:name="com.tren.trencenter.service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.MyFirebaseInstanceIDService">
+        <service android:name="com.tren.trencenter.service.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
         <activity
-            android:name=".activity.DetailLayanan"
+            android:name="com.tren.trencenter.activity.DetailLayanan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.LayananActivity"
+            android:name="com.tren.trencenter.activity.LayananActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.tim_pemenangan.DetailLayanan_TimPemenangan"
+            android:name="com.tren.trencenter.activity.tim_pemenangan.DetailLayanan_TimPemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.caleg.Caleg"
+            android:name="com.tren.trencenter.activity.caleg.Caleg"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Berita"
+            android:name="com.tren.trencenter.activity.Berita"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Partnership"
+            android:name="com.tren.trencenter.activity.Partnership"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailPartnership"
+            android:name="com.tren.trencenter.activity.DetailPartnership"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DaftarPemenangan"
+            android:name="com.tren.trencenter.activity.DaftarPemenangan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.VisiMisiAdmin"
+            android:name="com.tren.trencenter.activity.VisiMisiAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailCalegAdmin"
+            android:name="com.tren.trencenter.activity.DetailCalegAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.EditData"
+            android:name="com.tren.trencenter.activity.EditData"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.EditVisiMisi"
+            android:name="com.tren.trencenter.activity.EditVisiMisi"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DetailPlatform"
+            android:name="com.tren.trencenter.activity.DetailPlatform"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.EditPlatform" />
-        <activity android:name=".activity.DetailPenghargaanAdmin" />
-        <activity android:name=".activity.EditPenghargaan" />
-        <activity android:name=".activity.ProfilePicture" />
-        <activity android:name=".activity.Update" />
-        <activity android:name=".activity.ChangePhone" />
-        <activity android:name=".activity.TambahPenghargaan" />
-        <activity android:name=".activity.DetailVisiMisiAdmin" />
-        <activity android:name=".activity.TambahMisi" />
-        <activity android:name=".activity.TambahPlatform"></activity>
+        <activity android:name="com.tren.trencenter.activity.EditPlatform" />
+        <activity android:name="com.tren.trencenter.activity.DetailPenghargaanAdmin" />
+        <activity android:name="com.tren.trencenter.activity.EditPenghargaan" />
+        <activity android:name="com.tren.trencenter.activity.ProfilePicture" />
+        <activity android:name="com.tren.trencenter.activity.Update" />
+        <activity android:name="com.tren.trencenter.activity.ChangePhone" />
+        <activity android:name="com.tren.trencenter.activity.TambahPenghargaan" />
+        <activity android:name="com.tren.trencenter.activity.DetailVisiMisiAdmin" />
+        <activity android:name="com.tren.trencenter.activity.TambahMisi" />
+        <activity android:name="com.tren.trencenter.activity.TambahPlatform"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     android:id="@+id/activity_daftar_relawan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmc.trencenter.activity.DaftarRelawan">
+    tools:context="com.tren.trencenter.activity.DaftarRelawan">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

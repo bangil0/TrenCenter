@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_screen"
-    tools:context="com.bmc.trencenter.activity.LoginActivity">
+    tools:context="com.tren.trencenter.activity.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/loginBox"

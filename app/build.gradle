@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "28.0.1"
     defaultConfig {
-        applicationId "com.bmc.trencenter"
+        applicationId "com.tren.trencenter"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 14

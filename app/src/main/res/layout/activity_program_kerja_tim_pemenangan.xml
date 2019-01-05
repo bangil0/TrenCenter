@@ -4,7 +4,7 @@
     android:id="@+id/activity_program_kerja_tim_pemenangan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmc.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan">
+    tools:context="com.tren.trencenter.activity.tim_pemenangan.ProgramKerja_TimPemenangan">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

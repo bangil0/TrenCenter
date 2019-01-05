@@ -4,7 +4,7 @@
     android:id="@+id/activity_detail_logistik"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmc.trencenter.activity.DetailLayanan">
+    tools:context="com.tren.trencenter.activity.DetailLayanan">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
