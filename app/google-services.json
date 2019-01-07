@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "593674031720",
+    "firebase_url": "https://tren-b0962.firebaseio.com",
+    "project_id": "tren-b0962",
+    "storage_bucket": "tren-b0962.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593674031720:android:b5ed7d06b20234cc",
+        "android_client_info": {
+          "package_name": "com.tren.trencenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593674031720-rivlvd09mr0a50lv1l4786rpl9s3vnp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1oon2BKt_mHEA8GcphKdzy9FxNcZXPzQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
