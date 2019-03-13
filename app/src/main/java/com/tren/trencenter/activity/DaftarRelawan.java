@@ -16,10 +16,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.tren.trencenter.R;
+import com.tren.trencenter.adapter.PersonAdapter;
 import com.tren.trencenter.adapter.UserAdapter;
 import com.tren.trencenter.app.AppConfig;
 import com.tren.trencenter.app.AppController;
 import com.tren.trencenter.model.Caleg;
+import com.tren.trencenter.model.Person;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +34,8 @@ public class DaftarRelawan extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView recyclerView;
 
-    private ArrayList<Caleg> relawanList;
-    private UserAdapter adapter;
+    private ArrayList<Person> relawanList;
+    private PersonAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class DaftarRelawan extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.relawan_list);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         relawanList = new ArrayList<>();
-        adapter = new UserAdapter(this, relawanList);
+        adapter = new PersonAdapter(this, relawanList);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -81,10 +83,11 @@ public class DaftarRelawan extends AppCompatActivity {
                     if (!error) {
                         JSONArray data = jObj.getJSONArray("data");
                         JSONArray foto = jObj.getJSONArray("foto");
+                        JSONArray verified = jObj.getJSONArray("verified");
 
                         for(int i=0; i<data.length(); i++){
-                            relawanList.add(new Caleg("http://156.67.221.225/voting/dashboard/save/foto/" + foto.getString(i),
-                                    data.getString(i)));
+                            relawanList.add(new Person("http://156.67.221.225/voting/dashboard/save/foto/" + foto.getString(i),
+                                    data.getString(i), "relawan", Integer.parseInt(verified.getString(i))));
                         }
 
                         adapter.notifyDataSetChanged();

@@ -66,5 +66,6 @@ public class AppConfig {
     public static String URL_TAMBAH_PENGHARGAAN= "http://156.67.221.225/voting/android/add_penghargaan.php";
     public static String URL_TAMBAH_MISI = "http://156.67.221.225/voting/android/tambah_misi.php";
     public static String URL_TAMBAH_PLATFORM = "http://156.67.221.225/voting/android/add_platform.php";
+    public static String URL_VERIFIED_USER = "http://156.67.221.225/voting/android/verified_user.php";
 
 }

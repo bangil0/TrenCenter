@@ -12,6 +12,9 @@
     <color name="button_disable">#ccc</color>
     <color name="yellow">#F8A000</color>
 
+    <color name="green">#669900</color>
+    <color name="red">#cc0000</color>
+
     <array name="array_dot_active">
         <item>@android:color/white</item>
         <item>@android:color/white</item>

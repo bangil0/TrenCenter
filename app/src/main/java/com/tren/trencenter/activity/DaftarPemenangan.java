@@ -16,10 +16,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.tren.trencenter.R;
+import com.tren.trencenter.adapter.PersonAdapter;
 import com.tren.trencenter.adapter.UserAdapter;
 import com.tren.trencenter.app.AppConfig;
 import com.tren.trencenter.app.AppController;
 import com.tren.trencenter.model.Caleg;
+import com.tren.trencenter.model.Person;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +34,8 @@ public class DaftarPemenangan extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView recyclerView;
 
-    private ArrayList<Caleg> pemenanganList;
-    private UserAdapter adapter;
+    private ArrayList<Person> pemenanganList;
+    private PersonAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class DaftarPemenangan extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.pemenangan_list);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         pemenanganList = new ArrayList<>();
-        adapter = new UserAdapter(this, pemenanganList);
+        adapter = new PersonAdapter(this, pemenanganList);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -81,10 +83,11 @@ public class DaftarPemenangan extends AppCompatActivity {
                     if (!error) {
                         JSONArray data = jObj.getJSONArray("data");
                         JSONArray foto = jObj.getJSONArray("foto");
+                        JSONArray verified = jObj.getJSONArray("verified");
 
                         for(int i=0; i<data.length(); i++){
-                            pemenanganList.add(new Caleg("http://156.67.221.225/voting/dashboard/save/foto_pemenangan/" + foto.getString(i),
-                                    data.getString(i)));
+                            pemenanganList.add(new Person("http://156.67.221.225/voting/dashboard/save/foto_pemenangan/" + foto.getString(i),
+                                    data.getString(i), "pemenangan", Integer.parseInt(verified.getString(i))));
                         }
 
                         adapter.notifyDataSetChanged();
